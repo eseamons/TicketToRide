@@ -12,10 +12,10 @@ Becca Crawford, Eric Seamons, Lance James, Mason Coram, Michael Peterson
 
 ## Instructions to set up repository:
 
-1.  Install git on computer:
+1.  Install Git on computer:
 
     https://git-scm.com/downloads
     
-2.  Clone the following git repository:
+2.  Clone the following Git repository:
 
-    `https://github.com/eseamons/Ticket-To-Ride.git`
+    `https://github.com/eseamons/TicketToRide.git`
