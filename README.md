@@ -16,6 +16,6 @@ Becca Crawford, Eric Seamons, Lance James, Mason Coram, Michael Peterson
 
     https://git-scm.com/downloads
     
-2.  Use the git repository
+2.  Clone the following git repository:
 
     `https://github.com/eseamons/Ticket-To-Ride.git`
