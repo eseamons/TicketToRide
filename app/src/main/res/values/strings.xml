@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TicketToRide</string>
+    <string name="msgHint"><i> Type here:</i></string>
 </resources>
