@@ -14,6 +14,11 @@ import java.net.HttpURLConnection;
  * Created by sirla on 2/10/2017.
  */
 
+
+/**
+ * NOT FINISHED
+ */
+
 public class HandlerBase implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
