@@ -1,6 +1,7 @@
 package server;
 
 import java.util.List;
+import java.util.UUID;
 
 import shared.ColorNum;
 import shared.interfaces.ICommand;
@@ -42,21 +43,42 @@ public class ServerFacade implements IServer{
         ServerModel serverModel = ServerModel.getInstance();
         List<Account> accountList = serverModel.getAccounts();
         boolean accountExists = false;
+        boolean isRegisterSuccessful = false;
+
+        //Check if accounts with same username already exists
+        for (Account account : accountList) {
+            if(account.getUsername() == name) {
+                accountExists = true;
+            }
+        }
 
         if (accountExists == false) {
             Account newAccount = new Account();
             newAccount.setUsername(name);
             newAccount.setPassword(pass);
-            newAccount.setAuthentication("dkfaj-slfdkjak-sjfkdjsaf-ksdjf");
+
+            //create authentication code
+            String uuid = UUID.randomUUID().toString();
+            newAccount.setAuthentication(uuid);
         }
 
-        return !accountExists;
+        return isRegisterSuccessful;
     }
 
     @Override
     public List<GameLobby> getServerGameList(String auth) {
-        // TODO Auto-generated method stub
-        return null;
+        ServerModel serverModel = ServerModel.getInstance();
+        List<Account> accountList = serverModel.getAccounts();
+        List<GameLobby> returnLobbyList = null;
+
+        //Checks for auth code in accounts. If valid auth code, sets returnLobbyList
+        for (Account account : accountList) {
+            if(account.getAuthentication() == auth) {
+                returnLobbyList = serverModel.getLobbies();
+            }
+        }
+
+        return returnLobbyList;
     }
 
     @Override
