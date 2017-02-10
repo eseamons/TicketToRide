@@ -8,6 +8,20 @@ import shared.interfaces.ICommand;
  */
 
 public class Command implements ICommand {
+
+    String type;
+    String info;
+
+    public void setInfo(String info)
+    {
+        this.info = info;
+    }
+
+    public void setType(String info)
+    {
+        this.type = type;
+    }
+
     @Override
     public Result execute() {
         return null;
@@ -19,7 +33,13 @@ public class Command implements ICommand {
     }
 
     @Override
-    public ICommand getCommand() {
-        return null;
+    public ICommand getCommand()
+    {
+        switch(type)
+        {
+            case "addcomment": return new AddCommentCommand();
+            case "begingame": return new BeginGameCommand();
+        }
+        return new Command();
     }
 }

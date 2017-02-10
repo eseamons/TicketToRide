@@ -33,7 +33,7 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public List<GameLobby> getServerGameList(int ID, String auth) {
+    public List<GameLobby> getServerGameList(String auth) {
         // TODO Auto-generated method stub
         return null;
     }
