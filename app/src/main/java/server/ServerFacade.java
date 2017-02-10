@@ -11,6 +11,15 @@ import shared.model_classes.Player;
 
 public class ServerFacade implements IServer{
 
+    public static ServerFacade SINGLETON = null;
+
+    public static ServerFacade getInstance()
+    {
+        if(SINGLETON == null)
+            return new ServerFacade();
+        else
+            return SINGLETON;
+    }
     @Override
     public Account Login(String name, String pass) {
         // TODO Auto-generated method stub

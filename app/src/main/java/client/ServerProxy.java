@@ -2,6 +2,7 @@ package client;
 
 import java.util.List;
 
+import server.ServerFacade;
 import shared.ColorNum;
 import shared.interfaces.ICommand;
 import shared.interfaces.IServer;
@@ -10,6 +11,15 @@ import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
 
 public class ServerProxy implements IServer{
+
+    public static ServerProxy SINGLETON = null;
+    public static ServerProxy getInstance()
+    {
+        if(SINGLETON == null)
+            return new ServerProxy();
+        else
+            return SINGLETON;
+    }
 
     @Override
     public Account Login(String name, String pass) {
