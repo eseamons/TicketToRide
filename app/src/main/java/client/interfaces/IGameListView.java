@@ -13,4 +13,6 @@ public interface IGameListView {
     public int getNumberOfPlayers();
 
     public Game getSelectedGame();
+
+
 }
