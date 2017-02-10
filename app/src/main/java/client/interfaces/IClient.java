@@ -24,4 +24,7 @@ public interface IClient {
     public GameLobby createGame(String gameName, int maxPlayers);
 
     public Game strartGame(String auth);
+
+
+
 }
