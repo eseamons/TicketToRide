@@ -13,7 +13,7 @@ public interface IServer {
 
     public boolean Register(String name, String pass);
 
-    public List<GameLobby> getServerGameList(int ID, String auth);
+    public List<GameLobby> getServerGameList(String auth);
 
     public List<ICommand> getNewCommands(int ID, String auth);
 
@@ -25,5 +25,5 @@ public interface IServer {
 
     public boolean setPlayerColor(ColorNum color, String auth);
 
-    public boolean addComment(Player player, String message, String auth);
+    public boolean addComment(String message, String auth);
 }

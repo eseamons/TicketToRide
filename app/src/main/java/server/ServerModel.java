@@ -9,6 +9,17 @@ import shared.model_classes.GameLobby;
 
 public class ServerModel {
 
+    private static ServerModel SINGLETON;
+
+    private ServerModel() {}
+
+    public static ServerModel getInstance() {
+        if (SINGLETON == null) {
+            SINGLETON = new ServerModel();
+        }
+        return SINGLETON;
+    }
+
     private List<Account> accounts;
     private List<GameLobby> lobbies;
     private List<Game> games;

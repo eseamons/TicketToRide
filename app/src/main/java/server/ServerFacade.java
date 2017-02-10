@@ -15,25 +15,46 @@ public class ServerFacade implements IServer{
 
     public static ServerFacade getInstance()
     {
-        if(SINGLETON == null)
-            return new ServerFacade();
-        else
-            return SINGLETON;
+        if(SINGLETON == null) {
+            SINGLETON =  new ServerFacade();
+        }
+
+        return SINGLETON;
     }
     @Override
     public Account Login(String name, String pass) {
-        // TODO Auto-generated method stub
-        return null;
+        ServerModel serverModel = ServerModel.getInstance();
+        List<Account> accountList = serverModel.getAccounts();
+        Account returnAccount = null;
+
+        //set returnAccount if both username and password match an account
+        for (Account account : accountList) {
+            if(account.getPassword() == pass && account.getUsername() == name) {
+                returnAccount = account;
+            }
+        }
+
+        return returnAccount;
     }
 
     @Override
     public boolean Register(String name, String pass) {
-        // TODO Auto-generated method stub
-        return false;
+        ServerModel serverModel = ServerModel.getInstance();
+        List<Account> accountList = serverModel.getAccounts();
+        boolean accountExists = false;
+
+        if (accountExists == false) {
+            Account newAccount = new Account();
+            newAccount.setUsername(name);
+            newAccount.setPassword(pass);
+            newAccount.setAuthentication("dkfaj-slfdkjak-sjfkdjsaf-ksdjf");
+        }
+
+        return !accountExists;
     }
 
     @Override
-    public List<GameLobby> getServerGameList(int ID, String auth) {
+    public List<GameLobby> getServerGameList(String auth) {
         // TODO Auto-generated method stub
         return null;
     }
@@ -69,7 +90,7 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean addComment(Player player, String message, String auth) {
+    public boolean addComment(String message, String auth) {
         // TODO Auto-generated method stub
         return false;
     }
