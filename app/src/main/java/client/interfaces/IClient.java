@@ -19,7 +19,9 @@ public interface IClient {
 
     public List<ICommand> getNewCommands(int ID, String auth);
 
-    public GameLobby joinGame(int gameID, String auth);
+    public GameLobby joinGame(int gameID);
+
+    public GameLobby createGame(String gameName, int maxPlayers);
 
     public Game strartGame(String auth);
 }

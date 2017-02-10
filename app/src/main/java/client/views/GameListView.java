@@ -13,15 +13,18 @@ import com.example.erics.tickettoride.R;
 import java.util.List;
 
 import client.interfaces.IGameListView;
-import shared.model_classes.Game;
+import client.presenters.GameListPresenter;
+import shared.model_classes.*;
+import shared.model_classes.GameLobby;
 
 public class GameListView extends AppCompatActivity implements IGameListView  {
 
     List<String> avaliableGames;
     String gameName;
     int numPlayers;
-    Button joinGame;
-    Button createGame;
+    Button joinGameButton;
+    Button createGameButton;
+    GameListPresenter gameListPresenter = new GameListPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,49 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             public void afterTextChanged(Editable s)
             {gameName = s.toString();}
         });
+
+        EditText maxPlayerText = (EditText) findViewById(R.id.numberofPlayers);
+        maxPlayerText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                String maxPlayerString = charSequence.toString();
+                numPlayers = Integer.parseInt(maxPlayerString);
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
+            {
+                String maxPlayerString = charSequence.toString();
+                numPlayers = Integer.parseInt(maxPlayerString);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                String maxPlayerString = editable.toString();
+                numPlayers = Integer.parseInt(maxPlayerString);
+            }
+        });
+
+        joinGameButton = (Button)findViewById(R.id.joinGameButton);
+        joinGameButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                gameListPresenter.joinGame();
+            }
+        });
+
+        createGameButton = (Button)findViewById(R.id.creatGameButton);
+        createGameButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                gameListPresenter.createGame();
+            }
+        });
+
 
 
 
@@ -64,7 +110,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     }
 
     @Override
-    public Game getSelectedGame() {
+    public GameLobby getSelectedGame() {
         return null;
     }
 

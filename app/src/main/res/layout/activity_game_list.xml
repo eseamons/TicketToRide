@@ -42,7 +42,8 @@
                 android:text="Join Game"
                 android:textSize="40dp"
                 android:layout_centerInParent="true"
-                android:layout_below="@+id/gameList"/>
+                android:layout_below="@+id/gameList"
+                android:id="@+id/joinGameButton"/>
 
         </RelativeLayout>
 
@@ -97,7 +98,8 @@
                 android:textSize="40dp"
                 android:layout_below="@+id/TextViews"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="85dp" />
+                android:layout_marginTop="85dp"
+                android:id="@+id/creatGameButton"/>
 
         </RelativeLayout>
 
