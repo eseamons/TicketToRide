@@ -1,5 +1,7 @@
 package shared.command_classes;
 
+import android.speech.RecognizerIntent;
+
 import shared.Result;
 import shared.interfaces.ICommand;
 
@@ -35,11 +37,22 @@ public class Command implements ICommand {
     @Override
     public ICommand getCommand()
     {
+        Command cmd;
         switch(type)
         {
-            case "addcomment": return new AddCommentCommand();
-            case "begingame": return new BeginGameCommand();
+            case "addcomment": cmd = new AddCommentCommand(); break;
+            case "begingame": cmd = new BeginGameCommand(); break;
+            case "creategame": cmd = new CreateGameCommand(); break;
+            case "getgames": cmd = new GetGamesCommand(); break;
+            case "joingame": cmd = new JoinGameCommand(); break;
+            case "login": cmd = new LoginCommand(); break;
+            case "register": cmd = new RegisterCommand(); break;
+            case "setplayercolor": cmd = new SetPlayerColorCommand(); break;
+            default: cmd = null;
+
         }
-        return new Command();
+        cmd.setType(type);
+        cmd.setInfo(info);
+        return cmd;
     }
 }
