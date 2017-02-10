@@ -9,10 +9,10 @@ public class AddCommentCommand extends Command
     @Override
     public Result execute()
     {
-        Player player = new Player();
-        String message = "";
-        String auth = "";
-        boolean success = ServerFacade.getInstance().addComment(player, message, auth);
+        String parts[] = info.split(" ");
+        String message = parts[0];
+        String auth = parts[1];
+        boolean success = ServerFacade.getInstance().addComment(message, auth);
 
         return new Result(success, "");
     }

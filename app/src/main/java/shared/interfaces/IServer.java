@@ -25,5 +25,5 @@ public interface IServer {
 
     public boolean setPlayerColor(ColorNum color, String auth);
 
-    public boolean addComment(Player player, String message, String auth);
+    public boolean addComment(String message, String auth);
 }

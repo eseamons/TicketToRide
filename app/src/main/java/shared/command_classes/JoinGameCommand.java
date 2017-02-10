@@ -9,8 +9,9 @@ public class JoinGameCommand extends Command
 {
     public Result execute()
     {
-        int ID = 0;
-        String auth = "";
+        String[] parts = info.split(" ");
+        int ID = Integer.parseInt(parts[0]);
+        String auth = parts[1];
         GameLobby game = ServerFacade.getInstance().joinGame(ID, auth);
         if(game == null)
             return new Result(false,"");

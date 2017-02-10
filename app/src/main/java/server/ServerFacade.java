@@ -112,7 +112,7 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean addComment(Player player, String message, String auth) {
+    public boolean addComment(String message, String auth) {
         // TODO Auto-generated method stub
         return false;
     }

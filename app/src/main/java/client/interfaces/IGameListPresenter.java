@@ -8,5 +8,5 @@ public interface IGameListPresenter {
 
     Boolean joinGame();
 
-    Boolean CreateGame();
+    Boolean createGame();
 }

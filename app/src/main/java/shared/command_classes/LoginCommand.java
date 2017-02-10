@@ -9,8 +9,9 @@ public class LoginCommand extends Command
 {
     public Result execute()
     {
-        String name = "";
-        String pass = "";
+        String[] parts = info.split(" ");
+        String name = parts[0];
+        String pass = parts[1];
         Account acnt = ServerFacade.getInstance().Login(name, pass);
 
         if(acnt == null)
