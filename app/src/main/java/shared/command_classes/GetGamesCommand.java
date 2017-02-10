@@ -11,7 +11,7 @@ public class GetGamesCommand extends Command
 {
     public Result execute()
     {
-        String auth = "";
+        String auth = info;
         List<GameLobby> games = ServerFacade.getInstance().getServerGameList(auth);
         if(games == null)
             return new Result(false,"");
