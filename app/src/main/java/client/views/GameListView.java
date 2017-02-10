@@ -10,8 +10,6 @@ import android.widget.EditText;
 
 import com.example.erics.tickettoride.R;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import client.interfaces.IGameListView;

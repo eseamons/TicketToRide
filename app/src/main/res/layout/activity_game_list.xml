@@ -16,11 +16,36 @@
         android:orientation="horizontal"
         android:weightSum="6">
 
-        <ListView
+        <RelativeLayout
             android:layout_width="0dp"
-            android:layout_weight="4"
-            android:layout_height="match_parent">
-        </ListView>
+            android:layout_height="match_parent"
+            android:layout_weight="4">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Avaliable Games"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/avaliableGames"
+                android:textSize="40dp"/>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@id/avaliableGames"
+                android:id="@+id/gameList">
+            </ListView>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Join Game"
+                android:textSize="40dp"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/gameList"/>
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -55,15 +80,24 @@
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
-                    android:id="@+id/GameName"/>
+                    android:id="@+id/gameName"/>
                 <EditText
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:inputType="number"
-                    android:id="@+id/NumberofPlayers"/>
+                    android:id="@+id/numberofPlayers"/>
 
 
             </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create Game"
+                android:textSize="40dp"
+                android:layout_below="@+id/TextViews"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="85dp" />
 
         </RelativeLayout>
 
