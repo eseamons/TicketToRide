@@ -12,13 +12,14 @@ import shared.model_classes.Player;
 
 public class ServerProxy implements IServer{
 
-    public static ServerProxy SINGLETON = null;
+    private static ServerProxy SINGLETON = null;
     public static ServerProxy getInstance()
     {
-        if(SINGLETON == null)
-            return new ServerProxy();
-        else
-            return SINGLETON;
+        if(SINGLETON == null) {
+            SINGLETON = new ServerProxy();
+        }
+
+        return SINGLETON;
     }
 
     @Override

@@ -23,7 +23,7 @@ public interface IClient {
 
     public GameLobby createGame(String gameName, int maxPlayers);
 
-    public Game strartGame(String auth);
+    public Game beginGame(int ID, String auth);
 
 
 

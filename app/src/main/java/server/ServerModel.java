@@ -62,6 +62,7 @@ public class ServerModel implements IServer{
             String uuid = UUID.randomUUID().toString();
             newAccount.setAuthentication(uuid);
             accounts.add(newAccount);
+            isRegisterSuccessful = true;
         }
 
         return isRegisterSuccessful;
