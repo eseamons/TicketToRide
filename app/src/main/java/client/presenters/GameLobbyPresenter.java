@@ -4,6 +4,14 @@ import client.interfaces.IGameLobbyPresenter;
 
 public class GameLobbyPresenter implements IGameLobbyPresenter{
 
+    private static GameLobbyPresenter instance;
+
+    public static GameLobbyPresenter getInstance()
+    {
+        if (instance == null)
+            instance = new GameLobbyPresenter();
+        return instance;
+    }
 
 
     public GameLobbyPresenter()

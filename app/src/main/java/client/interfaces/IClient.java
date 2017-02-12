@@ -25,6 +25,8 @@ public interface IClient {
 
     public Game beginGame(int ID, String auth);
 
+    public boolean sendMessage(String message);
+
 
 
 }

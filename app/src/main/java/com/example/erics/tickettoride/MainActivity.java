@@ -1,8 +1,8 @@
 package com.example.erics.tickettoride;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.EditText;
 
 import client.presenters.GameLobbyPresenter;
@@ -16,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
         // start with this
         //setContentView(R.layout.activity_login);
-        setContentView(R.layout.activity_gamelobby);
+        startActivity(new Intent(MainActivity.this, GameLobbyView.class));
+        setContentView(R.layout.activity_newgamelobby);
 
         //This area for testing GameLobbyView
         EditText msgText = (EditText) findViewById(R.id.msgEditText);
