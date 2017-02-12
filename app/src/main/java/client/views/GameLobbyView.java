@@ -10,10 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.erics.tickettoride.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import client.ClientFacade;
 import client.interfaces.IGameLobbyView;
 import client.presenters.GameLobbyPresenter;
 import shared.model_classes.Player;
@@ -22,14 +27,14 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 
     private Player[] players;
 
-    private String chat;
-
     private EditText msgEditText;
     private ImageView player1Color;
     private ImageView player2Color;
     private ImageView player3Color;
     private ImageView player4Color;
     private ImageView player5Color;
+
+    private ListView ChatList;
 
     private Button startBtn;
 
@@ -103,6 +108,11 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         player5Color = (ImageView) findViewById(R.id.player5Color);
         player5Color.setImageResource(R.drawable.black);
 
+        ChatList = (ListView) findViewById(R.id.ChatList);
+        List<String> chatArray = getChat();
+        ArrayAdapter<String> chatAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, chatArray);
+        ChatList.setAdapter(chatAdapter);
+
 
 //        Spinner spinner1 = (Spinner) findViewById(R.id.spinner);
 //        //String[] spinnerArray1 = new String[] { "Red", "Green", "Blue", "Yellow", "Black"};
@@ -155,14 +165,6 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         players = p;
     }
 
-    public String getChat() {
-        return chat;
-    }
-
-    public void setChat(String chat) {
-        this.chat = chat;
-    }
-
     public String getMessage()
     {
         return msgEditText.getText().toString();
@@ -184,6 +186,14 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
     {
 
         return 0;
+    }
+
+    public ArrayList<String> getChat()
+    {
+        ClientFacade cf = new ClientFacade();
+        ArrayList<String> chatArray = cf.getChat();
+
+        return chatArray;
     }
 
 }

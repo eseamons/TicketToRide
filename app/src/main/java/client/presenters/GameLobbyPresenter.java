@@ -1,6 +1,11 @@
 package client.presenters;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import client.ClientFacade;
 import client.interfaces.IGameLobbyPresenter;
+import client.views.GameLobbyView;
 
 public class GameLobbyPresenter implements IGameLobbyPresenter{
 
@@ -21,8 +26,19 @@ public class GameLobbyPresenter implements IGameLobbyPresenter{
 
     public boolean sendMessage()
     {
+        //TODO:
+        //ClientFacade cf = ClientFacade.getInstance();
 
-        return true;
+        ClientFacade cf = new ClientFacade();
+
+        String message = "";
+
+        //TODO:
+        //message += cf.getPlayerName;
+
+        message += GameLobbyView.getInstance().getMessage();
+
+        return cf.sendMessage(message);
     }
 
     public boolean changeColor()
@@ -33,7 +49,8 @@ public class GameLobbyPresenter implements IGameLobbyPresenter{
 
     public boolean beginGame()
     {
-
+        Context context = GameLobbyView.getInstance().getApplicationContext();
+        Toast.makeText(context,"Start Game!!",Toast.LENGTH_LONG);
         return true;
     }
 

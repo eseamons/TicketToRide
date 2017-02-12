@@ -1,5 +1,6 @@
 package client.interfaces;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import shared.interfaces.ICommand;
@@ -26,6 +27,8 @@ public interface IClient {
     public Game beginGame(int ID, String auth);
 
     public boolean sendMessage(String message);
+
+    public ArrayList<String> getChat();
 
 
 

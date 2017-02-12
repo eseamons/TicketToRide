@@ -3,6 +3,8 @@ package client.interfaces;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 import shared.model_classes.Player;
 
 public interface IGameLobbyView {
@@ -20,8 +22,6 @@ public interface IGameLobbyView {
 
     public void setPlayers(Player[] p);
 
-    public String getChat();
-
-    public void setChat(String chat);
+    public ArrayList<String> getChat();
 
 }

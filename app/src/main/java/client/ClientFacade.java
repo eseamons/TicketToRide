@@ -1,5 +1,6 @@
 package client;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import client.interfaces.IClient;
@@ -9,6 +10,26 @@ import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
 public class ClientFacade implements IClient{
+
+    @Override
+    public boolean sendMessage(String msg)
+    {
+        //TODO: Implement this plz
+
+
+        return true;
+    }
+
+    @Override
+    public ArrayList<String> getChat()
+    {
+        //TODO: Implement this
+
+        ArrayList<String> chatArray = new ArrayList<String>();
+
+        return chatArray;
+    }
+
 
     @Override
     public Account Login(String name, String pass) {
