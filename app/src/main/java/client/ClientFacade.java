@@ -8,6 +8,7 @@ import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
+import shared.model_classes.Player;
 
 public class ClientFacade implements IClient{
 
@@ -28,6 +29,14 @@ public class ClientFacade implements IClient{
         ArrayList<String> chatArray = new ArrayList<String>();
 
         return chatArray;
+    }
+
+    @Override
+    public Player[] getPlayers()
+    {
+        //TODO: Implement this
+
+        return null;
     }
 
 

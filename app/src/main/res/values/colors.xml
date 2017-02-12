@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="lobbyBackground">#EE204459</color>
     <color name="lobbyBackgroundLight">#EE114268</color>
+    <color name="loginBackground">#DD001dff</color>
 </resources>

@@ -7,6 +7,7 @@ import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
+import shared.model_classes.Player;
 
 public interface IClient {
 
@@ -29,6 +30,8 @@ public interface IClient {
     public boolean sendMessage(String message);
 
     public ArrayList<String> getChat();
+
+    public Player[] getPlayers();
 
 
 

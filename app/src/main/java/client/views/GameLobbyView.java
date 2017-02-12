@@ -114,6 +114,9 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         ChatList.setAdapter(chatAdapter);
 
 
+        //POLLER
+        GameLobbyPresenter.getInstance().getPlayers();
+
 //        Spinner spinner1 = (Spinner) findViewById(R.id.spinner);
 //        //String[] spinnerArray1 = new String[] { "Red", "Green", "Blue", "Yellow", "Black"};
 //        SimpleImageArrayAdapter adapter1 = new SimpleImageArrayAdapter(this, new Integer[]{R.drawable.red, R.drawable.green, R.drawable.blue, R.drawable.yellow, R.drawable.black});
