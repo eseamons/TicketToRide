@@ -2,6 +2,7 @@ package shared.command_classes;
 
 import android.speech.RecognizerIntent;
 
+import server.ServerFacade;
 import shared.Result;
 import shared.interfaces.ICommand;
 
@@ -33,6 +34,11 @@ public class Command implements ICommand {
 
     public int getCmdID() { return cmdID;}
 
+    public void executeOnClient()
+    {
+
+    }
+
     @Override
     public Result execute() {
         return null;
@@ -63,6 +69,7 @@ public class Command implements ICommand {
         cmd.setcmdID(nextCmdID);
         cmd.setType(type);
         cmd.setInfo(info);
+        ServerFacade.getInstance().addCommand(cmd);
         return cmd;
     }
 }
