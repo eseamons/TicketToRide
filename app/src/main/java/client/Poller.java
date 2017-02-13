@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Poller
 {
-    public static void run()
+    public void runGetNonGameCommands()
     {
         ScheduledExecutorService scheduleTaskExecutor;
 
@@ -23,8 +23,4 @@ public class Poller
         }, 0, 1, TimeUnit.SECONDS);
     }
 
-    public static void main(String[] args)
-    {
-        run();
-    }
 }
