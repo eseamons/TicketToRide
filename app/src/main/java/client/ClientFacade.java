@@ -12,6 +12,8 @@ import shared.model_classes.Player;
 
 public class ClientFacade implements IClient{
 
+    private static ClientModel clientModel = ClientModel.getInstance();
+
     @Override
     public boolean sendMessage(String msg)
     {
@@ -87,7 +89,10 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public Game beginGame(int ID, String auth) {
+    public Game beginGame(int ID) {
+
+        clientModel.get
+
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.BeginGame(ID, auth);
         return null;
