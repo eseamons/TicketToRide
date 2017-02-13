@@ -1,13 +1,10 @@
 package client.views;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.erics.tickettoride.R;
@@ -81,7 +78,7 @@ public class AvaliableGamesAdapter extends BaseExpandableListAdapter{
             String headerTitle = (String) getGroup(groupPosition);
             if(convertView == null) {
                 LayoutInflater inflaterInflater = LayoutInflater.from(this.context);
-                convertView = inflaterInflater.inflate(R.layout.availableGamesHeader, null);
+                convertView = inflaterInflater.inflate(R.layout.availablegamesheader, null);
             }
 
             TextView labelListHeader = (TextView) convertView.findViewById(R.id.header);
@@ -107,7 +104,7 @@ public class AvaliableGamesAdapter extends BaseExpandableListAdapter{
                 if(convertView == null) {
                     LayoutInflater inflaterInflater = LayoutInflater.from(this.context);
                     //another xml...
-                    convertView = inflaterInflater.inflate(R.layout.avaliableGamesChild, null);
+                    convertView = inflaterInflater.inflate(R.layout.avaliablegameschild, null);
                 }
 
                 //find 3 items in xml...
