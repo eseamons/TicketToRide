@@ -13,7 +13,8 @@ public class Command implements ICommand {
 
     String type;
     String info;
-
+    int cmdID;
+    public static int nextCmdID = 0;
     public void setInfo(String info)
     {
         this.info = info;
@@ -23,6 +24,14 @@ public class Command implements ICommand {
     {
         this.type = type;
     }
+
+    public void setcmdID(int i)
+    {
+        this.cmdID = i;
+        nextCmdID++;
+    }
+
+    public int getCmdID() { return cmdID;}
 
     @Override
     public Result execute() {
@@ -51,6 +60,7 @@ public class Command implements ICommand {
             default: cmd = null;
 
         }
+        cmd.setcmdID(nextCmdID);
         cmd.setType(type);
         cmd.setInfo(info);
         return cmd;

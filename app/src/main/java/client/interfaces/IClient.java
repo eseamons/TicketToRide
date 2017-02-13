@@ -19,13 +19,13 @@ public interface IClient {
 
     public List<GameLobby> getClientGamesList(String auth);
 
-    public List<ICommand> getNewCommands(int ID, String auth);
+    public List<ICommand> getNewCommands();
 
     public GameLobby joinGame(int gameID);
 
-    public GameLobby createGame(String gameName, int maxPlayers, String auth);
+    public GameLobby createGame(String gameName, int maxPlayers);
 
-    public Game beginGame(int ID, String auth);
+    public Game beginGame(int ID);
 
     public boolean sendMessage(String message);
 

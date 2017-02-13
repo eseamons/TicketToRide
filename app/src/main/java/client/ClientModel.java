@@ -9,10 +9,18 @@ import shared.model_classes.GameLobby;
 
 public class ClientModel {
 
-    private Account account;
+    private Account account = null;
     private GameLobby current_game_lobby;
     private Game current_game;
     private List<ICommand> command_list;
+    private static ClientModel instance = new ClientModel();
+
+
+
+    private ClientModel(){};
+
+    public static ClientModel getInstance()
+    {return instance;}
 
     public int getLastCommand() {
         return 0;
@@ -49,4 +57,7 @@ public class ClientModel {
     public void setCommand_list(List<ICommand> command_list) {
         this.command_list = command_list;
     }
+
+    public String getAuthorization()
+    {return account.getAuthentication();}
 }

@@ -31,6 +31,10 @@ public class ServerModel implements IServer{
     private List<Game> games;
     private List<ICommand> lobby_commands;
 
+    public void addCommand(ICommand cmd)
+    {
+        lobby_commands.add(cmd);
+    }
     public Account Login(String name, String pass) {
 
         return accountList.login(name, pass);
