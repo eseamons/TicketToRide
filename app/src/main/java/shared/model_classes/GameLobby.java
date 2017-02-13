@@ -11,6 +11,7 @@ public class GameLobby {
     private int ID;
     private String name;
     private List<ICommand> command_list;
+    private List<String> comments;
 
     public List<Player> getPlayers() {
         return players;

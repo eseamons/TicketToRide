@@ -1,6 +1,9 @@
 package shared.model_classes;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -10,13 +13,11 @@ import java.util.UUID;
 public class AccountList {
 
     private List<Account> accounts;
+    Map<String, Account> accountAuthMap;
 
     public AccountList() {
-
-    }
-
-    public void addAccount(Account newAccount) {
-        accounts.add(newAccount);
+        accounts = new ArrayList<>();
+        accountAuthMap = new HashMap<>();
     }
 
     public Account login(String name, String pass) {
@@ -58,6 +59,7 @@ public class AccountList {
         //create authentication code
         String uuid = UUID.randomUUID().toString();
         newAccount.setAuthentication(uuid);
+        accountAuthMap.put(uuid, newAccount);
         return true;
     }
 
