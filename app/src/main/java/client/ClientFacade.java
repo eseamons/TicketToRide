@@ -70,7 +70,7 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public List<ICommand> getNewCommands(int ID, String auth) {
+    public List<ICommand> getNewCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
         return null;
     }
