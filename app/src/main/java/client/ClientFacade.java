@@ -82,7 +82,8 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public GameLobby createGame(String gameName, int maxPlayers, String auth) {
+    public GameLobby createGame(String gameName, int maxPlayers) {
+        String auth = clientModel.getAuthorization();
         ServerProxy serverProxy = ServerProxy.getInstance();
         GameLobby gameLobby = serverProxy.CreateGame(gameName, maxPlayers, auth);
         return gameLobby;
@@ -91,7 +92,7 @@ public class ClientFacade implements IClient{
     @Override
     public Game beginGame(int ID) {
 
-        clientModel.get
+        String auth = clientModel.getAuthorization();
 
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.BeginGame(ID, auth);
