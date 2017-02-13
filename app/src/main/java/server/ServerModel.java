@@ -10,7 +10,6 @@ import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
 import shared.interfaces.IServer;
-import shared.model_classes.Player;
 
 public class ServerModel implements IServer{
 
@@ -62,16 +61,19 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public List<ICommand> getNewCommands(int ID, String auth) {
+    public List<ICommand> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?
-        List<ICommand> commandList = null;
+        List<ICommand> fullCommandList = null;
+        List<ICommand> newCommandList = null;
 
         if(accountList.isAuthCodeValid(auth)) {
-            GameLobby lobby = lobbies.get(lobbies.size()+1);
-            commandList = lobby.getCommand_list();
+            GameLobby lobby = lobbies.get(lobbies.size());
+            fullCommandList = lobby.getCommand_list();
+            newCommandList = fullCommandList.subList(commandID-1, fullCommandList.size());
+
         }
 
-        return commandList;
+        return newCommandList;
     }
 
     @Override
@@ -90,13 +92,13 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public GameLobby joinGame(int ID, String auth) {
+    public GameLobby joinGame(int gameID, String auth) {
 
         GameLobby returnGameLobby = null;
 
         //Checks for auth code in accounts. If valid auth code, creates new Game lobby
         if(accountList.isAuthCodeValid(auth) == true) {
-            returnGameLobby = lobbies.get(ID - 1);
+            returnGameLobby = lobbies.get(gameID - 1);
         }
 
 
@@ -104,7 +106,7 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean BeginGame(int ID, String auth) {
+    public boolean BeginGame(int gameID, String auth) {
         // TODO Auto-generated method stub
 
         //create game
@@ -114,20 +116,8 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean setPlayerColor(ColorNum color, String auth) {
-        Player player = null;
-        boolean setPlayerColorSuccess = true;
-
-        player.setColor(color);
-        return setPlayerColorSuccess;
-
-
-        //Checks for auth code in accounts. If valid auth code, creates new Game lobby
-//        for (Account account : accounts) {
-//            if(account.getAuthentication() == auth) {
-//                returnGameLobby = lobbies.get(ID - 1);
-//            }
-//        }
-
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
