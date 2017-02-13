@@ -50,7 +50,8 @@ public class ClientFacade implements IClient{
     @Override
     public boolean Register(String name, String pass) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return false;
+        boolean registerSuccessful = serverProxy.Register(name, pass);
+        return registerSuccessful;
     }
 
     @Override
@@ -79,9 +80,10 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public GameLobby createGame(String gameName, int maxPlayers) {
+    public GameLobby createGame(String gameName, int maxPlayers, String auth) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return null;
+        GameLobby gameLobby = serverProxy.CreateGame(gameName, maxPlayers, auth);
+        return gameLobby;
     }
 
     @Override
