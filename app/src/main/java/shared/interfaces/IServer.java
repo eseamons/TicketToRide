@@ -15,13 +15,13 @@ public interface IServer {
 
     public List<GameLobby> getServerGameList(String auth);
 
-    public List<ICommand> getNewCommands(int ID, String auth);
+    public List<ICommand> getNewCommands(int commandID, String auth);
 
     public GameLobby CreateGame(String name, int max_player_num, String auth);
 
-    public GameLobby joinGame(int ID, String auth);
+    public GameLobby joinGame(int gameID, String auth);
 
-    public boolean BeginGame(int ID, String auth);
+    public boolean BeginGame(int gameID, String auth);
 
     public boolean setPlayerColor(ColorNum color, String auth);
 
