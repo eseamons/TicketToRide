@@ -1,12 +1,17 @@
 package client.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListAdapter;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import com.example.erics.tickettoride.R;
 
@@ -24,12 +29,50 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     int numPlayers;
     Button joinGameButton;
     Button createGameButton;
+    GameLobby selectedGame;
     GameListPresenter gameListPresenter = new GameListPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_list);
+
+        List<GameLobby> avaliableGamesArray = getAvaliableGames();
+        ExpandableListAdapter listAdapter = new AvaliableGamesAdapter(getBaseContext(), avaliableGamesArray);
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
+        listView.setAdapter(listAdapter);
+        listView.expandGroup(0);
+
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
+        {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
+            {
+                Object game = (Object) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
+                GameLobby gameLobby = new GameLobby();
+
+                if(game.getClass() == gameLobby.getClass())
+                {
+                    gameLobby = (GameLobby) game;
+                    selectedGame = gameLobby;
+                    return true;
+                }
+                return false;
+            }
+
+        });
+
+
+
+        createGameButton = (Button)findViewById(R.id.creatGameButton);
+        createGameButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view) {
+                gameListPresenter.createGame();
+            }
+        });
 
         EditText gameNameText = (EditText)findViewById(R.id.gameName);
         gameNameText.addTextChangedListener(new TextWatcher() {
@@ -78,23 +121,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 gameListPresenter.joinGame();
             }
         });
-
-        createGameButton = (Button)findViewById(R.id.creatGameButton);
-        createGameButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view) {
-                gameListPresenter.createGame();
-            }
-        });
-
-
-
-
-
-
-
-
     }
 
 
@@ -109,12 +135,17 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
     @Override
     public int getNumberOfPlayers() {
-        return 0;
+        return numPlayers;
     }
 
     @Override
     public GameLobby getSelectedGame() {
-        return null;
+        return selectedGame;
+    }
+
+    public List<GameLobby> getAvaliableGames()
+    {
+        return gameListPresenter.getAvaliableGames();
     }
 
 

@@ -1,6 +1,5 @@
 package client.interfaces;
 
-import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
 /**

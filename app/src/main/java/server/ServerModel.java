@@ -10,6 +10,7 @@ import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
 import shared.interfaces.IServer;
+import shared.model_classes.Player;
 
 public class ServerModel implements IServer{
 
@@ -57,11 +58,13 @@ public class ServerModel implements IServer{
             Account newAccount = new Account();
             newAccount.setUsername(name);
             newAccount.setPassword(pass);
+            accounts.add(newAccount);
 
             //create authentication code
             String uuid = UUID.randomUUID().toString();
             newAccount.setAuthentication(uuid);
-            accounts.add(newAccount);
+
+            //mark register action as successful
             isRegisterSuccessful = true;
         }
 
@@ -84,29 +87,52 @@ public class ServerModel implements IServer{
 
     @Override
     public List<ICommand> getNewCommands(int ID, String auth) {
-        // TODO Auto-generated method stub
-        return null;
+        //is the ID for the last command that the user has?
+        List<ICommand> commandList = null;
+        //how do we know which game we are looking for
+        GameLobby newGameLobby = null;
+        //Checks for auth code in accounts. If valid auth code, creates new Game lobby
+        for (Account account : accounts) {
+            if(account.getAuthentication() == auth) {
+                GameLobby lobby = lobbies.get(lobbies.size()+1);
+                commandList = lobby.getCommand_list();
+
+            }
+        }
+        return commandList;
     }
 
     @Override
-    public GameLobby CreateGame(String name, int players, String auth) {
+    public GameLobby CreateGame(String name, int max_player_num, String auth) {
         GameLobby newGameLobby = null;
         //Checks for auth code in accounts. If valid auth code, creates new Game lobby
         for (Account account : accounts) {
             if(account.getAuthentication() == auth) {
                 newGameLobby = new GameLobby();
                 newGameLobby.setName(name);
-
+                newGameLobby.setMax_players(max_player_num);
+                newGameLobby.setID(lobbies.size()+1);
+                lobbies.add(newGameLobby);
             }
         }
 
-        return null;
+        return newGameLobby;
     }
 
     @Override
     public GameLobby joinGame(int ID, String auth) {
-        // TODO Auto-generated method stub
-        return null;
+
+        GameLobby returnGameLobby = null;
+
+        //Checks for auth code in accounts. If valid auth code, creates new Game lobby
+        for (Account account : accounts) {
+            if(account.getAuthentication() == auth) {
+                returnGameLobby = lobbies.get(ID - 1);
+            }
+        }
+
+
+        return returnGameLobby;
     }
 
     @Override
@@ -117,8 +143,20 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean setPlayerColor(ColorNum color, String auth) {
-        // TODO Auto-generated method stub
-        return false;
+        Player player = null;
+        boolean setPlayerColorSuccess = true;
+
+        player.setColor(color);
+        return setPlayerColorSuccess;
+
+
+        //Checks for auth code in accounts. If valid auth code, creates new Game lobby
+//        for (Account account : accounts) {
+//            if(account.getAuthentication() == auth) {
+//                returnGameLobby = lobbies.get(ID - 1);
+//            }
+//        }
+
     }
 
     @Override
