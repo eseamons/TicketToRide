@@ -16,6 +16,10 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="client.views.LoginView"
+            android:screenOrientation="landscape"
+            />
+        <activity
             android:name="client.views.GameLobbyView"
             android:screenOrientation="landscape"
             />
