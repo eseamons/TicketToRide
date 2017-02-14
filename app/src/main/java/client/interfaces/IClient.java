@@ -19,7 +19,7 @@ public interface IClient {
 
     public List<GameLobby> getClientGamesList(String auth);
 
-    public List<ICommand> getNewCommands(int ID, String auth);
+    public List<ICommand> getNewCommands();
 
     public GameLobby joinGame(int gameID);
 

@@ -26,6 +26,10 @@ public class ServerFacade implements IServer{
         return serverModel.Login(name, pass);
     }
 
+    public void addCommand(ICommand cmd)
+    {
+        ServerModel.getInstance().addCommand(cmd);
+    }
     @Override
     public boolean Register(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
