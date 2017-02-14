@@ -19,6 +19,10 @@
             android:name="client.views.GameLobbyView"
             android:screenOrientation="landscape"
             />
+        <activity
+            android:name="client.views.GameListView"
+            android:screenOrientation="landscape"
+            />
     </application>
 
 </manifest>

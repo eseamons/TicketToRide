@@ -39,7 +39,7 @@ public class AvaliableGamesAdapter extends BaseExpandableListAdapter{
 
         @Override
         public int getGroupCount() {
-            return 2;
+            return 1;
         }
 
         @Override
@@ -51,7 +51,14 @@ public class AvaliableGamesAdapter extends BaseExpandableListAdapter{
         }
 
         @Override
-        public Object getGroup(int groupPosition) {return headers[groupPosition];}
+        public Object getGroup(int groupPosition)
+        {
+
+            if(groupPosition ==0)
+            {return headers[groupPosition];}
+            else
+            {return null;}
+        }
 
         @Override
         public Object getChild(int groupPosition, int childPosition) {

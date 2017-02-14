@@ -13,11 +13,10 @@ public class GameListPresenter implements IGameListPresenter {
 
 
     ClientFacade clientFacade = new ClientFacade();
-    GameListView gameListView = new GameListView();
 
     @Override
     public Boolean joinGame() {
-
+        GameListView gameListView = new GameListView();
         GameLobby game = gameListView.getSelectedGame();
         int id = game.getID();
         GameLobby gameLobby  = clientFacade.joinGame(id);
@@ -31,6 +30,7 @@ public class GameListPresenter implements IGameListPresenter {
     @Override
     public Boolean createGame()
     {
+        GameListView gameListView = new GameListView();
         String gameName = gameListView.getGameName();
         int maxPlayers = gameListView.getNumberOfPlayers();
         GameLobby gameLobby = clientFacade.createGame(gameName, maxPlayers);
@@ -43,8 +43,18 @@ public class GameListPresenter implements IGameListPresenter {
 
     @Override
     public List<GameLobby> getAvaliableGames() {
-        //TODO: clientfacade should be getting the authorization. presenter doesn't have access to this.
-        return clientFacade.getServerGamesList("0");
+
+
+        //List<GameLobby> gameLobbies =  clientFacade.getServerGamesList("0");
+        //return gameLobbies;
+        GameLobby g = new GameLobby();
+        g.setName("becca's game");
+        g.setMax_players(3);
+
+        ArrayList<GameLobby> games = new ArrayList<>();
+        games.add(g);
+
+        return games;
     }
 
 
