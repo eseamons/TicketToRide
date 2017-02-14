@@ -3,6 +3,7 @@ package client.interfaces;
 import java.util.ArrayList;
 import java.util.List;
 
+import shared.ColorNum;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
@@ -32,6 +33,8 @@ public interface IClient {
     public ArrayList<String> getChat();
 
     public Player[] getPlayers();
+
+    public boolean changePlayerColor(ColorNum colorNum);
 
 
 
