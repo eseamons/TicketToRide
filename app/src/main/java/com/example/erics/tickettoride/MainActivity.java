@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.EditText;
 
 import client.presenters.GameLobbyPresenter;
+import client.views.GameListView;
 import client.views.GameLobbyView;
 import client.views.LoginView;
 
@@ -17,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
 
         // start with this
         //setContentView(R.layout.activity_login);
-        startActivity(new Intent(MainActivity.this, LoginView.class));
-        setContentView(R.layout.activity_login);
+        startActivity(new Intent(MainActivity.this, GameListView.class));
+        setContentView(R.layout.activity_game_list);
 
 //        //This area for testing GameLobbyView
 //        EditText msgText = (EditText) findViewById(R.id.msgEditText);

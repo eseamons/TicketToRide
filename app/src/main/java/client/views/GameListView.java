@@ -93,10 +93,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         maxPlayerText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
-                String maxPlayerString = charSequence.toString();
-                numPlayers = Integer.parseInt(maxPlayerString);
-            }
+            {}
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
@@ -122,10 +119,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             }
         });
     }
-
-
-
-
 
 
     @Override

@@ -19,20 +19,13 @@
         <RelativeLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Avaliable Games"
-                android:layout_centerHorizontal="true"
-                android:id="@+id/avaliableGames"
-                android:textSize="40dp"/>
+            android:layout_weight="6">
 
             <ExpandableListView
                 android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_below="@id/avaliableGames"
+                android:layout_height="500dp"
+                android:textAlignment="center"
+                android:backgroundTint="@color/colorPrimaryDark"
                 android:id="@+id/gameList">
             </ExpandableListView>
 
@@ -40,68 +33,74 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Join Game"
-                android:textSize="40dp"
-                android:layout_centerInParent="true"
+                android:textSize="20sp"
+                android:id="@+id/joinGameButton"
                 android:layout_below="@+id/gameList"
-                android:id="@+id/joinGameButton"/>
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="40dp" />
 
         </RelativeLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="2">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.48"
+            android:layout_gravity="bottom">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="600dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:orientation="horizontal"
+                android:background="@color/loginBackground"
                 android:id="@+id/TextViews"
-                android:layout_centerVertical="true">
+                android:layout_marginBottom="30dp"
+                android:layout_gravity="bottom">
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
                     android:text="Game Name"
-                    android:textSize="40dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Number of Players"
-                    android:textSize="40dp"/>
+                    android:textSize="24sp"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/gameName"/>
+
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="600dp"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/TextViews"
-                android:orientation="vertical"
-                android:layout_centerVertical="true">
-                <EditText
+                android:layout_below="@+id/TextViews"
+                android:orientation="horizontal"
+                android:background="@color/loginBackground"
+                >
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:id="@+id/gameName"/>
+                    android:layout_height="60dp"
+                    android:text="Number of Players"
+                    android:textSize="24sp"/>
                 <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:inputType="number"
                     android:id="@+id/numberofPlayers"/>
-
-
             </LinearLayout>
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Create Game"
-                android:textSize="40dp"
-                android:layout_below="@+id/TextViews"
-                android:layout_centerHorizontal="true"
+                android:textSize="20sp"
                 android:layout_marginTop="85dp"
-                android:id="@+id/creatGameButton"/>
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="150dp"
+                android:id="@+id/creatGameButton"
+                />
 
-        </RelativeLayout>
+        </LinearLayout>
 
 
     </LinearLayout>
