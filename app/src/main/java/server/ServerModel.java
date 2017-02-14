@@ -1,6 +1,8 @@
 package server;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import shared.ColorNum;
 import shared.interfaces.ICommand;
@@ -10,14 +12,13 @@ import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
 import shared.interfaces.IServer;
+import shared.model_classes.Player;
 
 public class ServerModel implements IServer{
 
     private static ServerModel SINGLETON;
 
     private static int currentLobbyID;
-
-    private ServerModel() {}
 
     public static ServerModel getInstance() {
         if (SINGLETON == null) {
@@ -30,6 +31,14 @@ public class ServerModel implements IServer{
     private List<GameLobby> lobbies;
     private List<Game> games;
     private List<ICommand> lobby_commands;
+    private Map<String, Player> playerMap;
+
+    private ServerModel() {
+        accountList = new AccountList();
+        lobbies = new ArrayList<>();
+        games = new ArrayList<>();
+        lobby_commands = new ArrayList<>();
+    }
 
     public void addCommand(ICommand cmd)
     {
@@ -99,6 +108,12 @@ public class ServerModel implements IServer{
         //Checks for auth code in accounts. If valid auth code, creates new Game lobby
         if(accountList.isAuthCodeValid(auth) == true) {
             returnGameLobby = lobbies.get(gameLobbyID - 1);
+            Player p = new Player();
+            Account acc = accountList.getAccountByAuthCode(auth);
+            p.setAccount(acc);
+            playerMap.put(auth, p);
+            returnGameLobby.addNewPlayers(p);
+
         }
 
 
@@ -122,13 +137,14 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean setPlayerColor(ColorNum color, String auth) {
-
-        return false;
+        Player p = playerMap.get(auth);
+        p.setColor(color);
+        return true;
     }
 
     @Override
     public boolean addComment(String message, String auth) {
-        // TODO Auto-generated method stub
+
         return false;
     }
 
