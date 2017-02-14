@@ -64,5 +64,11 @@ public class AccountList {
     }
 
 
+    public Account getAccountByAuthCode(String auth) {
+
+        return accountAuthMap.get(auth);
+    }
+
+
 
 }

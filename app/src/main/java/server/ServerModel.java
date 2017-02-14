@@ -92,13 +92,13 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public GameLobby joinGame(int gameID, String auth) {
+    public GameLobby joinGame(int gameLobbyID, String auth) {
 
         GameLobby returnGameLobby = null;
 
         //Checks for auth code in accounts. If valid auth code, creates new Game lobby
         if(accountList.isAuthCodeValid(auth) == true) {
-            returnGameLobby = lobbies.get(gameID - 1);
+            returnGameLobby = lobbies.get(gameLobbyID - 1);
         }
 
 
@@ -106,17 +106,23 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean BeginGame(int gameID, String auth) {
-        // TODO Auto-generated method stub
+    public boolean BeginGame(int gameLobbyID, String auth) {
+        boolean authcodeValid = false;
 
-        //create game
-        //delete game lobby
-        return false;
+        if(accountList.isAuthCodeValid(auth)) {
+            //create game
+            Game newGame = new Game();
+            //delete game lobby
+            lobbies.remove(gameLobbyID - 1);
+            authcodeValid = true;
+        }
+
+        return authcodeValid;
     }
 
     @Override
     public boolean setPlayerColor(ColorNum color, String auth) {
-        // TODO Auto-generated method stub
+
         return false;
     }
 
