@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.interfaces.IClient;
+import shared.ColorNum;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
@@ -39,6 +40,15 @@ public class ClientFacade implements IClient{
         //TODO: Implement this
 
         return null;
+    }
+
+    @Override
+    public boolean changePlayerColor(ColorNum colorNum) {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        String auth = clientModel.getAuthorization();
+
+        boolean successful = serverProxy.setPlayerColor(colorNum, auth);
+        return successful;
     }
 
 
