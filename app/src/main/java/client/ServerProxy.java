@@ -111,7 +111,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public GameLobby CreateGame(String name, int players, String auth)
+    public boolean CreateGame(String name, int players, String auth)
     {
         StringBuilder message = new StringBuilder();
         message.append(name + " ");
@@ -121,14 +121,7 @@ public class ServerProxy implements IServer{
         cmd.setInfo(message.toString());
         cmd.setType("creategame");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
-        {
-            return ClientSerializer.deserializeGameLobby(r.getInfo());
-        }
-        else
-        {
-            return null;
-        }
+        return r.isSuccess();
     }
 
     @Override
