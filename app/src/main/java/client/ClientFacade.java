@@ -19,9 +19,7 @@ public class ClientFacade implements IClient{
     public boolean sendMessage(String msg)
     {
         //TODO: Implement this plz
-
-
-        return true;
+        return ServerProxy.getInstance().addComment(msg, clientModel.getAuthorization());
     }
 
     @Override
