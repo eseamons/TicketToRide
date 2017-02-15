@@ -31,10 +31,10 @@ public class ServerModelTestObject {
         return account;
     }
 
-    public GameLobby createGame(String name, int max_player_num, String auth) {
+    public boolean createGame(String name, int max_player_num, String auth) {
         ServerModel model = ServerModel.getInstance();
-        GameLobby lobby = model.CreateGame(name, max_player_num,auth);
-        return lobby;
+        boolean successful = model.CreateGame(name, max_player_num,auth);
+        return successful;
     }
 
     public GameLobby joinGame(int gameLobbyID, String auth) {
