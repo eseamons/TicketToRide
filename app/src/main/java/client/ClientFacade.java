@@ -97,8 +97,7 @@ public class ClientFacade implements IClient{
     public boolean createGame(String gameName, int maxPlayers) {
         String auth = clientModel.getAuthorization();
         ServerProxy serverProxy = ServerProxy.getInstance();
-        GameLobby gameLobby = serverProxy.CreateGame(gameName, maxPlayers, auth);
-        return gameLobby != null;
+        return serverProxy.CreateGame(gameName, maxPlayers, auth);
     }
 
     @Override
