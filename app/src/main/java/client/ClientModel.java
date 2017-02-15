@@ -3,6 +3,7 @@ package client;
 import java.util.List;
 import java.util.Observable;
 
+import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
@@ -42,7 +43,7 @@ public class ClientModel extends Observable
     {return instance;}
 
     public int getLastCommand() {
-        return 0;
+        return ((Command) command_list.get(command_list.size()-1)).getID();
     }
 
     public Account getAccount() {

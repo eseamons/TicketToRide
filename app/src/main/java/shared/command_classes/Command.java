@@ -32,6 +32,11 @@ public class Command implements ICommand {
         nextCmdID++;
     }
 
+    public int getID()
+    {
+        return cmdID;
+    }
+
     public int getCmdID() { return cmdID;}
 
     public void executeOnClient()
