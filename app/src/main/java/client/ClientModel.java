@@ -13,7 +13,13 @@ public class ClientModel {
     private GameLobby current_game_lobby;
     private Game current_game;
     private List<ICommand> command_list;
+    private List<GameLobby> list_of_lobbies;
     private static ClientModel instance = new ClientModel();
+
+    public void addLobbyToList(GameLobby game)
+    {
+        list_of_lobbies.add(game);
+    }
 
 
 

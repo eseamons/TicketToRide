@@ -108,4 +108,30 @@ public class ClientFacade implements IClient{
         boolean beginGameBool = serverProxy.BeginGame(ID, auth);
         return null;
     }
+
+    public void addGameToLobbyList(GameLobby game)
+    {
+        clientModel.addLobbyToList(game);
+    }
+
+    public void addComment(int gameID, String message)
+    {
+        if(clientModel.getCurrent_game_lobby().getID() == gameID)
+        {
+            //add the message
+        }
+        //else do nothing
+    }
+
+    public void someoneJoinedGame(int gameID, String name)
+    {
+        if(clientModel.getCurrent_game_lobby().getID() == gameID)
+        {
+            //add name to the current_game_lobby
+        }
+        else
+        {
+            //indicated that one more player is in the game
+        }
+    }
 }

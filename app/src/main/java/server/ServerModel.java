@@ -5,6 +5,12 @@ import java.util.List;
 import java.util.Map;
 
 import shared.ColorNum;
+import shared.command_classes.AddCommentCommand;
+import shared.command_classes.BeginGameCommand;
+import shared.command_classes.Command;
+import shared.command_classes.CreateGameCommand;
+import shared.command_classes.JoinGameCommand;
+import shared.command_classes.SetPlayerColorCommand;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.AccountList;
@@ -91,8 +97,15 @@ public class ServerModel implements IServer{
             newGameLobby = new GameLobby();
             newGameLobby.setName(name);
             newGameLobby.setMax_players(max_player_num);
-            newGameLobby.setID(lobbies.size()+1);
             lobbies.add(newGameLobby);
+
+            int ID = newGameLobby.getID();
+            Command cmd = new CreateGameCommand();
+            cmd.setInfo(name + " " + max_player_num + " " + ID);
+            cmd.setType("creategame");
+            cmd.setcmdID(lobbies.size());
+            lobby_commands.add(cmd);
+
         }
 
         return newGameLobby;
@@ -112,6 +125,12 @@ public class ServerModel implements IServer{
             playerMap.put(auth, p);
             returnGameLobby.addNewPlayers(p);
 
+            Command cmd = new JoinGameCommand();
+            cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
+            cmd.setcmdID(lobby_commands.size());
+            cmd.setType("joingame");
+            lobby_commands.add(cmd);
+
         }
 
 
@@ -122,12 +141,20 @@ public class ServerModel implements IServer{
     public boolean BeginGame(int gameLobbyID, String auth) {
         boolean authcodeValid = false;
 
-        if(accountList.authCodeExists(auth)) {
+        if(accountList.authCodeExists(auth))
+        {
             //create game
             Game newGame = new Game();
             //delete game lobby
             lobbies.remove(gameLobbyID - 1);
             authcodeValid = true;
+
+            Command cmd = new BeginGameCommand();
+            cmd.setInfo("" + gameLobbyID);
+            cmd.setType("begingame");
+            cmd.setcmdID(lobby_commands.size());
+            addCommand(cmd);
+
         }
 
         return authcodeValid;
@@ -137,6 +164,7 @@ public class ServerModel implements IServer{
     public boolean setPlayerColor(ColorNum color, String auth) {
         Player p = playerMap.get(auth);
         p.setColor(color);
+
         return true;
     }
 
@@ -145,9 +173,19 @@ public class ServerModel implements IServer{
         boolean addCommentSuccessful = false;
             for(GameLobby lobby : lobbies) {
                 if(lobby.authCodeExistsInLobby(auth)) {
+
                     lobby.addNewComment(message);
                     addCommentSuccessful = true;
+
+                    int ID = lobby.getID();
+                    Command cmd = new AddCommentCommand();
+                    cmd.setInfo(ID + " " + message);
+                    cmd.setType("addcomment");
+                    cmd.setcmdID(lobby_commands.size());
+                    addCommand(cmd);
                 }
+
+
 
             }
 
