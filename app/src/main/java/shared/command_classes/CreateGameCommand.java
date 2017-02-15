@@ -29,10 +29,11 @@ public class CreateGameCommand extends Command
         String name = parts[0];
         int players = Integer.parseInt(parts[1]);
         String auth = parts[2];
+        int ID = Integer.parseInt(parts[3]);
         GameLobby game = new GameLobby();
         game.setName(name);
         game.setMax_players(players);
-        game.setID(0);
+        game.setID(ID);
         client.addGameToLobbyList(game);
     }
 }
