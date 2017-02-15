@@ -151,9 +151,9 @@ public class GameListView extends AppCompatActivity implements Observer, IGameLi
         return selectedGame;
     }
 
-    public List<GameLobby> getAvaliableGames()
+    public void getAvaliableGames()
     {
-        return gameListPresenter.getAvaliableGames();
+        gameListPresenter.getAvaliableGames();
     }
 
 

@@ -9,7 +9,6 @@ public class GameLobby {
 
     private List<Player> players;
     private int max_players;
-    private int current_number_of_players = 0;
     private int ID;
     private String name;
     private List<ICommand> command_list;
@@ -24,7 +23,7 @@ public class GameLobby {
         players = new ArrayList<>();
     }
 
-    public void playerJoined(){ current_number_of_players++;}
+    public int playerJoined(){ return players.size();};
     public List<Player> getPlayers() {
         return players;
     }
