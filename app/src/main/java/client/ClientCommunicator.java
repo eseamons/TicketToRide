@@ -39,19 +39,19 @@ public class ClientCommunicator {
             HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 
             switch(requestInfo.getType()) {
-                case "getgames":
+                case "getgames":urlConnection.setRequestMethod("GET");
                     break;
-                case "login":
+                case "login": urlConnection.setRequestMethod("GET");
                     break;
                 case "joingame": urlConnection.setRequestMethod("GET");
                     break;
-                case "addcomment":
+                case "addcomment":urlConnection.setRequestMethod("GET");
                     break;
-                case "begingame":
+                case "begingame": urlConnection.setRequestMethod("GET");
                     break;
-                case "creategame":
+                case "creategame": urlConnection.setRequestMethod("GET");
                     break;
-                case "register":
+                case "register":urlConnection.setRequestMethod("GET");
                     break;
                 case "setplayercolor": urlConnection.setRequestMethod("POST");
                     break;
