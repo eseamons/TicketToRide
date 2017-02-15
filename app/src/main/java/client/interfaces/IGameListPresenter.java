@@ -14,5 +14,5 @@ public interface IGameListPresenter {
 
     Boolean createGame();
 
-    List<GameLobby> getAvaliableGames();
+    void getAvaliableGames();
 }
