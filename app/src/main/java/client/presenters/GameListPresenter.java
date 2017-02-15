@@ -14,7 +14,7 @@ import shared.model_classes.GameLobby;
 public class GameListPresenter implements IGameListPresenter,Observer {
 
 
-    GameListPresenter()
+    public GameListPresenter()
     {
         clientFacade.setGameListPrestenter(this);
     }
