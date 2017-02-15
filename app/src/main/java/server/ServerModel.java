@@ -78,7 +78,7 @@ public class ServerModel implements IServer{
     public List<ICommand> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?
         List<ICommand> fullCommandList = null;
-        List<ICommand> newCommandList = null;
+        List<ICommand> newCommandList = new ArrayList<>();
 
         if(accountList.authCodeExists(auth)) {
             GameLobby lobby = lobbies.get(lobbies.size());
