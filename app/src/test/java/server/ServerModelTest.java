@@ -60,7 +60,33 @@ public class ServerModelTest {
 
     @Test
     public void joinGame() throws Exception{
+        String gameName = "Ultimate Game";
+        String gameNameTwo = "Test Game";
+        int max_player_num = 4;
+        Account account = null;
+        GameLobby lobbyOne = null;
+        GameLobby lobbyTwo = null;
 
+        ServerModelTestObject testObject = new ServerModelTestObject();
+        testObject.register("mytest", "mypassword");
+        account = testObject.login("mytest", "mypassword");
+        testObject.createGame(gameName, max_player_num, account.getAuthentication());
+
+        max_player_num = 3;
+        testObject.createGame(gameNameTwo, max_player_num, account.getAuthentication());
+
+
+        lobbyOne = testObject.joinGame(1, account.getAuthentication());
+        lobbyTwo = testObject.joinGame(2, account.getAuthentication());
+
+
+        assertEquals(1, lobbyOne.getID());
+        assertEquals(4, lobbyOne.getMax_players());
+        assertEquals(lobbyOne.getName(), gameName);
+//
+//        assertEquals(2, lobbyTwo.getID());
+//        assertEquals(3, lobbyTwo.getMax_players());
+//        assertEquals(lobbyTwo.getName(), gameNameTwo);
     }
 
 

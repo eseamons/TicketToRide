@@ -37,6 +37,11 @@ public class ServerModelTestObject {
         return lobby;
     }
 
+    public GameLobby joinGame(int gameLobbyID, String auth) {
+        ServerModel model = ServerModel.getInstance();
+        return model.joinGame(gameLobbyID, auth);
+    }
+
     public Account getAccount(int index) {
         return testAccounts.get(index);
     }

@@ -33,9 +33,9 @@ public class GameListPresenter implements IGameListPresenter {
         GameListView gameListView = new GameListView();
         String gameName = gameListView.getGameName();
         int maxPlayers = gameListView.getNumberOfPlayers();
-        GameLobby gameLobby = clientFacade.createGame(gameName, maxPlayers);
+        boolean createGameSuccessful = clientFacade.createGame(gameName, maxPlayers);
 
-        if (gameLobby == null)
+        if (createGameSuccessful == false)
         {return false;}
 
         return true;
