@@ -23,7 +23,7 @@ public class LoginView extends AppCompatActivity implements ILoginView {
     private Button loginButton;
     private Button registerButton;
 
-    private static LoginView instance;
+    private static LoginView instance = new LoginView();
 
     public static LoginView getInstance()
     {

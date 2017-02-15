@@ -7,7 +7,7 @@ import client.views.LoginView;
 
 public class LoginPresenter implements ILoginPresenter{
 
-    private static LoginPresenter instance;
+    private static LoginPresenter instance = new LoginPresenter();
     private ClientFacade clientFacade = new ClientFacade();
 
     public static LoginPresenter getInstance()
