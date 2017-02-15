@@ -46,7 +46,7 @@ public class Command implements ICommand {
 
     @Override
     public String getType() {
-        return null;
+        return type;
     }
 
     @Override
