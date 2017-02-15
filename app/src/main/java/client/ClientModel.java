@@ -104,21 +104,23 @@ public class ClientModel extends Observable
         }
         if(game == current_game_lobby)
         {
-            //if its the current game
+            //if its the current game then add player to list so name pops up on screen
         }
+        update();
     }
 
     public void aGameStarted(int gameID)
     {
         if(gameID == current_game_lobby.getID())
         {
-
+            //start game for client
         }
         else
         {
             removeGameLobbyByID(gameID);
         }
 
+        update();
     }
 
     public void removeGameLobbyByID(int gameID)
