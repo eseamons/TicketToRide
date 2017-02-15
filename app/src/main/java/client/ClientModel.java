@@ -1,13 +1,15 @@
 package client;
 
 import java.util.List;
+import java.util.Observable;
 
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
-public class ClientModel {
+public class ClientModel extends Observable
+{
 
     private Account account = null;
     private GameLobby current_game_lobby;
@@ -21,6 +23,17 @@ public class ClientModel {
         list_of_lobbies.add(game);
     }
 
+    public GameLobby getGameLobbyByID(int gameID){
+     for(int i = 0; i< list_of_lobbies.size(); i++)
+     {
+         GameLobby game = list_of_lobbies.get(i);
+         if(game.getID() == gameID)
+         {
+             return game;
+         }
+     }
+        return null;
+    }
 
 
     private ClientModel(){};
@@ -66,4 +79,60 @@ public class ClientModel {
 
     public String getAuthorization()
     {return account.getAuthentication();}
+
+    public void update()
+    {
+        setChanged();
+        notifyObservers();
+    }
+
+    public void addCommentToCurrentGame(int gameID, String message)
+    {
+        if(current_game_lobby.getID() == gameID)
+        {
+            current_game_lobby.addNewComment(message);
+            update();
+        }
+    }
+
+    public void playerJoinsGame(int gameID, String name)
+    {
+        GameLobby game = getGameLobbyByID(gameID);
+        if(game != null)
+        {
+            game.playerJoined();
+        }
+        if(game == current_game_lobby)
+        {
+            //if its the current game
+        }
+    }
+
+    public void aGameStarted(int gameID)
+    {
+        if(gameID == current_game_lobby.getID())
+        {
+
+        }
+        else
+        {
+            removeGameLobbyByID(gameID);
+        }
+
+    }
+
+    public void removeGameLobbyByID(int gameID)
+    {
+        for(int i = 0; i < list_of_lobbies.size(); i++)
+        {
+            GameLobby game = list_of_lobbies.get(i);
+            if(game.getID() == gameID)
+            {
+                list_of_lobbies.remove(i);
+            }
+        }
+    }
+
+
+
 }

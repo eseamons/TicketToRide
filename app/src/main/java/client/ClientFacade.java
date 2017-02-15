@@ -123,21 +123,14 @@ public class ClientFacade implements IClient{
     {
         if(clientModel.getCurrent_game_lobby().getID() == gameID)
         {
-            //add the message
+            clientModel.addCommentToCurrentGame(gameID, message);
         }
         //else do nothing
     }
 
     public void someoneJoinedGame(int gameID, String name)
     {
-        if(clientModel.getCurrent_game_lobby().getID() == gameID)
-        {
-            //add name to the current_game_lobby
-        }
-        else
-        {
-            //indicated that one more player is in the game
-        }
+            clientModel.playerJoinsGame(gameID, name);
     }
 
     public void aGameStarted(int gameID)
