@@ -2,6 +2,8 @@ package client.presenters;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import client.interfaces.IGameListPresenter;
 
@@ -9,7 +11,7 @@ import client.ClientFacade;
 import client.views.GameListView;
 import shared.model_classes.GameLobby;
 
-public class GameListPresenter implements IGameListPresenter {
+public class GameListPresenter implements IGameListPresenter,Observer {
 
 
     ClientFacade clientFacade = new ClientFacade();
@@ -43,12 +45,15 @@ public class GameListPresenter implements IGameListPresenter {
 
     @Override
     public void getAvaliableGames() {
-
-
-
-        clientFacade.getServerGamesList("0");
-
+         clientFacade.getServerGamesList("0");
     }
 
 
+    @Override
+    public void update(Observable observable, Object o) {
+        List<GameLobby> gamesList = clientFacade.getClientGamesList();
+        GameListView gameListView = new GameListView();
+        gameListView.setAvaliableGames(gamesList);
+        gameListView.populateGamesList();
+    }
 }

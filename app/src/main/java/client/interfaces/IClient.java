@@ -18,7 +18,7 @@ public interface IClient {
 
     public void getServerGamesList(String auth);
 
-    public List<GameLobby> getClientGamesList(String auth);
+    public List<GameLobby> getClientGamesList();
 
     public void getNewCommands();
 

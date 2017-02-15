@@ -1,5 +1,6 @@
 package client.views;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -25,7 +26,7 @@ import client.presenters.GameListPresenter;
 import shared.model_classes.*;
 import shared.model_classes.GameLobby;
 
-public class GameListView extends AppCompatActivity implements Observer, IGameListView  {
+public class GameListView extends AppCompatActivity implements IGameListView  {
 
     List<String> avaliableGames;
 
@@ -35,13 +36,8 @@ public class GameListView extends AppCompatActivity implements Observer, IGameLi
     Button createGameButton;
     GameLobby selectedGame;
     GameListPresenter gameListPresenter = new GameListPresenter();
-
-    @Override
-    public void update(Observable o, Object arg) {
-
-        //TODO: Implement this, probably just call getServerGamesList or getClientGamesList
-
-    }
+    List<GameLobby> availableGames = null;
+    AvaliableGamesAdapter expAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +48,11 @@ public class GameListView extends AppCompatActivity implements Observer, IGameLi
         Poller poller = new Poller();
         poller.runGetNonGameCommands();
 
-        List<GameLobby> avaliableGamesArray = getAvaliableGames();
+
+        expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
+        populateGamesList();
+        /*
+        List<GameLobby> avaliableGamesArray = availableGames;
         ExpandableListAdapter listAdapter = new AvaliableGamesAdapter(getBaseContext(), avaliableGamesArray);
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
         listView.setAdapter(listAdapter);
@@ -77,7 +77,7 @@ public class GameListView extends AppCompatActivity implements Observer, IGameLi
             }
 
         });
-
+*/
 
 
         createGameButton = (Button)findViewById(R.id.creatGameButton);
@@ -151,10 +151,40 @@ public class GameListView extends AppCompatActivity implements Observer, IGameLi
         return selectedGame;
     }
 
-    public List<GameLobby> getAvaliableGames()
+    public void setAvaliableGames(List<GameLobby> games)
+    {availableGames = games;}
+
+
+    public void populateGamesList()
     {
-        return gameListPresenter.getAvaliableGames();
+        ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
+        listView.setAdapter(expAdapter);
+        listView.expandGroup(0);
+
+        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
+        {
+
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
+            {
+                Object game = (Object) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
+                GameLobby gameLobby = new GameLobby();
+
+                if(game.getClass() == gameLobby.getClass())
+                {
+                    gameLobby = (GameLobby) game;
+                    selectedGame = gameLobby;
+                    return true;
+                }
+                return false;
+            }
+
+        });
+
+        expAdapter.notifyDataSetChanged();
     }
+
+
 
 
 }

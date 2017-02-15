@@ -72,7 +72,7 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public List<GameLobby> getClientGamesList(String auth) {
+    public List<GameLobby> getClientGamesList() {
         return clientModel.getListOfLobbies();
 
     }
