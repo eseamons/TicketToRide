@@ -42,26 +42,12 @@ public class GameListPresenter implements IGameListPresenter {
     }
 
     @Override
-    public List<GameLobby> getAvaliableGames() {
+    public void getAvaliableGames() {
 
 
 
-        List<GameLobby> gameLobbies =  clientFacade.getServerGamesList("0");
-        if(gameLobbies == null)
-        {gameLobbies = new ArrayList<>();}
+        clientFacade.getServerGamesList("0");
 
-        return gameLobbies;
-
-
-        //testing list view...
-//        GameLobby g = new GameLobby();
-//        g.setName("becca's game");
-//        g.setMax_players(3);
-
-//        ArrayList<GameLobby> games = new ArrayList<>();
-//        games.add(g);
-//
-//        return games;
     }
 
 
