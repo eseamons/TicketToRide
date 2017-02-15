@@ -17,15 +17,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         // start with this
-        //setContentView(R.layout.activity_login);
-        startActivity(new Intent(MainActivity.this, GameListView.class));
-        setContentView(R.layout.activity_game_list);
+        setContentView(R.layout.activity_login);
+
+
+        //startActivity(new Intent(MainActivity.this, GameListView.class));
+        //setContentView(R.layout.activity_game_list);
 
 //        //This area for testing GameLobbyView
 //        EditText msgText = (EditText) findViewById(R.id.msgEditText);
 //        //Create View first
 //        GameLobbyView lobbyView = new GameLobbyView(msgText);
 
-        GameLobbyPresenter lobbyPresenter = new GameLobbyPresenter();
+        //GameLobbyPresenter lobbyPresenter = new GameLobbyPresenter();
     }
 }

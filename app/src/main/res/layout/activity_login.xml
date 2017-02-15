@@ -1,13 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/choo_tunnel">
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".4"></LinearLayout>
+        android:layout_weight=".4"
+        android:paddingTop="50dp"
+        android:paddingLeft="100dp"
+        android:paddingRight="100dp"
+        android:paddingBottom="50dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ttrTitle"
+            android:layout_weight="1"
+            android:text="(Ticket To Ride)"
+            android:textSize="72sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:gravity="center" />
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
