@@ -50,6 +50,7 @@ public class ClientModel extends Observable
         return account;
     }
 
+    public List<GameLobby> getListOfLobbies(){return list_of_lobbies;}
     public void setAccount(Account account) {
         this.account = account;
     }

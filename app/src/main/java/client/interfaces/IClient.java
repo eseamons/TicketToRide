@@ -16,11 +16,11 @@ public interface IClient {
 
     public boolean Register(String name, String pass);
 
-    public List<GameLobby> getServerGamesList(String auth);
+    public void getServerGamesList(String auth);
 
     public List<GameLobby> getClientGamesList(String auth);
 
-    public List<ICommand> getNewCommands();
+    public void getNewCommands();
 
     public GameLobby joinGame(int gameID);
 
