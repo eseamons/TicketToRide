@@ -23,7 +23,7 @@ public class Command implements ICommand {
 
     public void setType(String info)
     {
-        this.type = type;
+        this.type = info;
     }
 
     public void setcmdID(int i)
@@ -46,7 +46,7 @@ public class Command implements ICommand {
 
     @Override
     public String getType() {
-        return null;
+        return type;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class Command implements ICommand {
         cmd.setcmdID(nextCmdID);
         cmd.setType(type);
         cmd.setInfo(info);
-        ServerFacade.getInstance().addCommand(cmd);
+        //ServerFacade.getInstance().addCommand(cmd);
         return cmd;
     }
 }

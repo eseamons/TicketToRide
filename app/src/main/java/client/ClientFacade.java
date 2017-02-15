@@ -82,6 +82,11 @@ public class ClientFacade implements IClient{
     @Override
     public List<ICommand> getNewCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
+        List<ICommand> list_of_commands = serverProxy.getNewCommands(clientModel.getLastCommand(), clientModel.getAuthorization());
+        for(int i = 0; i < list_of_commands.size(); i++)
+        {
+            list_of_commands.get(i).executeOnClient();
+        }
         return null;
     }
 
@@ -107,5 +112,36 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.BeginGame(ID, auth);
         return null;
+    }
+
+    public void addGameToLobbyList(GameLobby game)
+    {
+        clientModel.addLobbyToList(game);
+    }
+
+    public void addComment(int gameID, String message)
+    {
+        if(clientModel.getCurrent_game_lobby().getID() == gameID)
+        {
+            clientModel.addCommentToCurrentGame(gameID, message);
+        }
+        //else do nothing
+    }
+
+    public void someoneJoinedGame(int gameID, String name)
+    {
+            clientModel.playerJoinsGame(gameID, name);
+    }
+
+    public void aGameStarted(int gameID)
+    {
+        if(clientModel.getCurrent_game_lobby().getID() == gameID)
+        {
+            //starts the game for client
+        }
+        else
+        {
+            //removes the game lobby from the lobby list
+        }
     }
 }

@@ -1,71 +1,41 @@
 package client.presenters;
 
+
 import client.ClientFacade;
 import client.interfaces.ILoginPresenter;
 import client.views.LoginView;
-import shared.Result;
 
 public class LoginPresenter implements ILoginPresenter{
 
-    private static LoginPresenter instance;
+    private static LoginPresenter instance = new LoginPresenter();
+    private ClientFacade clientFacade = new ClientFacade();
 
     public static LoginPresenter getInstance()
     {
         return instance;
     }
 
+
     @Override
-    public Result Register() {
-        ClientFacade cf = new ClientFacade();
+    public boolean Register() {
+        LoginView loginView = LoginView.getInstance();
 
-        LoginView LV = LoginView.getInstance();
+        String registerUN = loginView.getRegisUsername();
+        String registerPW = loginView.getRegisPassword();
 
-        String regisUN = LV.getRegisUsername();
-        String regisPW = LV.getRegisPassword();
-
-        String resultStr;
-        boolean resultBool;
-        if (cf.Register(regisUN, regisPW))
-        {
-            resultStr = "Registered!";
-            resultBool = true;
-        }
-        else{
-            resultStr = "Failed to Register :/";
-            resultBool = false;
-        }
-
-        Result result = new Result(resultBool,resultStr);
-        return result;
+        boolean successful = clientFacade.Register(registerUN, registerPW);
+        return successful;
     }
 
     @Override
-    public Result Login() {
+    public boolean Login()
+    {
+        LoginView loginView = LoginView.getInstance();
 
-        ClientFacade cf = new ClientFacade();
+        String username = loginView.getUsername();
+        String password = loginView.getPassword();
 
-        LoginView LV = LoginView.getInstance();
-
-        String Username = LV.getUsername();
-        String Password = LV.getPassword();
-
-        String resultStr;
-        boolean resultBool;
-        if (cf.Register(Username, Password))
-        {
-            resultStr = "Logged in!";
-            resultBool = true;
-        }
-        else{
-            resultStr = "Failed to Login :/";
-            resultBool = false;
-        }
-
-        Result result = new Result(resultBool,resultStr);
-        return result;
-
-
-
-
+        boolean successful = clientFacade.Register(username, password);
+        return successful;
     }
 }
