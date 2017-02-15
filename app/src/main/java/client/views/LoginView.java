@@ -1,5 +1,6 @@
 package client.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -52,12 +53,11 @@ public class LoginView extends AppCompatActivity implements ILoginView {
             @Override
             public void onClick(View v) {
 
-                //TODO: if successful switch to Game List View
                 LoginPresenter loginPresenter = LoginPresenter.getInstance();
                 boolean successful = loginPresenter.Login();
 
                 if(successful)
-                {}
+                {startActivity(new Intent(LoginView.this, GameListView.class));}
                 else
                 {Toast.makeText(getBaseContext(), "Login Unsuccessful",Toast.LENGTH_SHORT).show();}
 
