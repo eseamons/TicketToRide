@@ -17,16 +17,7 @@ import shared.model_classes.Player;
 public class ServerModel implements IServer{
 
     private static ServerModel SINGLETON;
-
     private static int currentLobbyID;
-
-    public static ServerModel getInstance() {
-        if (SINGLETON == null) {
-            SINGLETON = new ServerModel();
-        }
-        return SINGLETON;
-    }
-
     private AccountList accountList;
     private List<GameLobby> lobbies;
     private List<Game> games;
@@ -40,33 +31,40 @@ public class ServerModel implements IServer{
         lobby_commands = new ArrayList<>();
     }
 
-    public void addCommand(ICommand cmd)
-    {
-        lobby_commands.add(cmd);
-    }
-    public Account Login(String name, String pass) {
-
-        return accountList.login(name, pass);
+    public static ServerModel getInstance() {
+        if (SINGLETON == null) {
+            SINGLETON = new ServerModel();
+        }
+        return SINGLETON;
     }
 
     public boolean Register(String name, String pass) {
         boolean isRegisterSuccessful = false;
 
-        if (accountList.doesAccountExist(name)) {
-            isRegisterSuccessful = accountList.createAccount(name, pass);
+        if (!accountList.usernameExists(name)) {
+            isRegisterSuccessful = accountList.registerAccount(name, pass);
         }
 
         return isRegisterSuccessful;
 
     }
 
+    public Account Login(String name, String pass) {
+        return accountList.login(name, pass);
+    }
+
     public List<GameLobby> getServerGameList(String auth) {
         List<GameLobby> returnLobbyList = null;
-        if(accountList.isAuthCodeValid(auth)) {
+        if(accountList.authCodeExists(auth)) {
             returnLobbyList = lobbies;
         }
 
         return returnLobbyList;
+    }
+
+    public void addCommand(ICommand cmd)
+    {
+        lobby_commands.add(cmd);
     }
 
     @Override
@@ -75,7 +73,7 @@ public class ServerModel implements IServer{
         List<ICommand> fullCommandList = null;
         List<ICommand> newCommandList = null;
 
-        if(accountList.isAuthCodeValid(auth)) {
+        if(accountList.authCodeExists(auth)) {
             GameLobby lobby = lobbies.get(lobbies.size());
             fullCommandList = lobby.getCommand_list();
             newCommandList = fullCommandList.subList(commandID-1, fullCommandList.size());
@@ -89,7 +87,7 @@ public class ServerModel implements IServer{
     public GameLobby CreateGame(String name, int max_player_num, String auth) {
         GameLobby newGameLobby = null;
 
-        if(accountList.isAuthCodeValid(auth)) {
+        if(accountList.authCodeExists(auth)) {
             newGameLobby = new GameLobby();
             newGameLobby.setName(name);
             newGameLobby.setMax_players(max_player_num);
@@ -106,7 +104,7 @@ public class ServerModel implements IServer{
         GameLobby returnGameLobby = null;
 
         //Checks for auth code in accounts. If valid auth code, creates new Game lobby
-        if(accountList.isAuthCodeValid(auth) == true) {
+        if(accountList.authCodeExists(auth) == true) {
             returnGameLobby = lobbies.get(gameLobbyID - 1);
             Player p = new Player();
             Account acc = accountList.getAccountByAuthCode(auth);
@@ -124,7 +122,7 @@ public class ServerModel implements IServer{
     public boolean BeginGame(int gameLobbyID, String auth) {
         boolean authcodeValid = false;
 
-        if(accountList.isAuthCodeValid(auth)) {
+        if(accountList.authCodeExists(auth)) {
             //create game
             Game newGame = new Game();
             //delete game lobby
@@ -144,8 +142,16 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean addComment(String message, String auth) {
+        boolean addCommentSuccessful = false;
+            for(GameLobby lobby : lobbies) {
+                if(lobby.authCodeExistsInLobby(auth)) {
+                    lobby.addNewComment(message);
+                    addCommentSuccessful = true;
+                }
 
-        return false;
+            }
+
+        return addCommentSuccessful;
     }
 
 }

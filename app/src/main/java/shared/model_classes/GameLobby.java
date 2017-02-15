@@ -53,5 +53,15 @@ public class GameLobby {
         comment_list.add(comment);
     }
 
+    public boolean authCodeExistsInLobby(String auth) {
+        boolean authCodeExists = false;
+        for(Player player : players){
+            if (player.authCodeMatchesAccount(auth)) {
+                authCodeExists = true;
+            }
+        }
+        return authCodeExists;
+    }
+
 
 }

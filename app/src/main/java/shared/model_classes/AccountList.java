@@ -20,6 +20,20 @@ public class AccountList {
         accountAuthMap = new HashMap<>();
     }
 
+    public boolean registerAccount(String name, String pass) {
+        Account newAccount = new Account();
+        newAccount.setUsername(name);
+        newAccount.setPassword(pass);
+        accounts.add(newAccount);
+
+        //create authentication code
+        String authCode = UUID.randomUUID().toString();
+        newAccount.setAuthentication(authCode);
+        //Map authcode to Account for quicker lookup
+        accountAuthMap.put(authCode, newAccount);
+        return true;
+    }
+
     public Account login(String name, String pass) {
         Account loginAccount = null;
         for (Account account : accounts) {
@@ -30,42 +44,22 @@ public class AccountList {
         return loginAccount;
     }
 
-    public boolean isAuthCodeValid(String auth) {
-        boolean isAuthValid = false;
-        for (Account account : accounts) {
-            if(account.getAuthentication() == auth) {
-                isAuthValid = true;
-            }
-        }
-        return isAuthValid;
+    public boolean authCodeExists(String auth) {
+        // find auth code in hashmap
+        return accountAuthMap.containsKey(auth);
     }
 
-    public boolean doesAccountExist(String name) {
+    public boolean usernameExists(String username) {
         boolean accountExists = false;
         for (Account account : accounts) {
-            if(account.getUsername() == name) {
+            if(account.getUsername() == username) {
                 accountExists = true;
             }
         }
         return accountExists;
     }
 
-    public boolean createAccount(String name, String pass) {
-        Account newAccount = new Account();
-        newAccount.setUsername(name);
-        newAccount.setPassword(pass);
-        accounts.add(newAccount);
-
-        //create authentication code
-        String uuid = UUID.randomUUID().toString();
-        newAccount.setAuthentication(uuid);
-        accountAuthMap.put(uuid, newAccount);
-        return true;
-    }
-
-
     public Account getAccountByAuthCode(String auth) {
-
         return accountAuthMap.get(auth);
     }
 
