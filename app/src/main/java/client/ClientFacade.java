@@ -76,6 +76,8 @@ public class ClientFacade implements IClient{
     @Override
     public List<GameLobby> getClientGamesList(String auth) {
         ServerProxy serverProxy = ServerProxy.getInstance();
+        List<GameLobby> games = serverProxy.getServerGameList(clientModel.getAuthorization());
+        clientModel.setGameLobbyList(games);
         return null;
     }
 
@@ -135,13 +137,6 @@ public class ClientFacade implements IClient{
 
     public void aGameStarted(int gameID)
     {
-        if(clientModel.getCurrent_game_lobby().getID() == gameID)
-        {
-            //starts the game for client
-        }
-        else
-        {
-            //removes the game lobby from the lobby list
-        }
+        clientModel.aGameStarted(gameID);
     }
 }

@@ -139,6 +139,11 @@ public class ClientModel extends Observable
         }
     }
 
+    public void setGameLobbyList(List<GameLobby> games)
+    {
+        list_of_lobbies = games;
+    }
+
 
 
 }
