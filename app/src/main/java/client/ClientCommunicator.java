@@ -38,25 +38,26 @@ public class ClientCommunicator {
 
             HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 
-            switch(requestInfo.getType()) {
-                case "getgames":urlConnection.setRequestMethod("GET");
-                    break;
-                case "login": urlConnection.setRequestMethod("GET");
-                    break;
-                case "joingame": urlConnection.setRequestMethod("GET");
-                    break;
-                case "addcomment":urlConnection.setRequestMethod("GET");
-                    break;
-                case "begingame": urlConnection.setRequestMethod("GET");
-                    break;
-                case "creategame": urlConnection.setRequestMethod("GET");
-                    break;
-                case "register":urlConnection.setRequestMethod("GET");
-                    break;
-                case "setplayercolor": urlConnection.setRequestMethod("POST");
-                    break;
-
-            }
+            urlConnection.setRequestMethod("GET");
+//            switch(requestInfo.getType()) {
+//                case "getgames":urlConnection.setRequestMethod("GET");
+//                    break;
+//                case "login": urlConnection.setRequestMethod("GET");
+//                    break;
+//                case "joingame": urlConnection.setRequestMethod("GET");
+//                    break;
+//                case "addcomment":urlConnection.setRequestMethod("GET");
+//                    break;
+//                case "begingame": urlConnection.setRequestMethod("GET");
+//                    break;
+//                case "creategame": urlConnection.setRequestMethod("GET");
+//                    break;
+//                case "register":urlConnection.setRequestMethod("GET");
+//                    break;
+//                case "setplayercolor": urlConnection.setRequestMethod("POST");
+//                    break;
+//
+//            }
 
             urlConnection.setDoOutput(true);
             urlConnection.addRequestProperty("Accept", "application/json");
