@@ -15,11 +15,11 @@ public class CreateGameCommand extends Command
         String name = parts[0];
         int players = Integer.parseInt(parts[1]);
         String auth = parts[2];
-        GameLobby game = ServerFacade.getInstance().CreateGame(name, players, auth);
-        if(game == null)
+        boolean game = ServerFacade.getInstance().CreateGame(name, players, auth);
+        if(game == true)
             return new Result(false, "");
         else
-            return new Result(true, ServerSerializer.serializeGameLobby(game));
+            return new Result(true, "");
     }
 
     public void executeOnClient()
