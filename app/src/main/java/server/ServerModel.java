@@ -91,7 +91,7 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public GameLobby CreateGame(String name, int max_player_num, String auth) {
+    public boolean CreateGame(String name, int max_player_num, String auth) {
         GameLobby newGameLobby = null;
 
         if(accountList.authCodeExists(auth)) {
@@ -103,7 +103,7 @@ public class ServerModel implements IServer{
             currentLobbyID++;
         }
 
-        return newGameLobby;
+        return newGameLobby != null;
     }
 
     @Override

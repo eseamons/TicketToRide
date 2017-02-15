@@ -49,7 +49,7 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public GameLobby CreateGame(String name, int players, String auth) {
+    public boolean CreateGame(String name, int players, String auth) {
         ServerModel serverModel = ServerModel.getInstance();
         return serverModel.CreateGame(name, players, auth);
     }

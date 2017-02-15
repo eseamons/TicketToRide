@@ -17,7 +17,7 @@ public interface IServer {
 
     public List<ICommand> getNewCommands(int commandID, String auth);
 
-    public GameLobby CreateGame(String name, int max_player_num, String auth);
+    public boolean CreateGame(String name, int max_player_num, String auth);
 
     public GameLobby joinGame(int gameID, String auth);
 
