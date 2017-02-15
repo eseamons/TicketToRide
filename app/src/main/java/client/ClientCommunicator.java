@@ -40,13 +40,21 @@ public class ClientCommunicator {
 
             switch(requestInfo.getType()) {
                 case "getgames":
+                    break;
                 case "login":
-                case "joingame": urlConnection.setRequestMethod("GET"); break;
+                    break;
+                case "joingame": urlConnection.setRequestMethod("GET");
+                    break;
                 case "addcomment":
+                    break;
                 case "begingame":
+                    break;
                 case "creategame":
+                    break;
                 case "register":
-                case "setplayercolor": urlConnection.setRequestMethod("POST"); break;
+                    break;
+                case "setplayercolor": urlConnection.setRequestMethod("POST");
+                    break;
 
             }
 
