@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import com.example.erics.tickettoride.R;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -36,7 +37,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     Button createGameButton;
     GameLobby selectedGame;
     GameListPresenter gameListPresenter = new GameListPresenter();
-    List<GameLobby> availableGames = null;
+    ArrayList<GameLobby> availableGames = new ArrayList<>();
     AvaliableGamesAdapter expAdapter;
 
     @Override
@@ -152,7 +153,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     }
 
     public void setAvaliableGames(List<GameLobby> games)
-    {availableGames = games;}
+    {availableGames = (ArrayList)games;}
 
 
     public void populateGamesList()
