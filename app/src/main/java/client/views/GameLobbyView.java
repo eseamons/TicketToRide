@@ -12,18 +12,22 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.erics.tickettoride.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 import client.ClientFacade;
+import client.Poller;
 import client.interfaces.IGameLobbyView;
 import client.presenters.GameLobbyPresenter;
 import shared.model_classes.Player;
 
-public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
+public class GameLobbyView extends AppCompatActivity implements Observer, IGameLobbyView{
 
     private Player[] players;
 
@@ -33,6 +37,13 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
     private ImageView player3Color;
     private ImageView player4Color;
     private ImageView player5Color;
+
+    private TextView player1Text;
+    private TextView player2Text;
+    private TextView player3Text;
+    private TextView player4Text;
+    private TextView player5Text;
+
 
     private ListView ChatList;
 
@@ -61,6 +72,8 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         setContentView(R.layout.activity_newgamelobby);
 
         instance = this;
+
+
 
         msgEditText = (EditText) findViewById(R.id.msgEditText);
 //        msgEditText.addTextChangedListener(new TextWatcher() {
@@ -108,6 +121,15 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         player5Color = (ImageView) findViewById(R.id.player5Color);
         player5Color.setImageResource(R.drawable.black);
 
+
+        player1Text = (TextView) findViewById(R.id.player1Text);
+        player2Text = (TextView) findViewById(R.id.player2Text);
+        player3Text = (TextView) findViewById(R.id.player3Text);
+        player4Text = (TextView) findViewById(R.id.player4Text);
+        player5Text = (TextView) findViewById(R.id.player5Text);
+
+
+
         ChatList = (ListView) findViewById(R.id.ChatList);
         List<String> chatArray = getChat();
         ArrayAdapter<String> chatAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, chatArray);
@@ -129,6 +151,33 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 //        Spinner spinner4 = (Spinner) findViewById(R.id.spinner4);
 //
 //        Spinner spinner5 = (Spinner) findViewById(R.id.spinner5);
+    }
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+        ClientFacade cf = new ClientFacade();
+        Player[] players = cf.getPlayers();
+
+        Player currentPlayer;
+        for (int i = 0; i < players.length; i++)
+        {
+            currentPlayer = players[i];
+
+        }
+
+        if (players.length >= 1)
+            player1Text.setText(players[0].getAccount().getUsername());
+        if (players.length >= 2)
+            player1Text.setText(players[1].getAccount().getUsername());
+        if (players.length >= 3)
+            player1Text.setText(players[2].getAccount().getUsername());
+        if (players.length >= 4)
+            player1Text.setText(players[3].getAccount().getUsername());
+        if (players.length >= 5)
+            player1Text.setText(players[4].getAccount().getUsername());
+
     }
 
     public class SimpleImageArrayAdapter extends ArrayAdapter<Integer> {

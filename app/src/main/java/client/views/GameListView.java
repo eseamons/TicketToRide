@@ -16,15 +16,19 @@ import android.widget.ListView;
 import com.example.erics.tickettoride.R;
 
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
+import client.Poller;
 import client.interfaces.IGameListView;
 import client.presenters.GameListPresenter;
 import shared.model_classes.*;
 import shared.model_classes.GameLobby;
 
-public class GameListView extends AppCompatActivity implements IGameListView  {
+public class GameListView extends AppCompatActivity implements Observer, IGameListView  {
 
     List<String> avaliableGames;
+
     String gameName;
     int numPlayers;
     Button joinGameButton;
@@ -33,9 +37,20 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     GameListPresenter gameListPresenter = new GameListPresenter();
 
     @Override
+    public void update(Observable o, Object arg) {
+
+        //TODO: Implement this, probably just call getServerGamesList or getClientGamesList
+
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_list);
+
+
+        Poller poller = new Poller();
+        poller.runGetNonGameCommands();
 
         List<GameLobby> avaliableGamesArray = getAvaliableGames();
         ExpandableListAdapter listAdapter = new AvaliableGamesAdapter(getBaseContext(), avaliableGamesArray);
