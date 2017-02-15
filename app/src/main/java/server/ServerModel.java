@@ -35,6 +35,7 @@ public class ServerModel implements IServer{
         lobbies = new ArrayList<>();
         games = new ArrayList<>();
         lobby_commands = new ArrayList<>();
+        currentLobbyID = 1;
     }
 
     public static ServerModel getInstance() {
@@ -97,15 +98,9 @@ public class ServerModel implements IServer{
             newGameLobby = new GameLobby();
             newGameLobby.setName(name);
             newGameLobby.setMax_players(max_player_num);
+            newGameLobby.setID(currentLobbyID);
             lobbies.add(newGameLobby);
-
-            int ID = newGameLobby.getID();
-            Command cmd = new CreateGameCommand();
-            cmd.setInfo(name + " " + max_player_num + " " + ID);
-            cmd.setType("creategame");
-            cmd.setcmdID(lobbies.size());
-            lobby_commands.add(cmd);
-
+            currentLobbyID++;
         }
 
         return newGameLobby;
