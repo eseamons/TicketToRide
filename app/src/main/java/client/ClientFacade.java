@@ -65,29 +65,26 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public List<GameLobby> getServerGamesList(String auth) {
+    public void getServerGamesList(String auth) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        List<GameLobby> gameLobbyList = serverProxy.getServerGameList(auth);
-        return gameLobbyList;
+        List<GameLobby> games = serverProxy.getServerGameList(clientModel.getAuthorization());
+        clientModel.setGameLobbyList(games);
     }
 
     @Override
     public List<GameLobby> getClientGamesList(String auth) {
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        List<GameLobby> games = serverProxy.getServerGameList(clientModel.getAuthorization());
-        clientModel.setGameLobbyList(games);
-        return null;
+        return clientModel.getListOfLobbies();
+
     }
 
     @Override
-    public List<ICommand> getNewCommands() {
+    public void getNewCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
         List<ICommand> list_of_commands = serverProxy.getNewCommands(clientModel.getLastCommand(), clientModel.getAuthorization());
         for(int i = 0; i < list_of_commands.size(); i++)
         {
             list_of_commands.get(i).executeOnClient();
         }
-        return null;
     }
 
     @Override
