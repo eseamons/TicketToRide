@@ -93,15 +93,15 @@ public class ClientFacade implements IClient{
     @Override
     public GameLobby joinGame(int gameID) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return null;
+        return serverProxy.joinGame(gameID, clientModel.getAuthorization());
     }
 
     @Override
-    public GameLobby createGame(String gameName, int maxPlayers) {
+    public boolean createGame(String gameName, int maxPlayers) {
         String auth = clientModel.getAuthorization();
         ServerProxy serverProxy = ServerProxy.getInstance();
         GameLobby gameLobby = serverProxy.CreateGame(gameName, maxPlayers, auth);
-        return gameLobby;
+        return gameLobby != null;
     }
 
     @Override

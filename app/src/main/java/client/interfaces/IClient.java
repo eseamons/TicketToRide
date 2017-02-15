@@ -24,7 +24,7 @@ public interface IClient {
 
     public GameLobby joinGame(int gameID);
 
-    public GameLobby createGame(String gameName, int maxPlayers);
+    public boolean createGame(String gameName, int maxPlayers);
 
     public Game beginGame(int ID);
 
