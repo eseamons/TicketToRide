@@ -25,8 +25,8 @@ public class HandlerBase implements HttpHandler {
         boolean success = false;
 
         try {
-//            if (exchange.getRequestMethod().toLowerCase().equals("get")) ;
-//            {
+            if (exchange.getRequestMethod().toLowerCase().equals("get")) ;
+            {
                 InputStream reqBody = exchange.getRequestBody();
                 String reqData = readString(reqBody);
 
@@ -39,7 +39,7 @@ public class HandlerBase implements HttpHandler {
                 respBody.close();
 
                 success = true;
-//            }
+            }
             if (!success) {
                 exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
             }

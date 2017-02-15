@@ -3,6 +3,7 @@ package server;
 import com.google.gson.Gson;
 
 import shared.Result;
+import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.GameLobby;
 
@@ -12,9 +13,9 @@ public class ServerSerializer {
         return gson.toJson(r);
     }
 
-    public static ICommand deserializeCommand(String str){
+    public static Command deserializeCommand(String str){
         Gson gson = new Gson();
-        return gson.fromJson(str, ICommand.class);
+        return gson.fromJson(str, Command.class);
     }
 
     public static String serializeGameLobby(GameLobby game)
