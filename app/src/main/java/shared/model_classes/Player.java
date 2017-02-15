@@ -20,4 +20,8 @@ public class Player {
         this.color = color;
     }
 
+    public boolean authCodeMatchesAccount(String auth) {
+        return account.getAuthentication() == auth;
+    }
+
 }
