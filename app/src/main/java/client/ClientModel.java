@@ -114,7 +114,10 @@ public class ClientModel extends Observable
     {
         if(gameID == current_game_lobby.getID())
         {
-            //start game for client
+            current_game = current_game_lobby.changeIntoGame();
+            removeGameLobbyByID(current_game_lobby.getID());
+            current_game_lobby = null;
+
         }
         else
         {

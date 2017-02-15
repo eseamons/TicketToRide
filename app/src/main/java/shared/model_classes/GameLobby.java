@@ -15,6 +15,11 @@ public class GameLobby {
     private List<ICommand> command_list;
     private List<String> comment_list;
 
+    public Game changeIntoGame()
+    {
+        return new Game();
+    }
+
     public GameLobby() {
         players = new ArrayList<>();
     }
