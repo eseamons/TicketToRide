@@ -4,6 +4,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import dalvik.annotation.TestTargetClass;
+import server.testObjects.ServerModelTestObject;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
 
@@ -15,63 +17,50 @@ import static org.junit.Assert.*;
 
 public class ServerModelTest {
 
-    static String usernameOne;
-    static String passwordOne;
-    static Account accountOne;
-
-    @BeforeClass
-    public static void setup() throws Exception{
-        usernameOne = "mytest";
-        passwordOne = "mypassword";
-    }
-
     @Test
     public void register() throws Exception {
-        ServerModel model = ServerModel.getInstance();
-        boolean registerSuccessful = model.Register(usernameOne, passwordOne);
+        ServerModelTestObject testObject = new ServerModelTestObject();
+        boolean registerSuccessful = testObject.register("mytest", "mypassword");
         assertTrue(registerSuccessful);
     }
 
     @Test
     public void login() throws Exception {
-        ServerModel model = ServerModel.getInstance();
-        accountOne = model.Login(usernameOne, passwordOne);
-        assertEquals(accountOne.getPassword(), passwordOne);
-        assertEquals(accountOne.getUsername(), usernameOne);
-        assertTrue(accountOne.getAuthentication() instanceof String);
+        ServerModelTestObject testObject = new ServerModelTestObject();
+        testObject.register("mytest", "mypassword");
+        Account account = testObject.login("mytest", "mypassword");
+        assertTrue(account.getAuthentication() instanceof String);
     }
 
     @Test
     public void createGame() throws Exception {
-        String authcode = accountOne.getAuthentication();
+        String gameName = "Ultimate Game";
+        String gameNameTwo = "Test Game";
         int max_player_num = 4;
-        String gameNameOne = "Game One";
-        String gameNameTwo = "Coolest Game Ever";
-        String gameNameThree = "Ultimate Game";
+        Account account = null;
+        GameLobby lobbyOne = null;
+        GameLobby lobbyTwo = null;
 
+        ServerModelTestObject testObject = new ServerModelTestObject();
+        testObject.register("mytest", "mypassword");
+        account = testObject.login("mytest", "mypassword");
+        lobbyOne = testObject.createGame(gameName, max_player_num, account.getAuthentication());
 
-        ServerModel serverModel = ServerModel.getInstance();
-        GameLobby gameLobby = serverModel.CreateGame(gameNameOne, max_player_num,authcode);
-
-        assertEquals(gameLobby.getID(),1);
-        assertEquals(gameLobby.getMax_players(),4);
-        assertEquals(gameLobby.getName(),gameNameOne);
-
-        //create second game with user account
         max_player_num = 3;
-        gameLobby = serverModel.CreateGame(gameNameTwo, max_player_num, authcode);
+        lobbyTwo = testObject.createGame(gameNameTwo, max_player_num, account.getAuthentication());
 
-        assertEquals(gameLobby.getID(),2);
-        assertEquals(gameLobby.getMax_players(),3);
-        assertEquals(gameLobby.getName(),gameNameTwo);
+        assertEquals(1, lobbyOne.getID());
+        assertEquals(4, lobbyOne.getMax_players());
+        assertEquals(lobbyOne.getName(), gameName);
 
-        //create second game with user account
-        max_player_num = 5;
-        gameLobby = serverModel.CreateGame(gameNameThree, max_player_num, authcode);
+        assertEquals(2, lobbyTwo.getID());
+        assertEquals(3, lobbyTwo.getMax_players());
+        assertEquals(lobbyTwo.getName(), gameNameTwo);
+    }
 
-        assertEquals(gameLobby.getID(),3);
-        assertEquals(gameLobby.getMax_players(),5);
-        assertEquals(gameLobby.getName(),gameNameThree);
+    @Test
+    public void joinGame() throws Exception{
+
     }
 
 

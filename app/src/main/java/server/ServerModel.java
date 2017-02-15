@@ -35,6 +35,7 @@ public class ServerModel implements IServer{
         lobbies = new ArrayList<>();
         games = new ArrayList<>();
         lobby_commands = new ArrayList<>();
+        currentLobbyID = 1;
     }
 
     public static ServerModel getInstance() {
