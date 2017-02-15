@@ -3,6 +3,9 @@ package client;
 import java.util.List;
 import java.util.Observable;
 
+import client.presenters.GameListPresenter;
+import client.presenters.GameLobbyPresenter;
+import client.presenters.LoginPresenter;
 import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
@@ -18,6 +21,10 @@ public class ClientModel extends Observable
     private List<ICommand> command_list;
     private List<GameLobby> list_of_lobbies;
     private static ClientModel instance = new ClientModel();
+
+    private LoginPresenter loginPresenter = null;
+    private GameListPresenter gameListPresenter = null;
+    private GameLobbyPresenter gameLobbyPresenter = null;
 
     public void addLobbyToList(GameLobby game)
     {
@@ -148,5 +155,15 @@ public class ClientModel extends Observable
     }
 
 
+    public void setGameListPresenter(GameListPresenter gameListPresenter)
+    {
+        this.gameListPresenter = gameListPresenter;
+        addObserver(gameListPresenter);
+    }
 
+    public void setGameLobbyPresenter(GameLobbyPresenter gameLobbyPresenter)
+    {
+        this.gameLobbyPresenter = gameLobbyPresenter;
+        addObserver(gameLobbyPresenter);
+    }
 }

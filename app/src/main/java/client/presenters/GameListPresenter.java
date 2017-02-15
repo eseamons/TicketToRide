@@ -14,6 +14,11 @@ import shared.model_classes.GameLobby;
 public class GameListPresenter implements IGameListPresenter,Observer {
 
 
+    GameListPresenter()
+    {
+        clientFacade.setGameListPrestenter(this);
+    }
+
     ClientFacade clientFacade = new ClientFacade();
 
     @Override
