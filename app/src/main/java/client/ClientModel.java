@@ -80,7 +80,9 @@ public class ClientModel extends Observable
     }
 
     public String getAuthorization()
-    {return account.getAuthentication();}
+    {
+        return account.getAuthentication();
+    }
 
     public void update()
     {

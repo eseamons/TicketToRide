@@ -4,6 +4,7 @@ package client.presenters;
 import client.ClientFacade;
 import client.interfaces.ILoginPresenter;
 import client.views.LoginView;
+import shared.model_classes.Account;
 
 public class LoginPresenter implements ILoginPresenter{
 
@@ -35,7 +36,7 @@ public class LoginPresenter implements ILoginPresenter{
         String username = loginView.getUsername();
         String password = loginView.getPassword();
 
-        boolean successful = clientFacade.Register(username, password);
-        return successful;
+        Account successful = clientFacade.Login(username, password);
+        return successful != null;
     }
 }

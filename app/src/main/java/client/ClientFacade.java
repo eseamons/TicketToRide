@@ -54,6 +54,7 @@ public class ClientFacade implements IClient{
     public Account Login(String name, String pass) {
         ServerProxy serverProxy = ServerProxy.getInstance();
         Account account = serverProxy.Login(name, pass);
+        ClientModel.getInstance().setAccount(account);
         return account;
     }
 
