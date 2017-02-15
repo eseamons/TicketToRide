@@ -15,7 +15,7 @@ public class BeginGameCommand extends Command
         return new Result(success, "");
     }
 
-    public void executeOnServer()
+    public void executeOnClient()
     {
         String parts[] = info.split(" ");
         int ID = Integer.parseInt(parts[0]);
