@@ -23,7 +23,7 @@ public class Command implements ICommand {
 
     public void setType(String info)
     {
-        this.type = type;
+        this.type = info;
     }
 
     public void setcmdID(int i)
