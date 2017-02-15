@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.erics.tickettoride.R;
 
 import client.interfaces.ILoginView;
 import client.presenters.GameLobbyPresenter;
+import client.presenters.LoginPresenter;
 
 public class LoginView extends AppCompatActivity implements ILoginView {
 
@@ -49,12 +51,30 @@ public class LoginView extends AppCompatActivity implements ILoginView {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //TODO: if successful switch to Game List View
+                LoginPresenter loginPresenter = LoginPresenter.getInstance();
+                boolean successful = loginPresenter.Login();
+
+                if(successful)
+                {}
+                else
+                {Toast.makeText(getBaseContext(), "Login Unsuccessful",Toast.LENGTH_SHORT).show();}
+
             }
         });
         registerButton = (Button) findViewById(R.id.button2);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                LoginPresenter loginPresenter = LoginPresenter.getInstance();
+                boolean successful = loginPresenter.Register();
+
+                if(successful)
+                {Toast.makeText(getBaseContext(), "You have Successfully Registered!",Toast.LENGTH_SHORT).show();}
+                else
+                {Toast.makeText(getBaseContext(), "Register Unsuccessful",Toast.LENGTH_SHORT).show();}
             }
         });
     }
