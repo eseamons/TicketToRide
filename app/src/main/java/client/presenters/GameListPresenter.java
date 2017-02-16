@@ -69,7 +69,9 @@ public class GameListPresenter implements IGameListPresenter,Observer {
     public List<GameLobby> getClientGames() {
         List<GameLobby> games = clientFacade.getClientGamesList();
         if(games == null)
-        {games = new ArrayList<>();}
+        {
+            games = new ArrayList<>();
+        }
 
         return games;
     }
