@@ -27,14 +27,14 @@ public class AvaliableGamesAdapter extends BaseExpandableListAdapter{
 
         public String[] headers = {"Avaliable Games"};
 
-        ArrayList <GameLobby> availableGames = new ArrayList<>();
+        List <GameLobby> availableGames;
 
         public AvaliableGamesAdapter(Context context, List<GameLobby> availableGames)
         {
             this.context = context;
 
             //casting the list to an array list? shouldn't be a problem right??
-            this.availableGames =(ArrayList) availableGames;
+            this.availableGames =availableGames;
         }
 
         @Override
