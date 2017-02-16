@@ -35,10 +35,6 @@ public class ServerFacade implements IServer{
         return ret;
     }
 
-    public void addCommand(Command cmd)
-    {
-        ServerModel.getInstance().addCommand(cmd);
-    }
     @Override
     public boolean Register(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
