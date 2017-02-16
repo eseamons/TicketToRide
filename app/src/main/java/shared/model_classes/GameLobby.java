@@ -3,8 +3,6 @@ package shared.model_classes;
 import java.util.ArrayList;
 import java.util.List;
 
-import shared.interfaces.ICommand;
-
 public class GameLobby {
 
     private List<Player> players;
