@@ -1,9 +1,7 @@
 package shared.command_classes;
 
 import client.ClientFacade;
-import client.ClientSerializer;
 import server.ServerFacade;
-import server.ServerSerializer;
 import shared.Result;
 import shared.model_classes.GameLobby;
 
