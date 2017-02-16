@@ -32,8 +32,8 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
     List<String> avaliableGames;
 
-    String gameName;
-    int numPlayers;
+    String gameName = null;
+    int numPlayers = -1;
     Button joinGameButton;
     Button createGameButton;
     GameLobby selectedGame;
