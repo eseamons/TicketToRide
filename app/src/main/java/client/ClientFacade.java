@@ -103,7 +103,10 @@ public class ClientFacade implements IClient{
     @Override
     public GameLobby joinGame(int gameID) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.joinGame(gameID, clientModel.getAuthorization());
+        ClientModel model = ClientModel.getInstance();
+        GameLobby current_game_lobby = serverProxy.joinGame(gameID, clientModel.getAuthorization());
+        model.setCurrent_game_lobby(current_game_lobby);
+        return current_game_lobby;
     }
 
     @Override
