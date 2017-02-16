@@ -56,6 +56,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_list);
 
+        instance = this;
 
         Poller poller = new Poller();
         poller.runGetNonGameCommands();
