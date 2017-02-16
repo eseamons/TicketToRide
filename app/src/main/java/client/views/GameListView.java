@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.erics.tickettoride.R;
@@ -124,6 +123,10 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         return num;
     }
 
+    public AvaliableGamesAdapter getAdapter() {
+        return expAdapter;
+    }
+
     @Override
     public GameLobby getSelectedGame() {
         return selectedGame;
@@ -149,5 +152,4 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         if (availableGames.size() >= 5)
             textView5.setText(availableGames.get(4).getName());
 
-    }
 }

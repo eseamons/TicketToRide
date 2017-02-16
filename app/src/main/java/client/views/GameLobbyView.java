@@ -22,6 +22,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.ClientFacade;
+import client.ClientModel;
 import client.Poller;
 import client.interfaces.IGameLobbyView;
 import client.presenters.GameLobbyPresenter;
@@ -72,7 +73,6 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
         setContentView(R.layout.activity_newgamelobby);
 
         instance = this;
-
 
 
         msgEditText = (EditText) findViewById(R.id.msgEditText);
@@ -138,6 +138,7 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
 
         //POLLER
         GameLobbyPresenter.getInstance().getPlayers();
+        ClientModel model = ClientModel.getInstance();
 
 //        Spinner spinner1 = (Spinner) findViewById(R.id.spinner);
 //        //String[] spinnerArray1 = new String[] { "Red", "Green", "Blue", "Yellow", "Black"};

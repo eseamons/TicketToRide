@@ -27,7 +27,7 @@ public interface IClient {
 
     boolean createGame(String gameName, int maxPlayers);
 
-    Game beginGame(int ID);
+    Game beginGame();
 
     boolean sendMessage(String message);
 
