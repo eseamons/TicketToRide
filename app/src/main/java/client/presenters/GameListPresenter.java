@@ -35,7 +35,6 @@ public class GameListPresenter implements IGameListPresenter,Observer {
         GameLobby game = gameListView.getSelectedGame();
         if(game == null){return false;}
         int id = game.getID();
-
         GameLobby gameLobby  = clientFacade.joinGame(id);
 
         if (gameLobby == null)
