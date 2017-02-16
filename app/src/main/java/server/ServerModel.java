@@ -127,17 +127,20 @@ public class ServerModel implements IServer{
         //Checks for auth code in accounts. If valid auth code, creates new Game lobby
         if(accountList.authCodeExists(auth) == true) {
             returnGameLobby = lobbies.get(gameLobbyID - 1);
-            Player p = new Player();
-            Account acc = accountList.getAccountByAuthCode(auth);
-            p.setAccount(acc);
-            playerMap.put(auth, p);
-            returnGameLobby.addNewPlayers(p);
 
-            Command cmd = new JoinGameCommand();
-            cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
-            cmd.setcmdID(lobby_commands.size());
-            cmd.setType("joingame");
-            lobby_commands.add(cmd);
+            if(returnGameLobby.getPlayers().size() < returnGameLobby.getMax_players()) {
+                Player p = new Player();
+                Account acc = accountList.getAccountByAuthCode(auth);
+                p.setAccount(acc);
+                playerMap.put(auth, p);
+                returnGameLobby.addNewPlayers(p);
+
+                Command cmd = new JoinGameCommand();
+                cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
+                cmd.setcmdID(lobby_commands.size());
+                cmd.setType("joingame");
+                lobby_commands.add(cmd);
+            }
 
         }
 
