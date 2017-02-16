@@ -1,8 +1,6 @@
 package server;
 
-
 import shared.Result;
-import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 
 public class ExecCommandHandler extends HandlerBase {

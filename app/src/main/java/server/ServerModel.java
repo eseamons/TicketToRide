@@ -11,8 +11,6 @@ import shared.command_classes.BeginGameCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
 import shared.command_classes.JoinGameCommand;
-import shared.command_classes.SetPlayerColorCommand;
-import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.AccountList;
 import shared.model_classes.Game;

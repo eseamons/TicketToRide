@@ -4,7 +4,6 @@ import java.util.List;
 
 import shared.ColorNum;
 import shared.command_classes.Command;
-import shared.interfaces.ICommand;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;

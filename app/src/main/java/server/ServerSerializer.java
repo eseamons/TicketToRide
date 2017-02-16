@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 
 import shared.Result;
 import shared.command_classes.Command;
-import shared.interfaces.ICommand;
 import shared.model_classes.GameLobby;
 
 public class ServerSerializer {
