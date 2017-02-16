@@ -82,7 +82,7 @@ public class ServerModel implements IServer{
 
         if(accountList.authCodeExists(auth)) {
             GameLobby lobby = lobbies.get(lobbies.size());
-            fullCommandList = lobby.getCommand_list();
+            fullCommandList = lobby_commands;
             newCommandList = lobby_commands.subList(commandID-1, lobby_commands.size());
 
         }
