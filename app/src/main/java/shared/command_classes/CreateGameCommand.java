@@ -11,7 +11,7 @@ public class CreateGameCommand extends Command
 {
     public Result execute()
     {
-        String parts[] = info.split("ç");
+        String parts[] = info.split(" ");
         String name = parts[0];
         int players = Integer.parseInt(parts[1]);
         String auth = parts[2];
