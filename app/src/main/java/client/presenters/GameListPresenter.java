@@ -61,14 +61,23 @@ public class GameListPresenter implements IGameListPresenter,Observer {
     }
 
     @Override
-    public void getAvaliableGames() {
+    public void getServerGames() {
          clientFacade.getServerGamesList("0");
+    }
+
+    @Override
+    public List<GameLobby> getClientGames() {
+        List<GameLobby> games = clientFacade.getClientGamesList();
+        if(games == null)
+        {games = new ArrayList<>();}
+
+        return games;
     }
 
 
     @Override
     public void update(Observable observable, Object o) {
-        List<GameLobby> gamesList = clientFacade.getClientGamesList();
+        List<GameLobby> gamesList = getClientGames();
         GameListView gameListView = GameListView.getInstance();
         gameListView.setAvaliableGames(gamesList);
         gameListView.populateGamesList();
