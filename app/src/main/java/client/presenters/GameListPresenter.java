@@ -1,5 +1,7 @@
 package client.presenters;
 
+import org.apache.http.impl.cookie.BasicMaxAgeHandler;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -46,6 +48,10 @@ public class GameListPresenter implements IGameListPresenter,Observer {
         GameListView gameListView = GameListView.getInstance();
         String gameName = gameListView.getGameName();
         int maxPlayers = gameListView.getNumberOfPlayers();
+
+        if(maxPlayers <0 ||maxPlayers > 5 ||gameName == null||gameName.equals(""))
+        {return false;}
+
         boolean createGameSuccessful = clientFacade.createGame(gameName, maxPlayers);
 
         if (createGameSuccessful == false)
