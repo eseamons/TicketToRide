@@ -14,15 +14,17 @@ import shared.model_classes.GameLobby;
 public class GameListPresenter implements IGameListPresenter,Observer {
 
 
+    public GameListPresenter()
+    {
+        clientFacade.setGameListPrestenter(this);
+    }
+
     private static GameListPresenter instance = new GameListPresenter();
     ClientFacade clientFacade = new ClientFacade();
 
     public static GameListPresenter getInstance()
     {
         return instance;
-    }
-    private GameListPresenter() {
-
     }
 
     @Override

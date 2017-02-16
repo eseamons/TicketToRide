@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.interfaces.IClient;
+import client.presenters.GameListPresenter;
+import client.presenters.GameLobbyPresenter;
+import client.presenters.LoginPresenter;
 import shared.ColorNum;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
@@ -134,4 +137,10 @@ public class ClientFacade implements IClient{
     {
         clientModel.aGameStarted(gameID);
     }
+
+    public void setGameListPrestenter(GameListPresenter gameListPresenter )
+    { clientModel.setGameListPresenter(gameListPresenter);}
+
+    public void setGameLobbyPrestenter(GameLobbyPresenter gameLobbyPresenter )
+    { clientModel.setGameLobbyPresenter(gameLobbyPresenter);}
 }

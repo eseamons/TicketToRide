@@ -4,13 +4,15 @@ import android.content.Context;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 import client.ClientFacade;
 import client.interfaces.IGameLobbyPresenter;
 import client.views.GameLobbyView;
 import shared.model_classes.Player;
 
-public class GameLobbyPresenter implements IGameLobbyPresenter{
+public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
 
     private static GameLobbyPresenter instance;
 
@@ -21,10 +23,14 @@ public class GameLobbyPresenter implements IGameLobbyPresenter{
         return instance;
     }
 
+    @Override
+    public void update(Observable observable, Object o) {
 
+    }
     public GameLobbyPresenter()
     {
-
+        ClientFacade clientFacade = new ClientFacade();
+        clientFacade.setGameLobbyPrestenter(this);
     }
 
     public Player[] getPlayers()
@@ -70,6 +76,5 @@ public class GameLobbyPresenter implements IGameLobbyPresenter{
         Toast.makeText(context,"Start Game!!",Toast.LENGTH_LONG);
         return true;
     }
-
 
 }
