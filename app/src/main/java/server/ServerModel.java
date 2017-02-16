@@ -29,6 +29,7 @@ public class ServerModel implements IServer{
     private List<Game> games;
     private List<ICommand> lobby_commands;
     private Map<String, Player> playerMap;
+    private List<String> gameNames;
 
     private ServerModel() {
         accountList = new AccountList();
@@ -74,6 +75,7 @@ public class ServerModel implements IServer{
         lobby_commands.add(cmd);
     }
 
+    int times = 0;
     @Override
     public List<ICommand> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?
@@ -86,7 +88,8 @@ public class ServerModel implements IServer{
             newCommandList = lobby_commands.subList(commandID-1, lobby_commands.size());
 
         }
-
+        System.out.println("this was called: " + times);
+        times++;
         return newCommandList;
     }
 
@@ -94,11 +97,12 @@ public class ServerModel implements IServer{
     public boolean CreateGame(String name, int max_player_num, String auth) {
         GameLobby newGameLobby = null;
 
-        if(accountList.authCodeExists(auth)) {
+        if(accountList.authCodeExists(auth) && !gameNames.contains(name)) {
             newGameLobby = new GameLobby();
             newGameLobby.setName(name);
             newGameLobby.setMax_players(max_player_num);
             newGameLobby.setID(currentLobbyID);
+            gameNames.add(name);
             lobbies.add(newGameLobby);
             currentLobbyID++;
         }

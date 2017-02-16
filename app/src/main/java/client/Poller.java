@@ -6,6 +6,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Poller
 {
+    int times = 0;
     public void runGetNonGameCommands()
     {
         ScheduledExecutorService scheduleTaskExecutor;
@@ -19,8 +20,9 @@ public class Poller
             {
                 ClientFacade client = new ClientFacade();
                 client.getNewCommands();
+                System.out.println("POller is working: " + times);
             }
-        }, 0, 1, TimeUnit.SECONDS);
+        }, 1, 1, TimeUnit.SECONDS);
     }
 
 }
