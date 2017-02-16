@@ -85,6 +85,7 @@ public class GameListPresenter implements IGameListPresenter,Observer {
         GameListView gameListView = GameListView.getInstance();
         gameListView.setAvaliableGames(gamesList);
         gameListView.getAdapter().setNewItems(gamesList);
+        System.out.println("why");
         //gameListView.populateGamesList();
     }
 }
