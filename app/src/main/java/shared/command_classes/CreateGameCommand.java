@@ -17,9 +17,9 @@ public class CreateGameCommand extends Command
         String auth = parts[2];
         boolean game = ServerFacade.getInstance().CreateGame(name, players, auth);
         if(game == true)
-            return new Result(false, "");
-        else
             return new Result(true, "");
+        else
+            return new Result(false, "");
     }
 
     public void executeOnClient()
