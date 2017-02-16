@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.erics.tickettoride.R;
 
@@ -99,7 +100,11 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             @Override
             public void onClick(View view) {
                 GameListPresenter gameListPresenter = GameListPresenter.getInstance();
-                gameListPresenter.createGame();
+                boolean successful = gameListPresenter.createGame();
+                if(successful)
+                {Toast.makeText(getBaseContext(),"SUCCESSFULLY CREATED",Toast.LENGTH_SHORT).show();}
+                else
+                {Toast.makeText(getBaseContext(),"failed",Toast.LENGTH_SHORT).show();}
             }
         });
 
