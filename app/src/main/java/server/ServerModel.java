@@ -90,7 +90,7 @@ public class ServerModel implements IServer{
             newCommandList = lobby_commands.subList(commandID+1, lobby_commands.size());
 
         }
-        System.out.println("this was called: " + times);
+        System.out.println("SIZE: " + lobby_commands.size() + " CMDID " + commandID + ": this was called: " + times);
 
         return newCommandList;
     }
@@ -106,6 +106,13 @@ public class ServerModel implements IServer{
             newGameLobby.setID(currentLobbyID);
             gameNames.add(name);
             lobbies.add(newGameLobby);
+
+            Command cmd = new CreateGameCommand();
+            cmd.setInfo(name + " " + "  " + max_player_num + currentLobbyID);
+            cmd.setcmdID(lobby_commands.size());
+            cmd.setType("creategame");
+            lobby_commands.add(cmd);
+
             currentLobbyID++;
         }
 

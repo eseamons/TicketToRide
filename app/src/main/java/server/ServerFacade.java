@@ -25,6 +25,8 @@ public class ServerFacade implements IServer{
         ServerModel serverModel = ServerModel.getInstance();
         Account ret = serverModel.Login(name, pass);
         CreateGame("hi",3,ret.authentication);
+        CreateGame("noobs",3,ret.authentication);
+        CreateGame("noobspls",3,ret.authentication);
         return ret;
     }
 

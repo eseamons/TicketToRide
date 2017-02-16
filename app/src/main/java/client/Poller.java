@@ -23,6 +23,7 @@ public class Poller
                 ClientFacade client = new ClientFacade();
                 client.getNewCommands();
                 Log.i("l", " T: " + times);
+                times++;
             }
         }, 3,10, TimeUnit.SECONDS);
     }
