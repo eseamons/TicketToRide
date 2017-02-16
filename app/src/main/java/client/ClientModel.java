@@ -52,7 +52,7 @@ public class ClientModel extends Observable
 
     public int getLastCommand() {
         if(command_list.size() == 0)
-            return 0;
+            return -1;
         return ((Command) command_list.get(command_list.size()-1)).getID();
     }
 

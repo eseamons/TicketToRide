@@ -13,11 +13,15 @@ import java.util.UUID;
 public class AccountList {
 
     private List<Account> accounts;
+
+    //Maps
     Map<String, Account> accountAuthMap;
+    Map<String, Account> accountUsernameMap;
 
     public AccountList() {
         accounts = new ArrayList<>();
         accountAuthMap = new HashMap<>();
+        accountUsernameMap = new HashMap<>();
     }
 
     public boolean registerAccount(String name, String pass) {
@@ -29,8 +33,13 @@ public class AccountList {
         //create authentication code
         String authCode = UUID.randomUUID().toString();
         newAccount.setAuthentication(authCode);
+
+
         //Map authcode to Account for quicker lookup
         accountAuthMap.put(authCode, newAccount);
+        //Map username to Account for quicker lookup
+        accountUsernameMap.put(name, newAccount);
+
         return true;
     }
 
@@ -50,13 +59,8 @@ public class AccountList {
     }
 
     public boolean usernameExists(String username) {
-        boolean accountExists = false;
-        for (Account account : accounts) {
-            if(account.getUsername().equals(username)) {
-                accountExists = true;
-            }
-        }
-        return accountExists;
+        //find username in hashmap
+        return accountUsernameMap.containsKey(username);
     }
 
     public Account getAccountByAuthCode(String auth) {
