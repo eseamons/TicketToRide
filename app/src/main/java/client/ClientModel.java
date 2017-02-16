@@ -30,6 +30,7 @@ public class ClientModel extends Observable
     public void addLobbyToList(GameLobby game)
     {
         list_of_lobbies.add(game);
+        update();
     }
 
     public GameLobby getGameLobbyByID(int gameID){
@@ -71,6 +72,7 @@ public class ClientModel extends Observable
 
     public void setCurrent_game_lobby(GameLobby current_game_lobby) {
         this.current_game_lobby = current_game_lobby;
+        update();
     }
 
     public Game getCurrent_game() {
