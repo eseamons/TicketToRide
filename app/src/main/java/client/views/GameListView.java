@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.erics.tickettoride.R;
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import client.ClientFacade;
 import client.Poller;
 import client.interfaces.IGameListView;
 import client.presenters.GameListPresenter;
@@ -39,6 +41,12 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     GameLobby selectedGame;
     List<GameLobby> availableGames = new ArrayList<>();
     AvaliableGamesAdapter expAdapter;
+
+    TextView textView1;
+    TextView textView2;
+    TextView textView3;
+    TextView textView4;
+    TextView textView5;
 
     private static GameListView instance = new GameListView();
 
@@ -63,9 +71,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         poller.runGetNonGameCommands();
         availableGames = GameListPresenter.getInstance().getClientGames();
 
-        //available games list adapter
-        expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
-        populateGamesList();
 
         //text fields
         gameName = (EditText) findViewById(R.id.gameName);
@@ -125,39 +130,24 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     }
 
     public void setAvaliableGames(List<GameLobby> games) {
-        availableGames = games;}
-
-    public void populateGamesList()
-    {
-        //expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
-        ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
-        listView.setAdapter(expAdapter);
-
-        if(availableGames.size() <0)
-        {listView.expandGroup(0);}
-
-        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
-        {
-
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
-            {
-                Object game = (Object) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
-                GameLobby gameLobby = new GameLobby();
-
-                if(game.getClass() == gameLobby.getClass())
-                {
-                    gameLobby = (GameLobby) game;
-                    selectedGame = gameLobby;
-                    return true;
-                }
-                return false;
-            }
-
-        });
-
-        expAdapter.notifyDataSetChanged();
+        availableGames = games;
+        update();
     }
 
+    public void update() {
 
+        ClientFacade cf = new ClientFacade();
+
+        if (availableGames.size() >= 1)
+            textView1.setText(availableGames.get(0).getName());
+        if (availableGames.size() >= 2)
+            textView2.setText(availableGames.get(1).getName());
+        if (availableGames.size() >= 3)
+            textView3.setText(availableGames.get(2).getName());
+        if (availableGames.size() >= 4)
+            textView4.setText(availableGames.get(3).getName());
+        if (availableGames.size() >= 5)
+            textView5.setText(availableGames.get(4).getName());
+
+    }
 }
