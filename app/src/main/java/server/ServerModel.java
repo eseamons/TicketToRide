@@ -37,6 +37,7 @@ public class ServerModel implements IServer{
         games = new ArrayList<>();
         lobby_commands = new ArrayList<>();
         currentLobbyID = 1;
+        gameNames = new ArrayList<>();
     }
 
     public static ServerModel getInstance() {
@@ -76,6 +77,7 @@ public class ServerModel implements IServer{
     }
 
     int times = 0;
+
     @Override
     public List<ICommand> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?

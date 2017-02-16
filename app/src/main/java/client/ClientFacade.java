@@ -84,7 +84,11 @@ public class ClientFacade implements IClient{
     @Override
     public void getNewCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        List<ICommand> list_of_commands = serverProxy.getNewCommands(clientModel.getLastCommand(), clientModel.getAuthorization());
+        int last_cmd = clientModel.getLastCommand();
+        String auth = clientModel.getAuthorization();
+        List<ICommand> list_of_commands = serverProxy.getNewCommands(last_cmd, auth);
+        if(list_of_commands == null)
+            return;
         for(int i = 0; i < list_of_commands.size(); i++)
         {
             list_of_commands.get(i).executeOnClient();

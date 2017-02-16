@@ -1,5 +1,6 @@
 package client;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 
@@ -18,7 +19,7 @@ public class ClientModel extends Observable
     private Account account = null;
     private GameLobby current_game_lobby;
     private Game current_game;
-    private List<ICommand> command_list;
+    private List<ICommand> command_list = new ArrayList<>();
     private List<GameLobby> list_of_lobbies;
     private static ClientModel instance = new ClientModel();
 
@@ -50,6 +51,8 @@ public class ClientModel extends Observable
     {return instance;}
 
     public int getLastCommand() {
+        if(command_list.size() == 0)
+            return 0;
         return ((Command) command_list.get(command_list.size()-1)).getID();
     }
 
