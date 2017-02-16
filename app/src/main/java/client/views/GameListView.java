@@ -30,8 +30,10 @@ import shared.model_classes.GameLobby;
 
 public class GameListView extends AppCompatActivity implements IGameListView  {
 
-    String gameName = null;
-    int numPlayers = -1;
+    EditText gameName;
+    EditText maxPlayers;
+    //String gameName = null;
+    //int numPlayers = -1;
     Button joinGameButton;
     Button createGameButton;
     GameLobby selectedGame;
@@ -59,44 +61,18 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         Poller poller = new Poller();
         poller.runGetNonGameCommands();
-        //GameListPresenter.getInstance().getServerGames();
         availableGames = GameListPresenter.getInstance().getClientGames();
 
-
-        //System.out.println("might not work...");
-
-
+        //available games list adapter
         expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
         populateGamesList();
-        /*
-        List<GameLobby> avaliableGamesArray = availableGames;
-        ExpandableListAdapter listAdapter = new AvaliableGamesAdapter(getBaseContext(), avaliableGamesArray);
-        ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
-        listView.setAdapter(listAdapter);
-        listView.expandGroup(0);
 
-        listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
-        {
-
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id)
-            {
-                Object game = (Object) parent.getExpandableListAdapter().getChild(groupPosition, childPosition);
-                GameLobby gameLobby = new GameLobby();
-
-                if(game.getClass() == gameLobby.getClass())
-                {
-                    gameLobby = (GameLobby) game;
-                    selectedGame = gameLobby;
-                    return true;
-                }
-                return false;
-            }
-
-        });
-*/
+        //text fields
+        gameName = (EditText) findViewById(R.id.gameName);
+        maxPlayers = (EditText) findViewById(R.id.numberofPlayers);
 
 
+        //buttons
         createGameButton = (Button)findViewById(R.id.creatGameButton);
         createGameButton.setOnClickListener(new View.OnClickListener()
         {
@@ -111,42 +87,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             }
         });
 
-        EditText gameNameText = (EditText)findViewById(R.id.gameName);
-        gameNameText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after)
-            {gameName = s.toString();}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count)
-            {gameName = s.toString();}
-
-            @Override
-            public void afterTextChanged(Editable s)
-            {gameName = s.toString();}
-        });
-
-        EditText maxPlayerText = (EditText) findViewById(R.id.numberofPlayers);
-        maxPlayerText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {}
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2)
-            {
-                String maxPlayerString = charSequence.toString();
-                numPlayers = Integer.parseInt(maxPlayerString);
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable)
-            {
-                String maxPlayerString = editable.toString();
-                numPlayers = Integer.parseInt(maxPlayerString);
-            }
-        });
-
         joinGameButton = (Button)findViewById(R.id.joinGameButton);
         joinGameButton.setOnClickListener(new View.OnClickListener()
         {
@@ -156,19 +96,19 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 gameListPresenter.joinGame();
             }
         });
-
-       // GameListPresenter.getInstance().getServerGames();
     }
-
 
     @Override
     public String getGameName() {
-        return gameName;
+        String name = gameName.getText().toString();
+        return name;
     }
 
     @Override
     public int getNumberOfPlayers() {
-        return numPlayers;
+        String numOfPlayers = maxPlayers.getText().toString();
+        int num = Integer.parseInt(numOfPlayers);
+        return num;
     }
 
     @Override
@@ -176,9 +116,8 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         return selectedGame;
     }
 
-    public void setAvaliableGames(List<GameLobby> games)
-    {availableGames = games;}
-
+    public void setAvaliableGames(List<GameLobby> games) {
+        availableGames = games;}
 
     public void populateGamesList()
     {

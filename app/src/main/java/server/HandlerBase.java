@@ -22,7 +22,7 @@ import java.net.HttpURLConnection;
 public class HandlerBase implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        boolean success = false;
+        boolean success;
 
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("get")) ;

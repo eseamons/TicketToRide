@@ -1,7 +1,5 @@
 package client.interfaces;
 
-import android.content.Context;
-
 import shared.model_classes.Player;
 
 public interface IGameLobbyPresenter {

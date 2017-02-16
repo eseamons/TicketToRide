@@ -1,18 +1,14 @@
 package client.views;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.erics.tickettoride.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import shared.model_classes.GameLobby;
@@ -44,28 +40,33 @@ public class AvaliableGamesAdapter extends BaseExpandableListAdapter{
 
         @Override
         public int getChildrenCount(int groupPosition) {
-            if(groupPosition == 0)
-            {return availableGames.size();}
-            else
-            {return 0;}
+            if(groupPosition == 0) {
+                return availableGames.size();
+            }
+            else {
+                return 0;
+            }
         }
 
         @Override
         public Object getGroup(int groupPosition)
         {
-
-            if(groupPosition ==0)
-            {return headers[groupPosition];}
-            else
-            {return null;}
+            if(groupPosition ==0) {
+                return headers[groupPosition];
+            }
+            else {
+                return null;
+            }
         }
 
         @Override
         public Object getChild(int groupPosition, int childPosition) {
-            if(groupPosition ==0)
-            {return availableGames.get(childPosition);}
-            else
-            {return null;}
+            if(groupPosition ==0) {
+                return availableGames.get(childPosition);
+            }
+            else {
+                return null;
+            }
         }
 
         @Override

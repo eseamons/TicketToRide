@@ -6,12 +6,12 @@ package client.interfaces;
 
 public interface ILoginView {
 
-    public String getUsername();
+    String getUsername();
 
-    public String getPassword();
+    String getPassword();
 
-    public String getRegisUsername();
+    String getRegisUsername();
 
-    public String getRegisPassword();
+    String getRegisPassword();
 
 }

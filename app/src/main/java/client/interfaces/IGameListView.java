@@ -8,11 +8,11 @@ import shared.model_classes.GameLobby;
 
 public interface IGameListView {
 
-    public String getGameName();
+    String getGameName();
 
-    public int getNumberOfPlayers();
+    int getNumberOfPlayers();
 
-    public GameLobby getSelectedGame();
+    GameLobby getSelectedGame();
 
 
 }
