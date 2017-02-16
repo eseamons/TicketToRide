@@ -27,9 +27,9 @@ public class ServerFacade implements IServer{
 
         if(ret != null)
         {
-            CreateGame("LanceDontJoin", 3, ret.getAuthentication());
-            CreateGame("LanceMaybeJoin",3, ret.getAuthentication());
-            CreateGame("LanceHi",3, ret.getAuthentication());
+//            CreateGame("LanceDontJoin", 3, ret.getAuthentication());
+//            CreateGame("LanceMaybeJoin",3, ret.getAuthentication());
+//            CreateGame("LanceHi",3, ret.getAuthentication());
         }
 
         return ret;

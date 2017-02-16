@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.erics.tickettoride.R;
@@ -74,6 +75,12 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         //text fields
         gameName = (EditText) findViewById(R.id.gameName);
         maxPlayers = (EditText) findViewById(R.id.numberofPlayers);
+
+        textView1 = (TextView) findViewById(R.id.textView1);
+        textView2 = (TextView) findViewById(R.id.textView2);
+        textView3 = (TextView) findViewById(R.id.textView3);
+        textView4 = (TextView) findViewById(R.id.textView4);
+        textView5 = (TextView) findViewById(R.id.textView5);
 
 
         //buttons
@@ -141,6 +148,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         ClientFacade cf = new ClientFacade();
 
+
         if (availableGames.size() >= 1)
             textView1.setText(availableGames.get(0).getName());
         if (availableGames.size() >= 2)
@@ -151,5 +159,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             textView4.setText(availableGames.get(3).getName());
         if (availableGames.size() >= 5)
             textView5.setText(availableGames.get(4).getName());
+    }
 
 }
