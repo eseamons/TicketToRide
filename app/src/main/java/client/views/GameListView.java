@@ -64,7 +64,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         availableGames = GameListPresenter.getInstance().getClientGames();
 
         //available games list adapter
-        expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
+        //expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
         populateGamesList();
 
         //text fields
@@ -111,6 +111,10 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         return num;
     }
 
+    public AvaliableGamesAdapter getAdapter() {
+        return expAdapter;
+    }
+
     @Override
     public GameLobby getSelectedGame() {
         return selectedGame;
@@ -121,7 +125,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
     public void populateGamesList()
     {
-        //expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
+        expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
         listView.setAdapter(expAdapter);
 

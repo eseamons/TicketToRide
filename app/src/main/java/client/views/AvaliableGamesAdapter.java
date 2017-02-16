@@ -133,5 +133,12 @@ public class AvaliableGamesAdapter extends BaseExpandableListAdapter{
         public boolean isChildSelectable(int groupPosition, int childPosition) {
             return true;
         }
+        public void setNewItems(List<GameLobby> availableGames) {
+            this.availableGames = availableGames;
+            //this._listDataChild = listChildData;
+            notifyDataSetChanged();
+         }
+
+
 
 }
