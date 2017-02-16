@@ -30,14 +30,12 @@ import shared.model_classes.GameLobby;
 
 public class GameListView extends AppCompatActivity implements IGameListView  {
 
-    List<String> avaliableGames;
-
     String gameName = null;
     int numPlayers = -1;
     Button joinGameButton;
     Button createGameButton;
     GameLobby selectedGame;
-    ArrayList<GameLobby> availableGames = new ArrayList<>();
+    List<GameLobby> availableGames = new ArrayList<>();
     AvaliableGamesAdapter expAdapter;
 
     private static GameListView instance = new GameListView();
@@ -62,7 +60,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         Poller poller = new Poller();
         poller.runGetNonGameCommands();
         GameListPresenter.getInstance().getServerGames();
-        //availableGames = (ArrayList<GameLobby>)GameListPresenter.getInstance().getClientGames();
+        availableGames = GameListPresenter.getInstance().getClientGames();
 
 
         //System.out.println("might not work...");
