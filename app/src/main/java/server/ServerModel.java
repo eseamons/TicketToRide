@@ -77,6 +77,7 @@ public class ServerModel implements IServer{
     }
 
     int times = 0;
+
     @Override
     public List<ICommand> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?
