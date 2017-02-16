@@ -93,7 +93,15 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             @Override
             public void onClick(View view) {
                 GameListPresenter gameListPresenter = GameListPresenter.getInstance();
-                gameListPresenter.joinGame();
+                boolean success = gameListPresenter.joinGame();
+
+                if(success) {
+                    startActivity(new Intent(GameListView.this, GameLobbyView.class));
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Could not join game",Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }
