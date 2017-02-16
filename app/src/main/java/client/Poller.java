@@ -25,7 +25,7 @@ public class Poller
                 Log.i("l", " T: " + times);
                 times++;
             }
-        }, 3,10, TimeUnit.SECONDS);
+        }, 3,2, TimeUnit.SECONDS);
     }
 
 }

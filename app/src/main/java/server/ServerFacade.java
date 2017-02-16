@@ -3,6 +3,7 @@ package server;
 import java.util.List;
 
 import shared.ColorNum;
+import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
@@ -24,13 +25,11 @@ public class ServerFacade implements IServer{
     public Account Login(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
         Account ret = serverModel.Login(name, pass);
-        CreateGame("hi",3,ret.authentication);
-        CreateGame("noobs",3,ret.authentication);
-        CreateGame("noobspls",3,ret.authentication);
+
         return ret;
     }
 
-    public void addCommand(ICommand cmd)
+    public void addCommand(Command cmd)
     {
         ServerModel.getInstance().addCommand(cmd);
     }
@@ -47,7 +46,7 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public List<ICommand> getNewCommands(int ID, String auth) {
+    public List<Command> getNewCommands(int ID, String auth) {
         ServerModel serverModel = ServerModel.getInstance();
         return serverModel.getNewCommands(ID, auth);
     }

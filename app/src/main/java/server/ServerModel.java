@@ -27,7 +27,7 @@ public class ServerModel implements IServer{
     private AccountList accountList;
     private List<GameLobby> lobbies;
     private List<Game> games;
-    private List<ICommand> lobby_commands;
+    private List<Command> lobby_commands;
     private Map<String, Player> playerMap;
     private List<String> gameNames;
 
@@ -71,7 +71,7 @@ public class ServerModel implements IServer{
         return returnLobbyList;
     }
 
-    public void addCommand(ICommand cmd)
+    public void addCommand(Command cmd)
     {
         lobby_commands.add(cmd);
     }
@@ -79,11 +79,11 @@ public class ServerModel implements IServer{
     int times = 0;
 
     @Override
-    public List<ICommand> getNewCommands(int commandID, String auth) {
+    public List<Command> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?
         times++;
-        List<ICommand> fullCommandList = null;
-        List<ICommand> newCommandList = new ArrayList<>();
+
+        List<Command> newCommandList = new ArrayList<>();
 
         if(accountList.authCodeExists(auth))
         {

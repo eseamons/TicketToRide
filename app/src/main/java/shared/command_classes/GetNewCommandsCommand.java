@@ -19,7 +19,7 @@ public class GetNewCommandsCommand extends Command
         String parts[] = info.split(" ");
         int ID = Integer.parseInt(parts[0]);
         String auth = parts[1];
-        List<ICommand> cmds = ServerFacade.getInstance().getNewCommands(ID, auth);
+        List<Command> cmds = ServerFacade.getInstance().getNewCommands(ID, auth);
         if(cmds == null)
         {
             return new Result(false, "");
