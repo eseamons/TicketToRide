@@ -98,4 +98,11 @@ public class LoginView extends AppCompatActivity implements ILoginView {
     public String getRegisPassword() {
         return registerPW.getText().toString();
     }
+
+
+    public void clearloginUsername() {loginUN.setText("");}
+    public void clearLoginPassword() {loginPW.setText("");}
+
+    public void clearRegisUsername() {registerUN.setText("");}
+    public void clearRegisPassword() {registerPW.setText("");}
 }

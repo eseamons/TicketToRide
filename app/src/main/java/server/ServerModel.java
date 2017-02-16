@@ -1,6 +1,7 @@
 package server;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,6 +39,7 @@ public class ServerModel implements IServer{
         lobby_commands = new ArrayList<>();
         currentLobbyID = 1;
         gameNames = new ArrayList<>();
+        playerMap = new HashMap<>();
     }
 
     public static ServerModel getInstance() {

@@ -26,8 +26,15 @@ public class LoginPresenter implements ILoginPresenter{
 
         String registerUN = loginView.getRegisUsername();
         String registerPW = loginView.getRegisPassword();
+        //clear fields
+        loginView.clearRegisUsername();
+        loginView.clearRegisPassword();
 
-        boolean successful = clientFacade.Register(registerUN, registerPW);
+        boolean successful = false;
+        if(!registerPW.equals("") && !registerUN.equals("")) {
+            successful = clientFacade.Register(registerUN, registerPW);
+        }
+
         return successful;
     }
 
@@ -36,10 +43,19 @@ public class LoginPresenter implements ILoginPresenter{
     {
         LoginView loginView = LoginView.getInstance();
 
+        Account account = null;
+
         String username = loginView.getUsername();
         String password = loginView.getPassword();
 
-        Account successful = clientFacade.Login(username, password);
-        return successful != null;
+        //clear login fields
+        loginView.clearloginUsername();
+        loginView.clearLoginPassword();
+
+        if(!username.equals("") && !password.equals("")) {
+            account = clientFacade.Login(username, password);
+        }
+
+        return account != null;
     }
 }
