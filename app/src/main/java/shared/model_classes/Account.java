@@ -2,9 +2,9 @@ package shared.model_classes;
 
 public class Account {
 
-    public String username;
-    public String password;
-    public String authentication;
+    private String username;
+    private String password;
+    private String authentication;
 
     public String getUsername() {
         return username;
