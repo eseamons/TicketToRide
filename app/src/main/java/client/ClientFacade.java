@@ -117,10 +117,10 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public Game beginGame(int ID) {
+    public Game beginGame() {
 
         String auth = clientModel.getAuthorization();
-
+        int ID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.BeginGame(ID, auth);
         return null;
