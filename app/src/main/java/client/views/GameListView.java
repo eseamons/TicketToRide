@@ -62,7 +62,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         Poller poller = new Poller();
         poller.runGetNonGameCommands();
         GameListPresenter.getInstance().getServerGames();
-        availableGames = (ArrayList<GameLobby>)GameListPresenter.getInstance().getClientGames();
+        //availableGames = (ArrayList<GameLobby>)GameListPresenter.getInstance().getClientGames();
 
 
         //System.out.println("might not work...");
