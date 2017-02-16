@@ -20,7 +20,7 @@ public class ClientModel extends Observable
     private GameLobby current_game_lobby;
     private Game current_game;
     private List<ICommand> command_list = new ArrayList<>();
-    private List<GameLobby> list_of_lobbies;
+    private List<GameLobby> list_of_lobbies = new ArrayList<>();
     private static ClientModel instance = new ClientModel();
 
     private LoginPresenter loginPresenter = null;

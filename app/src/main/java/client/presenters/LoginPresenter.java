@@ -1,8 +1,5 @@
 package client.presenters;
 
-
-import android.util.Log;
-
 import client.ClientFacade;
 import client.interfaces.ILoginPresenter;
 import client.views.LoginView;

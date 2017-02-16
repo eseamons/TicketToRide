@@ -27,6 +27,7 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
     public void update(Observable observable, Object o) {
 
     }
+
     public GameLobbyPresenter()
     {
         ClientFacade clientFacade = new ClientFacade();
@@ -66,7 +67,6 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
 
     public boolean changeColor()
     {
-
         return true;
     }
 

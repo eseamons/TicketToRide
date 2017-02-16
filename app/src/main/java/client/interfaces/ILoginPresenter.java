@@ -8,8 +8,8 @@ import shared.Result;
 
 public interface ILoginPresenter {
 
-    public boolean Register();
+    boolean Register();
 
-    public boolean Login();
+    boolean Login();
 
 }

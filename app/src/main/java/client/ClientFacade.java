@@ -96,7 +96,7 @@ public class ClientFacade implements IClient{
             cmd = cmd.getCommand();
             cmd.executeOnClient();
             clientModel.getCommand_list().add(cmd);
-            clientModel.update();
+            //clientModel.update();
         }
     }
 

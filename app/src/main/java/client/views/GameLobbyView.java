@@ -63,7 +63,7 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
         msgEditText = msg;
     }
 
-    public GameLobbyView(){};
+    public GameLobbyView(){}
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
