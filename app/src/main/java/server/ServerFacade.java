@@ -23,7 +23,9 @@ public class ServerFacade implements IServer{
     @Override
     public Account Login(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
-        return serverModel.Login(name, pass);
+        Account ret = serverModel.Login(name, pass);
+        CreateGame("hi",3,ret.authentication);
+        return ret;
     }
 
     public void addCommand(ICommand cmd)

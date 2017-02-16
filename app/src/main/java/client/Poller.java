@@ -24,7 +24,7 @@ public class Poller
                 client.getNewCommands();
                 Log.i("l", " T: " + times);
             }
-        }, 1, 1, TimeUnit.SECONDS);
+        }, 3,10, TimeUnit.SECONDS);
     }
 
 }

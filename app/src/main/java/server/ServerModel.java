@@ -80,17 +80,17 @@ public class ServerModel implements IServer{
     @Override
     public List<ICommand> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?
+        times++;
         List<ICommand> fullCommandList = null;
         List<ICommand> newCommandList = new ArrayList<>();
 
-        if(accountList.authCodeExists(auth)) {
-            GameLobby lobby = lobbies.get(lobbies.size());
-            fullCommandList = lobby_commands;
-            newCommandList = lobby_commands.subList(commandID-1, lobby_commands.size());
+        if(accountList.authCodeExists(auth))
+        {
+            newCommandList = lobby_commands.subList(commandID+1, lobby_commands.size());
 
         }
         System.out.println("this was called: " + times);
-        times++;
+
         return newCommandList;
     }
 

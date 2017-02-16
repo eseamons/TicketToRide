@@ -68,6 +68,7 @@ public class Command implements ICommand {
             case "login": cmd = new LoginCommand(); break;
             case "register": cmd = new RegisterCommand(); break;
             case "setplayercolor": cmd = new SetPlayerColorCommand(); break;
+            case "getcommands": cmd = new GetNewCommandsCommand(); break;
             default: cmd = null;
 
         }
