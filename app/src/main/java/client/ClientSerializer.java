@@ -1,6 +1,7 @@
 package client;
 
 import shared.Result;
+import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
@@ -40,10 +41,10 @@ public class ClientSerializer {
         return gson.fromJson(str, GameLobby.class);
     }
 
-    public static List<ICommand> deserializeCommandList(String str)
+    public static List<Command> deserializeCommandList(String str)
     {
         Gson gson = new Gson();
-        ICommand[] cmds = gson.fromJson(str, ICommand[].class);
+        Command[] cmds = gson.fromJson(str, Command[].class);
         return Arrays.asList(cmds);
     }
 }

@@ -8,6 +8,7 @@ import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
 import shared.ColorNum;
+import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
@@ -86,12 +87,14 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         int last_cmd = clientModel.getLastCommand();
         String auth = clientModel.getAuthorization();
-        List<ICommand> list_of_commands = serverProxy.getNewCommands(last_cmd, auth);
+        List<Command> list_of_commands = serverProxy.getNewCommands(last_cmd, auth);
         if(list_of_commands == null)
             return;
         for(int i = 0; i < list_of_commands.size(); i++)
         {
-            list_of_commands.get(i).executeOnClient();
+            Command cmd = (Command) list_of_commands.get(i);
+            cmd.executeOnClient();
+            clientModel.getCommand_list().add(cmd);
         }
     }
 

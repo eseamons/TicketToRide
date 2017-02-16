@@ -91,7 +91,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public List<ICommand> getNewCommands(int ID, String auth)
+    public List<Command> getNewCommands(int ID, String auth)
     {
         StringBuilder message = new StringBuilder();
         message.append(ID);
