@@ -74,6 +74,7 @@ public class ServerModel implements IServer{
         lobby_commands.add(cmd);
     }
 
+    int times = 0;
     @Override
     public List<ICommand> getNewCommands(int commandID, String auth) {
         //is the ID for the last command that the user has?
@@ -86,7 +87,8 @@ public class ServerModel implements IServer{
             newCommandList = lobby_commands.subList(commandID-1, lobby_commands.size());
 
         }
-
+        System.out.println("this was called: " + times);
+        times++;
         return newCommandList;
     }
 

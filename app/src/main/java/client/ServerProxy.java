@@ -114,9 +114,9 @@ public class ServerProxy implements IServer{
     public boolean CreateGame(String name, int players, String auth)
     {
         StringBuilder message = new StringBuilder();
-        message.append(name + " ");
+        message.append(name + "ç");
         message.append(players);
-        message.append(" " + auth);
+        message.append("ç" + auth);
         Command cmd = new CreateGameCommand();
         cmd.setInfo(message.toString());
         cmd.setType("creategame");

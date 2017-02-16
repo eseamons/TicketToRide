@@ -61,6 +61,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         Poller poller = new Poller();
         poller.runGetNonGameCommands();
+        //System.out.println("might not work...");
 
 
         expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
