@@ -33,6 +33,7 @@ public class GameListPresenter implements IGameListPresenter,Observer {
     public Boolean joinGame() {
         GameListView gameListView = GameListView.getInstance();
         GameLobby game = gameListView.getSelectedGame();
+        if(game == null) return false;
         int id = game.getID();
         GameLobby gameLobby  = clientFacade.joinGame(id);
 
