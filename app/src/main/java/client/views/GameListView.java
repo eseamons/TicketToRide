@@ -59,7 +59,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         Poller poller = new Poller();
         poller.runGetNonGameCommands();
-        GameListPresenter.getInstance().getServerGames();
+        //GameListPresenter.getInstance().getServerGames();
         availableGames = GameListPresenter.getInstance().getClientGames();
 
 
@@ -156,6 +156,8 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 gameListPresenter.joinGame();
             }
         });
+
+       // GameListPresenter.getInstance().getServerGames();
     }
 
 
@@ -175,14 +177,16 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     }
 
     public void setAvaliableGames(List<GameLobby> games)
-    {availableGames = (ArrayList)games;}
+    {availableGames = games;}
 
 
     public void populateGamesList()
     {
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
         listView.setAdapter(expAdapter);
-        listView.expandGroup(0);
+
+        if(availableGames.size() <0)
+        {listView.expandGroup(0);}
 
         listView.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
         {

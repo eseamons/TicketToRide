@@ -1,6 +1,5 @@
 package shared.command_classes;
 
-import client.ClientFacade;
 import server.ServerFacade;
 import server.ServerSerializer;
 import shared.Result;

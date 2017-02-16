@@ -1,8 +1,5 @@
 package shared.command_classes;
 
-import android.speech.RecognizerIntent;
-
-import server.ServerFacade;
 import shared.Result;
 import shared.interfaces.ICommand;
 

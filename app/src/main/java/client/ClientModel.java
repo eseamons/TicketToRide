@@ -72,6 +72,7 @@ public class ClientModel extends Observable
 
     public void setCurrent_game_lobby(GameLobby current_game_lobby) {
         this.current_game_lobby = current_game_lobby;
+        update();
     }
 
     public Game getCurrent_game() {
