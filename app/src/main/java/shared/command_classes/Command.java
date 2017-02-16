@@ -55,7 +55,7 @@ public class Command implements ICommand {
     }
 
     @Override
-    public ICommand getCommand()
+    public Command getCommand()
     {
         Command cmd;
         switch(type)
