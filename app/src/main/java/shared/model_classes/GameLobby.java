@@ -11,7 +11,6 @@ public class GameLobby {
     private int max_players;
     private int ID;
     private String name;
-    private List<ICommand> command_list;
     private List<String> comment_list;
 
     public Game changeIntoGame()
@@ -47,12 +46,6 @@ public class GameLobby {
     }
     public void setName(String name) {
         this.name = name;
-    }
-    public List<ICommand> getCommand_list() {
-        return command_list;
-    }
-    public void setCommand_list(List<ICommand> command_list) {
-        this.command_list = command_list;
     }
 
     public void addNewComment(String comment) {
