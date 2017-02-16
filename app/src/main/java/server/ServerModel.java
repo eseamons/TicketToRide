@@ -110,7 +110,7 @@ public class ServerModel implements IServer{
             lobbies.add(newGameLobby);
 
             Command cmd = new CreateGameCommand();
-            cmd.setInfo(name + " " + "  " + max_player_num + currentLobbyID);
+            cmd.setInfo(name + " " + max_player_num + " " + currentLobbyID);
             cmd.setcmdID(lobby_commands.size());
             cmd.setType("creategame");
             lobby_commands.add(cmd);

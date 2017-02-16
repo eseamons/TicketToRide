@@ -22,6 +22,7 @@ public class Poller
             {
                 ClientFacade client = new ClientFacade();
                 client.getNewCommands();
+                //client.getServerGamesList(ClientModel.getInstance().getAuthorization());
                 Log.i("l", " T: " + times);
                 times++;
             }
