@@ -12,7 +12,6 @@ import android.widget.Toast;
 import com.example.erics.tickettoride.R;
 
 import client.interfaces.ILoginView;
-import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
 
 public class LoginView extends AppCompatActivity implements ILoginView {
@@ -56,10 +55,12 @@ public class LoginView extends AppCompatActivity implements ILoginView {
                 LoginPresenter loginPresenter = LoginPresenter.getInstance();
                 boolean successful = loginPresenter.Login();
 
-                if(successful)
-                {startActivity(new Intent(LoginView.this, GameListView.class));}
-                else
-                {Toast.makeText(getBaseContext(), "Login Unsuccessful",Toast.LENGTH_SHORT).show();}
+                if(successful) {
+                    startActivity(new Intent(LoginView.this, GameListView.class));
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Login Unsuccessful",Toast.LENGTH_SHORT).show();
+                }
 
             }
         });
@@ -71,10 +72,12 @@ public class LoginView extends AppCompatActivity implements ILoginView {
                 LoginPresenter loginPresenter = LoginPresenter.getInstance();
                 boolean successful = loginPresenter.Register();
 
-                if(successful)
-                {Toast.makeText(getBaseContext(), "You have Successfully Registered!",Toast.LENGTH_SHORT).show();}
-                else
-                {Toast.makeText(getBaseContext(), "Register Unsuccessful",Toast.LENGTH_SHORT).show();}
+                if(successful) {
+                    Toast.makeText(getBaseContext(), "You have Successfully Registered!",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(getBaseContext(), "Register Unsuccessful",Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -100,9 +103,19 @@ public class LoginView extends AppCompatActivity implements ILoginView {
     }
 
 
-    public void clearloginUsername() {loginUN.setText("");}
-    public void clearLoginPassword() {loginPW.setText("");}
+    public void clearloginUsername() {
+        loginUN.setText("");
+    }
 
-    public void clearRegisUsername() {registerUN.setText("");}
-    public void clearRegisPassword() {registerPW.setText("");}
+    public void clearLoginPassword() {
+        loginPW.setText("");
+    }
+
+    public void clearRegisUsername() {
+        registerUN.setText("");
+    }
+
+    public void clearRegisPassword() {
+        registerPW.setText("");
+    }
 }
