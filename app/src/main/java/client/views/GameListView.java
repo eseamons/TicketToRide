@@ -129,6 +129,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
     public void populateGamesList()
     {
+        //expAdapter = new AvaliableGamesAdapter(getBaseContext(),availableGames);
         ExpandableListView listView = (ExpandableListView) findViewById(R.id.gameList);
         listView.setAdapter(expAdapter);
 

@@ -25,6 +25,13 @@ public class ServerFacade implements IServer{
         ServerModel serverModel = ServerModel.getInstance();
         Account ret = serverModel.Login(name, pass);
 
+        if(ret != null)
+        {
+            CreateGame("LanceDontJoin", 3, ret.getAuthentication());
+            CreateGame("LanceMaybeJoin",3, ret.getAuthentication());
+            CreateGame("LanceHi",3, ret.getAuthentication());
+        }
+
         return ret;
     }
 
