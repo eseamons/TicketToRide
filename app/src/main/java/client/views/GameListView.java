@@ -36,9 +36,20 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     Button joinGameButton;
     Button createGameButton;
     GameLobby selectedGame;
-    GameListPresenter gameListPresenter = new GameListPresenter();
     ArrayList<GameLobby> availableGames = new ArrayList<>();
     AvaliableGamesAdapter expAdapter;
+
+    private static GameListView instance = new GameListView();
+
+
+    public static GameListView getInstance() {
+        return instance;
+    }
+
+
+    public GameListView() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +97,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         {
             @Override
             public void onClick(View view) {
+                GameListPresenter gameListPresenter = GameListPresenter.getInstance();
                 gameListPresenter.createGame();
             }
         });
@@ -131,6 +143,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         {
             @Override
             public void onClick(View view) {
+                GameListPresenter gameListPresenter = GameListPresenter.getInstance();
                 gameListPresenter.joinGame();
             }
         });

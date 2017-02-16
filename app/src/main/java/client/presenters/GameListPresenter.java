@@ -14,11 +14,20 @@ import shared.model_classes.GameLobby;
 public class GameListPresenter implements IGameListPresenter,Observer {
 
 
+    private static GameListPresenter instance = new GameListPresenter();
     ClientFacade clientFacade = new ClientFacade();
+
+    public static GameListPresenter getInstance()
+    {
+        return instance;
+    }
+    private GameListPresenter() {
+
+    }
 
     @Override
     public Boolean joinGame() {
-        GameListView gameListView = new GameListView();
+        GameListView gameListView = GameListView.getInstance();
         GameLobby game = gameListView.getSelectedGame();
         int id = game.getID();
         GameLobby gameLobby  = clientFacade.joinGame(id);
@@ -32,7 +41,7 @@ public class GameListPresenter implements IGameListPresenter,Observer {
     @Override
     public Boolean createGame()
     {
-        GameListView gameListView = new GameListView();
+        GameListView gameListView = GameListView.getInstance();
         String gameName = gameListView.getGameName();
         int maxPlayers = gameListView.getNumberOfPlayers();
         boolean createGameSuccessful = clientFacade.createGame(gameName, maxPlayers);
@@ -52,7 +61,7 @@ public class GameListPresenter implements IGameListPresenter,Observer {
     @Override
     public void update(Observable observable, Object o) {
         List<GameLobby> gamesList = clientFacade.getClientGamesList();
-        GameListView gameListView = new GameListView();
+        GameListView gameListView = GameListView.getInstance();
         gameListView.setAvaliableGames(gamesList);
         gameListView.populateGamesList();
     }

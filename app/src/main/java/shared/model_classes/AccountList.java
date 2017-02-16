@@ -37,7 +37,7 @@ public class AccountList {
     public Account login(String name, String pass) {
         Account loginAccount = null;
         for (Account account : accounts) {
-            if(account.getPassword() == pass && account.getUsername() == name) {
+            if(account.getPassword().equals(pass) && account.getUsername().equals(name)) {
                 loginAccount = account;
             }
         }
@@ -52,7 +52,7 @@ public class AccountList {
     public boolean usernameExists(String username) {
         boolean accountExists = false;
         for (Account account : accounts) {
-            if(account.getUsername() == username) {
+            if(account.getUsername().equals(username)) {
                 accountExists = true;
             }
         }
