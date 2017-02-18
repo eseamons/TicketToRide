@@ -29,9 +29,9 @@ public class ClientCommunicator {
     }
 
     Result send(String urlPath, Command requestInfo){
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+//        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-        StrictMode.setThreadPolicy(policy);
+//        StrictMode.setThreadPolicy(policy);
 
         try{
             URL url = new URL(urlPath);

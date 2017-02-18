@@ -23,7 +23,7 @@ import shared.model_classes.Player;
 public class ServerProxy implements IServer{
 
     private static ServerProxy SINGLETON = null;
-    String urlpath = "http://10.0.2.2:8080/command";
+    String urlpath = "http://localhost:8080/command";
 
     public static ServerProxy getInstance()
     {
@@ -32,6 +32,10 @@ public class ServerProxy implements IServer{
         }
 
         return SINGLETON;
+    }
+
+    private ServerProxy() {
+
     }
 
     @Override

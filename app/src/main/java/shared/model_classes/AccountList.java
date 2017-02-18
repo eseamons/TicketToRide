@@ -12,10 +12,11 @@ import java.util.UUID;
 
 public class AccountList {
 
+    //List of user accounts
     private List<Account> accounts;
-
-    //Maps
+    //Maps authentication code to Account for quicker lookup
     Map<String, Account> accountAuthMap;
+    //Maps username to Account for quicker lookup
     Map<String, Account> accountUsernameMap;
 
     public AccountList() {
@@ -24,29 +25,37 @@ public class AccountList {
         accountUsernameMap = new HashMap<>();
     }
 
-    public boolean registerAccount(String name, String pass) {
-        Account newAccount = new Account();
-        newAccount.setUsername(name);
-        newAccount.setPassword(pass);
-        accounts.add(newAccount);
+    /**
+     * Function registers a new account in the system
+     * @param username
+     * @param password
+     * @return boolean for whether account was successfully registered
+     */
+    public boolean registerAccount(String username, String password) {
 
-        //create authentication code
-        String authCode = UUID.randomUUID().toString();
-        newAccount.setAuthentication(authCode);
+        if (!usernameExists(username)) {
+            //create new Account
+            Account newAccount = new Account();
+            newAccount.setUsername(username);
+            newAccount.setPassword(password);
+            accounts.add(newAccount);
 
+            //create authentication code
+            String authCode = UUID.randomUUID().toString();
+            newAccount.setAuthentication(authCode);
 
-        //Map authcode to Account for quicker lookup
-        accountAuthMap.put(authCode, newAccount);
-        //Map username to Account for quicker lookup
-        accountUsernameMap.put(name, newAccount);
+            //map authorization code and username to Account
+            accountAuthMap.put(authCode, newAccount);
+            accountUsernameMap.put(username, newAccount);
+        }
 
         return true;
     }
 
-    public Account login(String name, String pass) {
+    public Account login(String username, String password) {
         Account loginAccount = null;
         for (Account account : accounts) {
-            if(account.getPassword().equals(pass) && account.getUsername().equals(name)) {
+            if(account.loginInfoValid(username, password)) {
                 loginAccount = account;
             }
         }
@@ -58,7 +67,7 @@ public class AccountList {
         return accountAuthMap.containsKey(auth);
     }
 
-    public boolean usernameExists(String username) {
+    private boolean usernameExists(String username) {
         //find username in hashmap
         return accountUsernameMap.containsKey(username);
     }

@@ -21,7 +21,7 @@ import shared.model_classes.Player;
 
 public class ServerModel implements IServer{
 
-    private static ServerModel SINGLETON;
+    private static ServerModel instance;
     private static int currentLobbyID;
     private AccountList accountList;
     private List<GameLobby> lobbies;
@@ -41,25 +41,31 @@ public class ServerModel implements IServer{
     }
 
     public static ServerModel getInstance() {
-        if (SINGLETON == null) {
-            SINGLETON = new ServerModel();
+        if (instance == null) {
+            instance = new ServerModel();
         }
-        return SINGLETON;
+        return instance;
     }
 
-    public boolean Register(String name, String pass) {
-        boolean isRegisterSuccessful = false;
-
-        if (!accountList.usernameExists(name)) {
-            isRegisterSuccessful = accountList.registerAccount(name, pass);
-        }
-
-        return isRegisterSuccessful;
+    /**
+     * This function registers a user in the system
+     * @param username username of user
+     * @param password password of user
+     * @return boolean indicating if register action was successful
+     */
+    public boolean Register(String username, String password) {
+        return accountList.registerAccount(username, password);
 
     }
 
-    public Account Login(String name, String pass) {
-        return accountList.login(name, pass);
+    /**
+     * This function logs a user into the system
+     * @param username username of user
+     * @param password password of user
+     * @return boolean indicating if register action was successful
+     */
+    public Account Login(String username, String password) {
+        return accountList.login(username, password);
     }
 
     public List<GameLobby> getServerGameList(String auth) {
