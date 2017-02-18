@@ -52,6 +52,12 @@ public class AccountList {
         return true;
     }
 
+    /**
+     * This function logs a user into the system
+     * @param username username of user
+     * @param password password of user
+     * @return boolean indicating if register action was successful
+     */
     public Account login(String username, String password) {
         Account loginAccount = null;
         for (Account account : accounts) {
@@ -67,11 +73,22 @@ public class AccountList {
         return accountAuthMap.containsKey(auth);
     }
 
+    /**
+     * Checks if username exists. This function helps us ensure that two accounts don't use
+     * the same username
+     * @param username
+     * @return boolean for whether username exists
+     */
     private boolean usernameExists(String username) {
         //find username in hashmap
         return accountUsernameMap.containsKey(username);
     }
 
+    /**
+     * Gets Account based on authcode
+     * @param auth
+     * @return Account for a given authcode
+     */
     public Account getAccountByAuthCode(String auth) {
         return accountAuthMap.get(auth);
     }

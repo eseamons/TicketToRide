@@ -40,6 +40,10 @@ public class ServerModel implements IServer{
         playerMap = new HashMap<>();
     }
 
+    /**
+     * Creates and returns a single instance of the ServerModel.
+     * @return instance of ServerModel
+     */
     public static ServerModel getInstance() {
         if (instance == null) {
             instance = new ServerModel();
