@@ -68,6 +68,11 @@ public class AccountList {
         return loginAccount;
     }
 
+    /**
+     * Checks whether the authcode is valid
+     * @param auth
+     * @return boolean for whether authcode exists in the system
+     */
     public boolean authCodeExists(String auth) {
         // find auth code in hashmap
         return accountAuthMap.containsKey(auth);
