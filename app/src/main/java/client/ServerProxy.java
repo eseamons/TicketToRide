@@ -22,28 +22,27 @@ import shared.model_classes.Player;
 
 public class ServerProxy implements IServer{
 
-    private static ServerProxy SINGLETON = null;
+    private static ServerProxy instance = null;
     String urlpath = "http://10.0.2.2:8080/command";
-
-    public static ServerProxy getInstance()
-    {
-        if(SINGLETON == null) {
-            SINGLETON = new ServerProxy();
-        }
-
-        return SINGLETON;
-    }
 
     private ServerProxy() {
 
     }
 
-    @Override
-    public Account Login(String name, String pass) {
+    public static ServerProxy getInstance()
+    {
+        if(instance == null) {
+            instance = new ServerProxy();
+        }
+        return instance;
+    }
 
-        String message = name + " " + pass;
+    @Override
+    public Account Login(String username, String password) {
+
+        String json = "{\"username\": \""+username+"\", \"password\":\""+password+"\"}";
         Command cmd = new LoginCommand();
-        cmd.setInfo(message);
+        cmd.setInfo(json);
         cmd.setType("login");
         Result r =  ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
@@ -54,26 +53,17 @@ public class ServerProxy implements IServer{
         {
             return null;
         }
-        // TODO Auto-generated method st
     }
 
     @Override
-    public boolean Register(String name, String pass)
+    public boolean Register(String username, String password)
     {
-        String message = name + " " + pass;
+        String json = "{\"username\": \""+username+"\", \"password\":\""+password+"\"}";
         Command cmd = new RegisterCommand();
-        cmd.setInfo(message);
+        cmd.setInfo(json);
         cmd.setType("register");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        return r.isSuccess();
     }
 
     @Override
@@ -115,14 +105,11 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean CreateGame(String name, int players, String auth)
+    public boolean CreateGame(String username, int max_player_num, String auth)
     {
-        StringBuilder message = new StringBuilder();
-        message.append(name + " ");
-        message.append(players);
-        message.append(" " + auth);
+        String json = "{\"username\": \""+username+"\", \"max_player_num\":"+max_player_num+", \"auth\": \""+auth+"\"}";
         Command cmd = new CreateGameCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("creategame");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         return r.isSuccess();

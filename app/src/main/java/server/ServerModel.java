@@ -59,7 +59,6 @@ public class ServerModel implements IServer{
      */
     public boolean Register(String username, String password) {
         return accountList.registerAccount(username, password);
-
     }
 
     /**
@@ -72,15 +71,24 @@ public class ServerModel implements IServer{
         return accountList.login(username, password);
     }
 
+    /**
+     * Returns list of all game lobbies
+     * @param auth
+     * @return
+     */
     public List<GameLobby> getServerGameList(String auth) {
         List<GameLobby> returnLobbyList = null;
         if(accountList.authCodeExists(auth)) {
             returnLobbyList = lobbies;
         }
-
         return returnLobbyList;
     }
 
+    /**
+     * Adds new command to game lobby commands list
+     * @param cmd
+     * @return
+     */
     public void addCommand(Command cmd)
     {
         lobby_commands.add(cmd);

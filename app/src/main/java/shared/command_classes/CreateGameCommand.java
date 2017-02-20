@@ -1,5 +1,9 @@
 package shared.command_classes;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import client.ClientFacade;
 import server.ServerFacade;
 import shared.Result;
@@ -9,12 +13,12 @@ public class CreateGameCommand extends Command
 {
     public Result execute()
     {
-        String parts[] = info.split(" ");
-        String name = parts[0];
-        int players = Integer.parseInt(parts[1]);
-        String auth = parts[2];
-        boolean game = ServerFacade.getInstance().CreateGame(name, players, auth);
-        if(game == true)
+        JsonObject jsonObject = (new JsonParser()).parse(info).getAsJsonObject();
+        String username = jsonObject.get("username").getAsString();
+        int max_player_num = Integer.parseInt(jsonObject.get("max_player_num").getAsString());
+        String auth = jsonObject.get("auth").getAsString();
+        boolean gameCreatedSuccessful = ServerFacade.getInstance().CreateGame(username, max_player_num, auth);
+        if(gameCreatedSuccessful == true)
             return new Result(true, "");
         else
             return new Result(false, "");

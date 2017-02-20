@@ -10,29 +10,21 @@ import shared.model_classes.GameLobby;
 
 public class ServerFacade implements IServer{
 
-    private static ServerFacade SINGLETON = null;
+    private static ServerFacade instance = null;
 
     public static ServerFacade getInstance()
     {
-        if(SINGLETON == null) {
-            SINGLETON =  new ServerFacade();
+        if(instance == null) {
+            instance =  new ServerFacade();
         }
 
-        return SINGLETON;
+        return instance;
     }
     @Override
     public Account Login(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
-        Account ret = serverModel.Login(name, pass);
-
-        if(ret != null)
-        {
-//            CreateGame("LanceDontJoin", 3, ret.getAuthentication());
-//            CreateGame("LanceMaybeJoin",3, ret.getAuthentication());
-//            CreateGame("LanceHi",3, ret.getAuthentication());
-        }
-
-        return ret;
+        Account returnAccount = serverModel.Login(name, pass);
+        return returnAccount;
     }
 
     @Override

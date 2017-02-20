@@ -1,5 +1,9 @@
 package shared.command_classes;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import server.ServerFacade;
 import shared.Result;
 
@@ -7,10 +11,10 @@ public class RegisterCommand extends Command
 {
     public Result execute()
     {
-        String[] parts = info.split(" ");
-        String name = parts[0];
-        String password = parts[1];
-        boolean success = ServerFacade.getInstance().Register(name, password);
+        JsonObject jsonObject = (new JsonParser()).parse(info).getAsJsonObject();
+        String username = jsonObject.get("username").getAsString();
+        String password = jsonObject.get("password").getAsString();
+        boolean success = ServerFacade.getInstance().Register(username, password);
         return new Result(success, "");
     }
 

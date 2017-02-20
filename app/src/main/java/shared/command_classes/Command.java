@@ -29,6 +29,10 @@ public class Command implements ICommand {
         nextCmdID++;
     }
 
+    public String getInfo() {
+        return info;
+    }
+
     public int getID()
     {
         return cmdID;
