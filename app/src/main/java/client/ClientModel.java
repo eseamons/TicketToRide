@@ -16,6 +16,15 @@ import shared.model_classes.GameLobby;
 public class ClientModel extends Observable
 {
 
+    private ClientModel(){
+
+    };
+
+    public static ClientModel getInstance()
+    {
+        return instance;
+    }
+
     private Account account = null;
     private GameLobby current_game_lobby;
     private Game current_game;
@@ -44,12 +53,6 @@ public class ClientModel extends Observable
      }
         return null;
     }
-
-
-    private ClientModel(){};
-
-    public static ClientModel getInstance()
-    {return instance;}
 
     public int getLastCommand() {
         if(command_list.size() == 0)

@@ -25,5 +25,15 @@ public class Account {
         this.authentication = authentication;
     }
 
+    /**
+     * This function determines if the username and password the client gives matches the account
+     * @param username
+     * @param password
+     * @return boolean for whether login info is valid
+     */
+    public boolean loginInfoValid(String username, String password) {
+        return this.username.equals(username) && this.password.equals(password);
+    }
+
 
 }

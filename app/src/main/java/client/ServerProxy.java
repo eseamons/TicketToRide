@@ -22,24 +22,27 @@ import shared.model_classes.Player;
 
 public class ServerProxy implements IServer{
 
-    private static ServerProxy SINGLETON = null;
+    private static ServerProxy instance = null;
     String urlpath = "http://10.0.2.2:8080/command";
+
+    private ServerProxy() {
+
+    }
 
     public static ServerProxy getInstance()
     {
-        if(SINGLETON == null) {
-            SINGLETON = new ServerProxy();
+        if(instance == null) {
+            instance = new ServerProxy();
         }
-
-        return SINGLETON;
+        return instance;
     }
 
     @Override
-    public Account Login(String name, String pass) {
+    public Account Login(String username, String password) {
 
-        String message = name + " " + pass;
+        String json = "{\"username\": \""+username+"\", \"password\":\""+password+"\"}";
         Command cmd = new LoginCommand();
-        cmd.setInfo(message);
+        cmd.setInfo(json);
         cmd.setType("login");
         Result r =  ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
@@ -50,88 +53,36 @@ public class ServerProxy implements IServer{
         {
             return null;
         }
-        // TODO Auto-generated method st
     }
 
     @Override
-    public boolean Register(String name, String pass)
+    public boolean Register(String username, String password)
     {
-        String message = name + " " + pass;
+        String json = "{\"username\": \""+username+"\", \"password\":\""+password+"\"}";
         Command cmd = new RegisterCommand();
-        cmd.setInfo(message);
+        cmd.setInfo(json);
         cmd.setType("register");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-
+        return r.isSuccess();
     }
 
     @Override
-    public List<GameLobby> getServerGameList(String auth)
+    public boolean CreateGame(String username, int max_player_num, String auth)
     {
-        String message = auth;
-        Command cmd = new GetGamesCommand();
-        cmd.setInfo(message);
-        cmd.setType("getgames");
-        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
-        {
-            return ClientSerializer.deserializeGameLobbyList(r.getInfo());
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    @Override
-    public List<Command> getNewCommands(int ID, String auth)
-    {
-        StringBuilder message = new StringBuilder();
-        message.append(ID);
-        message.append(" " + auth);
-        Command cmd = new GetGamesCommand();
-        cmd.setInfo(message.toString());
-        cmd.setType("getcommands");
-        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
-        {
-            return ClientSerializer.deserializeCommandList(r.getInfo());
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    @Override
-    public boolean CreateGame(String name, int players, String auth)
-    {
-        StringBuilder message = new StringBuilder();
-        message.append(name + " ");
-        message.append(players);
-        message.append(" " + auth);
+        String json = "{\"username\": \""+username+"\", \"max_player_num\":"+max_player_num+", \"auth\": \""+auth+"\"}";
         Command cmd = new CreateGameCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("creategame");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         return r.isSuccess();
     }
 
     @Override
-    public GameLobby joinGame(int ID, String auth)
+    public GameLobby joinGame(int gameID, String auth)
     {
-        StringBuilder message = new StringBuilder();
-        message.append(ID);
-        message.append(" " + auth);
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new JoinGameCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("joingame");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
@@ -145,13 +96,49 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean BeginGame(int ID, String auth)
+    public List<GameLobby> getServerGameList(String auth)
     {
-        StringBuilder message = new StringBuilder();
-        message.append(ID);
-        message.append(" " + auth);
+        String json = "{\"auth\":\""+auth+"\"}";
         Command cmd = new GetGamesCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
+        cmd.setType("getgames");
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        if(r.isSuccess())
+        {
+            return ClientSerializer.deserializeGameLobbyList(r.getInfo());
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    @Override
+    public List<Command> getNewCommands(int gameID, String auth)
+    {
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        Command cmd = new GetGamesCommand();
+        cmd.setInfo(json);
+        cmd.setType("getcommands");
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        if(r.isSuccess())
+        {
+            return ClientSerializer.deserializeCommandList(r.getInfo());
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    //everything below needs to be changed in Command Objects
+
+    @Override
+    public boolean BeginGame(int gameID, String auth)
+    {
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        Command cmd = new GetGamesCommand();
+        cmd.setInfo(json);
         cmd.setType("begingame");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
 
@@ -172,13 +159,10 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean addComment(String messagetosend, String auth) {
-
-        StringBuilder message = new StringBuilder();
-        message.append(messagetosend + " ");
-        message.append(auth);
+    public boolean addComment(String message, String auth) {
+        String json = "{\"message\": \""+message+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new AddCommentCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("addcomment");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         return r.isSuccess();

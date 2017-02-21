@@ -29,7 +29,7 @@ public class ServerModelTest {
         ServerModelTestObject testObject = new ServerModelTestObject();
         testObject.register("mytest", "mypassword");
         Account account = testObject.login("mytest", "mypassword");
-        assertTrue(account.getAuthentication() instanceof String);
+        assertTrue(account.getAuthentication() != null);
     }
 
     @Test

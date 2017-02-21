@@ -50,7 +50,7 @@ public class GameListPresenter implements IGameListPresenter,Observer {
         String gameName = gameListView.getGameName();
         int maxPlayers = gameListView.getNumberOfPlayers();
 
-        if(maxPlayers <0 ||maxPlayers > 5 ||gameName == null||gameName.equals("")) {
+        if(maxPlayers < 2 ||maxPlayers > 5 ||gameName == null||gameName.equals("")) {
             return false;
         }
 

@@ -29,7 +29,7 @@ public class ClientCommunicator {
     }
 
     Result send(String urlPath, Command requestInfo){
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+       StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
 
@@ -37,31 +37,9 @@ public class ClientCommunicator {
             URL url = new URL(urlPath);
 
             HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
-
             urlConnection.setRequestMethod("GET");
-//            switch(requestInfo.getType()) {
-//                case "getgames":urlConnection.setRequestMethod("GET");
-//                    break;
-//                case "login": urlConnection.setRequestMethod("GET");
-//                    break;
-//                case "joingame": urlConnection.setRequestMethod("GET");
-//                    break;
-//                case "addcomment":urlConnection.setRequestMethod("GET");
-//                    break;
-//                case "begingame": urlConnection.setRequestMethod("GET");
-//                    break;
-//                case "creategame": urlConnection.setRequestMethod("GET");
-//                    break;
-//                case "register":urlConnection.setRequestMethod("GET");
-//                    break;
-//                case "setplayercolor": urlConnection.setRequestMethod("POST");
-//                    break;
-//
-//            }
-
             urlConnection.setDoOutput(true);
             urlConnection.addRequestProperty("Accept", "application/json");
-
             urlConnection.connect();
 
             String reqData = ClientSerializer.serializeObject(requestInfo);

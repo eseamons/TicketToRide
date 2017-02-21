@@ -1,5 +1,7 @@
 package shared.command_classes;
 
+import com.google.gson.JsonObject;
+
 import client.ClientFacade;
 import server.ServerFacade;
 import shared.Result;
@@ -9,9 +11,9 @@ public class AddCommentCommand extends Command
     @Override
     public Result execute()
     {
-        String parts[] = info.split(" ");
-        String message = parts[0];
-        String auth = parts[1];
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        String message = jsonObject.get("message").getAsString();
+        String auth = jsonObject.get("auth").getAsString();
         boolean success = ServerFacade.getInstance().addComment(message, auth);
 
         return new Result(success, "");
