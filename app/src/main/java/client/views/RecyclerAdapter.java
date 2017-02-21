@@ -10,6 +10,7 @@ import com.example.erics.tickettoride.R;
 
 import java.util.List;
 
+import client.presenters.GameListPresenter;
 import shared.model_classes.GameLobby;
 
 /**
@@ -43,7 +44,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.GameLo
 
         @Override
         public void onClick(View view)
-        {}
+        {
+            GameListView.getInstance().setSelectedGame(mGameLobby);
+            GameListPresenter.getInstance().joinGame();
+        }
     }
 
     public RecyclerAdapter(List<GameLobby> myAvailableGames) {
@@ -71,12 +75,4 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.GameLo
         return availableGames.size();
     }
 
-    public void setGameLobbyList(List<GameLobby> games)
-    {
-        availableGames = games;
-        //notifyDataSetChanged();
-    }
-
-//    public ViewGroup getP()
-//    {return p;}
 }
