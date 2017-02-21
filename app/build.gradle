@@ -29,4 +29,6 @@ dependencies {
     compile 'com.sun.net.httpserver:http:20070405'
     testCompile 'junit:junit:4.12'
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.android.support:recyclerview-v7:25.+'
+
 }
