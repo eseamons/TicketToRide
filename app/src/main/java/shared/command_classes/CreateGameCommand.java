@@ -13,7 +13,7 @@ public class CreateGameCommand extends Command
 {
     public Result execute()
     {
-        JsonObject jsonObject = (new JsonParser()).parse(info).getAsJsonObject();
+        JsonObject jsonObject = convertStringToJsonObject(info);
         String username = jsonObject.get("username").getAsString();
         int max_player_num = Integer.parseInt(jsonObject.get("max_player_num").getAsString());
         String auth = jsonObject.get("auth").getAsString();

@@ -13,7 +13,7 @@ public class LoginCommand extends Command
 {
     public Result execute()
     {
-        JsonObject jsonObject = (new JsonParser()).parse(info).getAsJsonObject();
+        JsonObject jsonObject = convertStringToJsonObject(info);
         String username = jsonObject.get("username").getAsString();
         String password = jsonObject.get("password").getAsString();
         Account account = ServerFacade.getInstance().Login(username, password);

@@ -67,11 +67,40 @@ public class ServerProxy implements IServer{
     }
 
     @Override
+    public boolean CreateGame(String username, int max_player_num, String auth)
+    {
+        String json = "{\"username\": \""+username+"\", \"max_player_num\":"+max_player_num+", \"auth\": \""+auth+"\"}";
+        Command cmd = new CreateGameCommand();
+        cmd.setInfo(json);
+        cmd.setType("creategame");
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        return r.isSuccess();
+    }
+
+    @Override
+    public GameLobby joinGame(int gameID, String auth)
+    {
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        Command cmd = new JoinGameCommand();
+        cmd.setInfo(json);
+        cmd.setType("joingame");
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        if(r.isSuccess())
+        {
+            return ClientSerializer.deserializeGameLobby(r.getInfo());
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    @Override
     public List<GameLobby> getServerGameList(String auth)
     {
-        String message = auth;
+        String json = "{\"auth\":\""+auth+"\"}";
         Command cmd = new GetGamesCommand();
-        cmd.setInfo(message);
+        cmd.setInfo(json);
         cmd.setType("getgames");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
@@ -85,13 +114,11 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public List<Command> getNewCommands(int ID, String auth)
+    public List<Command> getNewCommands(int gameID, String auth)
     {
-        StringBuilder message = new StringBuilder();
-        message.append(ID);
-        message.append(" " + auth);
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new GetGamesCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("getcommands");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
@@ -104,36 +131,6 @@ public class ServerProxy implements IServer{
         }
     }
 
-    @Override
-    public boolean CreateGame(String username, int max_player_num, String auth)
-    {
-        String json = "{\"username\": \""+username+"\", \"max_player_num\":"+max_player_num+", \"auth\": \""+auth+"\"}";
-        Command cmd = new CreateGameCommand();
-        cmd.setInfo(json);
-        cmd.setType("creategame");
-        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        return r.isSuccess();
-    }
-
-    @Override
-    public GameLobby joinGame(int ID, String auth)
-    {
-        StringBuilder message = new StringBuilder();
-        message.append(ID);
-        message.append(" " + auth);
-        Command cmd = new JoinGameCommand();
-        cmd.setInfo(message.toString());
-        cmd.setType("joingame");
-        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
-        {
-            return ClientSerializer.deserializeGameLobby(r.getInfo());
-        }
-        else
-        {
-            return null;
-        }
-    }
 
     @Override
     public boolean BeginGame(int ID, String auth)

@@ -1,5 +1,7 @@
 package shared.command_classes;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 import server.ServerFacade;
@@ -14,10 +16,10 @@ public class GetNewCommandsCommand extends Command
 {
     public Result execute()
     {
-        String parts[] = info.split(" ");
-        int ID = Integer.parseInt(parts[0]);
-        String auth = parts[1];
-        List<Command> cmds = ServerFacade.getInstance().getNewCommands(ID, auth);
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
+        String auth = jsonObject.get("auth").getAsString();
+        List<Command> cmds = ServerFacade.getInstance().getNewCommands(gameID, auth);
         if(cmds == null)
         {
             return new Result(false, "");

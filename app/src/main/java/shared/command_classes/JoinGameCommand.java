@@ -1,5 +1,8 @@
 package shared.command_classes;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import client.ClientFacade;
 import server.ServerFacade;
 import server.ServerSerializer;
@@ -10,10 +13,10 @@ public class JoinGameCommand extends Command
 {
     public Result execute()
     {
-        String[] parts = info.split(" ");
-        int ID = Integer.parseInt(parts[0]);
-        String auth = parts[1];
-        GameLobby game = ServerFacade.getInstance().joinGame(ID, auth);
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
+        String auth = jsonObject.get("auth").getAsString();
+        GameLobby game = ServerFacade.getInstance().joinGame(gameID, auth);
         if(game == null)
             return new Result(false,"");
         else

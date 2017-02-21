@@ -1,5 +1,8 @@
 package shared.command_classes;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import shared.Result;
 import shared.interfaces.ICommand;
 
@@ -79,4 +82,9 @@ public class Command implements ICommand {
         //ServerFacade.getInstance().addCommand(cmd);
         return cmd;
     }
+
+    public JsonObject convertStringToJsonObject(String info) {
+        return (new JsonParser()).parse(info).getAsJsonObject();
+    }
+
 }
