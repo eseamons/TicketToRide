@@ -9,6 +9,7 @@ import client.interfaces.IGameListPresenter;
 
 import client.ClientFacade;
 import client.views.GameListView;
+import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
 public class GameListPresenter implements IGameListPresenter,Observer {
@@ -69,12 +70,8 @@ public class GameListPresenter implements IGameListPresenter,Observer {
 
     @Override
     public List<GameLobby> getClientGames() {
-        List<GameLobby> games = clientFacade.getClientGamesList();
-        if(games == null)
-        {
-            games = new ArrayList<>();
-        }
 
+        List<GameLobby> games = clientFacade.getClientGamesList();
         return games;
     }
 
@@ -83,6 +80,6 @@ public class GameListPresenter implements IGameListPresenter,Observer {
     public void update(Observable observable, Object o) {
         List<GameLobby> gamesList = getClientGames();
         GameListView gameListView = GameListView.getInstance();
-        gameListView.setAvaliableGames(gamesList);
+        gameListView.setAvailableGames(gamesList);
     }
 }

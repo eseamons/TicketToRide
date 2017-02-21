@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,21 +36,19 @@ import shared.model_classes.GameLobby;
 
 public class GameListView extends AppCompatActivity implements IGameListView  {
 
-    EditText gameName;
-    EditText maxPlayers;
-    //String gameName = null;
-    //int numPlayers = -1;
-    Button joinGameButton;
-    Button createGameButton;
-    GameLobby selectedGame;
-    List<GameLobby> availableGames = new ArrayList<>();
-    AvaliableGamesAdapter expAdapter;
+    private EditText gameName;
+    private EditText maxPlayers;
+    private Button joinGameButton;
+    private Button createGameButton;
 
-    TextView textView1;
-    TextView textView2;
-    TextView textView3;
-    TextView textView4;
-    TextView textView5;
+    private RecyclerView mRecyclerView;
+   // private RecyclerView.Adapter mAdapter;
+    private RecyclerAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private GameLobby selectedGame;
+    private List<GameLobby> availableGames = new ArrayList<>();
+//    AvaliableGamesAdapter expAdapter;
 
     private static GameListView instance = new GameListView();
 
@@ -67,21 +69,28 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         instance = this;
 
-        Poller poller = new Poller();
-        poller.runGetNonGameCommands();
+        //Poller poller = new Poller();
+        //poller.runGetNonGameCommands();
         availableGames = GameListPresenter.getInstance().getClientGames();
+
+        //working on adding recycler view from HERE
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new RecyclerAdapter(availableGames);
+        mRecyclerView.setAdapter(mAdapter);
+
+
+        //to HERE
+
 
 
         //text fields
         gameName = (EditText) findViewById(R.id.gameName);
         maxPlayers = (EditText) findViewById(R.id.numberofPlayers);
-
-        textView1 = (TextView) findViewById(R.id.textView1);
-        textView2 = (TextView) findViewById(R.id.textView2);
-        textView3 = (TextView) findViewById(R.id.textView3);
-        textView4 = (TextView) findViewById(R.id.textView4);
-        textView5 = (TextView) findViewById(R.id.textView5);
-
 
         //buttons
         createGameButton = (Button)findViewById(R.id.creatGameButton);
@@ -95,6 +104,8 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 {Toast.makeText(getBaseContext(),"SUCCESSFULLY CREATED",Toast.LENGTH_SHORT).show();}
                 else
                 {Toast.makeText(getBaseContext(),"failed",Toast.LENGTH_SHORT).show();}
+
+                GameListPresenter.getInstance().getServerGames();
             }
         });
 
@@ -130,35 +141,45 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
         return num;
     }
 
-    public AvaliableGamesAdapter getAdapter() {
-        return expAdapter;
-    }
 
     @Override
     public GameLobby getSelectedGame() {
         return selectedGame;
     }
 
-    public void setAvaliableGames(List<GameLobby> games) {
+    public void setSelectedGame(GameLobby gameLobby){selectedGame = gameLobby;}
+
+    public void setAvailableGames(List<GameLobby> games) {
+
+        //TODO: figure out how to update it? creating a new adapter doesnt see to be working...
+
         availableGames = games;
-        update();
-    }
-
-    public void update() {
-
-        ClientFacade cf = new ClientFacade();
 
 
-        if (availableGames.size() >= 1)
-            textView1.setText(availableGames.get(0).getName());
-        if (availableGames.size() >= 2)
-            textView2.setText(availableGames.get(1).getName());
-        if (availableGames.size() >= 3)
-            textView3.setText(availableGames.get(2).getName());
-        if (availableGames.size() >= 4)
-            textView4.setText(availableGames.get(3).getName());
-        if (availableGames.size() >= 5)
-            textView5.setText(availableGames.get(4).getName());
-    }
+//        View v = LayoutInflater.from(getBaseContext())
+//                .inflate(R.layout.my_text_view, mAdapter.getP(), false);
+//        mLayoutManager.addView(v);
 
+//            mAdapter.setGameLobbyList(games);
+//        mAdapter.notifyDataSetChanged();
+
+//        mRecyclerView.swapAdapter(new RecyclerAdapter(availableGames), false);
+
+
+        //breaks on line 989 of RecyclerView.java in the setAdapter Class.
+        //can not find the layout --  (in view.java)asks for super.requestLayout then breaks in DODRAWFOREGROUND on last line foreground.setBounds(overlayBounds);
+//        RecyclerAdapter newAdapter = new RecyclerAdapter(availableGames);
+//        mRecyclerView.swapAdapter(newAdapter,false);
+
+//        mRecyclerView.setAdapter(mAdapter);
+//        mRecyclerView.invalidate();
+
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        mRecyclerView.setLayoutFrozen(true);
+
+        mAdapter = new RecyclerAdapter(availableGames);
+        mRecyclerView.setAdapter(mAdapter);
+     }
 }
