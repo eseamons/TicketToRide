@@ -131,15 +131,14 @@ public class ServerProxy implements IServer{
         }
     }
 
+    //everything below needs to be changed in Command Objects
 
     @Override
-    public boolean BeginGame(int ID, String auth)
+    public boolean BeginGame(int gameID, String auth)
     {
-        StringBuilder message = new StringBuilder();
-        message.append(ID);
-        message.append(" " + auth);
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new GetGamesCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("begingame");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
 
@@ -160,13 +159,10 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean addComment(String messagetosend, String auth) {
-
-        StringBuilder message = new StringBuilder();
-        message.append(messagetosend + " ");
-        message.append(auth);
+    public boolean addComment(String message, String auth) {
+        String json = "{\"message\": \""+message+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new AddCommentCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("addcomment");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         return r.isSuccess();
