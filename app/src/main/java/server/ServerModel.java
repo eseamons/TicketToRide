@@ -72,6 +72,37 @@ public class ServerModel implements IServer{
     }
 
     /**
+     * Creates a game lobby
+     * @param name
+     * @param max_player_num
+     * @param auth
+     * @return
+     */
+    @Override
+    public boolean CreateGame(String name, int max_player_num, String auth) {
+        GameLobby newGameLobby = null;
+
+        if(accountList.authCodeExists(auth) && !gameNames.contains(name)) {
+            newGameLobby = new GameLobby();
+            newGameLobby.setName(name);
+            newGameLobby.setMax_players(max_player_num);
+            newGameLobby.setID(currentLobbyID);
+            gameNames.add(name);
+            lobbies.add(newGameLobby);
+
+            Command cmd = new CreateGameCommand();
+            cmd.setInfo(name + " " + max_player_num + " " + currentLobbyID);
+            cmd.setcmdID(lobby_commands.size());
+            cmd.setType("creategame");
+            lobby_commands.add(cmd);
+
+            currentLobbyID++;
+        }
+
+        return newGameLobby != null;
+    }
+
+    /**
      * Returns list of all game lobbies
      * @param auth
      * @return
@@ -114,36 +145,12 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean CreateGame(String name, int max_player_num, String auth) {
-        GameLobby newGameLobby = null;
-
-        if(accountList.authCodeExists(auth) && !gameNames.contains(name)) {
-            newGameLobby = new GameLobby();
-            newGameLobby.setName(name);
-            newGameLobby.setMax_players(max_player_num);
-            newGameLobby.setID(currentLobbyID);
-            gameNames.add(name);
-            lobbies.add(newGameLobby);
-
-            Command cmd = new CreateGameCommand();
-            cmd.setInfo(name + " " + max_player_num + " " + currentLobbyID);
-            cmd.setcmdID(lobby_commands.size());
-            cmd.setType("creategame");
-            lobby_commands.add(cmd);
-
-            currentLobbyID++;
-        }
-
-        return newGameLobby != null;
-    }
-
-    @Override
     public GameLobby joinGame(int gameLobbyID, String auth) {
 
         GameLobby returnGameLobby = null;
 
         //Checks for auth code in accounts. If valid auth code, creates new Game lobby
-        if(accountList.authCodeExists(auth) == true) {
+        if(accountList.authCodeExists(auth)) {
             returnGameLobby = lobbies.get(gameLobbyID - 1);
 
             if(returnGameLobby.getPlayers().size() < returnGameLobby.getMax_players()) {
