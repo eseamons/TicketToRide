@@ -42,13 +42,11 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     private Button createGameButton;
 
     private RecyclerView mRecyclerView;
-   // private RecyclerView.Adapter mAdapter;
     private RecyclerAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private GameLobby selectedGame;
     private List<GameLobby> availableGames = new ArrayList<>();
-//    AvaliableGamesAdapter expAdapter;
 
     private static GameListView instance = new GameListView();
 
@@ -151,33 +149,12 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
     public void setAvailableGames(List<GameLobby> games) {
 
-        //TODO: figure out how to update it? creating a new adapter doesnt see to be working...
 
         availableGames = games;
 
+        //mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
-//        View v = LayoutInflater.from(getBaseContext())
-//                .inflate(R.layout.my_text_view, mAdapter.getP(), false);
-//        mLayoutManager.addView(v);
-
-//            mAdapter.setGameLobbyList(games);
-//        mAdapter.notifyDataSetChanged();
-
-//        mRecyclerView.swapAdapter(new RecyclerAdapter(availableGames), false);
-
-
-        //breaks on line 989 of RecyclerView.java in the setAdapter Class.
-        //can not find the layout --  (in view.java)asks for super.requestLayout then breaks in DODRAWFOREGROUND on last line foreground.setBounds(overlayBounds);
-//        RecyclerAdapter newAdapter = new RecyclerAdapter(availableGames);
-//        mRecyclerView.swapAdapter(newAdapter,false);
-
-//        mRecyclerView.setAdapter(mAdapter);
-//        mRecyclerView.invalidate();
-
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
-
-        mRecyclerView.setLayoutFrozen(true);
+        //mRecyclerView.setLayoutFrozen(true);
 
         mAdapter = new RecyclerAdapter(availableGames);
         mRecyclerView.setAdapter(mAdapter);
