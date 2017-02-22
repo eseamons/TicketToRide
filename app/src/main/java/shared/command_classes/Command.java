@@ -79,7 +79,6 @@ public class Command implements ICommand {
         cmd.setcmdID(nextCmdID);
         cmd.setType(type);
         cmd.setInfo(info);
-        //ServerFacade.getInstance().addCommand(cmd);
         return cmd;
     }
 

@@ -147,11 +147,9 @@ public class ServerProxy implements IServer{
 
     @Override
     public boolean setPlayerColor(ColorNum color, String auth) {
-        StringBuilder message = new StringBuilder();
-        message.append(color.toString());
-        message.append(" " + auth);
+        String json = "{\"ColorNum\": \""+color.toString()+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new SetPlayerColorCommand();
-        cmd.setInfo(message.toString());
+        cmd.setInfo(json);
         cmd.setType("setplayercolor");
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         return r.isSuccess();
