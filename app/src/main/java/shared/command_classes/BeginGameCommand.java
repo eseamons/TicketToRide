@@ -25,6 +25,8 @@ public class BeginGameCommand extends Command
         int ID = Integer.parseInt(parts[0]);
         ClientFacade client = new ClientFacade();
         client.aGameStarted(ID);
+        //TODO:have this assign the players their cards
+
     }
 
 }
