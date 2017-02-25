@@ -21,10 +21,10 @@ public class BeginGameCommand extends Command
 
     public void executeOnClient()
     {
-        String parts[] = info.split(" ");
-        int ID = Integer.parseInt(parts[0]);
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
         ClientFacade client = new ClientFacade();
-        client.aGameStarted(ID);
+        client.aGameStarted(gameID);
         //TODO:have this assign the players their cards
 
     }

@@ -8,6 +8,7 @@ import shared.Result;
 
 public class SetPlayerColorCommand extends Command
 {
+    @Override
     public Result execute()
     {
         JsonObject jsonObject = convertStringToJsonObject(info);

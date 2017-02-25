@@ -143,8 +143,6 @@ public class ServerProxy implements IServer{
         }
     }
 
-    //everything below needs to be changed in Command Objects
-
     @Override
     public boolean BeginGame(int gameID, String auth)
     {

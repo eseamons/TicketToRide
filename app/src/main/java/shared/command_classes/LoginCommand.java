@@ -12,6 +12,7 @@ import shared.model_classes.GameLobby;
 
 public class LoginCommand extends Command
 {
+    @Override
     public Result execute()
     {
         JsonObject jsonObject = convertStringToJsonObject(info);

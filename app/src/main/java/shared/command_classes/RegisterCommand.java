@@ -9,6 +9,7 @@ import shared.Result;
 
 public class RegisterCommand extends Command
 {
+    @Override
     public Result execute()
     {
         JsonObject jsonObject = convertStringToJsonObject(info);

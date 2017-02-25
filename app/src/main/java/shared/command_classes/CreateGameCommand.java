@@ -11,6 +11,7 @@ import shared.model_classes.GameLobby;
 
 public class CreateGameCommand extends Command
 {
+    @Override
     public Result execute()
     {
         JsonObject jsonObject = convertStringToJsonObject(info);
@@ -24,17 +25,19 @@ public class CreateGameCommand extends Command
             return new Result(false, "");
     }
 
+    @Override
     public void executeOnClient()
     {
         ClientFacade client = new ClientFacade();
+        JsonObject jsonObject = convertStringToJsonObject(info);
         String parts[] = info.split(" ");
-        String name = parts[0];
-        int players = Integer.parseInt(parts[1]);
-        int ID = Integer.parseInt(parts[2]);
+        String username = jsonObject.get("username").getAsString();
+        int max_player_num = Integer.parseInt(jsonObject.get("max_player_num").getAsString());
+        int gameLobbyID = Integer.parseInt(jsonObject.get("gameLobbyID").getAsString());
         GameLobby game = new GameLobby();
-        game.setName(name);
-        game.setMax_players(players);
-        game.setID(ID);
+        game.setName(username);
+        game.setMax_players(max_player_num);
+        game.setID(gameLobbyID);
         client.addGameToLobbyList(game);
     }
 }
