@@ -131,7 +131,11 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            return ClientSerializer.deserializeCommandList(r.getInfo());
+            try {
+                return (List<Command>) Serializer.deserialize(r.getInfo());
+            } catch(IOException e) {
+                return null;
+            }
         }
         else
         {
