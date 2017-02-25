@@ -21,11 +21,6 @@ public class Command implements ICommand {
         this.info = info;
     }
 
-    public void setType(String info)
-    {
-        this.type = info;
-    }
-
     public void setcmdID(int i)
     {
         this.cmdID = i;
@@ -51,35 +46,6 @@ public class Command implements ICommand {
     @Override
     public Result execute() {
         return null;
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public Command getCommand()
-    {
-        Command cmd;
-        switch(type)
-        {
-            case "addcomment": cmd = new AddCommentCommand(); break;
-            case "begingame": cmd = new BeginGameCommand(); break;
-            case "creategame": cmd = new CreateGameCommand(); break;
-            case "getgames": cmd = new GetGamesCommand(); break;
-            case "joingame": cmd = new JoinGameCommand(); break;
-            case "login": cmd = new LoginCommand(); break;
-            case "register": cmd = new RegisterCommand(); break;
-            case "setplayercolor": cmd = new SetPlayerColorCommand(); break;
-            case "getcommands": cmd = new GetNewCommandsCommand(); break;
-            default: cmd = null;
-
-        }
-        cmd.setcmdID(nextCmdID);
-        cmd.setType(type);
-        cmd.setInfo(info);
-        return cmd;
     }
 
     public JsonObject convertStringToJsonObject(String info) {

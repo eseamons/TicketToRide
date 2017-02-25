@@ -93,7 +93,6 @@ public class ServerModel implements IServer{
             Command cmd = new CreateGameCommand();
             cmd.setInfo(name + " " + max_player_num + " " + currentLobbyID);
             cmd.setcmdID(lobby_commands.size());
-            cmd.setType("creategame");
             lobby_commands.add(cmd);
 
             currentLobbyID++;
@@ -163,7 +162,6 @@ public class ServerModel implements IServer{
                 Command cmd = new JoinGameCommand();
                 cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
                 cmd.setcmdID(lobby_commands.size());
-                cmd.setType("joingame");
                 lobby_commands.add(cmd);
             }
 
@@ -187,7 +185,6 @@ public class ServerModel implements IServer{
 
             Command cmd = new BeginGameCommand();
             cmd.setInfo("" + gameLobbyID);
-            cmd.setType("begingame");
             cmd.setcmdID(lobby_commands.size());
             addCommand(cmd);
 
@@ -216,7 +213,6 @@ public class ServerModel implements IServer{
                     int ID = lobby.getID();
                     Command cmd = new AddCommentCommand();
                     cmd.setInfo(ID + " " + message);
-                    cmd.setType("addcomment");
                     cmd.setcmdID(lobby_commands.size());
                     addCommand(cmd);
                 }

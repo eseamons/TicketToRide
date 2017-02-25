@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import shared.Result;
+import shared.Serializer;
 import shared.command_classes.Command;
 
 /**
@@ -28,7 +29,7 @@ public class ClientCommunicator {
     private ClientCommunicator() {
     }
 
-    Result send(String urlPath, Command requestInfo){
+    Result send(String urlPath, Command requestCmd){
        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
@@ -42,7 +43,7 @@ public class ClientCommunicator {
             urlConnection.addRequestProperty("Accept", "application/json");
             urlConnection.connect();
 
-            String reqData = ClientSerializer.serializeObject(requestInfo);
+            String reqData = Serializer.serialize(requestCmd);
 
             OutputStream reqBody = urlConnection.getOutputStream();
             writeString(reqData, reqBody);
@@ -51,10 +52,10 @@ public class ClientCommunicator {
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream respBody = urlConnection.getInputStream();
                 String respData = readString(respBody);
-                return ClientSerializer.deserializeResults(respData);
+                return (Result) Serializer.deserialize(respData);
             }
             else {
-                return ClientSerializer.deserializeResults(urlConnection.getResponseMessage());
+                return (Result) Serializer.deserialize(urlConnection.getResponseMessage());
             }
 
         } catch (MalformedURLException e) {

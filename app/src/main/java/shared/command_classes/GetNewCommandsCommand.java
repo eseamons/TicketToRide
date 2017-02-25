@@ -2,11 +2,13 @@ package shared.command_classes;
 
 import com.google.gson.JsonObject;
 
+import java.io.IOException;
 import java.util.List;
 
 import server.ServerFacade;
-import server.ServerSerializer;
 import shared.Result;
+import shared.Serializer;
+import shared.model_classes.GameLobby;
 
 /**
  * Created by Michaels on 2/12/2017.
@@ -20,12 +22,16 @@ public class GetNewCommandsCommand extends Command
         int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
         String auth = jsonObject.get("auth").getAsString();
         List<Command> cmds = ServerFacade.getInstance().getNewCommands(gameID, auth);
-        if(cmds == null)
-        {
-            return new Result(false, "");
+        Result result = null;
+        if(cmds == null) {
+            result = new Result(false,"");
+        } else {
+            try {
+                result = new Result(true, Serializer.serialize(cmds));
+            } catch(IOException e) {
+                result = new Result(false,"");
+            }
         }
-        else
-            return new Result(true,ServerSerializer.serializeObject(cmds));
+        return result;
     }
-
 }
