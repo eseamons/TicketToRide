@@ -36,7 +36,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public Account Login(String username, String password) {
+    public Account login(String username, String password) {
 
         String json = "{\"username\": \""+username+"\", \"password\":\""+password+"\"}";
         Command cmd = new LoginCommand();
@@ -59,7 +59,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean Register(String username, String password)
+    public boolean register(String username, String password)
     {
         String json = "{\"username\": \""+username+"\", \"password\":\""+password+"\"}";
         Command cmd = new RegisterCommand();
@@ -69,7 +69,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean CreateGame(String username, int max_player_num, String auth)
+    public boolean createGameLobby(String username, int max_player_num, String auth)
     {
         String json = "{\"username\": \""+username+"\", \"max_player_num\":"+max_player_num+", \"auth\": \""+auth+"\"}";
         Command cmd = new CreateGameCommand();
@@ -144,7 +144,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean BeginGame(int gameID, String auth)
+    public boolean beginGame(int gameID, String auth)
     {
         String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new GetGamesCommand();

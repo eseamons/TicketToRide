@@ -14,16 +14,21 @@ import shared.command_classes.JoinGameCommand;
 import shared.model_classes.Account;
 import shared.model_classes.AccountList;
 import shared.model_classes.Game;
+import shared.model_classes.GameList;
 import shared.model_classes.GameLobby;
 
 import shared.interfaces.IServer;
+import shared.model_classes.GameLobbyList;
 import shared.model_classes.Player;
 
 public class ServerModel implements IServer{
 
     private static ServerModel instance;
-    private static int currentLobbyID;
     private AccountList accountList;
+    private GameLobbyList gameLobbyList;
+    private GameList gameList;
+
+    private static int currentLobbyID;
     private List<GameLobby> lobbies;
     private List<Game> games;
     private List<Command> lobby_commands;
@@ -57,7 +62,7 @@ public class ServerModel implements IServer{
      * @param password password of user
      * @return boolean indicating if register action was successful
      */
-    public boolean Register(String username, String password) {
+    public boolean register(String username, String password) {
         return accountList.registerAccount(username, password);
     }
 
@@ -67,7 +72,7 @@ public class ServerModel implements IServer{
      * @param password password of user
      * @return boolean indicating if register action was successful
      */
-    public Account Login(String username, String password) {
+    public Account login(String username, String password) {
         return accountList.login(username, password);
     }
 
@@ -79,7 +84,7 @@ public class ServerModel implements IServer{
      * @return
      */
     @Override
-    public boolean CreateGame(String name, int max_player_num, String auth) {
+    public boolean createGameLobby(String name, int max_player_num, String auth) {
         GameLobby newGameLobby = null;
 
         if(accountList.authCodeExists(auth) && !gameNames.contains(name)) {
@@ -172,7 +177,7 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean BeginGame(int gameLobbyID, String auth) {
+    public boolean beginGame(int gameLobbyID, String auth) {
         boolean authcodeValid = false;
 
         if(accountList.authCodeExists(auth))

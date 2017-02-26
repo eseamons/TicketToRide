@@ -55,17 +55,17 @@ public class ClientFacade implements IClient{
 
 
     @Override
-    public Account Login(String name, String pass) {
+    public Account login(String name, String pass) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        Account account = serverProxy.Login(name, pass);
+        Account account = serverProxy.login(name, pass);
         ClientModel.getInstance().setAccount(account);
         return account;
     }
 
     @Override
-    public boolean Register(String name, String pass) {
+    public boolean register(String name, String pass) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        boolean registerSuccessful = serverProxy.Register(name, pass);
+        boolean registerSuccessful = serverProxy.register(name, pass);
         return registerSuccessful;
     }
 
@@ -109,10 +109,10 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public boolean createGame(String gameName, int maxPlayers) {
+    public boolean createGameLobby(String gameName, int maxPlayers) {
         String auth = clientModel.getAuthorization();
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.CreateGame(gameName, maxPlayers, auth);
+        return serverProxy.createGameLobby(gameName, maxPlayers, auth);
     }
 
     @Override
@@ -121,7 +121,7 @@ public class ClientFacade implements IClient{
         String auth = clientModel.getAuthorization();
         int ID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
-        boolean beginGameBool = serverProxy.BeginGame(ID, auth);
+        boolean beginGameBool = serverProxy.beginGame(ID, auth);
         return null;
     }
 

@@ -13,9 +13,9 @@ import shared.model_classes.Player;
 
 public interface IClient {
 
-    Account Login(String name, String pass);
+    Account login(String name, String pass);
 
-    boolean Register(String name, String pass);
+    boolean register(String name, String pass);
 
     void getServerGamesList(String auth);
 
@@ -25,7 +25,7 @@ public interface IClient {
 
     GameLobby joinGame(int gameID);
 
-    boolean createGame(String gameName, int maxPlayers);
+    boolean createGameLobby(String gameName, int maxPlayers);
 
     Game beginGame();
 
