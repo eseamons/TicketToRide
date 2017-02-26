@@ -21,16 +21,16 @@ public class ServerFacade implements IServer{
         return instance;
     }
     @Override
-    public Account Login(String name, String pass) {
+    public Account login(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
-        Account returnAccount = serverModel.Login(name, pass);
+        Account returnAccount = serverModel.login(name, pass);
         return returnAccount;
     }
 
     @Override
-    public boolean Register(String name, String pass) {
+    public boolean register(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
-        return serverModel.Register(name, pass);
+        return serverModel.register(name, pass);
     }
 
     @Override
@@ -46,9 +46,9 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean CreateGame(String name, int players, String auth) {
+    public boolean createGameLobby(String name, int players, String auth) {
         ServerModel serverModel = ServerModel.getInstance();
-        return serverModel.CreateGame(name, players, auth);
+        return serverModel.createGameLobby(name, players, auth);
     }
 
     @Override
@@ -58,9 +58,9 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean BeginGame(int ID, String auth) {
+    public boolean beginGame(int ID, String auth) {
         ServerModel serverModel = ServerModel.getInstance();
-        return serverModel.BeginGame(ID, auth);
+        return serverModel.beginGame(ID, auth);
     }
 
     @Override
