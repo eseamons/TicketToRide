@@ -27,7 +27,7 @@ public class GameLobby {
     public void addNewPlayers(Player player) {
         players.add(player);
     }
-    public int getMax_players() {
+    public int getMaxPlayers() {
         return max_players;
     }
     public void setMax_players(int max_players) {

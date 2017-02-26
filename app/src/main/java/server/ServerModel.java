@@ -6,20 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import shared.ColorNum;
-import shared.command_classes.AddCommentCommand;
-import shared.command_classes.BeginGameCommand;
-import shared.command_classes.Command;
-import shared.command_classes.CreateGameCommand;
-import shared.command_classes.JoinGameCommand;
-import shared.model_classes.Account;
-import shared.model_classes.AccountList;
-import shared.model_classes.Game;
-import shared.model_classes.GameList;
-import shared.model_classes.GameLobby;
-
+import shared.command_classes.*;
+import shared.model_classes.*;
 import shared.interfaces.IServer;
-import shared.model_classes.GameLobbyList;
-import shared.model_classes.Player;
+import shared.model_classes.model_list_classes.*;
 
 public class ServerModel implements IServer{
 
@@ -28,20 +18,16 @@ public class ServerModel implements IServer{
     private GameLobbyList gameLobbyList;
     private GameList gameList;
 
-    private static int currentLobbyID;
-    private List<GameLobby> lobbies;
-    private List<Game> games;
-    private List<Command> lobby_commands;
+
+    private List<Command> lobbyCommands;
     private Map<String, Player> playerMap;
-    private List<String> gameNames;
 
     private ServerModel() {
         accountList = new AccountList();
-        lobbies = new ArrayList<>();
-        games = new ArrayList<>();
-        lobby_commands = new ArrayList<>();
-        currentLobbyID = 1;
-        gameNames = new ArrayList<>();
+        gameLobbyList = new GameLobbyList();
+        lobbyCommands = new ArrayList<>();
+
+
         playerMap = new HashMap<>();
     }
 
@@ -78,29 +64,25 @@ public class ServerModel implements IServer{
 
     /**
      * Creates a game lobby
-     * @param name
+     * @param gameLobbyName
      * @param max_player_num
      * @param auth
      * @return
      */
     @Override
-    public boolean createGameLobby(String name, int max_player_num, String auth) {
+    public boolean createGameLobby(String gameLobbyName, int max_player_num, String auth) {
         GameLobby newGameLobby = null;
 
-        if(accountList.authCodeExists(auth) && !gameNames.contains(name)) {
-            newGameLobby = new GameLobby();
-            newGameLobby.setName(name);
-            newGameLobby.setMax_players(max_player_num);
-            newGameLobby.setID(currentLobbyID);
-            gameNames.add(name);
-            lobbies.add(newGameLobby);
+        if(accountList.authCodeExists(auth) && !gameLobbyList.gameLobbyNameExists(gameLobbyName)) {
+
+            newGameLobby = gameLobbyList.createGameLobby(gameLobbyName, max_player_num);
+            int gameLobbyID = newGameLobby.getID();
 
             Command cmd = new CreateGameCommand();
-            cmd.setInfo(name + " " + max_player_num + " " + currentLobbyID);
-            cmd.setcmdID(lobby_commands.size());
-            lobby_commands.add(cmd);
+            cmd.setInfo(gameLobbyName + " " + max_player_num + " " + gameLobbyID);
+            cmd.setcmdID(lobbyCommands.size());
+            lobbyCommands.add(cmd);
 
-            currentLobbyID++;
         }
 
         return newGameLobby != null;
@@ -114,7 +96,7 @@ public class ServerModel implements IServer{
     public List<GameLobby> getServerGameList(String auth) {
         List<GameLobby> returnLobbyList = null;
         if(accountList.authCodeExists(auth)) {
-            returnLobbyList = lobbies;
+            returnLobbyList = gameLobbyList.getGameLobbyList();
         }
         return returnLobbyList;
     }
@@ -126,7 +108,7 @@ public class ServerModel implements IServer{
      */
     public void addCommand(Command cmd)
     {
-        lobby_commands.add(cmd);
+        lobbyCommands.add(cmd);
     }
 
     int times = 0;
@@ -140,10 +122,10 @@ public class ServerModel implements IServer{
 
         if(accountList.authCodeExists(auth))
         {
-            newCommandList = lobby_commands.subList(commandID+1, lobby_commands.size());
+            newCommandList = lobbyCommands.subList(commandID+1, lobbyCommands.size());
 
         }
-        System.out.println("SIZE: " + lobby_commands.size() + " CMDID " + commandID + ": this was called: " + times);
+        System.out.println("SIZE: " + lobbyCommands.size() + " CMDID " + commandID + ": this was called: " + times);
 
         return newCommandList;
     }
@@ -153,11 +135,11 @@ public class ServerModel implements IServer{
 
         GameLobby returnGameLobby = null;
 
-        //Checks for auth code in accounts. If valid auth code, creates new Game lobby
+        //Checks for auth code in accounts. If valid auth code, gets Game lobby
         if(accountList.authCodeExists(auth)) {
-            returnGameLobby = lobbies.get(gameLobbyID - 1);
+            returnGameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
 
-            if(returnGameLobby.getPlayers().size() < returnGameLobby.getMax_players()) {
+            if(returnGameLobby.getPlayers().size() < returnGameLobby.getMaxPlayers()) {
                 Player p = new Player();
                 Account acc = accountList.getAccountByAuthCode(auth);
                 p.setAccount(acc);
@@ -166,8 +148,8 @@ public class ServerModel implements IServer{
 
                 Command cmd = new JoinGameCommand();
                 cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
-                cmd.setcmdID(lobby_commands.size());
-                lobby_commands.add(cmd);
+                cmd.setcmdID(lobbyCommands.size());
+                lobbyCommands.add(cmd);
             }
 
         }
@@ -182,15 +164,17 @@ public class ServerModel implements IServer{
 
         if(accountList.authCodeExists(auth))
         {
-            //create game
-            Game newGame = new Game();
-            //delete game lobby
-            lobbies.remove(gameLobbyID - 1);
+
+            gameList.beginGame();
+
+            //remove game lobby
+            gameLobbyList.removeLobby(gameLobbyID);
+
             authcodeValid = true;
 
             Command cmd = new BeginGameCommand();
             cmd.setInfo("" + gameLobbyID);
-            cmd.setcmdID(lobby_commands.size());
+            cmd.setcmdID(lobbyCommands.size());
             addCommand(cmd);
 
         }
@@ -209,22 +193,22 @@ public class ServerModel implements IServer{
     @Override
     public boolean addComment(String message, String auth) {
         boolean addCommentSuccessful = false;
-            for(GameLobby lobby : lobbies) {
-                if(lobby.authCodeExistsInLobby(auth)) {
-
-                    lobby.addNewComment(message);
-                    addCommentSuccessful = true;
-
-                    int ID = lobby.getID();
-                    Command cmd = new AddCommentCommand();
-                    cmd.setInfo(ID + " " + message);
-                    cmd.setcmdID(lobby_commands.size());
-                    addCommand(cmd);
-                }
 
 
+        GameLobby lobby = gameLobbyList.addCommentToGameLobby(message,auth);
 
-            }
+        if (lobby != null) {
+            addCommentSuccessful = true;
+            int ID = lobby.getID();
+            Command cmd = new AddCommentCommand();
+            cmd.setInfo(ID + " " + message);
+            cmd.setcmdID(lobbyCommands.size());
+            addCommand(cmd);
+        }
+
+
+
+
 
         return addCommentSuccessful;
     }

@@ -1,10 +1,12 @@
-package shared.model_classes;
+package shared.model_classes.model_list_classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+
+import shared.model_classes.Account;
 
 /**
  * Created by erics on 2/13/2017.
@@ -56,7 +58,7 @@ public class AccountList {
      * This function logs a user into the system
      * @param username username of user
      * @param password password of user
-     * @return boolean indicating if register action was successful
+     * @return Account if login successful, else null
      */
     public Account login(String username, String password) {
         Account loginAccount = null;
