@@ -29,7 +29,7 @@ public class LoginPresenter implements ILoginPresenter{
 
         boolean successful = false;
         if(!registerPW.equals("") && !registerUN.equals("")) {
-            successful = clientFacade.Register(registerUN, registerPW);
+            successful = clientFacade.register(registerUN, registerPW);
         }
 
         return successful;
@@ -50,7 +50,7 @@ public class LoginPresenter implements ILoginPresenter{
         loginView.clearLoginPassword();
 
         if(!username.equals("") && !password.equals("")) {
-            account = clientFacade.Login(username, password);
+            account = clientFacade.login(username, password);
         }
 
         return account != null;

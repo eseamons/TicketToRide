@@ -15,7 +15,7 @@ public class BeginGameCommand extends Command
         JsonObject jsonObject = convertStringToJsonObject(info);
         int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
         String auth = jsonObject.get("auth").getAsString();
-        boolean success = ServerFacade.getInstance().BeginGame(gameID, auth);
+        boolean success = ServerFacade.getInstance().beginGame(gameID, auth);
         return new Result(success, "");
     }
 

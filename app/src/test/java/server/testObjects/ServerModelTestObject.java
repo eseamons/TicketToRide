@@ -21,19 +21,19 @@ public class ServerModelTestObject {
 
     public boolean register(String username, String password) {
         ServerModel model = ServerModel.getInstance();
-        boolean registerSuccessful = model.Register(username, password);
+        boolean registerSuccessful = model.register(username, password);
         return registerSuccessful;
     }
 
     public Account login(String username, String password) {
         ServerModel model = ServerModel.getInstance();
-        Account account = model.Login(username, password);
+        Account account = model.login(username, password);
         return account;
     }
 
     public boolean createGame(String name, int max_player_num, String auth) {
         ServerModel model = ServerModel.getInstance();
-        boolean successful = model.CreateGame(name, max_player_num,auth);
+        boolean successful = model.createGameLobby(name, max_player_num,auth);
         return successful;
     }
 

@@ -15,7 +15,7 @@ public class RegisterCommand extends Command
         JsonObject jsonObject = convertStringToJsonObject(info);
         String username = jsonObject.get("username").getAsString();
         String password = jsonObject.get("password").getAsString();
-        boolean success = ServerFacade.getInstance().Register(username, password);
+        boolean success = ServerFacade.getInstance().register(username, password);
         return new Result(success, "");
     }
 

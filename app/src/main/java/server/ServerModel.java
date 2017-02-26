@@ -159,17 +159,16 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean beginGame(int gameLobbyID, String auth) {
-        boolean authcodeValid = false;
+        boolean beginGameSuccessful = false;
 
         if(accountList.authCodeExists(auth))
         {
 
-            gameList.beginGame();
-
             //remove game lobby
             gameLobbyList.removeLobby(gameLobbyID);
 
-            authcodeValid = true;
+            //Begin game
+            gameList.beginGame();
 
             int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
             gameLobbyList.incrementCurrentLobbyCommandID();
@@ -177,10 +176,10 @@ public class ServerModel implements IServer{
             cmd.setInfo("" + gameLobbyID);
             cmd.setCmdID(currentCmdID);
             gameLobbyList.addLobbyCommand(cmd);
-
+            beginGameSuccessful = true;
         }
 
-        return authcodeValid;
+        return beginGameSuccessful;
     }
 
     @Override

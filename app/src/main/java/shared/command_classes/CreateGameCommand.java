@@ -18,7 +18,7 @@ public class CreateGameCommand extends Command
         String username = jsonObject.get("username").getAsString();
         int max_player_num = Integer.parseInt(jsonObject.get("max_player_num").getAsString());
         String auth = jsonObject.get("auth").getAsString();
-        boolean gameCreatedSuccessful = ServerFacade.getInstance().CreateGame(username, max_player_num, auth);
+        boolean gameCreatedSuccessful = ServerFacade.getInstance().createGameLobby(username, max_player_num, auth);
         if(gameCreatedSuccessful == true)
             return new Result(true, "");
         else

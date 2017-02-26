@@ -18,7 +18,7 @@ public class LoginCommand extends Command
         JsonObject jsonObject = convertStringToJsonObject(info);
         String username = jsonObject.get("username").getAsString();
         String password = jsonObject.get("password").getAsString();
-        Account account = ServerFacade.getInstance().Login(username, password);
+        Account account = ServerFacade.getInstance().login(username, password);
         Result result = null;
         if(account == null) {
             result = new Result(false,"");

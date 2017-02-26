@@ -54,7 +54,7 @@ public class GameListPresenter implements IGameListPresenter,Observer {
             return false;
         }
 
-        boolean createGameSuccessful = clientFacade.createGame(gameName, maxPlayers);
+        boolean createGameSuccessful = clientFacade.createGameLobby(gameName, maxPlayers);
 
         if (createGameSuccessful == false) {
             return false;
