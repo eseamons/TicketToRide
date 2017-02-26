@@ -19,15 +19,13 @@ public class ServerModel implements IServer{
     private GameList gameList;
 
 
-    private List<Command> lobbyCommands;
+
     private Map<String, Player> playerAuthMap;
 
     private ServerModel() {
         accountList = new AccountList();
         gameLobbyList = new GameLobbyList();
-        lobbyCommands = new ArrayList<>();
-
-
+        gameList = new GameList();
         playerAuthMap = new HashMap<>();
     }
 
@@ -77,11 +75,15 @@ public class ServerModel implements IServer{
 
             newGameLobby = gameLobbyList.createGameLobby(gameLobbyName, max_player_num);
             int gameLobbyID = newGameLobby.getID();
+            String json = "{\"gameLobbyName\":\""+gameLobbyName+"\", \"max_player_num\":\""+max_player_num+"\", \"gameLobbyID\":\""+gameLobbyID+"\"}";
+
+            int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+            gameLobbyList.incrementCurrentLobbyCommandID();
 
             Command cmd = new CreateGameCommand();
-            cmd.setInfo(gameLobbyName + " " + max_player_num + " " + gameLobbyID);
-            cmd.setCmdID(lobbyCommands.size());
-            lobbyCommands.add(cmd);
+            cmd.setInfo(json);
+            cmd.setCmdID(currentCmdID);
+            gameLobbyList.addLobbyCommand(cmd);
 
         }
 
@@ -108,24 +110,19 @@ public class ServerModel implements IServer{
      */
     public void addCommand(Command cmd)
     {
-        lobbyCommands.add(cmd);
+        gameLobbyList.addLobbyCommand(cmd);
     }
-
-    int times = 0;
 
     @Override
     public List<Command> getNewCommands(int commandID, String auth) {
-        //is the ID for the last command that the user has?
-        times++;
 
         List<Command> newCommandList = new ArrayList<>();
 
         if(accountList.authCodeExists(auth))
         {
-            newCommandList = lobbyCommands.subList(commandID+1, lobbyCommands.size());
+            newCommandList = gameLobbyList.getNewLobbyCommands(commandID);
 
         }
-        System.out.println("SIZE: " + lobbyCommands.size() + " CMDID " + commandID + ": this was called: " + times);
 
         return newCommandList;
     }
@@ -146,10 +143,12 @@ public class ServerModel implements IServer{
                 playerAuthMap.put(auth, p);
                 returnGameLobby.addNewPlayers(p);
 
+                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+                gameLobbyList.incrementCurrentLobbyCommandID();
                 Command cmd = new JoinGameCommand();
                 cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
-                cmd.setCmdID(lobbyCommands.size());
-                lobbyCommands.add(cmd);
+                cmd.setCmdID(currentCmdID);
+                gameLobbyList.addLobbyCommand(cmd);
             }
 
         }
@@ -172,10 +171,12 @@ public class ServerModel implements IServer{
 
             authcodeValid = true;
 
+            int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+            gameLobbyList.incrementCurrentLobbyCommandID();
             Command cmd = new BeginGameCommand();
             cmd.setInfo("" + gameLobbyID);
-            cmd.setCmdID(lobbyCommands.size());
-            addCommand(cmd);
+            cmd.setCmdID(currentCmdID);
+            gameLobbyList.addLobbyCommand(cmd);
 
         }
 
@@ -186,7 +187,6 @@ public class ServerModel implements IServer{
     public boolean setPlayerColor(ColorNum color, String auth) {
         Player p = playerAuthMap.get(auth);
         p.setColor(color);
-
         return true;
     }
 
@@ -198,16 +198,16 @@ public class ServerModel implements IServer{
         if (lobby != null) {
             addCommentSuccessful = true;
             int gameLobbyID = lobby.getID();
+            String json = "{\"message\": \""+message+"\", \"gameLobbyID\":\""+gameLobbyID+"\"}";
+
+            int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+            gameLobbyList.incrementCurrentLobbyCommandID();
+
             Command cmd = new AddCommentCommand();
-            cmd.setInfo(gameLobbyID + " " + message);
-            cmd.setCmdID(lobbyCommands.size());
-            addCommand(cmd);
+            cmd.setInfo(json);
+            cmd.setCmdID(currentCmdID);
+            gameLobbyList.addLobbyCommand(cmd);
         }
-
-
-
-
-
         return addCommentSuccessful;
     }
 

@@ -14,18 +14,18 @@ import shared.interfaces.ICommand;
 
 public class Command implements ICommand {
 
-    private String type;
     private String info;
     private int cmdID;
 
+    //setters
     public void setInfo(String info) { this.info = info; }
     public void setCmdID(int cmdID) { this.cmdID = cmdID; }
+    //getters
     public String getInfo() {
         return info;
     }
     public int getCmdID() { return cmdID;}
 
-    @Override
     public void executeOnClient() {}
 
     @Override
@@ -35,14 +35,6 @@ public class Command implements ICommand {
 
     public JsonObject convertStringToJsonObject(String info) {
         return (new JsonParser()).parse(info).getAsJsonObject();
-    }
-
-    public void createNewLobbyCommand() {
-
-    }
-
-    public List<Command> getNewLobbyCommands() {
-        return null;
     }
 
 }

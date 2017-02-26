@@ -15,12 +15,16 @@ public class GameLobbyList {
 
     private List<GameLobby> lobbies;
     private static int currentLobbyID;
+    private static int currentLobbyCommandID;
     private List<String> gameLobbyNames;
+    private List<Command> lobbyCommands;
 
     public GameLobbyList() {
         lobbies = new ArrayList<>();
         currentLobbyID = 1;
+        currentLobbyCommandID = 1;
         gameLobbyNames = new ArrayList<>();
+        lobbyCommands = new ArrayList<>();
     }
 
     /**
@@ -46,7 +50,7 @@ public class GameLobbyList {
         lobbies.add(newGameLobby);
 
         //Increment the Game Lobby ID Counter
-        currentLobbyID++;
+        incrementCurrentLobbyID();
 
         return newGameLobby;
     }
@@ -91,6 +95,26 @@ public class GameLobbyList {
 
     public List<GameLobby> getGameLobbyList() {
         return lobbies;
+    }
+
+    private void incrementCurrentLobbyID() {
+        currentLobbyID++;
+    }
+
+    public int getCurrentLobbyCommandID() {
+        return currentLobbyCommandID;
+    }
+
+    public void incrementCurrentLobbyCommandID() {
+        currentLobbyCommandID++;
+    }
+
+    public void addLobbyCommand(Command cmd) {
+        lobbyCommands.add(cmd);
+    }
+
+    public List<Command> getNewLobbyCommands(int commandID) {
+        return lobbyCommands.subList(commandID+1, lobbyCommands.size());
     }
 
 }
