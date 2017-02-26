@@ -3,6 +3,8 @@ package shared.command_classes;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.util.List;
+
 import shared.Result;
 import shared.interfaces.ICommand;
 
@@ -12,36 +14,19 @@ import shared.interfaces.ICommand;
 
 public class Command implements ICommand {
 
-    String type;
-    String info;
-    int cmdID;
-    public static int nextCmdID = 0;
-    public void setInfo(String info)
-    {
-        this.info = info;
-    }
+    private String type;
+    private String info;
+    private int cmdID;
 
-    public void setcmdID(int i)
-    {
-        this.cmdID = i;
-        nextCmdID++;
-    }
-
+    public void setInfo(String info) { this.info = info; }
+    public void setCmdID(int cmdID) { this.cmdID = cmdID; }
     public String getInfo() {
         return info;
     }
-
-    public int getID()
-    {
-        return cmdID;
-    }
-
     public int getCmdID() { return cmdID;}
 
-    public void executeOnClient()
-    {
-
-    }
+    @Override
+    public void executeOnClient() {}
 
     @Override
     public Result execute() {
@@ -50,6 +35,14 @@ public class Command implements ICommand {
 
     public JsonObject convertStringToJsonObject(String info) {
         return (new JsonParser()).parse(info).getAsJsonObject();
+    }
+
+    public void createNewLobbyCommand() {
+
+    }
+
+    public List<Command> getNewLobbyCommands() {
+        return null;
     }
 
 }

@@ -20,7 +20,7 @@ public class ServerModel implements IServer{
 
 
     private List<Command> lobbyCommands;
-    private Map<String, Player> playerMap;
+    private Map<String, Player> playerAuthMap;
 
     private ServerModel() {
         accountList = new AccountList();
@@ -28,7 +28,7 @@ public class ServerModel implements IServer{
         lobbyCommands = new ArrayList<>();
 
 
-        playerMap = new HashMap<>();
+        playerAuthMap = new HashMap<>();
     }
 
     /**
@@ -80,7 +80,7 @@ public class ServerModel implements IServer{
 
             Command cmd = new CreateGameCommand();
             cmd.setInfo(gameLobbyName + " " + max_player_num + " " + gameLobbyID);
-            cmd.setcmdID(lobbyCommands.size());
+            cmd.setCmdID(lobbyCommands.size());
             lobbyCommands.add(cmd);
 
         }
@@ -143,12 +143,12 @@ public class ServerModel implements IServer{
                 Player p = new Player();
                 Account acc = accountList.getAccountByAuthCode(auth);
                 p.setAccount(acc);
-                playerMap.put(auth, p);
+                playerAuthMap.put(auth, p);
                 returnGameLobby.addNewPlayers(p);
 
                 Command cmd = new JoinGameCommand();
                 cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
-                cmd.setcmdID(lobbyCommands.size());
+                cmd.setCmdID(lobbyCommands.size());
                 lobbyCommands.add(cmd);
             }
 
@@ -174,7 +174,7 @@ public class ServerModel implements IServer{
 
             Command cmd = new BeginGameCommand();
             cmd.setInfo("" + gameLobbyID);
-            cmd.setcmdID(lobbyCommands.size());
+            cmd.setCmdID(lobbyCommands.size());
             addCommand(cmd);
 
         }
@@ -184,7 +184,7 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean setPlayerColor(ColorNum color, String auth) {
-        Player p = playerMap.get(auth);
+        Player p = playerAuthMap.get(auth);
         p.setColor(color);
 
         return true;
@@ -193,16 +193,14 @@ public class ServerModel implements IServer{
     @Override
     public boolean addComment(String message, String auth) {
         boolean addCommentSuccessful = false;
-
-
         GameLobby lobby = gameLobbyList.addCommentToGameLobby(message,auth);
 
         if (lobby != null) {
             addCommentSuccessful = true;
-            int ID = lobby.getID();
+            int gameLobbyID = lobby.getID();
             Command cmd = new AddCommentCommand();
-            cmd.setInfo(ID + " " + message);
-            cmd.setcmdID(lobbyCommands.size());
+            cmd.setInfo(gameLobbyID + " " + message);
+            cmd.setCmdID(lobbyCommands.size());
             addCommand(cmd);
         }
 
