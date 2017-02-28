@@ -132,17 +132,14 @@ public class ClientModel extends Observable
     {
         if(gameID == current_game_lobby.getID())
         {
-            current_game = current_game_lobby.changeIntoGame();
-            removeGameLobbyByID(current_game_lobby.getID());
-            current_game_lobby = null;
-
+            current_game = new Game(current_game_lobby);
+            //TODO: change view...
+            //TODO: stop poller from getting game lobby commands and start get game commands
         }
         else
         {
             removeGameLobbyByID(gameID);
         }
-
-        //update();
     }
 
     public void removeGameLobbyByID(int gameID)
@@ -153,6 +150,7 @@ public class ClientModel extends Observable
             if(game.getID() == gameID)
             {
                 list_of_lobbies.remove(i);
+                update();
             }
         }
     }

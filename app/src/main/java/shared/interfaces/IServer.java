@@ -26,4 +26,7 @@ public interface IServer {
     boolean setPlayerColor(ColorNum color, String auth);
 
     boolean addComment(String message, String auth);
+
+    //added endTurn for the end turn Command (2/28)
+    boolean endTrun(int gameID, String auth);
 }

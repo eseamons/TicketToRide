@@ -75,4 +75,11 @@ public class ServerFacade implements IServer{
         return serverModel.addComment(message, auth);
     }
 
+    //added endTurn for the end turn Command (2/28)
+    @Override
+    public boolean endTrun(int gameID, String auth) {
+        ServerModel serverModel = ServerModel.getInstance();
+        return serverModel.endTrun(gameID,auth);
+    }
+
 }

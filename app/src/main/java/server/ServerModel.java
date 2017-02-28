@@ -164,11 +164,13 @@ public class ServerModel implements IServer{
         if(accountList.authCodeExists(auth))
         {
 
+            //Begin game
+            gameList.beginGame(gameLobbyList.getGameLobbyByID(gameLobbyID));
+
             //remove game lobby
             gameLobbyList.removeLobby(gameLobbyID);
 
-            //Begin game
-            gameList.beginGame();
+
 
             int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
             gameLobbyList.incrementCurrentLobbyCommandID();
@@ -208,6 +210,30 @@ public class ServerModel implements IServer{
             gameLobbyList.addLobbyCommand(cmd);
         }
         return addCommentSuccessful;
+    }
+
+    //added endTurn for the end turn Command (2/28)
+    @Override
+    public boolean endTrun(int gameID, String auth) {
+        boolean endTurnSuccessful = false;
+        Game game = gameList.getGame(gameID);
+
+        if (game != null)
+        {
+            endTurnSuccessful = true;
+            game.endTurn();
+
+            String json = "{ \"gameID\":\""+gameID+"\"}";
+
+            int currentCmdId = gameList.getCurrentGameCommandID();
+            gameList.incrementCurrentGameCommandID();
+
+            Command cmd = new EndTurnCommand();
+            cmd.setInfo(json);
+            cmd.setCmdID(currentCmdId);
+            gameList.addGameCommand(cmd);
+        }
+        return endTurnSuccessful;
     }
 
 }

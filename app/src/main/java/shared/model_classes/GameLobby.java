@@ -11,11 +11,6 @@ public class GameLobby {
     private String name;
     private List<String> comment_list;
 
-    public Game changeIntoGame()
-    {
-        return new Game();
-    }
-
     public GameLobby() {
         players = new ArrayList<>();
     }
