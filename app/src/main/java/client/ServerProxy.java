@@ -188,7 +188,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean claimRoute(Route routeClaimed, int pointValue, String auth) {
+    public boolean claimRoute(Route routeClaimed, String auth) {
         return false;
     }
 
