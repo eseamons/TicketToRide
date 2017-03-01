@@ -173,4 +173,9 @@ public class ServerProxy implements IServer{
         return r.isSuccess();
     }
 
+    @Override
+    public boolean endTrun(int gameID, String auth) {
+        return false;
+    }
+
 }

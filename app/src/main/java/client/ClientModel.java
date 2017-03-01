@@ -96,6 +96,7 @@ public class ClientModel extends Observable
         GameLobby game = gameLobbyList.getGameLobbyByID(gameID);
         if(game != null)
         {
+            //TODO: switch this to add player to game
             game.playerJoined();
         }
         if(game == currentGameLobby)

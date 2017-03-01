@@ -48,6 +48,7 @@ public class ClientCommunicator {
             writeString(reqData, reqBody);
             reqBody.close();
 
+            //breaks on this if statement
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream respBody = urlConnection.getInputStream();
                 String respData = readString(respBody);

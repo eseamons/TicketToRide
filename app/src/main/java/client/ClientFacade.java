@@ -100,17 +100,6 @@ public class ClientFacade implements IClient{
         clientModel.playerJoinsGame(gameID, name);
     }
 
-    @Override
-    public Game beginGame() {
-
-        //TODO: this should either return the boolean or have a way to get the game?
-
-        String auth = clientModel.getAuthorization();
-        int ID = clientModel.getCurrent_game_lobby().getID();
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        boolean beginGameBool = serverProxy.beginGame(ID, auth);
-        return null;
-    }
 
 
 
@@ -153,6 +142,17 @@ public class ClientFacade implements IClient{
         clientModel.aGameStarted(gameID);
     }
 
+    @Override
+    public Game beginGame() {
+
+        //TODO: this should either return the boolean or have a way to get the game?
+
+        String auth = clientModel.getAuthorization();
+        int ID = clientModel.getCurrent_game_lobby().getID();
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        boolean beginGameBool = serverProxy.beginGame(ID, auth);
+        return null;
+    }
 
 
 
