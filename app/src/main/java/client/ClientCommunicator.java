@@ -20,14 +20,13 @@ import shared.command_classes.Command;
  */
 
 public class ClientCommunicator {
-    private static ClientCommunicator ourInstance = new ClientCommunicator();
 
+    private static ClientCommunicator ourInstance = new ClientCommunicator();
     public static ClientCommunicator getInstance() {
         return ourInstance;
     }
 
-    private ClientCommunicator() {
-    }
+    private ClientCommunicator() {}
 
     Result send(String urlPath, Command requestCmd){
        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();

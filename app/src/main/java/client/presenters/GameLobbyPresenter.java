@@ -31,7 +31,7 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
     public GameLobbyPresenter()
     {
         ClientFacade clientFacade = new ClientFacade();
-        clientFacade.setGameLobbyPrestenter(this);
+        clientFacade.setGameLobbyPresenter(this);
     }
 
     public Player[] getPlayers()

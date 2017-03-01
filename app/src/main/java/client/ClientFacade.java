@@ -19,40 +19,18 @@ public class ClientFacade implements IClient{
 
     private static ClientModel clientModel = ClientModel.getInstance();
 
-    @Override
-    public boolean sendMessage(String msg)
-    {
-        //TODO: Implement this plz
-        return ServerProxy.getInstance().addComment(msg, clientModel.getAuthorization());
+
+    //methods needed for the login/register view
+    public void setGameLobbyPresenter(GameLobbyPresenter gameLobbyPresenter) {
+        clientModel.setGameLobbyPresenter(gameLobbyPresenter);
     }
 
     @Override
-    public ArrayList<String> getChat()
-    {
-        //TODO: Implement this
-
-        ArrayList<String> chatArray = new ArrayList<String>();
-
-        return chatArray;
-    }
-
-    @Override
-    public Player[] getPlayers()
-    {
-        //TODO: Implement this
-
-        return null;
-    }
-
-    @Override
-    public boolean changePlayerColor(ColorNum colorNum) {
+    public boolean register(String name, String pass) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        String auth = clientModel.getAuthorization();
-
-        boolean successful = serverProxy.setPlayerColor(colorNum, auth);
-        return successful;
+        boolean registerSuccessful = serverProxy.register(name, pass);
+        return registerSuccessful;
     }
-
 
     @Override
     public Account login(String name, String pass) {
@@ -62,11 +40,12 @@ public class ClientFacade implements IClient{
         return account;
     }
 
-    @Override
-    public boolean register(String name, String pass) {
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        boolean registerSuccessful = serverProxy.register(name, pass);
-        return registerSuccessful;
+
+
+
+    //methods needed for the gameListView
+    public void setGameListPresenter(GameListPresenter gameListPresenter) {
+        clientModel.setGameListPresenter(gameListPresenter);
     }
 
     @Override
@@ -100,6 +79,17 @@ public class ClientFacade implements IClient{
     }
 
     @Override
+    public boolean createGameLobby(String gameName, int maxPlayers) {
+        String auth = clientModel.getAuthorization();
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        return serverProxy.createGameLobby(gameName, maxPlayers, auth);
+    }
+
+    public void addGameToLobbyList(GameLobby game) {
+        clientModel.addLobbyToList(game);
+    }
+
+    @Override
     public GameLobby joinGame(int gameID) {
         ServerProxy serverProxy = ServerProxy.getInstance();
         ClientModel model = ClientModel.getInstance();
@@ -108,11 +98,8 @@ public class ClientFacade implements IClient{
         return current_game_lobby;
     }
 
-    @Override
-    public boolean createGameLobby(String gameName, int maxPlayers) {
-        String auth = clientModel.getAuthorization();
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.createGameLobby(gameName, maxPlayers, auth);
+    public void someoneJoinedGame(int gameID, String name) {
+        clientModel.playerJoinsGame(gameID, name);
     }
 
     @Override
@@ -125,13 +112,26 @@ public class ClientFacade implements IClient{
         return null;
     }
 
-    public void addGameToLobbyList(GameLobby game)
-    {
-        clientModel.addLobbyToList(game);
+
+
+
+    //methods needed for GameLobby View
+    @Override
+    public ArrayList<String> getChat() {
+        //TODO: Implement this
+
+        ArrayList<String> chatArray = new ArrayList<String>();
+
+        return chatArray;
     }
 
-    public void addComment(int gameID, String message)
-    {
+    @Override
+    public boolean sendMessage(String msg) {
+        //TODO: Implement this plz
+        return ServerProxy.getInstance().addComment(msg, clientModel.getAuthorization());
+    }
+
+    public void addComment(int gameID, String message) {
         if(clientModel.getCurrent_game_lobby().getID() == gameID)
         {
             clientModel.addCommentToCurrentGame(gameID, message);
@@ -139,19 +139,33 @@ public class ClientFacade implements IClient{
         //else do nothing
     }
 
-    public void someoneJoinedGame(int gameID, String name)
-    {
-            clientModel.playerJoinsGame(gameID, name);
+    @Override
+    public boolean changePlayerColor(ColorNum colorNum) {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        String auth = clientModel.getAuthorization();
+
+        boolean successful = serverProxy.setPlayerColor(colorNum, auth);
+        return successful;
     }
 
-    public void aGameStarted(int gameID)
-    {
+    public void aGameStarted(int gameID){
         clientModel.aGameStarted(gameID);
     }
 
-    public void setGameListPrestenter(GameListPresenter gameListPresenter )
-    { clientModel.setGameListPresenter(gameListPresenter);}
 
-    public void setGameLobbyPrestenter(GameLobbyPresenter gameLobbyPresenter )
-    { clientModel.setGameLobbyPresenter(gameLobbyPresenter);}
+
+
+
+    //methods needed for game play
+    @Override
+    public Player[] getPlayers() {
+        //TODO: Implement this
+
+        return null;
+    }
+
+
+
+
+
 }

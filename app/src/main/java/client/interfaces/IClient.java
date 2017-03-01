@@ -37,8 +37,8 @@ public interface IClient {
 
     boolean changePlayerColor(ColorNum colorNum);
 
-    void setGameListPrestenter(GameListPresenter gameListPresenter );
+    void setGameListPresenter(GameListPresenter gameListPresenter );
 
-    void setGameLobbyPrestenter(GameLobbyPresenter gameLobbyPresenter );
+    void setGameLobbyPresenter(GameLobbyPresenter gameLobbyPresenter );
 
 }

@@ -17,7 +17,7 @@ public class GameListPresenter implements IGameListPresenter,Observer {
 
     private GameListPresenter()
     {
-        clientFacade.setGameListPrestenter(this);
+        clientFacade.setGameListPresenter(this);
     }
 
     private static GameListPresenter instance = new GameListPresenter();
