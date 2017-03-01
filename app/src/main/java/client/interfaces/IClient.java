@@ -2,6 +2,7 @@ package client.interfaces;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
@@ -13,12 +14,17 @@ import shared.model_classes.Player;
 
 public interface IClient {
 
+    //methods needed for the login/register view
+    void setObserver(Observer o);
+
     Account login(String name, String pass);
 
     boolean register(String name, String pass);
 
     void getServerGamesList(String auth);
 
+
+    //methods needed for the gameListView
     List<GameLobby> getClientGamesList();
 
     void getNewCommands();
@@ -35,10 +41,10 @@ public interface IClient {
 
     Player[] getPlayers();
 
+
+    //methods needed for GameLobby View
     boolean changePlayerColor(ColorNum colorNum);
 
-    void setGameListPresenter(GameListPresenter gameListPresenter );
-
-    void setGameLobbyPresenter(GameLobbyPresenter gameLobbyPresenter );
+    boolean endTurn();
 
 }

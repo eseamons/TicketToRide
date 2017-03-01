@@ -2,6 +2,7 @@ package client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observer;
 
 import client.interfaces.IClient;
 import client.presenters.GameListPresenter;
@@ -21,8 +22,9 @@ public class ClientFacade implements IClient{
 
 
     //methods needed for the login/register view
-    public void setGameLobbyPresenter(GameLobbyPresenter gameLobbyPresenter) {
-        clientModel.setGameLobbyPresenter(gameLobbyPresenter);
+    @Override
+    public void setObserver(Observer o) {
+        clientModel.addObserver(o);
     }
 
     @Override
@@ -43,11 +45,8 @@ public class ClientFacade implements IClient{
 
 
 
-    //methods needed for the gameListView
-    public void setGameListPresenter(GameListPresenter gameListPresenter) {
-        clientModel.setGameListPresenter(gameListPresenter);
-    }
 
+    //methods needed for the gameListView
     @Override
     public void getServerGamesList(String auth) {
         ServerProxy serverProxy = ServerProxy.getInstance();
@@ -92,9 +91,8 @@ public class ClientFacade implements IClient{
     @Override
     public GameLobby joinGame(int gameID) {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        ClientModel model = ClientModel.getInstance();
         GameLobby current_game_lobby = serverProxy.joinGame(gameID, clientModel.getAuthorization());
-        model.setCurrent_game_lobby(current_game_lobby);
+        clientModel.setCurrent_game_lobby(current_game_lobby);
         return current_game_lobby;
     }
 
@@ -104,6 +102,8 @@ public class ClientFacade implements IClient{
 
     @Override
     public Game beginGame() {
+
+        //TODO: this should either return the boolean or have a way to get the game?
 
         String auth = clientModel.getAuthorization();
         int ID = clientModel.getCurrent_game_lobby().getID();
@@ -115,7 +115,17 @@ public class ClientFacade implements IClient{
 
 
 
+
     //methods needed for GameLobby View
+    @Override
+    public boolean changePlayerColor(ColorNum colorNum) {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        String auth = clientModel.getAuthorization();
+
+        boolean successful = serverProxy.setPlayerColor(colorNum, auth);
+        return successful;
+    }
+
     @Override
     public ArrayList<String> getChat() {
         //TODO: Implement this
@@ -139,15 +149,6 @@ public class ClientFacade implements IClient{
         //else do nothing
     }
 
-    @Override
-    public boolean changePlayerColor(ColorNum colorNum) {
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        String auth = clientModel.getAuthorization();
-
-        boolean successful = serverProxy.setPlayerColor(colorNum, auth);
-        return successful;
-    }
-
     public void aGameStarted(int gameID){
         clientModel.aGameStarted(gameID);
     }
@@ -164,6 +165,11 @@ public class ClientFacade implements IClient{
         return null;
     }
 
+    @Override
+    public boolean endTurn() {
+        //TODO: implement this
+        return true;
+    }
 
 
 

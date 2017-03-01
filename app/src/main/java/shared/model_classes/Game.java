@@ -1,5 +1,7 @@
 package shared.model_classes;
 
+import java.util.List;
+
 import shared.model_classes.model_list_classes.PlayersList;
 
 public class Game {
@@ -16,9 +18,15 @@ public class Game {
     }
 
     //added this while working on endturnCommand(2/28)
-    public int getGameID()
-    {return gameID;}
+    public int getGameID() {
+        return gameID;
+    }
 
-    public void endTurn()
-    {players.endTurn();}
+    public void endTurn() {
+        players.endTurn();
+    }
+
+    public List<Player> getPlayers() {
+        return players.getAllPlayers();
+    }
 }

@@ -68,6 +68,10 @@ public class GameLobbyList {
         return lobbies.get(gameLobbyID - 1);
     }
 
+    public void addLobby(GameLobby gameLobby){
+        lobbies.add(gameLobby);
+    }
+
     /**
      *
      * @param gameLobbyID
@@ -91,6 +95,10 @@ public class GameLobbyList {
             }
         }
         return returnLobby;
+    }
+
+    public void setGameLobbyList(List<GameLobby> gameLobbyList) {
+        lobbies = gameLobbyList;
     }
 
     public List<GameLobby> getGameLobbyList() {

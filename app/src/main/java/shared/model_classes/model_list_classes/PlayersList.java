@@ -34,6 +34,9 @@ public class PlayersList {
     public Player getCurrentPlayer()
     {return currentPlayer;}
 
+    public List<Player> getAllPlayers()
+    {return players;}
+
     public void endTurn()
     {
         currentPlayerID++;

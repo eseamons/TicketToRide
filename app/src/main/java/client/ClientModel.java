@@ -3,6 +3,7 @@ package client;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
@@ -12,6 +13,8 @@ import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
+import shared.model_classes.Player;
+import shared.model_classes.model_list_classes.GameLobbyList;
 
 public class ClientModel extends Observable
 {
@@ -26,72 +29,19 @@ public class ClientModel extends Observable
     }
 
     private Account account = null;
-    private GameLobby current_game_lobby;
-    private Game current_game;
     private List<ICommand> command_list = new ArrayList<>();
-    private List<GameLobby> list_of_lobbies = new ArrayList<>();
+    private GameLobbyList gameLobbyList = new GameLobbyList();
+    private GameLobby currentGameLobby;
+    private Game currentGame;
+
+
+
+    //Methods needed for all classes
     private static ClientModel instance = new ClientModel();
 
-    private LoginPresenter loginPresenter = null;
-    private GameListPresenter gameListPresenter = null;
-    private GameLobbyPresenter gameLobbyPresenter = null;
-
-    public void addLobbyToList(GameLobby game)
-    {
-        list_of_lobbies.add(game);
-        update();
-    }
-
-    public GameLobby getGameLobbyByID(int gameID){
-     for(int i = 0; i< list_of_lobbies.size(); i++)
-     {
-         GameLobby game = list_of_lobbies.get(i);
-         if(game.getID() == gameID)
-         {
-             return game;
-         }
-     }
-        return null;
-    }
-
-    public int getLastCommand() {
-        if(command_list.size() == 0)
-            return -1;
-        return ((Command) command_list.get(command_list.size()-1)).getCmdID();
-    }
-
-    public Account getAccount() {
-        return account;
-    }
-
-    public List<GameLobby> getListOfLobbies(){return list_of_lobbies;}
-    public void setAccount(Account account) {
-        this.account = account;
-    }
-
-    public GameLobby getCurrent_game_lobby() {
-        return current_game_lobby;
-    }
-
-    public void setCurrent_game_lobby(GameLobby current_game_lobby) {
-        this.current_game_lobby = current_game_lobby;
-        update();
-    }
-
-    public Game getCurrent_game() {
-        return current_game;
-    }
-
-    public void setCurrent_game(Game current_game) {
-        this.current_game = current_game;
-    }
-
-    public List<ICommand> getCommand_list() {
-        return command_list;
-    }
-
-    public void setCommand_list(List<ICommand> command_list) {
-        this.command_list = command_list;
+    public void update() {
+        setChanged();
+        notifyObservers();
     }
 
     public String getAuthorization()
@@ -99,78 +49,117 @@ public class ClientModel extends Observable
         return account.getAuthentication();
     }
 
-    public void update()
-    {
-        setChanged();
-        notifyObservers();
+
+
+
+    //methods needed for the login/register view
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+        //not being used...
+    public Account getAccount() {
+        return account;
     }
 
-    public void addCommentToCurrentGame(int gameID, String message)
-    {
-        if(current_game_lobby.getID() == gameID)
-        {
-            current_game_lobby.addNewComment(message);
-            update();
-        }
+
+
+
+    //methods needed for the gameListView
+    public void setGameLobbyList(List<GameLobby> games) {
+        gameLobbyList.setGameLobbyList(games);
+        update();
     }
 
-    public void playerJoinsGame(int gameID, String name)
-    {
-        GameLobby game = getGameLobbyByID(gameID);
+    public List<GameLobby> getListOfLobbies(){return gameLobbyList.getGameLobbyList();}
+
+    public int getLastCommand() {
+        if(command_list.size() == 0)
+            return -1;
+        return ((Command) command_list.get(command_list.size()-1)).getCmdID();
+    }
+
+    public List<ICommand> getCommand_list() {
+        return command_list;
+    }
+
+    public void addLobbyToList(GameLobby game) {
+        gameLobbyList.addLobby(game);
+        update();
+    }
+
+    public void setCurrent_game_lobby(GameLobby currentGameLobby) {
+        this.currentGameLobby = currentGameLobby;
+        update();
+    }
+
+    public void playerJoinsGame(int gameID, String name) {
+        GameLobby game = gameLobbyList.getGameLobbyByID(gameID);
         if(game != null)
         {
             game.playerJoined();
         }
-        if(game == current_game_lobby)
+        if(game == currentGameLobby)
         {
-            //if its the current game then add player to list so name pops up on screen
+            //TODO: if its the current game then add player to list so name pops up on screen
         }
         update();
     }
 
-    public void aGameStarted(int gameID)
-    {
-        if(gameID == current_game_lobby.getID())
+    public GameLobby getCurrent_game_lobby() {
+        return currentGameLobby;
+    }
+
+
+
+
+    //methods needed for GameLobby View
+    public void addCommentToCurrentGame(int gameID, String message) {
+        if(currentGameLobby.getID() == gameID)
         {
-            current_game = new Game(current_game_lobby);
+            currentGameLobby.addNewComment(message);
+            update();
+        }
+    }
+
+    public void aGameStarted(int gameID) {
+        if(gameID == currentGameLobby.getID())
+        {
+            currentGame = new Game(currentGameLobby);
             //TODO: change view...
             //TODO: stop poller from getting game lobby commands and start get game commands
         }
-        else
-        {
-            removeGameLobbyByID(gameID);
-        }
+        removeGameLobbyByID(gameID);
     }
 
-    public void removeGameLobbyByID(int gameID)
-    {
-        for(int i = 0; i < list_of_lobbies.size(); i++)
-        {
-            GameLobby game = list_of_lobbies.get(i);
-            if(game.getID() == gameID)
-            {
-                list_of_lobbies.remove(i);
-                update();
-            }
-        }
-    }
-
-    public void setGameLobbyList(List<GameLobby> games)
-    {
-        list_of_lobbies = games;
-        update();
+    public void removeGameLobbyByID(int gameID) {
+        gameLobbyList.removeLobby(gameID);
     }
 
 
-    public void setGameListPresenter(GameListPresenter gameListPresenter)
-    {
-        this.gameListPresenter = gameListPresenter;
-        addObserver(gameListPresenter);
+
+    //methods needed for game play
+    public void endTurn(int gameID) {
+        if(currentGame.getGameID() == gameID)
+        {currentGame.endTurn();}
     }
 
-    public void setGameLobbyPresenter(GameLobbyPresenter gameLobbyPresenter)
-    {
-        this.gameLobbyPresenter = gameLobbyPresenter;
-        addObserver(gameLobbyPresenter);
+    public List<Player> getPlayers()
+    {return currentGame.getPlayers();}
+
+
+        //NOT SURE WHERE THESE GO YET
+    public Game getCurrent_game() {
+        return currentGame;
     }
+
+    public void setCurrent_game(Game currentGame) {
+        this.currentGame = currentGame;
+    }
+
+    public void setCommand_list(List<ICommand> command_list) {
+        this.command_list = command_list;
+    }
+
+
+
 }
