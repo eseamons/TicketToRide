@@ -2,6 +2,7 @@ package shared.model_classes;
 
 import java.util.List;
 
+import shared.ColorNum;
 import shared.model_classes.model_list_classes.PlayersList;
 
 public class Game {
@@ -10,14 +11,12 @@ public class Game {
     private PlayersList players;
     private TrainCardDeck trainCardDeck;
 
-    public Game(GameLobby gameLobby)
-    {
+    public Game(GameLobby gameLobby) {
         gameID = gameLobby.getID();
         players = new PlayersList(gameLobby.getPlayers());
         trainCardDeck = TrainCardDeck.getInstance();
     }
 
-    //added this while working on endturnCommand(2/28)
     public int getGameID() {
         return gameID;
     }
@@ -28,5 +27,17 @@ public class Game {
 
     public List<Player> getPlayers() {
         return players.getAllPlayers();
+    }
+
+
+    //Train Deck Methods
+    public ColorNum drawCard() {
+        return trainCardDeck.drawCard();
+    }
+    public void addCardsToDiscard(List<ColorNum> cardColors) {
+        trainCardDeck.addCardsToDiscard(cardColors);
+    }
+    public void reShuffleTrainCards(){
+        trainCardDeck.reShuffleDeck();
     }
 }
