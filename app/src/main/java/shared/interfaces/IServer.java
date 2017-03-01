@@ -6,7 +6,7 @@ import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
-import shared.model_classes.model_list_classes.Route;
+import shared.model_classes.Route;
 
 public interface IServer {
 

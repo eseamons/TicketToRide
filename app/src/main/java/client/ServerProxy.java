@@ -17,7 +17,7 @@ import shared.command_classes.SetPlayerColorCommand;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
-import shared.model_classes.model_list_classes.Route;
+import shared.model_classes.Route;
 
 public class ServerProxy implements IServer{
 
