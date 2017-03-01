@@ -1,5 +1,8 @@
 package client.interfaces;
 
+import java.util.List;
+
+import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 
 /**
@@ -14,5 +17,7 @@ public interface IGameListView {
 
     GameLobby getSelectedGame();
 
+    void setSelectedGame(GameLobby gameLobby);
 
+    void setAvailableGames(List<GameLobby> games);
 }

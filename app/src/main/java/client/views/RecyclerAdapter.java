@@ -45,8 +45,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.GameLo
         @Override
         public void onClick(View view)
         {
-            GameListView.getInstance().setSelectedGame(mGameLobby);
-            GameListPresenter.getInstance().joinGame();
+            GameListView gameListView = GameListView.getInstance();
+            gameListView.setSelectedGame(mGameLobby);
         }
     }
 

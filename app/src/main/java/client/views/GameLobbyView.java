@@ -71,33 +71,18 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_newgamelobby);
-
         instance = this;
 
 
         msgEditText = (EditText) findViewById(R.id.msgEditText);
-//        msgEditText.addTextChangedListener(new TextWatcher() {
-//            @Override
-//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-//
-//            }
-//
-//            @Override
-//            public void onTextChanged(CharSequence s, int start, int before, int count) {
-//
-//            }
-//
-//            @Override
-//            public void afterTextChanged(Editable s) {
-//
-//            }
-//        });
+
 
         startBtn = (Button) findViewById(R.id.StartBtn);
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 GameLobbyPresenter.getInstance().beginGame();
+                //TODO: switch views if successful
             }
         });
 
@@ -123,12 +108,15 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
 
 
         player1Text = (TextView) findViewById(R.id.player1Text);
+        player1Text.setText("Empty");
         player2Text = (TextView) findViewById(R.id.player2Text);
+        player2Text.setText("Empty");
         player3Text = (TextView) findViewById(R.id.player3Text);
+        player3Text.setText("Empty");
         player4Text = (TextView) findViewById(R.id.player4Text);
+        player4Text.setText("Empty");
         player5Text = (TextView) findViewById(R.id.player5Text);
-
-
+        player5Text.setText("Empty");
 
         ChatList = (ListView) findViewById(R.id.ChatList);
         List<String> chatArray = getChat();
@@ -161,13 +149,6 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
         ClientFacade cf = new ClientFacade();
         Player[] players = cf.getPlayers();
 
-        Player currentPlayer;
-        for (int i = 0; i < players.length; i++)
-        {
-            currentPlayer = players[i];
-
-        }
-
         if (players.length >= 1)
             player1Text.setText(players[0].getAccount().getUsername());
         if (players.length >= 2)
@@ -178,7 +159,6 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
             player1Text.setText(players[3].getAccount().getUsername());
         if (players.length >= 5)
             player1Text.setText(players[4].getAccount().getUsername());
-
     }
 
     public class SimpleImageArrayAdapter extends ArrayAdapter<Integer> {
@@ -232,17 +212,11 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
         return players[index];
     }
 
-
-
-
-    public int getColor()
-    {
-
+    public int getColor() {
         return 0;
     }
 
-    public ArrayList<String> getChat()
-    {
+    public ArrayList<String> getChat() {
         ClientFacade cf = new ClientFacade();
         ArrayList<String> chatArray = cf.getChat();
 
