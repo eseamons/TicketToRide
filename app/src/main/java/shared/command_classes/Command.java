@@ -14,8 +14,8 @@ import shared.interfaces.ICommand;
 
 public class Command implements ICommand {
 
-    String info;
-    int cmdID;
+    protected String info;
+    protected int cmdID;
 
     //setters
     public void setInfo(String info) { this.info = info; }

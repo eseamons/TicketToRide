@@ -17,6 +17,7 @@ import shared.command_classes.SetPlayerColorCommand;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
+import shared.model_classes.model_list_classes.Route;
 
 public class ServerProxy implements IServer{
 
@@ -34,6 +35,10 @@ public class ServerProxy implements IServer{
         }
         return instance;
     }
+
+    /*
+      Function used prior to starting game
+    */
 
     @Override
     public Account login(String username, String password) {
@@ -173,8 +178,37 @@ public class ServerProxy implements IServer{
         return r.isSuccess();
     }
 
+    /*
+        These are the functions used after starting the game
+    */
+
     @Override
-    public boolean endTrun(int gameID, String auth) {
+    public boolean endTurn(int gameID, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean claimRoute(Route routeClaimed, int pointValue, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawDestinationCard(String destinationCardName, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean removeDestinationCard(String destinationCardName, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawDeckCard(String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
         return false;
     }
 
