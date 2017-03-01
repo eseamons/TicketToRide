@@ -16,11 +16,12 @@ public class EndTurnCommand extends Command{
         JsonObject jsonObject = convertStringToJsonObject(info);
         int gameID = jsonObject.get("gameID").getAsInt();
         String auth = jsonObject.get("auth").getAsString();
-        boolean success = ServerFacade.getInstance().endTrun(gameID, auth);
+        boolean success = ServerFacade.getInstance().endTurn(gameID, auth);
         return new Result(success, auth);
     }
 
     public void executeOnClient()
     {
+
     }
 }

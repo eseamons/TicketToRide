@@ -212,9 +212,12 @@ public class ServerModel implements IServer{
         return addCommentSuccessful;
     }
 
+    /*
+        These are the functions used after starting the game
+    */
     //added endTurn for the end turn Command (2/28)
     @Override
-    public boolean endTrun(int gameID, String auth) {
+    public boolean endTurn(int gameID, String auth) {
         boolean endTurnSuccessful = false;
         Game game = gameList.getGame(gameID);
 
@@ -234,6 +237,31 @@ public class ServerModel implements IServer{
             gameList.addGameCommand(cmd);
         }
         return endTurnSuccessful;
+    }
+
+    @Override
+    public boolean claimRoute(Route routeClaimed, int pointValue, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawDestinationCard(String destinationCardName, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean removeDestinationCard(String destinationCardName, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawDeckCard(String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+        return false;
     }
 
 }

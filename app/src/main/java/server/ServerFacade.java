@@ -7,6 +7,7 @@ import shared.command_classes.Command;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
+import shared.model_classes.model_list_classes.Route;
 
 public class ServerFacade implements IServer{
 
@@ -20,6 +21,10 @@ public class ServerFacade implements IServer{
 
         return instance;
     }
+
+    /*
+      Function used prior to starting game
+    */
     @Override
     public Account login(String name, String pass) {
         ServerModel serverModel = ServerModel.getInstance();
@@ -75,11 +80,40 @@ public class ServerFacade implements IServer{
         return serverModel.addComment(message, auth);
     }
 
+    /*
+        These are the functions used after starting the game
+    */
+
     //added endTurn for the end turn Command (2/28)
     @Override
-    public boolean endTrun(int gameID, String auth) {
+    public boolean endTurn(int gameID, String auth) {
         ServerModel serverModel = ServerModel.getInstance();
-        return serverModel.endTrun(gameID,auth);
+        return serverModel.endTurn(gameID,auth);
+    }
+
+    @Override
+    public boolean claimRoute(Route routeClaimed, int pointValue, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawDestinationCard(String destinationCardName, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean removeDestinationCard(String destinationCardName, String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawDeckCard(String auth) {
+        return false;
+    }
+
+    @Override
+    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+        return false;
     }
 
 }
