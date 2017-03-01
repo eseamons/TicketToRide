@@ -1,7 +1,5 @@
 package shared.model_classes;
 
-import java.util.List;
-
 import shared.model_classes.model_list_classes.PlayersList;
 
 public class Game {
