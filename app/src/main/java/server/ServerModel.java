@@ -1,11 +1,15 @@
 package server;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import shared.ColorNum;
+import shared.Serializer;
 import shared.command_classes.*;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
@@ -141,12 +145,18 @@ public class ServerModel implements IServer{
                 Account acc = accountList.getAccountByAuthCode(auth);
                 p.setAccount(acc);
                 playerAuthMap.put(auth, p);
-                returnGameLobby.addNewPlayers(p);
 
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
                 gameLobbyList.incrementCurrentLobbyCommandID();
                 Command cmd = new JoinGameCommand();
-                cmd.setInfo(gameLobbyID + "  " + acc.getUsername());
+
+                String accountString = "";
+                try {
+                    accountString = Serializer.serialize(acc);
+                } catch (IOException e) {e.printStackTrace();}
+
+                String info = "{\"gameLobbyID\": \""+gameLobbyID+"\", \"acc\":\""+accountString+"\"}";
+                cmd.setInfo(info);
                 cmd.setCmdID(currentCmdID);
                 gameLobbyList.addLobbyCommand(cmd);
             }

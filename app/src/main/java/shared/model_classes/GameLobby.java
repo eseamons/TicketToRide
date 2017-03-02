@@ -3,25 +3,36 @@ package shared.model_classes;
 import java.util.ArrayList;
 import java.util.List;
 
+import shared.model_classes.model_list_classes.PlayersList;
+
 public class GameLobby {
 
-    private List<Player> players;
+   // private List<Player> playersList;
+    private PlayersList playersList;
     private int max_players;
     private int ID;
     private String name;
     private List<String> comment_list;
 
     public GameLobby() {
-        players = new ArrayList<>();
+        ArrayList<Player> newPlayersList = new ArrayList<>();
+        playersList = new PlayersList(newPlayersList);
     }
 
-    public int playerJoined(){ return players.size();};
+    public int NumOfCurrentPlayers(){ return playersList.getSize();}
     public List<Player> getPlayers() {
-        return players;
+        return playersList.getAllPlayers();
     }
-    public void addNewPlayers(Player player) {
-        players.add(player);
+    public int addNewPlayers(Account playerAccount) {
+        Player player = new Player();
+        player.setAccount(playerAccount);
+        playersList.addPlayer(player);
+        return playersList.getSize()-1;
     }
+    public Player getPlayer(int index){
+        return playersList.getPlayer(index);
+    }
+
     public int getMaxPlayers() {
         return max_players;
     }
@@ -47,7 +58,7 @@ public class GameLobby {
 
     public boolean authCodeExistsInLobby(String auth) {
         boolean authCodeExists = false;
-        for(Player player : players){
+        for(Player player : playersList.getAllPlayers()){
             if (player.authCodeMatchesAccount(auth)) {
                 authCodeExists = true;
             }
