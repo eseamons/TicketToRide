@@ -10,6 +10,7 @@ import shared.command_classes.AddCommentCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
 import shared.command_classes.GetGamesCommand;
+import shared.command_classes.GetNewCommandsCommand;
 import shared.command_classes.JoinGameCommand;
 import shared.command_classes.LoginCommand;
 import shared.command_classes.RegisterCommand;
@@ -131,7 +132,7 @@ public class ServerProxy implements IServer{
     public List<Command> getNewCommands(int gameID, String auth)
     {
         String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
-        Command cmd = new GetGamesCommand();
+        Command cmd = new GetNewCommandsCommand();
         cmd.setInfo(json);
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
