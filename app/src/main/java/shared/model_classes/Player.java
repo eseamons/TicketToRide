@@ -8,12 +8,13 @@ import shared.ColorNum;
 
 public class Player {
 
-    public Account account;
-    public ColorNum color;
-    public int points;
-    public List<CardColor> trainCards = new ArrayList<>();
-    public List<DestinationCard> destinationCards;
-    public int trainsRemaining;
+    private Account account;
+    private ColorNum color;
+    private int points;
+    private List<CardColor> trainCards = new ArrayList<>();
+    private List<DestinationCard> destinationCards;
+    private int trainsRemaining;
+    private int playerID;  // 1-5
 
     public Account getAccount() {
         return account;

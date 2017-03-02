@@ -3,8 +3,8 @@ package shared;
 public class Result
 {
 
-    boolean success;
-    String info;
+    private boolean success;
+    private String info;
 
     public boolean isSuccess() {
         return success;

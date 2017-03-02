@@ -4,8 +4,11 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.util.List;
+
 import dalvik.annotation.TestTargetClass;
 import server.testObjects.ServerModelTestObject;
+import shared.command_classes.Command;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
 
@@ -58,6 +61,26 @@ public class ServerModelTest {
         assertEquals(4, lobbyOne.getMaxPlayers());
         assertEquals(lobbyOne.getName(), gameName);
         assertEquals(1, lobbyOne.NumOfCurrentPlayers());
+    }
+
+    @Test
+    public void getNewCommands() throws Exception{
+        String gameName = "Ultimate Game";
+        String gameNameTwo = "Test Game";
+        int max_player_num = 4;
+        Account account = null;
+        GameLobby lobbyOne = null;
+        GameLobby lobbyTwo = null;
+
+        ServerModelTestObject testObject = new ServerModelTestObject();
+        testObject.register("mytest", "mypassword");
+        account = testObject.login("mytest", "mypassword");
+        testObject.createGame(gameName, max_player_num, account.getAuthentication());
+
+        max_player_num = 3;
+        testObject.createGame(gameNameTwo, max_player_num, account.getAuthentication());
+        List<Command> commandList = testObject.getNewCommands(-1,account.getAuthentication());
+        System.out.println("Done");
     }
 
 
