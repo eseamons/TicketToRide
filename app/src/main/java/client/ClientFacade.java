@@ -52,6 +52,7 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         List<GameLobby> games = serverProxy.getServerGameList(clientModel.getAuthorization());
         clientModel.setGameLobbyList(games);
+
     }
 
     @Override

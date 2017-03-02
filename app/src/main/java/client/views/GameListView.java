@@ -65,8 +65,8 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         instance = this;
 
-        Poller poller = new Poller();
-        poller.runGetLobbyCommands();
+        //Poller poller = new Poller();
+        //poller.runGetLobbyCommands();
         availableGames = GameListPresenter.getInstance().getClientGames();
 
         //Code for RecyclerView
@@ -96,6 +96,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
                 GameListPresenter.getInstance().getServerGames();
                 //TODO:we have to set this game to the current game and then join the game!
+
             }
         });
 
