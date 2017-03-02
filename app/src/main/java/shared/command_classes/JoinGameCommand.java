@@ -35,13 +35,6 @@ public class JoinGameCommand extends Command
 
     public void executeOnClient()
     {
-        //THIS SHOULD WORK?
-//        String[] parts = info.split(" ");
-//        int ID = Integer.parseInt(parts[0]);
-//        String name = parts[1];
-//        ClientFacade facade = new ClientFacade();
-//        facade.someoneJoinedGame(ID, name);
-
         try {
             JsonObject jsonObject = convertStringToJsonObject(info);
             int gameLobbyID = Integer.parseInt(jsonObject.get("gameLobbyID").getAsString());
