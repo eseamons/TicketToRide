@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import server.ServerModel;
+import shared.command_classes.Command;
 import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
 
@@ -40,6 +41,12 @@ public class ServerModelTestObject {
     public GameLobby joinGame(int gameLobbyID, String auth) {
         ServerModel model = ServerModel.getInstance();
         return model.joinGame(gameLobbyID, auth);
+    }
+
+    public List<Command> getNewCommands(int commandID, String auth) {
+        ServerModel model = ServerModel.getInstance();
+        List<Command> commandList = model.getNewCommands(commandID, auth);
+        return commandList;
     }
 
     public Account getAccount(int index) {
