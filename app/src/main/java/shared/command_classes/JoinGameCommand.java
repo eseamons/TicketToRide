@@ -9,6 +9,7 @@ import client.ClientFacade;
 import server.ServerFacade;
 import shared.Result;
 import shared.Serializer;
+import shared.model_classes.Account;
 import shared.model_classes.GameLobby;
 
 public class JoinGameCommand extends Command
@@ -34,11 +35,26 @@ public class JoinGameCommand extends Command
 
     public void executeOnClient()
     {
-        String[] parts = info.split(" ");
-        int ID = Integer.parseInt(parts[0]);
-        String name = parts[1];
-        ClientFacade facade = new ClientFacade();
-        facade.someoneJoinedGame(ID, name);
+        //THIS SHOULD WORK?
+//        String[] parts = info.split(" ");
+//        int ID = Integer.parseInt(parts[0]);
+//        String name = parts[1];
+//        ClientFacade facade = new ClientFacade();
+//        facade.someoneJoinedGame(ID, name);
+
+        try {
+            JsonObject jsonObject = convertStringToJsonObject(info);
+            int gameLobbyID = Integer.parseInt(jsonObject.get("gameLobbyID").getAsString());
+            String acc = jsonObject.get("acc").getAsString();
+            Account account = (Account)Serializer.deserialize(acc);
+            ClientFacade clientFacade = new ClientFacade();
+            clientFacade.someoneJoinedGame(gameLobbyID, account);
+
+
+
+        } catch (IOException e)
+        {e.printStackTrace();}
+
 
     }
 }

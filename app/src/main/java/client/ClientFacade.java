@@ -96,8 +96,8 @@ public class ClientFacade implements IClient{
         return current_game_lobby;
     }
 
-    public void someoneJoinedGame(int gameID, String name) {
-        clientModel.playerJoinsGame(gameID, name);
+    public void someoneJoinedGame(int gameID, Account account) {
+        clientModel.playerJoinsGame(gameID, account);
     }
 
 

@@ -2,6 +2,7 @@ package shared.model_classes.model_list_classes;
 
 import java.util.List;
 
+import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.Player;
 
@@ -36,6 +37,25 @@ public class PlayersList {
 
     public List<Player> getAllPlayers()
     {return players;}
+
+    public Player getPlayer(int index)
+    {return players.get(index);}
+
+    public int getSize()
+    {return players.size();}
+
+    public void addPlayer(Player p){
+        if(players.size() == 0)
+        {p.setColor(ColorNum.RED);}
+        if(players.size() == 1)
+        {p.setColor(ColorNum.GREEN);}
+        if(players.size() == 2)
+        {p.setColor(ColorNum.BLUE);}
+        if(players.size() == 3)
+        {p.setColor(ColorNum.YELLOW);}
+        if(players.size() == 4)
+        {p.setColor(ColorNum.BLACK);}
+    }
 
     public void endTurn()
     {

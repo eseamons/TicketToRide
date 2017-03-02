@@ -88,6 +88,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             public void onClick(View view) {
                 GameListPresenter gameListPresenter = GameListPresenter.getInstance();
                 boolean successful = gameListPresenter.createGame();
+
                 if(successful)
                 {Toast.makeText(getBaseContext(),"SUCCESSFULLY CREATED",Toast.LENGTH_SHORT).show();}
                 else

@@ -57,7 +57,7 @@ public class ServerModelTest {
         assertEquals(1, lobbyOne.getID());
         assertEquals(4, lobbyOne.getMaxPlayers());
         assertEquals(lobbyOne.getName(), gameName);
-        assertEquals(1, lobbyOne.playerJoined());
+        assertEquals(1, lobbyOne.NumOfCurrentPlayers());
     }
 
 

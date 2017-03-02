@@ -82,8 +82,8 @@ public class ClientModel extends Observable
         return command_list;
     }
 
-    public void addLobbyToList(GameLobby game) {
-        gameLobbyList.addLobby(game);
+    public void addLobbyToList(GameLobby gameLobby) {
+        gameLobbyList.addLobby(gameLobby);
         update();
     }
 
@@ -92,16 +92,11 @@ public class ClientModel extends Observable
         update();
     }
 
-    public void playerJoinsGame(int gameID, String name) {
-        GameLobby game = gameLobbyList.getGameLobbyByID(gameID);
-        if(game != null)
+    public void playerJoinsGame(int gameID, Account account) {
+        GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameID);
+        if(gameLobby != null)
         {
-            //TODO: switch this to add player to game
-            game.playerJoined();
-        }
-        if(game == currentGameLobby)
-        {
-            //TODO: if its the current game then add player to list so name pops up on screen
+            gameLobby.addNewPlayers(account);
         }
         update();
     }
