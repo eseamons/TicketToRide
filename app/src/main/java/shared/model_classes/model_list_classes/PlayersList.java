@@ -26,7 +26,6 @@ public class PlayersList {
         players = listOfPlayers;
         numOfPlayers = listOfPlayers.size();
         currentPlayerID =0;
-        currentPlayer = players.get(0);
     }
 
     public int getCurrentPlayerID()

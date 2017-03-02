@@ -33,19 +33,19 @@ public class Poller
 
     public void runGetLobbyCommands()
     {
-        ScheduledExecutorService scheduleTaskExecutor;
-
-        scheduleTaskExecutor= Executors.newScheduledThreadPool(5);
-
-        // This schedule a task to run every 1 second:
-        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable()
-        {
-            public void run()
-            {
-                LobbyPolling l = new LobbyPolling();
-                l.doInBackground();
-            }
-        }, 3,2, TimeUnit.SECONDS);
+//        ScheduledExecutorService scheduleTaskExecutor;
+//
+//        scheduleTaskExecutor= Executors.newScheduledThreadPool(5);
+//
+//        // This schedule a task to run every 1 second:
+//        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable()
+//        {
+//            public void run()
+//            {
+//                LobbyPolling l = new LobbyPolling();
+//                l.doInBackground();
+//            }
+//        }, 3,2, TimeUnit.SECONDS);
     }
 
 
