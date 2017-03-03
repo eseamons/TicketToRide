@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">TicketToRide</string>
     <string name="msgHint"><i> Type here:</i></string>
+    <string name="title_activity_map_view">MapViewActivity</string>
 </resources>
