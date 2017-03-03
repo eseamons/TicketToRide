@@ -8,7 +8,11 @@ import shared.Result;
 
 public class DrawDestinationCardCommand extends Command {
     public Result execute()
-    {return null;}
+    {
+        String destinationCardName = "";
+        String auth = "";
+        return null;
+    }
 
     public void executeOnClient()
     {
