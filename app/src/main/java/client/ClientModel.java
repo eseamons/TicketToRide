@@ -67,7 +67,7 @@ public class ClientModel extends Observable
     //methods needed for the gameListView
     public void setGameLobbyList(List<GameLobby> games) {
         gameLobbyList.setGameLobbyList(games);
-        update();
+//        update();
     }
 
     public List<GameLobby> getListOfLobbies(){return gameLobbyList.getGameLobbyList();}
@@ -84,12 +84,12 @@ public class ClientModel extends Observable
 
     public void addLobbyToList(GameLobby gameLobby) {
         gameLobbyList.addLobby(gameLobby);
-        update();
+        //update();
     }
 
     public void setCurrent_game_lobby(GameLobby currentGameLobby) {
         this.currentGameLobby = currentGameLobby;
-        update();
+       // update();
     }
 
     public void playerJoinsGame(int gameID, Account account) {
@@ -98,7 +98,7 @@ public class ClientModel extends Observable
         {
             gameLobby.addNewPlayers(account);
         }
-        update();
+       // update();
     }
 
     public GameLobby getCurrent_game_lobby() {
@@ -113,7 +113,7 @@ public class ClientModel extends Observable
         if(currentGameLobby.getID() == gameID)
         {
             currentGameLobby.addNewComment(message);
-            update();
+            //update();
         }
     }
 

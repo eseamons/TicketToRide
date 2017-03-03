@@ -94,9 +94,8 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 else
                 {Toast.makeText(getBaseContext(),"failed",Toast.LENGTH_SHORT).show();}
 
-                GameListPresenter.getInstance().getServerGames();
+                //GameListPresenter.getInstance().getServerGames();
                 //TODO:we have to set this game to the current game and then join the game!
-
             }
         });
 
@@ -118,6 +117,10 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
             }
         });
+
+        Poller p = new Poller();
+        p.runGetLobbyCommands();
+
     }
 
     @Override

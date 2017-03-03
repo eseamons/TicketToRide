@@ -1,52 +1,28 @@
 package client;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Poller
 {
-    int times = 0;
-//    public void runGetNonGameCommands()
-//    {
-//        ScheduledExecutorService scheduleTaskExecutor;
-//
-//        scheduleTaskExecutor= Executors.newScheduledThreadPool(5);
-//
-//            // This schedule a task to run every 1 second:
-//        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable()
-//        {
-//            public void run()
-//            {
-//                ClientFacade client = new ClientFacade();
-//                client.getNewCommands();
-//                //client.getServerGamesList(ClientModel.getInstance().getAuthorization());
-//                Log.i("l", " T: " + times);
-//                times++;
-//            }
-//        }, 3,2, TimeUnit.SECONDS);
-//    }
-
-
     public void runGetLobbyCommands()
     {
-//        ScheduledExecutorService scheduleTaskExecutor;
-//
-//        scheduleTaskExecutor= Executors.newScheduledThreadPool(5);
-//
-//        // This schedule a task to run every 1 second:
-//        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable()
-//        {
-//            public void run()
-//            {
-//                LobbyPolling l = new LobbyPolling();
-//                l.doInBackground();
-//            }
-//        }, 3,2, TimeUnit.SECONDS);
+
+        //this calls the Async task over and over again. The numbers 1,1 tell it how often to run
+        //the higher the numbers the SLOWER it runs.
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                LobbyPolling l = new LobbyPolling();
+                l.execute();
+            }
+        }, 1, 1);
     }
+
+
 
 
     public class LobbyPolling extends AsyncTask<Void, Void, Void>
@@ -56,17 +32,17 @@ public class Poller
         {
             ClientFacade client = new ClientFacade();
             client.getNewCommands();
+            client.getServerGamesList(ClientModel.getInstance().getAuthorization());
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            ClientFacade client = new ClientFacade();
-            client.getServerGamesList(ClientModel.getInstance().getAuthorization());
+            ClientModel clientModel = ClientModel.getInstance();
+            if(clientModel.getListOfLobbies().size() > 0) {
+                clientModel.update();
+            }
         }
-
-
     }
-
 }
