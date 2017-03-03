@@ -30,7 +30,7 @@ public class CreateGameCommand extends Command
     {
         ClientFacade client = new ClientFacade();
         JsonObject jsonObject = convertStringToJsonObject(info);
-        String username = jsonObject.get("username").getAsString();
+        String username = jsonObject.get("gameLobbyName").getAsString();
         int max_player_num = Integer.parseInt(jsonObject.get("max_player_num").getAsString());
         int gameLobbyID = Integer.parseInt(jsonObject.get("gameLobbyID").getAsString());
         GameLobby game = new GameLobby();
