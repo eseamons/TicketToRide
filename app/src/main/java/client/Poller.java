@@ -1,72 +1,59 @@
 package client;
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Poller
 {
-    int times = 0;
-//    public void runGetNonGameCommands()
-//    {
-//        ScheduledExecutorService scheduleTaskExecutor;
-//
-//        scheduleTaskExecutor= Executors.newScheduledThreadPool(5);
-//
-//            // This schedule a task to run every 1 second:
-//        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable()
-//        {
-//            public void run()
-//            {
-//                ClientFacade client = new ClientFacade();
-//                client.getNewCommands();
-//                //client.getServerGamesList(ClientModel.getInstance().getAuthorization());
-//                Log.i("l", " T: " + times);
-//                times++;
-//            }
-//        }, 3,2, TimeUnit.SECONDS);
-//    }
-
-
+    Timer LobbyListTimer = new Timer();
     public void runGetLobbyCommands()
     {
-//        ScheduledExecutorService scheduleTaskExecutor;
-//
-//        scheduleTaskExecutor= Executors.newScheduledThreadPool(5);
-//
-//        // This schedule a task to run every 1 second:
-//        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable()
-//        {
-//            public void run()
-//            {
-//                LobbyPolling l = new LobbyPolling();
-//                l.doInBackground();
-//            }
-//        }, 3,2, TimeUnit.SECONDS);
+
+        //this calls the Async task over and over again. The numbers 1,1 tell it how often to run
+        //the higher the numbers the SLOWER it runs.
+        //TODO: inorder to stop this when you join a game we will need to call
+        LobbyListTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                LobbyPolling l = new LobbyPolling();
+                l.execute();
+            }
+        }, 1, 1);
     }
 
+    //I haven't tested this yet but this should stop the Timer from calling.
+    // We can use this to stop polling the Lobby List when we start a game.
+    //After that we could create another timer? Or something else if you guys have a better solution!
+    public void stopLobbyListTimer()
+    { LobbyListTimer.cancel();}
 
+
+
+    //Async task that has the code that was originally in the poller (Thank you Michael)
     public class LobbyPolling extends AsyncTask<Void, Void, Void>
     {
+
+        //this gets all the info from the server(MODEL DOES NOT UPDATE)
         @Override
         protected Void doInBackground(Void... params)
         {
             ClientFacade client = new ClientFacade();
             client.getNewCommands();
+            client.getServerGamesList(ClientModel.getInstance().getAuthorization());
             return null;
         }
 
+        //If there are any lobbies to show then the Model updates...
+        //Would be better if it had a way to update only if the sixe of the list increased.
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            ClientFacade client = new ClientFacade();
-            client.getServerGamesList(ClientModel.getInstance().getAuthorization());
+            ClientModel clientModel = ClientModel.getInstance();
+            if(clientModel.getListOfLobbies().size() > 0) {
+                clientModel.update();
+            }
         }
-
-
     }
-
 }
