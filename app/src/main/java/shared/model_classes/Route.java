@@ -21,4 +21,25 @@ public class Route {
         this.length = length;
         this.ownership = -1;
     }
+
+    public int getPointValue()
+    {
+        int pointValue = 0;
+        switch (length)
+        {
+            case 1: pointValue = 1;
+                break;
+            case 2: pointValue = 2;
+                break;
+            case 3: pointValue =4;
+                break;
+            case 4: pointValue = 7;
+                break;
+            case 5: pointValue = 10;
+                break;
+            case 6: pointValue = 15;
+                break;
+        }
+        return pointValue;
+    }
 }

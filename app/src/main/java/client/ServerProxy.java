@@ -8,6 +8,7 @@ import shared.ColorNum;
 import shared.Result;
 import shared.Serializer;
 import shared.command_classes.AddCommentCommand;
+import shared.command_classes.ClaimRouteCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
 import shared.command_classes.GetGamesCommand;
@@ -190,8 +191,12 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean claimRoute(Route routeClaimed, String auth) {
-        return false;
+    public boolean claimRoute(int gameID, Route routeClaimed, String auth) {
+        String json = "{\"gameID\": \""+gameID+"\", \"route\":\""+routeClaimed+"\", \"auth\":\""+auth+"\"}";
+        Command cmd = new ClaimRouteCommand();
+        cmd.setInfo(json);
+        Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+        return r.isSuccess();
     }
 
     @Override

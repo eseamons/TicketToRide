@@ -250,8 +250,35 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean claimRoute(Route routeClaimed, String auth) {
-        return false;
+    public boolean claimRoute(int gameID, Route route, String auth) {
+        boolean routeClaimed = false;
+        Game game = gameList.getGame(gameID);
+
+        if (game != null)
+        {
+            routeClaimed = game.claimRoute(route, auth);
+
+            if(routeClaimed == true) {
+
+                String routeString = null;
+
+                try {
+                    routeString = Serializer.serialize(route);
+                } catch (IOException e) {e.printStackTrace();}
+
+                String json = "{ \"gameID\":\"" + gameID + "\", \"route\":\"" + routeString + "\", \"auth\":\"" +auth+ "\"}";
+
+                int currentCmdId = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
+
+                Command cmd = new ClaimRouteCommand();
+                cmd.setInfo(json);
+                cmd.setCmdID(currentCmdId);
+                gameList.addGameCommand(cmd);
+            }
+        }
+        return routeClaimed;
+
     }
 
     @Override

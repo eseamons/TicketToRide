@@ -22,6 +22,6 @@ public class EndTurnCommand extends Command{
 
     public void executeOnClient()
     {
-
+        //TODO: implement this and connect it to the client side.
     }
 }

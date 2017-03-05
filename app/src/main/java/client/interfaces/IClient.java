@@ -11,6 +11,7 @@ import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
+import shared.model_classes.Route;
 
 public interface IClient {
 
@@ -45,6 +46,10 @@ public interface IClient {
     //methods needed for GameLobby View
     boolean changePlayerColor(ColorNum colorNum);
 
+
+    //methods needed for GamePlay
     boolean endTurn();
+
+    void RouteClaimedbyPlayer(int gameID, Route route, String auth);
 
 }
