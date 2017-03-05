@@ -39,11 +39,19 @@ public interface IClient {
 
     ArrayList<String> getChat();
 
-    Player[] getPlayers();
+    List<Player> getPlayers();
+
+    public void someoneJoinedGame(int gameID, Account account);
+
+    public void addGameToLobbyList(GameLobby game);
 
 
     //methods needed for GameLobby View
     boolean changePlayerColor(ColorNum colorNum);
+
+    public void aGameStarted(int gameID);
+
+    public void addComment(int gameID, String message);
 
     boolean endTurn();
 
