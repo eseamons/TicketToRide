@@ -23,11 +23,7 @@ public class LoginCommand extends Command
         if(account == null) {
             result = new Result(false,"");
         } else {
-            try {
-                result = new Result(true, Serializer.serialize(account));
-            } catch(IOException e) {
-                result = new Result(false,"");
-            }
+            result = new Result(true, Serializer.serialize(account));
         }
         return result;
     }

@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,10 +151,7 @@ public class ServerModel implements IServer{
                 gameLobbyList.incrementCurrentLobbyCommandID();
                 Command cmd = new JoinGameCommand();
 
-                String accountString = "";
-                try {
-                    accountString = Serializer.serialize(acc);
-                } catch (IOException e) {e.printStackTrace();}
+                String accountString = Serializer.serialize(acc);
 
                 String info = "{\"gameLobbyID\": \""+gameLobbyID+"\", \"acc\":\""+accountString+"\"}";
                 cmd.setInfo(info);

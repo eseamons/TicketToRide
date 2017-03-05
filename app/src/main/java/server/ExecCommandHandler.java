@@ -11,19 +11,11 @@ public class ExecCommandHandler extends HandlerBase {
 
     @Override
     public String execute(String json){
-        Result result = null;
-        try {
-            Command command = (Command) Serializer.deserialize(json);
-            result = command.execute();
-        } catch (IOException e) {
-            result = new Result(false,"");
-        }
 
-        try {
-            json = Serializer.serialize(result);
-        } catch (IOException e) {
-            json = "";
-        }
+        Result result = null;
+        Command command = (Command) Serializer.deserialize(json);
+        result = command.execute();
+        json = Serializer.serialize(result);
         return json;
     }
 }
