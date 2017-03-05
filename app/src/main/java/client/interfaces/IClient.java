@@ -40,14 +40,21 @@ public interface IClient {
 
     ArrayList<String> getChat();
 
-    Player[] getPlayers();
+    List<Player> getPlayers();
+
+    public void someoneJoinedGame(int gameID, Account account);
+
+    public void addGameToLobbyList(GameLobby game);
 
 
     //methods needed for GameLobby View
     boolean changePlayerColor(ColorNum colorNum);
 
+    public void aGameStarted(int gameID);
 
     //methods needed for GamePlay
+    public void addComment(int gameID, String message);
+
     boolean endTurn();
 
     void RouteClaimedbyPlayer(int gameID, Route route, String auth);

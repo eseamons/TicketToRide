@@ -26,6 +26,7 @@ public class GameLobby {
     public int addNewPlayers(Account playerAccount) {
         Player player = new Player();
         player.setAccount(playerAccount);
+        player.setPlayerID(playersList.getSize());
         playersList.addPlayer(player);
         return playersList.getSize()-1;
     }

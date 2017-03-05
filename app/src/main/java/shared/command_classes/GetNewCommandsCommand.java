@@ -23,16 +23,16 @@ public class GetNewCommandsCommand extends Command
         int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
         String auth = jsonObject.get("auth").getAsString();
         List<Command> cmds = ServerFacade.getInstance().getNewCommands(gameID, auth);
-       Command[] cmdArray = (Command[]) cmds.toArray();
+
+        if(cmds.size() != 0) {
+            System.out.println("Test");
+        }
+
         Result result = null;
         if(cmds == null) {
             result = new Result(false,"");
         } else {
-            try {
-                result = new Result(true, Serializer.serialize(cmdArray));
-            } catch(IOException e) {
-                result = new Result(false,"");
-            }
+            result = new Result(true, Serializer.serializeList(cmds));
         }
         return result;
     }

@@ -53,11 +53,7 @@ public class ServerProxy implements IServer{
         Account account = null;
         if(r.isSuccess())
         {
-            try {
-                account = (Account) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-
-            }
+            account = (Account) Serializer.deserialize(r.getInfo());
             return account;
         }
         else
@@ -95,12 +91,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            try {
-                return (GameLobby) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-                return null;
-            }
-
+            return (GameLobby) Serializer.deserialize(r.getInfo());
         }
         else
         {
@@ -117,12 +108,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            try {
-                return (List<GameLobby>) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-                return null;
-            }
-
+            return (List<GameLobby>) Serializer.deserialize(r.getInfo());
         }
         else
         {
@@ -139,11 +125,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            try {
-                return (List<Command>) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-                return null;
-            }
+            return (List<Command>) Serializer.deserializeList(r.getInfo());
         }
         else
         {

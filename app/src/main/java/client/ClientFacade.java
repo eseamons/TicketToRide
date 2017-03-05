@@ -86,6 +86,7 @@ public class ClientFacade implements IClient{
         return serverProxy.createGameLobby(gameName, maxPlayers, auth);
     }
 
+    @Override
     public void addGameToLobbyList(GameLobby game) {
         clientModel.addLobbyToList(game);
     }
@@ -98,6 +99,7 @@ public class ClientFacade implements IClient{
         return current_game_lobby;
     }
 
+    @Override
     public void someoneJoinedGame(int gameID, Account account) {
         clientModel.playerJoinsGame(gameID, account);
     }
@@ -108,6 +110,12 @@ public class ClientFacade implements IClient{
 
 
     //methods needed for GameLobby View
+    @Override
+    public List<Player> getPlayers() {
+        //TODO: Implement this
+        return clientModel.getCurrent_game_lobby().getPlayers();
+    }
+
     @Override
     public boolean changePlayerColor(ColorNum colorNum) {
         ServerProxy serverProxy = ServerProxy.getInstance();
@@ -132,6 +140,7 @@ public class ClientFacade implements IClient{
         return ServerProxy.getInstance().addComment(msg, clientModel.getAuthorization());
     }
 
+    @Override
     public void addComment(int gameID, String message) {
         if(clientModel.getCurrent_game_lobby().getID() == gameID)
         {
@@ -140,6 +149,7 @@ public class ClientFacade implements IClient{
         //else do nothing
     }
 
+    @Override
     public void aGameStarted(int gameID){
         clientModel.aGameStarted(gameID);
     }
@@ -160,12 +170,7 @@ public class ClientFacade implements IClient{
 
 
     //methods needed for game play
-    @Override
-    public Player[] getPlayers() {
-        //TODO: Implement this
 
-        return null;
-    }
 
     @Override
     public boolean endTurn() {

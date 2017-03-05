@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import shared.CardColor;
+import shared.model_classes.Player;
 import shared.model_classes.Route;
 
 /**
@@ -15,7 +16,7 @@ import shared.model_classes.Route;
 public class RoutesList {
     private List<Route> availableRouteList = new ArrayList<>();
     private Map<String,Route> playersClaimedRoutes = new HashMap<>();
-    
+
     public RoutesList()
     {
         //TODO: Add every route individually, WILL DO THIS OK!!
@@ -120,7 +121,7 @@ public class RoutesList {
 
     }
 
-    public Route findRoute(String city1, String city2, CardColor color)
+    public Route getRoute(String city1, String city2, CardColor color)
     {
         Route currentRoute = availableRouteList.get(0);
         for (int i = 0; i < availableRouteList.size(); i++)
@@ -136,7 +137,107 @@ public class RoutesList {
         }
         return currentRoute;
     }
-    
+
+    public Route getRoute(int index)
+    {
+        return routeList.get(index);
+    }
+
+    public List<Route> getClaimableRoutes(Player p)
+    {
+        List<CardColor> playerCards = p.getTrainCards();
+        int redCards = 0;
+        int orangeCards = 0;
+        int yellowCards = 0;
+        int greenCards = 0;
+        int blueCards = 0;
+        int purpleCards = 0;
+        int whiteCards = 0;
+        int blackCards = 0;
+        int wildCards = 0;
+
+        for (int i = 0; i < playerCards.size(); i++)
+        {
+            switch(playerCards.get(i))
+            {
+                case RED:
+                    redCards++;
+                    break;
+                case ORANGE:
+                    orangeCards++;
+                    break;
+                case YELLOW:
+                    yellowCards++;
+                    break;
+                case GREEN:
+                    greenCards++;
+                    break;
+                case BLUE:
+                    blueCards++;
+                    break;
+                case PURPLE:
+                    purpleCards++;
+                    break;
+                case WHITE:
+                    whiteCards++;
+                    break;
+                case BLACK:
+                    blackCards++;
+                    break;
+                case WILD:
+                    wildCards++;
+                    break;
+            }
+        }
+
+        Route currentRoute;
+        List<Route> claimableRoutes = new ArrayList<>();
+        for(int i = 0; i < routeList.size(); i++)
+        {
+            currentRoute = routeList.get(i);
+            // if route not owned
+            if (currentRoute.ownership == 0)
+            {
+                switch(currentRoute.color)
+                {
+                    case RED:
+                        if ((redCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);
+                        break;
+                    case ORANGE:
+                        if ((orangeCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                    case YELLOW:
+                        if ((yellowCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                    case GREEN:
+                        if ((greenCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                    case BLUE:
+                        if ((blueCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                    case PURPLE:
+                        if ((purpleCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                    case WHITE:
+                        if ((whiteCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                    case BLACK:
+                        if ((blackCards + wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                    case WILD:
+                        if ((redCards+orangeCards+yellowCards+greenCards+blueCards+purpleCards+whiteCards+blackCards+wildCards) >= currentRoute.length)
+                            claimableRoutes.add(currentRoute);                        break;
+                }
+            }
+        }
+
+        return claimableRoutes;
+
+    }
+
+
+
     public boolean claimRoute(Route routeToClaim, String auth)
     {
         for(int i = 0; i <availableRouteList.size(); i++)
