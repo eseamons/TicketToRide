@@ -11,7 +11,7 @@ public class Route {
     public String city2;
     public CardColor color;
     public int length;
-    public int ownership; //-1 = no one.  0-4 = players
+    public int ownership; //0 = no one.  1-5 = players
 
     public Route(String city1, String city2, CardColor color, int length)
     {
@@ -19,6 +19,6 @@ public class Route {
         this.city2 = city2;
         this.color = color;
         this.length = length;
-        this.ownership = -1;
+        this.ownership = 0;
     }
 }

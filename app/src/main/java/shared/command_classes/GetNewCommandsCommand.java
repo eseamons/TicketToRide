@@ -3,6 +3,7 @@ package shared.command_classes;
 import com.google.gson.JsonObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import server.ServerFacade;
@@ -22,12 +23,13 @@ public class GetNewCommandsCommand extends Command
         int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
         String auth = jsonObject.get("auth").getAsString();
         List<Command> cmds = ServerFacade.getInstance().getNewCommands(gameID, auth);
+       Command[] cmdArray = (Command[]) cmds.toArray();
         Result result = null;
         if(cmds == null) {
             result = new Result(false,"");
         } else {
             try {
-                result = new Result(true, Serializer.serialize(cmds));
+                result = new Result(true, Serializer.serialize(cmdArray));
             } catch(IOException e) {
                 result = new Result(false,"");
             }
