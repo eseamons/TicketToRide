@@ -137,22 +137,22 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer1TrainCardsNum(int i) {
-        player1TrainCardsNum.setText(i);
+        player1TrainCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer1DestinationCardsNum(int i) {
-        player1DestinationCardsNum.setText(i);
+        player1DestinationCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer1TrainsRemainingNum(int i) {
-        player1TrainsRemainingNum.setText(i);
+        player1TrainsRemainingNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer1PointsNum(int i) {
-        player1PointsNum.setText(i);
+        player1PointsNum.setText(Integer.toString(i));
     }
 
     @Override
@@ -168,22 +168,22 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer2TrainCardsNum(int i) {
-        player2TrainCardsNum.setText(i);
+        player2TrainCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer2DestinationCardsNum(int i) {
-        player2DestinationCardsNum.setText(i);
+        player2DestinationCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer2TrainsRemainingNum(int i) {
-        player2TrainsRemainingNum.setText(i);
+        player2TrainsRemainingNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer2PointsNum(int i) {
-        player2PointsNum.setText(i);
+        player2PointsNum.setText(Integer.toString(i));
     }
 
     @Override
@@ -199,22 +199,22 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer3TrainCardsNum(int i) {
-        player3TrainCardsNum.setText(i);
+        player3TrainCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer3DestinationCardsNum(int i) {
-        player3DestinationCardsNum.setText(i);
+        player3DestinationCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer3TrainsRemainingNum(int i) {
-        player3TrainsRemainingNum.setText(i);
+        player3TrainsRemainingNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer3PointsNum(int i) {
-        player3PointsNum.setText(i);
+        player3PointsNum.setText(Integer.toString(i));
     }
 
     @Override
@@ -230,22 +230,22 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer4TrainCardsNum(int i) {
-        player4TrainCardsNum.setText(i);
+        player4TrainCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer4DestinationCardsNum(int i) {
-        player4DestinationCardsNum.setText(i);
+        player4DestinationCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer4TrainsRemainingNum(int i) {
-        player4TrainsRemainingNum.setText(i);
+        player4TrainsRemainingNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer4PointsNum(int i) {
-        player4PointsNum.setText(i);
+        player4PointsNum.setText(Integer.toString(i));
     }
 
     @Override
@@ -261,22 +261,22 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer5TrainCardsNum(int i) {
-        player5TrainCardsNum.setText(i);
+        player5TrainCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer5DestinationCardsNum(int i) {
-        player5DestinationCardsNum.setText(i);
+        player5DestinationCardsNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer5TrainsRemainingNum(int i) {
-        player5TrainsRemainingNum.setText(i);
+        player5TrainsRemainingNum.setText(Integer.toString(i));
     }
 
     @Override
     public void setPlayer5PointsNum(int i) {
-        player5PointsNum.setText(i);
+        player5PointsNum.setText(Integer.toString(i));
     }
 
     @Override
