@@ -5,6 +5,7 @@ import java.util.List;
 
 import shared.ColorNum;
 import shared.command_classes.Command;
+import shared.model_classes.model_list_classes.DestinationCardsList;
 import shared.model_classes.model_list_classes.PlayersList;
 import shared.model_classes.model_list_classes.RoutesList;
 
@@ -15,6 +16,7 @@ public class Game {
     private TrainCardDeck trainCardDeck;
     private List<ColorNum> faceUpCards;
     private RoutesList routes;
+    private DestinationCardsList destinationCardsList;
     private List<Command> commands;
 
     public Game(GameLobby gameLobby) {
@@ -22,6 +24,8 @@ public class Game {
         players = new PlayersList(gameLobby.getPlayers());
         trainCardDeck = TrainCardDeck.getInstance();
         faceUpCards = new ArrayList<ColorNum>(5);
+        destinationCardsList = new DestinationCardsList();
+        routes = new RoutesList();
     }
 
     public int getGameID() {
@@ -58,4 +62,26 @@ public class Game {
         }
         return successful;
     }
+
+    public boolean destinationCardIsOwned(String destinationCardName) {
+        return false;
+    }
+
+    public DestinationCard getDestinationCardByName(String destinationCardName) {
+        return null;
+    }
+
+    public boolean setDestinationCardOwnership(String destinationCardName, int playerID) {
+        DestinationCard destinationCard = destinationCardsList.getDestinationCardByName(destinationCardName);
+        boolean destinationCardDrawnSuccessfully = false;
+        if(destinationCard.getOwnership() != -1) {
+            destinationCard.setOwnership(playerID);
+            destinationCardDrawnSuccessfully = true;
+        }
+
+        return destinationCardDrawnSuccessfully;
+    }
+
+
+
 }

@@ -22,9 +22,6 @@ public class ServerModel implements IServer{
     private AccountList accountList;
     private GameLobbyList gameLobbyList;
     private GameList gameList;
-
-
-
     private Map<String, Player> playerAuthMap;
 
     private ServerModel() {
@@ -280,7 +277,15 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean drawDestinationCard(String destinationCardName, String auth) {
-        return false;
+        Game currentGame = null;
+        DestinationCard destinationCard = null;
+        int playerID = 0;
+        boolean destinationCardDrawnSuccessfully = false;
+
+        if(currentGame.destinationCardIsOwned(destinationCardName)) {
+            destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, playerID);
+        }
+        return destinationCardDrawnSuccessfully;
     }
 
     @Override
