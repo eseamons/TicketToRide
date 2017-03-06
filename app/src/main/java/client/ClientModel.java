@@ -109,10 +109,14 @@ public class ClientModel extends Observable
 
     //methods needed for GameLobby View
     public void addCommentToCurrentGame(int gameID, String message) {
-        if(currentGameLobby.getID() == gameID)
+        if(currentGame.getGameID() == gameID)
         {
-            currentGameLobby.addNewComment(message);
+            currentGame.addNewComment(message);
         }
+    }
+
+    public List<String> getGameComments(){
+        return currentGame.getAllComments();
     }
 
     public void aGameStarted(int gameID) {

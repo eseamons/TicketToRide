@@ -19,6 +19,7 @@ public class Game {
     private RoutesList routes;
     private DestinationCardsList destinationCardsList;
     private List<Command> commands;
+    private List<String> comments = new ArrayList<>();
 
     public Game(GameLobby gameLobby) {
         gameID = gameLobby.getID();
@@ -84,4 +85,10 @@ public class Game {
     }
 
 
+    public void addNewComment(String message) {
+        comments.add(message);
+    }
+    public List<String> getAllComments() {
+        return comments;
+    }
 }
