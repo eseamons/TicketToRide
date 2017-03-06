@@ -1,5 +1,6 @@
 package client.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -101,6 +102,27 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
         deckButton = (Button) findViewById(R.id.deckButton);
         mapButton = (Button) findViewById(R.id.mapButton);
         sendMessageButton = (Button) findViewById(R.id.sendButton);
+
+        deckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameStatsView.this, GameDeckView.class));
+            }
+        });
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameStatsView.this, MapViewActivity.class));
+            }
+        });
+
+        sendMessageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add functionality
+            }
+        });
     }
 
     @Override
