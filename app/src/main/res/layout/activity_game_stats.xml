@@ -54,6 +54,7 @@
         android:layout_marginStart="47dp"
         android:text="Player 1"
         android:textAllCaps="false"
+        android:textColor="@color/blue"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -67,6 +68,7 @@
         android:layout_marginTop="44dp"
         android:text="Player 3"
         android:textAllCaps="false"
+        android:textColor="@color/green"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -80,6 +82,7 @@
         android:layout_marginTop="42dp"
         android:text="Player 5"
         android:textAllCaps="false"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -94,6 +97,7 @@
         android:layout_toRightOf="@+id/player3DestinationTicketsNum"
         android:text="Player 4"
         android:textAllCaps="false"
+        android:textColor="@android:color/holo_orange_light"
         android:textSize="30sp"
         android:textStyle="bold" />
 
@@ -101,13 +105,14 @@
         android:id="@+id/player2Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Player 2"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        android:textStyle="bold"
         android:layout_above="@+id/player1TrainCardsNum"
         android:layout_alignLeft="@+id/player4Text"
-        android:layout_alignStart="@+id/player4Text" />
+        android:layout_alignStart="@+id/player4Text"
+        android:text="Player 2"
+        android:textAllCaps="false"
+        android:textColor="@color/red"
+        android:textSize="30sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/player2DestinationTicketsText"

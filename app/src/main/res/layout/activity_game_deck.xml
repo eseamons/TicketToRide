@@ -165,7 +165,7 @@
         android:background="@color/white"
         android:text="\nWhite"
         android:textAlignment="center"
-        android:textColor="@drawable/black"
+        android:textColor="@color/black"
         android:textSize="26sp" />
 
     <TextView
@@ -235,7 +235,7 @@
         android:layout_toRightOf="@+id/yellowText"
         android:text="0"
         android:textAlignment="center"
-        android:textColor="@drawable/black"
+        android:textColor="@color/black"
         android:textSize="26sp" />
 
     <TextView
@@ -321,7 +321,7 @@
         android:layout_toRightOf="@+id/destinationTicketView"
         android:text="0"
         android:textAlignment="center"
-        android:textColor="@drawable/black"
+        android:textColor="@color/black"
         android:textSize="26sp" />
 
     <TextView
