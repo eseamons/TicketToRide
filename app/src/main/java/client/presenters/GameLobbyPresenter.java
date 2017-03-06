@@ -26,6 +26,7 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
     @Override
     public void update(Observable observable, Object o) {
 
+        GameLobbyView.getInstance().update(observable, o);
     }
 
     public GameLobbyPresenter()
