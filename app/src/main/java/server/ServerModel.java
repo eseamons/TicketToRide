@@ -303,6 +303,8 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean drawDeckCard(String auth) {
+        Game currentGame = null;
+        ColorNum colorNum = currentGame.drawCard();
         return false;
     }
 
