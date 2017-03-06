@@ -78,9 +78,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 {Toast.makeText(getBaseContext(),"SUCCESSFULLY CREATED",Toast.LENGTH_SHORT).show();}
                 else
                 {Toast.makeText(getBaseContext(),"failed",Toast.LENGTH_SHORT).show();}
-
-                //GameListPresenter.getInstance().getServerGames();
-                //TODO:we have to set this game to the current game and then join the game!
             }
         });
 
