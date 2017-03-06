@@ -2,6 +2,7 @@ package shared.command_classes;
 
 import com.google.gson.JsonObject;
 
+import client.ClientFacade;
 import server.ServerFacade;
 import shared.Result;
 
@@ -22,6 +23,9 @@ public class EndTurnCommand extends Command{
 
     public void executeOnClient()
     {
-        //TODO: implement this and connect it to the client side.
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
+        ClientFacade client = new ClientFacade();
+        client.aTurnEnded(gameID);
     }
 }

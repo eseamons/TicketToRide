@@ -29,7 +29,6 @@ public class GameList {
         Game newGame = new Game(gameLobby);
         games.add(newGame);
         gameCommands = new ArrayList<>();
-
         return true;
     }
 
@@ -57,6 +56,10 @@ public class GameList {
 
     public List<Command> getNewGameCommands(int commandID) {
         return gameCommands.subList(commandID+1, gameCommands.size());
+    }
+
+    public Game getGameByAuthCode(String auth) {
+        return null;
     }
 
 }

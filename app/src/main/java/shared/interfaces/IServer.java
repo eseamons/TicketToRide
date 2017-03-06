@@ -39,12 +39,12 @@ public interface IServer {
 
     boolean claimRoute(int gameID, Route routeClaimed, String auth);
 
-    boolean drawDestinationCard(String destinationCardName, String auth);
+    boolean drawDestinationCard(String destinationCardName, int playerID, String auth);
 
-    boolean removeDestinationCard(String destinationCardName, String auth);
+    boolean removeDestinationCard(String destinationCardName,  String auth);
 
     boolean drawDeckCard(String auth);
 
-    boolean drawFaceUpCard(int faceUpCardID, String auth);
+    boolean drawFaceUpCard(ColorNum faceUpCardID, String auth);
 
 }

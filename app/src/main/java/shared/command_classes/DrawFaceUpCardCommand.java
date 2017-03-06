@@ -3,6 +3,7 @@ package shared.command_classes;
 import com.google.gson.JsonObject;
 
 import server.ServerFacade;
+import shared.ColorNum;
 import shared.Result;
 
 /**
@@ -15,7 +16,7 @@ public class DrawFaceUpCardCommand extends Command {
     {
         JsonObject jsonObject = convertStringToJsonObject(info);
         String auth = jsonObject.get("auth").getAsString();
-        int faceUpCardID = Integer.parseInt(jsonObject.get("faceUpCardID").getAsString());
+        ColorNum faceUpCardID = ColorNum.convertInttoEnum(jsonObject.get("faceUpCardID").getAsInt());
         boolean success = ServerFacade.getInstance().drawFaceUpCard(faceUpCardID, auth);
         return new Result(success, "");
     }

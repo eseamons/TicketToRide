@@ -22,7 +22,9 @@ public class ClientFacade implements IClient{
     private static ClientModel clientModel = ClientModel.getInstance();
 
 
-    //methods needed for the login/register view
+/*
+    methods needed for the login/register view
+*/
     @Override
     public void setObserver(Observer o) {
         clientModel.addObserver(o);
@@ -44,10 +46,9 @@ public class ClientFacade implements IClient{
     }
 
 
-
-
-
-    //methods needed for the gameListView
+/*
+    methods needed for gameListView
+*/
     @Override
     public void getServerGamesList(String auth) {
         ServerProxy serverProxy = ServerProxy.getInstance();
@@ -67,15 +68,18 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         int last_cmd = clientModel.getLastCommand();
         String auth = clientModel.getAuthorization();
+
         List<Command> list_of_commands = serverProxy.getNewCommands(last_cmd, auth);
+
+        //Return was not in brackets... did this fix it?
         if(list_of_commands == null)
-            return;
+        {return;}
+
         for(int i = 0; i < list_of_commands.size(); i++)
         {
             Command cmd = (Command) list_of_commands.get(i);
             cmd.executeOnClient();
             clientModel.getCommand_list().add(cmd);
-            //clientModel.update();
         }
     }
 
@@ -105,14 +109,11 @@ public class ClientFacade implements IClient{
     }
 
 
-
-
-
-
-    //methods needed for GameLobby View
+/*
+    methods needed for GameLobby View
+*/
     @Override
     public List<Player> getPlayers() {
-        //TODO: Implement this
         return clientModel.getCurrent_game_lobby().getPlayers();
     }
 
@@ -127,16 +128,12 @@ public class ClientFacade implements IClient{
 
     @Override
     public ArrayList<String> getChat() {
-        //TODO: Implement this
-
         ArrayList<String> chatArray = new ArrayList<String>();
-
         return chatArray;
     }
 
     @Override
     public boolean sendMessage(String msg) {
-        //TODO: Implement this plz
         return ServerProxy.getInstance().addComment(msg, clientModel.getAuthorization());
     }
 
@@ -150,14 +147,7 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public void aGameStarted(int gameID){
-        clientModel.aGameStarted(gameID);
-    }
-
-    @Override
     public Game beginGame() {
-
-        //TODO: this should either return the boolean or have a way to get the game?
 
         String auth = clientModel.getAuthorization();
         int ID = clientModel.getCurrent_game_lobby().getID();
@@ -166,21 +156,34 @@ public class ClientFacade implements IClient{
         return null;
     }
 
-
-
-
-    //methods needed for game play
-
-
     @Override
-    public boolean endTurn() {
-        //TODO: implement this
-        return true;
+    public void aGameStarted(int gameID){
+        clientModel.aGameStarted(gameID);
     }
 
-    //todo: create a claim route for people to call from the presenter
-    public boolean ClaimRoute(Route route)
-    {
+
+
+/*
+    methods needed for game play
+    client methods are followed by their counterpart needed for receiving
+*/
+    @Override
+    public boolean endTurn() {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
+
+        boolean successful = serverProxy.endTurn(gameID,auth);
+        return successful;
+    }
+
+    @Override
+    public void aTurnEnded(int gameID) {
+        clientModel.endTurn(gameID);
+    }
+
+    @Override
+    public boolean ClaimRoute(Route route) {
         ServerProxy serverProxy = ServerProxy.getInstance();
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();

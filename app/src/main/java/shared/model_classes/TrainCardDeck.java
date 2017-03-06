@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import shared.CardColor;
 import shared.ColorNum;
 
 /**
@@ -14,29 +15,24 @@ public class TrainCardDeck {
 
     private static TrainCardDeck instance = new TrainCardDeck();
 
-    private List<ColorNum> cardsInDeck = new ArrayList<>();
-    private List<ColorNum> discardDeck = new ArrayList<>();
-
-    //TODO: should we add a discard deck in here or in another class?
-    //might be easier here so that you can keep the reshuffle in one place.
+    private List<CardColor> cardsInDeck = new ArrayList<>();
+    private List<CardColor> discardDeck = new ArrayList<>();
 
     private TrainCardDeck() {
-        //TODO:create colors in the Deck.
         for(int i =0; i < 12; i++)
         {
-            cardsInDeck.add(ColorNum.RED);
-            cardsInDeck.add(ColorNum.BLUE);
-            cardsInDeck.add(ColorNum.GREEN);
-            cardsInDeck.add(ColorNum.YELLOW);
-            cardsInDeck.add(ColorNum.BLACK);
-            //cardsInDeck.add(ColorNum.WHITE);
-            //cardsInDeck.add(ColorNum.ORANGE);
-            //cardsInDeck.add(ColorNum.PURPLE);
+            cardsInDeck.add(CardColor.RED);
+            cardsInDeck.add(CardColor.BLUE);
+            cardsInDeck.add(CardColor.GREEN);
+            cardsInDeck.add(CardColor.YELLOW);
+            cardsInDeck.add(CardColor.BLACK);
+            cardsInDeck.add(CardColor.WHITE);
+            cardsInDeck.add(CardColor.ORANGE);
+            cardsInDeck.add(CardColor.PURPLE);
         }
+
         for(int j =0; j <14; j++)
-        {
-            //cardsInDeck.add(ColorNum.WILD);
-        }
+        {cardsInDeck.add(CardColor.WILD);}
 
 
     }
@@ -45,27 +41,30 @@ public class TrainCardDeck {
         return instance;
     }
 
-    public ColorNum drawCard() {
+    public CardColor drawCard() {
         int min = 0;
         int max = cardsInDeck.size();
         int randomIndex = (int) Math.random()*(max-min)+min;
 
-        ColorNum cardColor =cardsInDeck.get(randomIndex);
+        CardColor cardColor =cardsInDeck.get(randomIndex);
         cardsInDeck.remove(randomIndex);
+
+        if(cardsInDeck.size() == 0)
+        {reShuffleDeck();}
 
         return cardColor;
     }
 
-    public void addCardsToDiscard(List<ColorNum> cardColors) {
+    public void addCardsToDiscard(List<CardColor> cardColors) {
 
-        for(ColorNum color :cardColors )
+        for(CardColor color :cardColors )
         {
             discardDeck.add(color);
         }
     }
 
     public void reShuffleDeck() {
-        for(ColorNum card: discardDeck)
+        for(CardColor card: discardDeck)
         {
             cardsInDeck.add(card);
         }

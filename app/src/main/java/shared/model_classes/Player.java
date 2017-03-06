@@ -11,10 +11,16 @@ public class Player {
     private Account account;
     private ColorNum color;
     private int points;
-    private List<CardColor> trainCards = new ArrayList<>();
+    private List<CardColor> trainCards;
     private List<DestinationCard> destinationCards;
     private int trainsRemaining;
     private int playerID;  // 1-5
+
+
+    public Player() {
+        destinationCards = new ArrayList<>();
+        trainCards = new ArrayList<>();
+    }
 
     public Account getAccount() {
         return account;
@@ -54,4 +60,19 @@ public class Player {
     public void setPoints(int points) {
         this.points = points;
     }
+
+    public void addDestinationCard(DestinationCard destinationCard) {
+        destinationCards.add(destinationCard);
+    }
+
+    public void removeDestinationCard(String destinationCardName) {
+        int index = 0;
+        for(int i = 0; i < destinationCards.size(); i++) {
+            if(destinationCards.get(i).getDestinationCardName() == destinationCardName) {
+                index = i;
+            }
+        }
+        destinationCards.remove(index);
+    }
+
 }

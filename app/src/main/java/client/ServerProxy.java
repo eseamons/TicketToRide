@@ -11,6 +11,7 @@ import shared.command_classes.AddCommentCommand;
 import shared.command_classes.ClaimRouteCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
+import shared.command_classes.EndTurnCommand;
 import shared.command_classes.GetGamesCommand;
 import shared.command_classes.GetNewCommandsCommand;
 import shared.command_classes.JoinGameCommand;
@@ -169,7 +170,11 @@ public class ServerProxy implements IServer{
 
     @Override
     public boolean endTurn(int gameID, String auth) {
-        return false;
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        Command cmd = new EndTurnCommand();
+        cmd.setInfo(json);
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        return r.isSuccess();
     }
 
     @Override
@@ -182,7 +187,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCard(String destinationCardName, String auth) {
+    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
         return false;
     }
 
@@ -197,7 +202,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
 

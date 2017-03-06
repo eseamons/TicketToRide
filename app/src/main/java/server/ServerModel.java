@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.Serializer;
 import shared.command_classes.*;
@@ -22,9 +23,6 @@ public class ServerModel implements IServer{
     private AccountList accountList;
     private GameLobbyList gameLobbyList;
     private GameList gameList;
-
-
-
     private Map<String, Player> playerAuthMap;
 
     private ServerModel() {
@@ -279,22 +277,40 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCard(String destinationCardName, String auth) {
-        return false;
+    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
+        Game currentGame = null;
+        DestinationCard destinationCard = null;
+        boolean destinationCardDrawnSuccessfully = false;
+        Player player = playerAuthMap.get(auth);
+
+        if(!currentGame.destinationCardIsOwned(destinationCardName)) {
+            destinationCard = currentGame.getDestinationCardByName(destinationCardName);
+            player.addDestinationCard(destinationCard);
+            destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, playerID);
+        }
+        return destinationCardDrawnSuccessfully;
     }
 
     @Override
     public boolean removeDestinationCard(String destinationCardName, String auth) {
-        return false;
+        Game currentGame = null;
+        Player player = playerAuthMap.get(auth);
+        DestinationCard destinationCard = null;
+        destinationCard = currentGame.getDestinationCardByName(destinationCardName);
+        destinationCard.setOwnership(-1);
+        player.removeDestinationCard(destinationCardName);
+        return true;
     }
 
     @Override
     public boolean drawDeckCard(String auth) {
+        Game currentGame = null;
+        CardColor cardColor = currentGame.drawCard();
         return false;
     }
 
     @Override
-    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
 

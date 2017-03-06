@@ -83,8 +83,6 @@ public class ServerFacade implements IServer{
     /*
         These are the functions used after starting the game
     */
-
-    //added endTurn for the end turn Command (2/28)
     @Override
     public boolean endTurn(int gameID, String auth) {
         ServerModel serverModel = ServerModel.getInstance();
@@ -99,13 +97,15 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCard(String destinationCardName, String auth) {
-        return false;
+    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
+        ServerModel serverModel = ServerModel.getInstance();
+        return serverModel.drawDestinationCard(destinationCardName, playerID, auth);
     }
 
     @Override
     public boolean removeDestinationCard(String destinationCardName, String auth) {
-        return false;
+        ServerModel serverModel = ServerModel.getInstance();
+        return serverModel.removeDestinationCard(destinationCardName, auth);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
 

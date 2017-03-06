@@ -1,5 +1,6 @@
 package client.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -78,9 +79,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 {Toast.makeText(getBaseContext(),"SUCCESSFULLY CREATED",Toast.LENGTH_SHORT).show();}
                 else
                 {Toast.makeText(getBaseContext(),"failed",Toast.LENGTH_SHORT).show();}
-
-                //GameListPresenter.getInstance().getServerGames();
-                //TODO:we have to set this game to the current game and then join the game!
             }
         });
 
@@ -94,7 +92,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
                 if(success) {
                     //TODO: should i start the new activity or does it do this somewhere else?
-                    //startActivity(new Intent(GameListView.this, GameLobbyView.class));
+                    startActivity(new Intent(GameListView.this, GameLobbyView.class));
                 }
                 else {
                     Toast.makeText(getBaseContext(), "Could not join game",Toast.LENGTH_SHORT).show();
