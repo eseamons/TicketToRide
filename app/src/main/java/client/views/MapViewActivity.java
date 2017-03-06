@@ -93,7 +93,8 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         cur_done = routes.cur_done;
         for(int i = 0; i < cur_done; i++)
         {
-            routes.getRoute(i).ownership = 1;
+            int owner = i%5 + 1;
+            routes.getRoute(i).ownership = owner;
         }
 
 
@@ -155,12 +156,26 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             Route route = routes.getRoute(i);
             if(route.ownership != 0)
             {
-                paint.setColor(Color.RED);
+                paint.setColor(getColorByOwnerShip(route.ownership));
                 paint.setStrokeWidth(10);
                 canvas.drawLine(route.start_x,route.start_y,route.end_x,route.end_y,paint);
             }
         }
         map.setImageBitmap(mutableBitmap);
+    }
+
+    public int getColorByOwnerShip(int ownership)
+    {
+        int ret = Color.RED;
+        switch(ownership)
+        {
+            case 1: ret = Color.BLUE; break;
+            case 2: ret = Color.RED; break;
+            case 3: ret = Color.GREEN; break;
+            case 4: ret = Color.YELLOW; break;
+            case 5: ret = Color.BLACK; break;
+        }
+        return ret;
     }
 
     public void setPlayerCardViews(List<CardColor> playerCards)
