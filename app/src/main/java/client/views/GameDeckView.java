@@ -135,52 +135,52 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
 
     @Override
     public void setPurpleNum(int i) {
-        purple.setText(i);
+        purple.setText(Integer.toString(i));
     }
 
     @Override
     public void setWhiteNum(int i) {
-        white.setText(i);
+        white.setText(Integer.toString(i));
     }
 
     @Override
     public void setBlueNum(int i) {
-        blue.setText(i);
+        blue.setText(Integer.toString(i));
     }
 
     @Override
     public void setYellowNum(int i) {
-        yellow.setText(i);
+        yellow.setText(Integer.toString(i));
     }
 
     @Override
     public void setOrangeNum(int i) {
-        orange.setText(i);
+        orange.setText(Integer.toString(i));
     }
 
     @Override
     public void setBlackNum(int i) {
-        black.setText(i);
+        black.setText(Integer.toString(i));
     }
 
     @Override
     public void setRedNum(int i) {
-        red.setText(i);
+        red.setText(Integer.toString(i));
     }
 
     @Override
     public void setGreenNum(int i) {
-        green.setText(i);
+        green.setText(Integer.toString(i));
     }
 
     @Override
     public void setWildNum(int i) {
-        wild.setText(i);
+        wild.setText(Integer.toString(i));
     }
 
     @Override
     public void setTrainsRemainingNum(int i) {
-        trainsRemaining.setText(i);
+        trainsRemaining.setText(Integer.toString(i));
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
