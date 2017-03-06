@@ -46,7 +46,7 @@ public class DestinationCardsList {
         destinationCardsList.add(new DestinationCard("Montreal", "New Orleans", 13));
         destinationCardsList.add(new DestinationCard("Sault St Marie", "Oklahoma City", 9));
         destinationCardsList.add(new DestinationCard("Seattle", "Los Angeles", 9));
-        
+
 
     }
 
