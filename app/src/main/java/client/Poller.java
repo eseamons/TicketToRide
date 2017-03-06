@@ -13,7 +13,6 @@ public class Poller
 
         //this calls the Async task over and over again. The numbers 1,1 tell it how often to run
         //the higher the numbers the SLOWER it runs.
-        //TODO: inorder to stop this when you join a game we will need to call
         LobbyListTimer.schedule(new TimerTask() {
             @Override
             public void run() {

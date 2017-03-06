@@ -5,27 +5,29 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/greenText"
         android:layout_width="117dp"
-        android:layout_alignParentBottom="true"
+        android:layout_height="117dp"
         android:layout_alignLeft="@+id/orangeText"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/orangeText"
+        android:background="@color/green"
+        android:text="\nGreen"
         android:textAlignment="center"
-        tools:text="\nGreen"
+        android:textColor="@color/white"
         android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/wildText"
         android:layout_width="117dp"
+        android:layout_height="117dp"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/greenText"
         android:layout_toEndOf="@+id/greenText"
+        android:layout_toRightOf="@+id/greenText"
+        android:background="@color/gray"
+        android:text="\nWild"
         android:textAlignment="center"
-        tools:text="\nWild"
+        android:textColor="@color/white"
         android:textSize="26sp" />
 
     <ImageButton
@@ -101,89 +103,96 @@
         android:layout_toEndOf="@+id/faceUpButton3" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/yellowText"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="\nYellow"
-        android:textSize="26sp"
+        android:layout_height="117dp"
         android:layout_above="@+id/redText"
+        android:layout_toEndOf="@+id/destinationTicketView"
         android:layout_toRightOf="@+id/destinationTicketView"
-        android:layout_toEndOf="@+id/destinationTicketView" />
+        android:background="@color/yellow"
+        android:text="\nYellow"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/orangeText"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="\nOrange"
-        android:textSize="26sp"
+        android:layout_height="117dp"
         android:layout_alignBaseline="@+id/yellowText"
         android:layout_alignBottom="@+id/yellowText"
+        android:layout_toEndOf="@+id/redText"
         android:layout_toRightOf="@+id/redText"
-        android:layout_toEndOf="@+id/redText" />
+        android:background="@color/orange"
+        android:text="\nOrange"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/blackText"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="\nBlack"
-        android:textSize="26sp"
+        android:layout_height="117dp"
         android:layout_above="@+id/wildText"
+        android:layout_toEndOf="@+id/greenText"
         android:layout_toRightOf="@+id/greenText"
-        android:layout_toEndOf="@+id/greenText" />
+        android:background="@color/black"
+        android:text="\nBlack"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/blueText"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="\nBlue"
-        android:textSize="26sp"
+        android:layout_height="117dp"
         android:layout_above="@+id/blackText"
+        android:layout_toEndOf="@+id/whiteText"
         android:layout_toRightOf="@+id/whiteText"
-        android:layout_toEndOf="@+id/whiteText" />
+        android:background="@color/blue"
+        android:text="\nBlue"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/whiteText"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        android:textSize="26sp"
+        android:layout_height="117dp"
         android:layout_above="@+id/yellowText"
-        android:layout_toRightOf="@+id/purpleText"
         android:layout_toEndOf="@+id/purpleText"
-        tools:text="\nWhite" />
+        android:layout_toRightOf="@+id/purpleText"
+        android:background="@color/white"
+        android:text="\nWhite"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/purpleText"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="\nPurple"
-        android:textSize="26sp"
+        android:layout_height="117dp"
         android:layout_above="@+id/yellowText"
+        android:layout_toEndOf="@+id/destinationTicketView"
         android:layout_toRightOf="@+id/destinationTicketView"
-        android:layout_toEndOf="@+id/destinationTicketView" />
+        android:background="@color/purple"
+        android:text="\nPurple"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="117dp"
         android:id="@+id/redText"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="\nRed"
-        android:textSize="26sp"
+        android:layout_height="117dp"
         android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/destinationTicketView"
         android:layout_toRightOf="@+id/destinationTicketView"
-        android:layout_toEndOf="@+id/destinationTicketView" />
+        android:background="@color/red"
+        android:text="\nRed"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/destinationTicketView"
@@ -205,128 +214,126 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/purpleNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
-        android:layout_marginTop="62dp"
+        android:layout_height="55dp"
         android:layout_above="@+id/yellowText"
+        android:layout_toEndOf="@+id/destinationTicketView"
         android:layout_toRightOf="@+id/destinationTicketView"
-        android:layout_toEndOf="@+id/destinationTicketView" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/whiteNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_alignBaseline="@+id/purpleNum"
         android:layout_alignBottom="@+id/purpleNum"
+        android:layout_toEndOf="@+id/yellowText"
         android:layout_toRightOf="@+id/yellowText"
-        android:layout_toEndOf="@+id/yellowText" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/blueNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_alignBaseline="@+id/whiteNum"
         android:layout_alignBottom="@+id/whiteNum"
+        android:layout_toEndOf="@+id/whiteText"
         android:layout_toRightOf="@+id/whiteText"
-        android:layout_toEndOf="@+id/whiteText" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/orangeNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_above="@+id/greenText"
+        android:layout_toEndOf="@+id/redText"
         android:layout_toRightOf="@+id/redText"
-        android:layout_toEndOf="@+id/redText" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/blackNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_above="@+id/wildText"
+        android:layout_toEndOf="@+id/greenText"
         android:layout_toRightOf="@+id/greenText"
-        android:layout_toEndOf="@+id/greenText" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/redNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:layout_toLeftOf="@+id/whiteText"
-        android:layout_toStartOf="@+id/whiteText" />
+        android:layout_toStartOf="@+id/whiteText"
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/greenNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/redNum"
         android:layout_toRightOf="@+id/redNum"
-        android:layout_toEndOf="@+id/redNum" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/wildNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/greenText"
         android:layout_toRightOf="@+id/greenText"
-        android:layout_toEndOf="@+id/greenText" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
-        android:layout_height="55dp"
         android:id="@+id/yellowNum"
         android:layout_width="117dp"
-        android:textAlignment="center"
-        tools:text="0"
-        android:textSize="26sp"
+        android:layout_height="55dp"
         android:layout_alignBaseline="@+id/orangeNum"
         android:layout_alignBottom="@+id/orangeNum"
+        android:layout_toEndOf="@+id/destinationTicketView"
         android:layout_toRightOf="@+id/destinationTicketView"
-        android:layout_toEndOf="@+id/destinationTicketView" />
+        android:text="0"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/trainsRemainingNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/trainsRemainingNum"
-        android:textSize="36sp"
-        tools:text="0"
         android:layout_alignBaseline="@+id/trainsRem"
         android:layout_alignBottom="@+id/trainsRem"
+        android:layout_toEndOf="@+id/trainsRem"
         android:layout_toRightOf="@+id/trainsRem"
-        android:layout_toEndOf="@+id/trainsRem" />
+        android:text="0"
+        android:textSize="36sp" />
 
     <TextView
         android:text="Trains Remaining: "
@@ -341,37 +348,34 @@
         android:layout_marginStart="29dp" />
 
     <TextView
-        android:text="TextView"
+        android:id="@+id/drawCardText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="29dp"
-        android:layout_marginStart="29dp"
-        android:id="@+id/drawCardText"
-        tools:text="Draw a Card:"
-        android:textSize="36sp"
         android:layout_above="@+id/deckButton"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="29dp"
+        android:layout_marginStart="29dp"
+        android:text="Draw a Card:"
+        android:textSize="36sp" />
 
     <Button
-        android:text="Button"
-        android:layout_height="100dp"
         android:id="@+id/mapButton"
         android:layout_width="150dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginEnd="56dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/destTicket"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
         android:layout_toLeftOf="@+id/trainsRemainingNum"
         android:layout_toStartOf="@+id/trainsRemainingNum"
-        tools:text="To Map\n(Claim Route/Draw Desination Tickets)" />
+        android:text="To Map\n(Claim Route/Draw Desination Tickets)" />
 
     <Button
-        android:text="Button"
-        android:layout_height="100dp"
         android:id="@+id/statsButton"
         android:layout_width="150dp"
+        android:layout_height="100dp"
         android:layout_above="@+id/wildNum"
         android:layout_alignLeft="@+id/mapButton"
         android:layout_alignStart="@+id/mapButton"
-        tools:text="To Stats" />
+        android:text="To Stats" />
 </RelativeLayout>

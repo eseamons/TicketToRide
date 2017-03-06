@@ -35,10 +35,9 @@ public interface IServer {
     /*
         These are the functions used after starting the game
     */
-    //added endTurn for the end turn Command (2/28)
     boolean endTurn(int gameID, String auth);
 
-    boolean claimRoute(Route routeClaimed, String auth);
+    boolean claimRoute(int gameID, Route routeClaimed, String auth);
 
     boolean drawDestinationCard(String destinationCardName, String auth);
 

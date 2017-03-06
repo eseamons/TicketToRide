@@ -11,6 +11,7 @@ import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
+import shared.model_classes.Route;
 
 public interface IClient {
 
@@ -51,8 +52,11 @@ public interface IClient {
 
     public void aGameStarted(int gameID);
 
+    //methods needed for GamePlay
     public void addComment(int gameID, String message);
 
     boolean endTurn();
+
+    void RouteClaimedbyPlayer(int gameID, Route route, String auth);
 
 }

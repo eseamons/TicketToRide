@@ -11,8 +11,8 @@
     <color name = "blue">#0066ff</color>
     <color name = "yellow">#ffff00</color>
     <color name="orange">#ff9900</color>
-    <color name="black">#333333</color>
+    <color name="black">#121212</color>
     <color name="red">#ef0000</color>
-    <color name="green">#00e6a8</color>
+    <color name="green">#00b446</color>
     <color name="gray">#808080</color>
 </resources>

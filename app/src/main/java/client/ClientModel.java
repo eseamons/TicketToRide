@@ -14,7 +14,9 @@ import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
+import shared.model_classes.Route;
 import shared.model_classes.model_list_classes.GameLobbyList;
+import shared.model_classes.model_list_classes.RoutesList;
 
 public class ClientModel extends Observable
 {
@@ -33,6 +35,7 @@ public class ClientModel extends Observable
     private GameLobbyList gameLobbyList = new GameLobbyList();
     private GameLobby currentGameLobby;
     private Game currentGame;
+    //private RoutesList routes = new RoutesList();
 
 
 
@@ -141,6 +144,10 @@ public class ClientModel extends Observable
 
     public List<Player> getPlayers()
     {return currentGame.getPlayers();}
+
+    public void claimRoute(Route route, String auth) {
+        currentGame.claimRoute(route,auth);
+    }
 
 
         //NOT SURE WHERE THESE GO YET

@@ -8,6 +8,7 @@ import shared.ColorNum;
 import shared.Result;
 import shared.Serializer;
 import shared.command_classes.AddCommentCommand;
+import shared.command_classes.ClaimRouteCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
 import shared.command_classes.GetGamesCommand;
@@ -52,11 +53,7 @@ public class ServerProxy implements IServer{
         Account account = null;
         if(r.isSuccess())
         {
-            try {
-                account = (Account) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-
-            }
+            account = (Account) Serializer.deserialize(r.getInfo());
             return account;
         }
         else
@@ -94,12 +91,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            try {
-                return (GameLobby) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-                return null;
-            }
-
+            return (GameLobby) Serializer.deserialize(r.getInfo());
         }
         else
         {
@@ -116,12 +108,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            try {
-                return (List<GameLobby>) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-                return null;
-            }
-
+            return (List<GameLobby>) Serializer.deserialize(r.getInfo());
         }
         else
         {
@@ -138,11 +125,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            try {
-                return (List<Command>) Serializer.deserialize(r.getInfo());
-            } catch(IOException e) {
-                return null;
-            }
+            return (List<Command>) Serializer.deserializeList(r.getInfo());
         }
         else
         {
@@ -190,8 +173,12 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean claimRoute(Route routeClaimed, String auth) {
-        return false;
+    public boolean claimRoute(int gameID, Route routeClaimed, String auth) {
+        String json = "{\"gameID\": \""+gameID+"\", \"route\":\""+routeClaimed+"\", \"auth\":\""+auth+"\"}";
+        Command cmd = new ClaimRouteCommand();
+        cmd.setInfo(json);
+        Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+        return r.isSuccess();
     }
 
     @Override

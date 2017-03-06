@@ -66,6 +66,16 @@ public class PlayersList {
         currentPlayer = players.get(currentPlayerID);
     }
 
-
-
+    public void increasePlayerScore(String auth, int points) {
+        for(int i = 0; i < players.size(); i ++)
+        {
+            Player tempPlayer = players.get(i);
+            String tempAuth = tempPlayer.getAccount().getAuthentication();
+            if(tempAuth.equals(auth))
+            {
+                int newScore = tempPlayer.getPoints() + points;
+                tempPlayer.setPoints(newScore);
+            }
+        }
+    }
 }

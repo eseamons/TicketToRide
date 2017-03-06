@@ -21,11 +21,7 @@ public class GetGamesCommand extends Command
         if(games == null) {
             result = new Result(false,"");
         } else {
-            try {
-                result = new Result(true, Serializer.serialize(games));
-            } catch(IOException e) {
-                result = new Result(false,"");
-            }
+            result = new Result(true, Serializer.serialize(games));
         }
         return result;
     }

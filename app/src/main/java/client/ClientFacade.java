@@ -15,6 +15,7 @@ import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
+import shared.model_classes.Route;
 
 public class ClientFacade implements IClient{
 
@@ -177,7 +178,21 @@ public class ClientFacade implements IClient{
         return true;
     }
 
+    //todo: create a claim route for people to call from the presenter
+    public boolean ClaimRoute(Route route)
+    {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
 
+        boolean successful = serverProxy.claimRoute(gameID, route,auth);
+        return successful;
+    }
 
-
+    @Override
+    public void RouteClaimedbyPlayer(int gameID, Route route, String auth) {
+        Game currentGame = clientModel.getCurrent_game();
+        if(currentGame.getGameID() == gameID)
+        {clientModel.claimRoute(route, auth);}
+    }
 }

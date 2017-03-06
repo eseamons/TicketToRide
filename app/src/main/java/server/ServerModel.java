@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -150,10 +151,7 @@ public class ServerModel implements IServer{
                 gameLobbyList.incrementCurrentLobbyCommandID();
                 Command cmd = new JoinGameCommand();
 
-                String accountString = "";
-                try {
-                    accountString = Serializer.serialize(acc);
-                } catch (IOException e) {e.printStackTrace();}
+                String accountString = Serializer.serialize(acc);
 
                 String info = "{\"gameLobbyID\": \""+gameLobbyID+"\", \"acc\":\""+accountString+"\"}";
                 cmd.setInfo(info);
@@ -250,8 +248,34 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean claimRoute(Route routeClaimed, String auth) {
-        return false;
+    public boolean claimRoute(int gameID, Route route, String auth) {
+        boolean routeClaimed = false;
+        Game game = gameList.getGame(gameID);
+
+        if (game != null)
+        {
+            routeClaimed = game.claimRoute(route, auth);
+
+            if(routeClaimed == true) {
+
+                String routeString = null;
+
+
+                routeString = Serializer.serialize(route);
+
+                String json = "{ \"gameID\":\"" + gameID + "\", \"route\":\"" + routeString + "\", \"auth\":\"" +auth+ "\"}";
+
+                int currentCmdId = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
+
+                Command cmd = new ClaimRouteCommand();
+                cmd.setInfo(json);
+                cmd.setCmdID(currentCmdId);
+                gameList.addGameCommand(cmd);
+            }
+        }
+        return routeClaimed;
+
     }
 
     @Override

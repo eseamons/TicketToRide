@@ -24,30 +24,18 @@ public class JoinGameCommand extends Command
         if(game == null) {
             result = new Result(false,"");
         } else {
-            try {
-                result = new Result(true, Serializer.serialize(game));
-            } catch(IOException e) {
-                result = new Result(false,"");
-            }
+            result = new Result(true, Serializer.serialize(game));
         }
         return result;
     }
 
     public void executeOnClient()
     {
-        try {
-            JsonObject jsonObject = convertStringToJsonObject(info);
-            int gameLobbyID = Integer.parseInt(jsonObject.get("gameLobbyID").getAsString());
-            String acc = jsonObject.get("acc").getAsString();
-            Account account = (Account)Serializer.deserialize(acc);
-            ClientFacade clientFacade = new ClientFacade();
-            clientFacade.someoneJoinedGame(gameLobbyID, account);
-
-
-
-        } catch (IOException e)
-        {e.printStackTrace();}
-
-
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        int gameLobbyID = Integer.parseInt(jsonObject.get("gameLobbyID").getAsString());
+        String acc = jsonObject.get("acc").getAsString();
+        Account account = (Account)Serializer.deserialize(acc);
+        ClientFacade clientFacade = new ClientFacade();
+        clientFacade.someoneJoinedGame(gameLobbyID, account);
     }
 }

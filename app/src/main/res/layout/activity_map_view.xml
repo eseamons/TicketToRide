@@ -1,165 +1,154 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<RelativeLayout
+    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="client.views.MapViewActivity">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_map_view" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-    <RelativeLayout
+    <ImageView
+        android:layout_alignParentTop="true"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       >
+        android:background="@drawable/ttrmap"
+        android:id="@+id/map"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ttrmap"
-            android:id="@+id/map"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@id/map">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_below="@id/map">
+        <ScrollView
+            android:layout_width="300dp"
+            android:layout_height="match_parent" />
 
-            <ScrollView
-                android:layout_width="300dp"
-                android:layout_height="match_parent" />
+        <TextView
+            android:id="@+id/purpleNum1"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/purple"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/purple"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/whiteNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/blueNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/blue"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/blue"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/yellowNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/yellow"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/yellow"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/orangeNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/orange"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/orange"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/blackNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/black"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/redNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/red"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/red"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
+        <TextView
+            android:id="@+id/greenNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/green"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/green"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
-
-            <TextView
-                android:layout_width="80dp"
-                android:layout_height="match_parent"
-                android:background="@color/gray"
-                android:text="0"
-                android:textAlignment="center"
-                android:textSize="30dp"/>
-
-            <Button
-                android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:textSize="10dp"
-                android:text="CLAIM ROUTE"/>
-
-            <Button
-                android:layout_width="130dp"
-                android:layout_height="match_parent"
-                android:textSize="10dp"
-                android:text="DRAW DESTINATION"/>
-
-        </LinearLayout>
-
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="105dp"
-            android:text="T     O      D      E     C    K"
-            android:textSize="10dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:id="@+id/button_TODECK"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/wildNum"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="@color/gray"
+            android:text="0"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
 
         <Button
-            android:layout_width="40dp"
-            android:layout_height="105dp"
-            android:text="T  O  S   T  A  T  S"
-            android:textSize="10dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginStart="12dp"
-            android:id="@+id/button_TOSTATS"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true" />
-    </RelativeLayout>
+            android:id="@+id/claimRouteButton"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:text="CLAIM ROUTE"
+            android:textSize="10dp" />
 
-</android.support.design.widget.CoordinatorLayout>
+        <Button
+            android:id="@+id/drawDestinationButton"
+            android:layout_width="130dp"
+            android:layout_height="match_parent"
+            android:text="DRAW DESTINATION"
+            android:textSize="10dp" />
+
+    </LinearLayout>
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="105dp"
+        android:text="T     O      D      E     C    K"
+        android:textSize="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:id="@+id/button_TODECK"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true" />
+
+    <Button
+        android:layout_width="40dp"
+        android:layout_height="105dp"
+        android:text="T  O  S   T  A  T  S"
+        android:textSize="10dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:id="@+id/button_TOSTATS"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true" />
+</RelativeLayout>
+

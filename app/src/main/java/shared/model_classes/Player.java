@@ -47,4 +47,11 @@ public class Player {
         return account.getAuthentication() == auth;
     }
 
+
+    public int getPoints() {
+        return points;
+    }
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }
