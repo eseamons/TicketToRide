@@ -276,21 +276,29 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCard(String destinationCardName, String auth) {
+    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
         Game currentGame = null;
         DestinationCard destinationCard = null;
-        int playerID = 0;
         boolean destinationCardDrawnSuccessfully = false;
+        Player player = playerAuthMap.get(auth);
 
-        if(currentGame.destinationCardIsOwned(destinationCardName)) {
+        if(!currentGame.destinationCardIsOwned(destinationCardName)) {
+            destinationCard = currentGame.getDestinationCardByName(destinationCardName);
+            player.addDestinationCard(destinationCard);
             destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, playerID);
         }
         return destinationCardDrawnSuccessfully;
     }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, String auth) {
-        return false;
+    public boolean removeDestinationCard(String destinationCardName, int playerID, String auth) {
+        Game currentGame = null;
+        Player player = playerAuthMap.get(auth);
+        DestinationCard destinationCard = null;
+        destinationCard = currentGame.getDestinationCardByName(destinationCardName);
+        destinationCard.setOwnership(-1);
+        player.removeDestinationCard(destinationCardName);
+        return true;
     }
 
     @Override

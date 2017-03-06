@@ -27,6 +27,11 @@ public class DestinationCard {
         return this.ownership;
     }
 
+    public String getDestinationCardName() {
+        return city1 + " " + city2;
+    }
+
+
 
 
 
