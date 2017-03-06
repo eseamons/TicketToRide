@@ -262,7 +262,7 @@ public class ServerModel implements IServer{
 
                 try {
                     routeString = Serializer.serialize(route);
-                } catch (IOException e) {e.printStackTrace();}
+                } catch (Exception e) {e.printStackTrace();}
 
                 String json = "{ \"gameID\":\"" + gameID + "\", \"route\":\"" + routeString + "\", \"auth\":\"" +auth+ "\"}";
 

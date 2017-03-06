@@ -27,9 +27,15 @@
             android:name="client.views.GameListView"
             android:screenOrientation="landscape" />
         <activity
+            android:name="client.views.GameDeckView"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="client.views.GameStatsView"
+            android:screenOrientation="landscape" />
+        <activity
             android:name="client.views.MapViewActivity"
-            android:label="@string/title_activity_map_view"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

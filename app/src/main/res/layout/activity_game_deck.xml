@@ -360,16 +360,15 @@
         android:textSize="36sp" />
 
     <Button
-        android:text="Button"
-        android:layout_height="100dp"
         android:id="@+id/mapButton"
         android:layout_width="150dp"
-        android:layout_marginRight="56dp"
-        android:layout_marginEnd="56dp"
+        android:layout_height="100dp"
         android:layout_below="@+id/destTicket"
+        android:layout_marginEnd="56dp"
+        android:layout_marginRight="56dp"
         android:layout_toLeftOf="@+id/trainsRemainingNum"
         android:layout_toStartOf="@+id/trainsRemainingNum"
-        tools:text="To Map\n(Claim Route/Draw Desination Tickets)" />
+        android:text="To Map\n(Claim Route/Draw Desination Tickets)" />
 
     <Button
         android:id="@+id/statsButton"
@@ -378,6 +377,5 @@
         android:layout_above="@+id/wildNum"
         android:layout_alignLeft="@+id/mapButton"
         android:layout_alignStart="@+id/mapButton"
-        android:text="Button"
-        tools:text="To Stats" />
+        android:text="To Stats" />
 </RelativeLayout>

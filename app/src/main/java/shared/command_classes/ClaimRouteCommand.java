@@ -26,7 +26,7 @@ public class ClaimRouteCommand extends Command {
 
             boolean success = ServerFacade.getInstance().claimRoute(gameID, route,auth);
             return new Result(success, auth);
-        }catch (IOException e) {e.printStackTrace();}
+        }catch (Exception e) {e.printStackTrace();}
         return null;
     }
 
@@ -42,7 +42,7 @@ public class ClaimRouteCommand extends Command {
             ClientFacade clientFacade = new ClientFacade();
             clientFacade.RouteClaimedbyPlayer(gameID,route,auth);
 
-        } catch (IOException e)
+        } catch (Exception e)
         {e.printStackTrace();}
 
 

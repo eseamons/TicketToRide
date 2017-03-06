@@ -61,7 +61,7 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
         return instance;
     }
 
-    private GameStatsView(){}
+    public GameStatsView(){}
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
