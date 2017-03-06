@@ -10,17 +10,22 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.erics.tickettoride.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import shared.CardColor;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.Route;
 import shared.model_classes.model_list_classes.RoutesList;
 
@@ -37,6 +42,8 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     TextView redNum;
     TextView greenNum;
     TextView wildNum;
+
+    TextView destView;
 
     int test_num = 0;
     int cur_done = 3;
@@ -59,6 +66,8 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         greenNum = (TextView) findViewById(R.id.greenNum);
         wildNum = (TextView) findViewById(R.id.wildNum);
 
+        destView = (TextView) findViewById(R.id.map_destinationView);
+        destView.setMovementMethod(new ScrollingMovementMethod());
 
         routes = new RoutesList();
         cur_done = routes.cur_done;
@@ -89,7 +98,20 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             Log.d("SPACE", "ROUTE END");
         }
         drawRoutes(routes);
+        testCardNums();
         return true;
+    }
+
+    public void testCardNums()
+    {
+        List<CardColor> cards = new ArrayList<>();
+        cards.add(CardColor.RED);
+        cards.add(CardColor.RED);
+        cards.add(CardColor.BLUE);
+        cards.add(CardColor.ORANGE);
+        cards.add(CardColor.BLACK);
+        cards.add(CardColor.BLACK);
+        setPlayerCardViews(cards);
     }
 
 
@@ -175,9 +197,15 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
     }
 
-    public void setDestinationBox()
+    public void setDestinationBox(List<DestinationCard> destinationCards)
     {
-
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i < destinationCards.size(); i++)
+        {
+            DestinationCard dc = destinationCards.get(i);
+            sb.append(dc.toString() + "\n");
+        }
+        destView.setText(sb.toString());
     }
 
 
