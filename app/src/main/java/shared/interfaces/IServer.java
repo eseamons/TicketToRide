@@ -45,6 +45,6 @@ public interface IServer {
 
     boolean drawDeckCard(String auth);
 
-    boolean drawFaceUpCard(int faceUpCardID, String auth);
+    boolean drawFaceUpCard(ColorNum faceUpCardID, String auth);
 
 }

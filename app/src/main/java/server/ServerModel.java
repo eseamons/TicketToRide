@@ -307,7 +307,7 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
 
