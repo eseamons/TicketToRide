@@ -15,47 +15,61 @@ import shared.model_classes.Route;
 
 public interface IClient {
 
-    //methods needed for the login/register view
+/*
+    methods needed for the login/register view
+*/
     void setObserver(Observer o);
 
     Account login(String name, String pass);
 
     boolean register(String name, String pass);
 
+/*
+    methods needed for gameListView
+*/
     void getServerGamesList(String auth);
 
-
-    //methods needed for the gameListView
     List<GameLobby> getClientGamesList();
 
     void getNewCommands();
 
-    GameLobby joinGame(int gameID);
-
     boolean createGameLobby(String gameName, int maxPlayers);
-
-    Game beginGame();
-
-    boolean sendMessage(String message);
-
-    ArrayList<String> getChat();
-
-    List<Player> getPlayers();
-
-    public void someoneJoinedGame(int gameID, Account account);
 
     public void addGameToLobbyList(GameLobby game);
 
+    GameLobby joinGame(int gameID);
 
-    //methods needed for GameLobby View
+    public void someoneJoinedGame(int gameID, Account account);
+
+
+
+/*
+    methods needed for GameLobby View
+*/
+    List<Player> getPlayers();
+
     boolean changePlayerColor(ColorNum colorNum);
+
+    ArrayList<String> getChat();
+
+    boolean sendMessage(String message);
+
+    public void addComment(int gameID, String message);
+
+    Game beginGame();
 
     public void aGameStarted(int gameID);
 
-    //methods needed for GamePlay
-    public void addComment(int gameID, String message);
 
+/*
+    methods needed for game play
+    client methods are followed by thier counterpart needed for receiving
+*/
     boolean endTurn();
+
+    public void aTurnEnded(int gameID);
+
+    public boolean ClaimRoute(Route route);
 
     void RouteClaimedbyPlayer(int gameID, Route route, String auth);
 
