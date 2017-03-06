@@ -1,10 +1,12 @@
 package client.views;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -72,6 +74,63 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
         faceUpCard4Button = (ImageButton) findViewById(R.id.faceUpButton4);
         mapButton = (Button) findViewById(R.id.mapButton);
         statsButton = (Button) findViewById(R.id.statsButton);
+
+
+        deckButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add functionality
+            }
+        });
+
+        faceUpCard0Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add functionality
+            }
+        });
+
+        faceUpCard1Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add functionality
+            }
+        });
+
+        faceUpCard2Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add functionality
+            }
+        });
+
+        faceUpCard3Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add functionality
+            }
+        });
+
+        faceUpCard4Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: add functionality
+            }
+        });
+
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameDeckView.this, MapViewActivity.class));
+            }
+        });
+
+        statsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(GameDeckView.this, GameStatsView.class));
+            }
+        });
     }
 
     @Override
