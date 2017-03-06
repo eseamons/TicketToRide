@@ -1,5 +1,6 @@
 package client.views;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.util.StringBuilderPrinter;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -45,6 +47,9 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
     TextView destView;
 
+    Button toDeck;
+    Button toStats;
+
     int test_num = 0;
     int cur_done = 3;
     RoutesList routes;
@@ -68,6 +73,21 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
         destView = (TextView) findViewById(R.id.map_destinationView);
         destView.setMovementMethod(new ScrollingMovementMethod());
+
+        toStats = (Button) findViewById(R.id.button_TOSTATS);
+        toStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapViewActivity.this, GameStatsView.class));
+            }
+        });
+        toDeck = (Button) findViewById(R.id.button_TODECK);
+        toDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapViewActivity.this, GameDeckView.class));
+            }
+        });
 
         routes = new RoutesList();
         cur_done = routes.cur_done;
