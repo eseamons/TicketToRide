@@ -18,8 +18,8 @@ public class RoutesList {
     private Map<String,Route> playersClaimedRoutes = new HashMap<>();
 
     //added just so will compile
-    List<Route> routeList;
-    public int cur_done = 41+1; //this is for Michael to help harcoding his view
+    //List<Route> routeList;
+    public int cur_done = 87+1; //this is for Michael to help harcoding his view
     public RoutesList()
     {
         availableRouteList.add(new Route("Vancouver", "Calgary", CardColor.WILD, 3));
@@ -107,51 +107,97 @@ public class RoutesList {
         availableRouteList.add(new Route("Omaha", "Duluth", CardColor.WILD, 2));
         getRoute(41).setCoords(1445,462,1394,585);
         availableRouteList.add(new Route("Sault St Marie", "Duluth", CardColor.WILD, 3));
+        getRoute(42).setCoords(1492,394,1731,314);
         availableRouteList.add(new Route("Toronto", "Duluth", CardColor.PURPLE, 6));
+        getRoute(43).setCoords(1470,425,1995,351);
         availableRouteList.add(new Route("Chicago", "Duluth", CardColor.RED, 3));
+        getRoute(44).setCoords(1461,446,1700,517);
         availableRouteList.add(new Route("Omaha", "Chicago", CardColor.BLUE, 4));
+        getRoute(45).setCoords(1394,609,1715,555);
         availableRouteList.add(new Route("Omaha", "Kansas City", CardColor.WILD, 1));
+        getRoute(46).setCoords(1366,639,1397,695);
         availableRouteList.add(new Route("Omaha", "Kansas City", CardColor.WILD, 1));
+        getRoute(47).setCoords(1394,627,1430,679);
         availableRouteList.add(new Route("Saint Louis", "Kansas City", CardColor.BLUE, 2));
+        getRoute(48).setCoords(1443,698,1609,696);
         availableRouteList.add(new Route("Saint Louis", "Kansas City", CardColor.PURPLE, 2));
+        getRoute(49).setCoords(1443,721,1609,718);
         availableRouteList.add(new Route("Oklahoma City", "Kansas City", CardColor.WILD, 2));
+        getRoute(50).setCoords(1413,735,1370,860);
         availableRouteList.add(new Route("Oklahoma City", "Kansas City", CardColor.WILD, 2));
+        getRoute(51).setCoords(1443,739,1395,867);
         availableRouteList.add(new Route("Oklahoma City", "Little Rock", CardColor.WILD, 2));
+        getRoute(52).setCoords(1403,889,1571,883);
         availableRouteList.add(new Route("Oklahoma City", "Dallas", CardColor.WILD, 2));
+        getRoute(53).setCoords(1377,907,1397,1039);
         availableRouteList.add(new Route("Oklahoma City", "Dallas", CardColor.WILD, 2));
+        getRoute(54).setCoords(1411,905,1430,1038);
         availableRouteList.add(new Route("Dallas", "Little Rock", CardColor.WILD, 2));
+        getRoute(55).setCoords(1463,1020,1565,913);
         availableRouteList.add(new Route("Dallas", "Houston", CardColor.WILD, 1));
+        getRoute(56).setCoords(1430,1085,1479,1131);
         availableRouteList.add(new Route("Dallas", "Houston", CardColor.WILD, 1));
+        getRoute(57).setCoords(1455,1067,1504,1112);
         availableRouteList.add(new Route("New Orleans", "Houston", CardColor.WILD, 2));
+        getRoute(58).setCoords(1550,1140,1718,1118);
         availableRouteList.add(new Route("Chicago", "Toronto", CardColor.WHITE, 4));
+        getRoute(59).setCoords(1734,514,2028,360);
         availableRouteList.add(new Route("Chicago", "Pittsburgh", CardColor.ORANGE, 3));
+        getRoute(60).setCoords(1768,520,2029,492);
         availableRouteList.add(new Route("Chicago", "Pittsburgh", CardColor.BLACK, 3));
+        getRoute(61).setCoords(1781,548,2034,520);
         availableRouteList.add(new Route("Saint Louis", "Chicago", CardColor.GREEN, 2));
+        getRoute(62).setCoords(1620,685,1711,570);
         availableRouteList.add(new Route("Saint Louis", "Chicago", CardColor.WHITE, 2));
+        getRoute(63).setCoords(1652,698,1740,578);
         availableRouteList.add(new Route("Saint Louis", "Pittsburgh", CardColor.GREEN, 5));
+        getRoute(64).setCoords(1665,716,2046,547);
         availableRouteList.add(new Route("Saint Louis", "Nashville", CardColor.WILD, 2));
+        getRoute(65).setCoords(1661,750,1826,790);
         availableRouteList.add(new Route("Saint Louis", "Little Rock", CardColor.WILD, 2));
+        getRoute(66).setCoords(1636,735,1595,867);
         availableRouteList.add(new Route("Nashville", "Little Rock", CardColor.WHITE, 3));
+        getRoute(67).setCoords(1624,890,1862,812);
         availableRouteList.add(new Route("New Orleans", "Little Rock", CardColor.GREEN, 3));
+        getRoute(68).setCoords(1610,913,1728,1094);
         availableRouteList.add(new Route("Nashville", "Pittsburgh", CardColor.YELLOW, 4));
+        getRoute(69).setCoords(1845,775,2073,560);
         availableRouteList.add(new Route("Nashville", "Raleigh", CardColor.BLACK, 3));
+        getRoute(70).setCoords(1890,775,2140,727);
         availableRouteList.add(new Route("Nashville", "Atlanta", CardColor.WILD, 1));
+        getRoute(71).setCoords(1890,805,1963,843);
         availableRouteList.add(new Route("New Orleans", "Atlanta", CardColor.YELLOW, 4));
+        getRoute(72).setCoords(1765,1093,1971,864);
         availableRouteList.add(new Route("New Orleans", "Atlanta", CardColor.ORANGE, 4));
+        getRoute(73).setCoords(1790,1109,1990,888);
         availableRouteList.add(new Route("New Orleans", "Miami", CardColor.RED, 4));
+        getRoute(74).setCoords(1812,1121,2271,1198);
         availableRouteList.add(new Route("Atlanta", "Raleigh", CardColor.WILD, 2));
+        getRoute(75).setCoords(2007,840,2138,754);
         availableRouteList.add(new Route("Atlanta", "Raleigh", CardColor.WILD, 2));
+        getRoute(76).setCoords(2024,860,2162,769);
         availableRouteList.add(new Route("Atlanta", "Charleston", CardColor.WILD, 2));
+        getRoute(77).setCoords(2037,882,2207,890);
         availableRouteList.add(new Route("Atlanta", "Miami", CardColor.BLUE, 5));
+        getRoute(78).setCoords(2010,898,2286,1173);
         availableRouteList.add(new Route("Charleston", "Miami", CardColor.PURPLE, 4));
+        getRoute(79).setCoords(2232,898,2319,1169);
         availableRouteList.add(new Route("Charleston", "Raleigh", CardColor.WILD, 2));
+        getRoute(80).setCoords(2185,759,2248,857);
         availableRouteList.add(new Route("Raleigh", "Washington", CardColor.WILD, 2));
+        getRoute(81).setCoords(2173,722,2285,618);
         availableRouteList.add(new Route("Raleigh", "Washington", CardColor.WILD, 2));
+        getRoute(82).setCoords(2195,741,2310,633);
         availableRouteList.add(new Route("Raleigh", "Pittsburgh", CardColor.WILD, 2));
+        getRoute(83).setCoords(2100,565,2139,702);
         availableRouteList.add(new Route("Pittsburgh", "Washington", CardColor.WILD, 2));
+        getRoute(84).setCoords(2118,540,2268,603);
         availableRouteList.add(new Route("Pittsburgh", "New York", CardColor.WHITE, 2));
+        getRoute(85).setCoords(2287,455,2295,590);
         availableRouteList.add(new Route("Pittsburgh", "New York", CardColor.GREEN, 2));
+        getRoute(86).setCoords(2315,455,2325,590);
         availableRouteList.add(new Route("Pittsburgh", "Toronto", CardColor.WILD, 2));
+        getRoute(87).setCoords(2055,357,2064,494);
         availableRouteList.add(new Route("Toronto", "Sault St Marie", CardColor.WILD, 2));
         availableRouteList.add(new Route("Toronto", "Montreal", CardColor.WILD, 3));
         availableRouteList.add(new Route("Montreal", "Sault St Marie", CardColor.BLACK, 5));
@@ -236,9 +282,9 @@ public class RoutesList {
 
         Route currentRoute;
         List<Route> claimableRoutes = new ArrayList<>();
-        for(int i = 0; i < routeList.size(); i++)
+        for(int i = 0; i < availableRouteList.size(); i++)
         {
-            currentRoute = routeList.get(i);
+            currentRoute = availableRouteList.get(i);
             // if route not owned
             if (currentRoute.ownership == 0)
             {

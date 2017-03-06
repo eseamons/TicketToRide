@@ -18,6 +18,9 @@ import android.widget.TextView;
 
 import com.example.erics.tickettoride.R;
 
+import java.util.List;
+
+import shared.CardColor;
 import shared.model_classes.Route;
 import shared.model_classes.model_list_classes.RoutesList;
 
@@ -26,6 +29,14 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
     ImageView map;
     TextView purpleNum;
+    TextView whiteNum;
+    TextView blueNum;
+    TextView yellowNum;
+    TextView orangeNum;
+    TextView blackNum;
+    TextView redNum;
+    TextView greenNum;
+    TextView wildNum;
 
     int test_num = 0;
     int cur_done = 3;
@@ -39,7 +50,15 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         map.setOnTouchListener(this);
 
         purpleNum = (TextView) findViewById(R.id.purpleNum1);
-        purpleNum.setText("BAKA");
+        whiteNum = (TextView) findViewById(R.id.whiteNum);
+        blueNum = (TextView) findViewById(R.id.blueNum);
+        yellowNum = (TextView) findViewById(R.id.yellowNum);
+        orangeNum = (TextView) findViewById(R.id.orangeNum);
+        blackNum = (TextView) findViewById(R.id.blackNum);
+        redNum = (TextView) findViewById(R.id.redNum);
+        greenNum = (TextView) findViewById(R.id.greenNum);
+        wildNum = (TextView) findViewById(R.id.wildNum);
+
 
         routes = new RoutesList();
         cur_done = routes.cur_done;
@@ -100,4 +119,66 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         }
         map.setImageBitmap(mutableBitmap);
     }
+
+    public void setPlayerCardViews(List<CardColor> playerCards)
+    {
+        int redCards = 0;
+        int orangeCards = 0;
+        int yellowCards = 0;
+        int greenCards = 0;
+        int blueCards = 0;
+        int purpleCards = 0;
+        int whiteCards = 0;
+        int blackCards = 0;
+        int wildCards = 0;
+
+        for (int i = 0; i < playerCards.size(); i++) {
+            switch (playerCards.get(i)) {
+                case RED:
+                    redCards++;
+                    break;
+                case ORANGE:
+                    orangeCards++;
+                    break;
+                case YELLOW:
+                    yellowCards++;
+                    break;
+                case GREEN:
+                    greenCards++;
+                    break;
+                case BLUE:
+                    blueCards++;
+                    break;
+                case PURPLE:
+                    purpleCards++;
+                    break;
+                case WHITE:
+                    whiteCards++;
+                    break;
+                case BLACK:
+                    blackCards++;
+                    break;
+                case WILD:
+                    wildCards++;
+                    break;
+            }
+        }
+        purpleNum.setText("" + purpleCards);
+        whiteNum.setText("" + whiteCards);
+        blueNum.setText("" + blueCards);
+        yellowNum.setText("" + yellowCards);
+        orangeNum.setText("" + orangeCards);
+        blackNum.setText("" + blackCards);
+        redNum.setText("" + redCards);
+        greenNum.setText("" + greenCards);
+        wildNum.setText("" + wildCards);
+
+    }
+
+    public void setDestinationBox()
+    {
+
+    }
+
+
 }
