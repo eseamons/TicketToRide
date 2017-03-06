@@ -66,12 +66,13 @@
                         android:textColor="?android:attr/textColorPrimary" />
 
                     <EditText
+                        android:id="@+id/editText3"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/editText3"
                         android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:nextFocusDown="@+id/editText4"
                         android:textSize="24sp" />
                 </LinearLayout>
 
@@ -104,12 +105,13 @@
                         android:textSize="24sp" />
 
                     <EditText
+                        android:id="@+id/editText4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="textPassword"
-                        android:ems="10"
-                        android:id="@+id/editText4"
                         android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:nextFocusDown="@+id/editText5"
                         android:textSize="24sp" />
                 </LinearLayout>
 
@@ -171,12 +173,13 @@
                         android:textColor="?android:attr/textColorPrimary" />
 
                     <EditText
+                        android:id="@+id/editText5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/editText5"
                         android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:nextFocusDown="@+id/editText6"
                         android:textSize="24sp" />
 
                 </LinearLayout>
@@ -207,12 +210,13 @@
                         android:textSize="24sp" />
 
                     <EditText
+                        android:id="@+id/editText6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"
-                        android:ems="10"
-                        android:id="@+id/editText6"
                         android:layout_weight="1"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:nextFocusDown="@+id/editText3"
                         android:textSize="24sp" />
 
                 </LinearLayout>
