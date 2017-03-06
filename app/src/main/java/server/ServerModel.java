@@ -286,7 +286,7 @@ public class ServerModel implements IServer{
         if(!currentGame.destinationCardIsOwned(destinationCardName)) {
             destinationCard = currentGame.getDestinationCardByName(destinationCardName);
             player.addDestinationCard(destinationCard);
-            destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, playerID);
+            destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, auth);
         }
         return destinationCardDrawnSuccessfully;
     }
@@ -297,7 +297,7 @@ public class ServerModel implements IServer{
         Player player = playerAuthMap.get(auth);
         DestinationCard destinationCard = null;
         destinationCard = currentGame.getDestinationCardByName(destinationCardName);
-        destinationCard.setOwnership(-1);
+        destinationCard.setOwnership(auth);
         player.removeDestinationCard(destinationCardName);
         return true;
     }
