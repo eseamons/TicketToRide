@@ -187,12 +187,12 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCard(String destinationCardName, String auth) {
+    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
         return false;
     }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, String auth) {
+    public boolean removeDestinationCard(String destinationCardName, int playerID, String auth) {
         return false;
     }
 
@@ -202,7 +202,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
 
