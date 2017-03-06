@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.erics.tickettoride.R;
 
+import org.w3c.dom.Text;
+
 import client.interfaces.IGameStatsView;
 
 /**
@@ -53,6 +55,7 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
     Button deckButton;
     Button mapButton;
     Button sendMessageButton;
+    TextView chatBox;
 
 
     private static GameStatsView instance = new GameStatsView();
@@ -102,6 +105,7 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
         deckButton = (Button) findViewById(R.id.deckButton);
         mapButton = (Button) findViewById(R.id.mapButton);
         sendMessageButton = (Button) findViewById(R.id.sendButton);
+        chatBox = (TextView) findViewById(R.id.chatBox);
 
         deckButton.setOnClickListener(new View.OnClickListener() {
             @Override

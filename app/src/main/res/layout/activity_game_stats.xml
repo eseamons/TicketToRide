@@ -13,13 +13,13 @@
         android:text="Chat"
         android:textSize="36sp" />
 
-    <ListView
+    <TextView
         android:layout_width="match_parent"
         android:layout_below="@+id/chatText"
         android:layout_alignLeft="@+id/chatText"
         android:layout_alignStart="@+id/chatText"
         android:layout_height="500dp"
-        android:id="@+id/listView" />
+        android:id="@+id/chatBox" />
 
     <EditText
         android:id="@+id/editText"

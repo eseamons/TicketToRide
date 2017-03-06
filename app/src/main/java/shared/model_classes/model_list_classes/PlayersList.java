@@ -78,4 +78,16 @@ public class PlayersList {
             }
         }
     }
+
+
+    public boolean playerFound(String auth) {
+        boolean playerFound = false;
+        for(Player p : players) {
+            if(p.getPlayerAuthCode().equals(auth)) {
+                playerFound = true;
+            }
+        }
+        return playerFound;
+    }
+
 }
