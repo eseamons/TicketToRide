@@ -88,7 +88,6 @@ public class Game {
         return players.playerFound(auth);
     }
 
-
     public void addNewComment(String message) {
         comments.add(message);
     }
