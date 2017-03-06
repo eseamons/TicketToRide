@@ -52,7 +52,7 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 
     private Button msgButton;
 
-    private static GameLobbyView instance;
+    private static GameLobbyView instance = new GameLobbyView();
 
     public static GameLobbyView getInstance()
     {

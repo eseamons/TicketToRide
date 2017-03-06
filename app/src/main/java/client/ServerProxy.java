@@ -192,7 +192,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, int playerID, String auth) {
+    public boolean removeDestinationCard(String destinationCardName, String auth) {
         return false;
     }
 

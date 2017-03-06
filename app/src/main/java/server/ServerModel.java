@@ -291,7 +291,7 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, int playerID, String auth) {
+    public boolean removeDestinationCard(String destinationCardName, String auth) {
         Game currentGame = null;
         Player player = playerAuthMap.get(auth);
         DestinationCard destinationCard = null;

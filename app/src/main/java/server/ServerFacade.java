@@ -103,9 +103,9 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, int playerID, String auth) {
+    public boolean removeDestinationCard(String destinationCardName, String auth) {
         ServerModel serverModel = ServerModel.getInstance();
-        return serverModel.removeDestinationCard(destinationCardName, playerID, auth);
+        return serverModel.removeDestinationCard(destinationCardName, auth);
     }
 
     @Override
@@ -114,7 +114,7 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean drawFaceUpCard(int faceUpCardID, String auth) {
+    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
 
