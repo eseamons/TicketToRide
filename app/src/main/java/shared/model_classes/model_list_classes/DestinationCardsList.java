@@ -15,6 +15,7 @@ public class DestinationCardsList {
 
     public DestinationCardsList() {
         destinationCardsList = new ArrayList<>();
+        //TODO: add all possible destination cards.
     }
 
     public boolean destinationCardIsOwned(String destinationCardName) {

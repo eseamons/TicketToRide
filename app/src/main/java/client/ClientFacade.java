@@ -134,18 +134,18 @@ public class ClientFacade implements IClient{
 
     @Override
     public boolean sendMessage(String msg) {
-        return ServerProxy.getInstance().addComment(msg, clientModel.getAuthorization());
+        String message = clientModel.getAccount().getUsername() + ": "+msg;
+        return ServerProxy.getInstance().addComment(message, clientModel.getAuthorization());
     }
 
     @Override
     public void addComment(int gameID, String message) {
-        if(clientModel.getCurrent_game_lobby().getID() == gameID)
-        {
-            clientModel.addCommentToCurrentGame(gameID, message);
-        }
-        //else do nothing
+        clientModel.addCommentToCurrentGame(gameID, message);
     }
 
+    public List<String> getGameComments(){
+        return clientModel.getGameComments();
+    }
     @Override
     public Game beginGame() {
 
