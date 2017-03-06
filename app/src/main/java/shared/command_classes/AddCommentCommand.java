@@ -21,11 +21,11 @@ public class AddCommentCommand extends Command
 
     public void executeOnClient()
     {
-        String parts[] = info.split(" ");
-        int ID = Integer.parseInt(parts[0]);
-        String message = info.substring(parts[0].length());
-        ClientFacade client = new ClientFacade();
-        client.addComment(ID, message);
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        String message = jsonObject.get("message").getAsString();
+        int gameID = jsonObject.get("gameID").getAsInt();
+        ClientFacade clientFacade = new ClientFacade();
+        clientFacade.addComment(gameID,message);
     }
 
 }
