@@ -22,7 +22,6 @@ public class RoutesList {
     public int cur_done = 41+1; //this is for Michael to help harcoding his view
     public RoutesList()
     {
-        //TODO: Add every route individually, WILL DO THIS OK!!
         availableRouteList.add(new Route("Vancouver", "Calgary", CardColor.WILD, 3));
         getRoute(0).setCoords(304,200,567,176);
         availableRouteList.add(new Route("Vancouver", "Seattle", CardColor.WILD, 1));
