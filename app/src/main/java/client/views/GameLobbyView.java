@@ -28,7 +28,7 @@ import client.interfaces.IGameLobbyView;
 import client.presenters.GameLobbyPresenter;
 import shared.model_classes.Player;
 
-public class GameLobbyView extends AppCompatActivity implements Observer, IGameLobbyView{
+public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 
     private Player[] players;
 
@@ -143,7 +143,6 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
     }
 
 
-    @Override
     public void update(Observable o, Object arg) {
 
         ClientFacade cf = new ClientFacade();
