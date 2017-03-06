@@ -47,4 +47,15 @@ public class Game {
     public void reShuffleTrainCards(){
         trainCardDeck.reShuffleDeck();
     }
+
+    //other actions for game
+    public boolean claimRoute(Route route, String auth) {
+        boolean successful =  routes.claimRoute(route,auth);
+        if(successful)
+        {
+            int pointIncrease = route.getPointValue();
+            players.increasePlayerScore(auth, pointIncrease );
+        }
+        return successful;
+    }
 }

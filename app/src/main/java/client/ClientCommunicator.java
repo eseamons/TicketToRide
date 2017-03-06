@@ -52,6 +52,13 @@ public class ClientCommunicator {
             if (urlConnection.getResponseCode() == HttpURLConnection.HTTP_OK) {
                 InputStream respBody = urlConnection.getInputStream();
                 String respData = readString(respBody);
+                /*
+                   Replace is used because in server
+                   I serialize object and put it in the info variable of the result object,
+                   and then I serialize the result object, which puts triple slashes in the json string
+                   and makes it throws an error.
+                 */
+                respData = respData.replace("\\\\","");
                 return (Result) Serializer.deserialize(respData);
             }
             else {

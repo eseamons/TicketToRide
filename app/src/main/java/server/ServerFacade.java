@@ -92,8 +92,10 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean claimRoute(Route routeClaimed, String auth) {
-        return false;
+    public boolean claimRoute(int gameID, Route routeClaimed, String auth) {
+        ServerModel serverModel = ServerModel.getInstance();
+        return serverModel.claimRoute(gameID, routeClaimed, auth);
+
     }
 
     @Override

@@ -15,6 +15,7 @@ import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
+import shared.model_classes.Route;
 
 public class ClientFacade implements IClient{
 
@@ -85,6 +86,7 @@ public class ClientFacade implements IClient{
         return serverProxy.createGameLobby(gameName, maxPlayers, auth);
     }
 
+    @Override
     public void addGameToLobbyList(GameLobby game) {
         clientModel.addLobbyToList(game);
     }
@@ -97,6 +99,7 @@ public class ClientFacade implements IClient{
         return current_game_lobby;
     }
 
+    @Override
     public void someoneJoinedGame(int gameID, Account account) {
         clientModel.playerJoinsGame(gameID, account);
     }
@@ -107,6 +110,12 @@ public class ClientFacade implements IClient{
 
 
     //methods needed for GameLobby View
+    @Override
+    public List<Player> getPlayers() {
+        //TODO: Implement this
+        return clientModel.getCurrent_game_lobby().getPlayers();
+    }
+
     @Override
     public boolean changePlayerColor(ColorNum colorNum) {
         ServerProxy serverProxy = ServerProxy.getInstance();
@@ -131,6 +140,7 @@ public class ClientFacade implements IClient{
         return ServerProxy.getInstance().addComment(msg, clientModel.getAuthorization());
     }
 
+    @Override
     public void addComment(int gameID, String message) {
         if(clientModel.getCurrent_game_lobby().getID() == gameID)
         {
@@ -139,6 +149,7 @@ public class ClientFacade implements IClient{
         //else do nothing
     }
 
+    @Override
     public void aGameStarted(int gameID){
         clientModel.aGameStarted(gameID);
     }
@@ -159,12 +170,7 @@ public class ClientFacade implements IClient{
 
 
     //methods needed for game play
-    @Override
-    public Player[] getPlayers() {
-        //TODO: Implement this
 
-        return null;
-    }
 
     @Override
     public boolean endTurn() {
@@ -172,7 +178,21 @@ public class ClientFacade implements IClient{
         return true;
     }
 
+    //todo: create a claim route for people to call from the presenter
+    public boolean ClaimRoute(Route route)
+    {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
 
+        boolean successful = serverProxy.claimRoute(gameID, route,auth);
+        return successful;
+    }
 
-
+    @Override
+    public void RouteClaimedbyPlayer(int gameID, Route route, String auth) {
+        Game currentGame = clientModel.getCurrent_game();
+        if(currentGame.getGameID() == gameID)
+        {clientModel.claimRoute(route, auth);}
+    }
 }

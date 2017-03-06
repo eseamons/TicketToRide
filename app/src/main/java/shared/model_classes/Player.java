@@ -35,8 +35,23 @@ public class Player {
         this.trainCards = trainCards;
     }
 
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
+    }
+
     public boolean authCodeMatchesAccount(String auth) {
         return account.getAuthentication() == auth;
     }
 
+
+    public int getPoints() {
+        return points;
+    }
+    public void setPoints(int points) {
+        this.points = points;
+    }
 }
