@@ -99,6 +99,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         }
         drawRoutes(routes);
         testCardNums();
+        setDestinationBox(new ArrayList<DestinationCard>());
         return true;
     }
 
@@ -206,6 +207,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             sb.append(dc.toString() + "\n");
         }
         destView.setText(sb.toString());
+        destView.setText("HI\nNO\nLANCE\nPLEASE\nSAVEme\nNO316ENGLISHPLS");
     }
 
 
