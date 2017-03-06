@@ -3,6 +3,7 @@ package shared.model_classes;
 import java.util.ArrayList;
 import java.util.List;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.model_list_classes.DestinationCardsList;
@@ -42,10 +43,10 @@ public class Game {
 
 
     //Train Deck Methods
-    public ColorNum drawCard() {
+    public CardColor drawCard() {
         return trainCardDeck.drawCard();
     }
-    public void addCardsToDiscard(List<ColorNum> cardColors) {
+    public void addCardsToDiscard(List<CardColor> cardColors) {
         trainCardDeck.addCardsToDiscard(cardColors);
     }
     public void reShuffleTrainCards(){

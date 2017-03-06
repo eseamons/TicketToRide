@@ -145,22 +145,27 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 
     public void update(Observable o, Object arg) {
 
-        ClientFacade cf = new ClientFacade();
-        List<Player> players = cf.getPlayers();
+        if (ClientModel.getInstance().getCurrent_game_lobby() != null)
+        {
 
-        if (players.size() >= 1)
-            player1Text.setText(players.get(0).getAccount().getUsername());
-        if (players.size() >= 2)
-            player1Text.setText(players.get(1).getAccount().getUsername());
-        if (players.size() >= 3)
-            player1Text.setText(players.get(2).getAccount().getUsername());
-        if (players.size() >= 4)
-            player1Text.setText(players.get(3).getAccount().getUsername());
-        if (players.size() >= 5)
-            player1Text.setText(players.get(4).getAccount().getUsername());
+            ClientFacade cf = new ClientFacade();
+            List<Player> players = cf.getPlayers();
+
+            if (players.size() >= 1)
+                player1Text.setText(players.get(0).getAccount().getUsername());
+            if (players.size() >= 2)
+                player1Text.setText(players.get(1).getAccount().getUsername());
+            if (players.size() >= 3)
+                player1Text.setText(players.get(2).getAccount().getUsername());
+            if (players.size() >= 4)
+                player1Text.setText(players.get(3).getAccount().getUsername());
+            if (players.size() >= 5)
+                player1Text.setText(players.get(4).getAccount().getUsername());
 
 
-        //TODO: update chat?
+            //TODO: update chat?
+
+        }
     }
 
     public class SimpleImageArrayAdapter extends ArrayAdapter<Integer> {

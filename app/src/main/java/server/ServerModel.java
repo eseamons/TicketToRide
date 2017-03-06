@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.Serializer;
 import shared.command_classes.*;
@@ -304,7 +305,7 @@ public class ServerModel implements IServer{
     @Override
     public boolean drawDeckCard(String auth) {
         Game currentGame = null;
-        ColorNum colorNum = currentGame.drawCard();
+        CardColor cardColor = currentGame.drawCard();
         return false;
     }
 
