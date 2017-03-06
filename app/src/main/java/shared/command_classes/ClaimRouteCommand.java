@@ -17,33 +17,26 @@ import shared.model_classes.Route;
 
 public class ClaimRouteCommand extends Command {
     public Result execute() {
-        try {
-            JsonObject jsonObject = convertStringToJsonObject(info);
-            String auth = jsonObject.get("auth").getAsString();
-            int gameID = jsonObject.get("gameID").getAsInt();
-            String routeString = jsonObject.get("route").getAsString();
-            Route route = (Route)Serializer.deserialize(routeString);
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        String auth = jsonObject.get("auth").getAsString();
+        int gameID = jsonObject.get("gameID").getAsInt();
+        String routeString = jsonObject.get("route").getAsString();
+        Route route = (Route)Serializer.deserialize(routeString);
 
-            boolean success = ServerFacade.getInstance().claimRoute(gameID, route,auth);
-            return new Result(success, auth);
-        }catch (Exception e) {e.printStackTrace();}
-        return null;
+        boolean success = ServerFacade.getInstance().claimRoute(gameID, route,auth);
+        return new Result(success, auth);
     }
 
     public void executeOnClient()
     {
-        try {
-            JsonObject jsonObject = convertStringToJsonObject(info);
-            String auth = jsonObject.get("auth").getAsString();
-            int gameID = jsonObject.get("gameID").getAsInt();
-            String routeString = jsonObject.get("route").getAsString();
-            Route route = (Route)Serializer.deserialize(routeString);
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        String auth = jsonObject.get("auth").getAsString();
+        int gameID = jsonObject.get("gameID").getAsInt();
+        String routeString = jsonObject.get("route").getAsString();
+        Route route = (Route)Serializer.deserialize(routeString);
 
-            ClientFacade clientFacade = new ClientFacade();
-            clientFacade.RouteClaimedbyPlayer(gameID,route,auth);
-
-        } catch (Exception e)
-        {e.printStackTrace();}
+        ClientFacade clientFacade = new ClientFacade();
+        clientFacade.RouteClaimedbyPlayer(gameID,route,auth);
 
 
     }

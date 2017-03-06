@@ -1,5 +1,8 @@
 package shared.command_classes;
 
+import com.google.gson.JsonObject;
+
+import server.ServerFacade;
 import shared.Result;
 
 /**
@@ -9,7 +12,13 @@ import shared.Result;
 public class RemoveDestinationCardCommand extends Command {
 
     public Result execute()
-    {return null;}
+    {
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        String destinationCardName = jsonObject.get("destinationCardName").getAsString();
+        String auth = jsonObject.get("auth").getAsString();
+        boolean success = ServerFacade.getInstance().removeDestinationCard(destinationCardName, auth);
+        return new Result(success, "");
+    }
 
     public void executeOnClient()
     {
