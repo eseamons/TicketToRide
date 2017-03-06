@@ -17,6 +17,9 @@ public class RoutesList {
     private List<Route> availableRouteList = new ArrayList<>();
     private Map<String,Route> playersClaimedRoutes = new HashMap<>();
 
+    //added just so will compile
+    List<Route> routeList;
+
     public RoutesList()
     {
         //TODO: Add every route individually, WILL DO THIS OK!!

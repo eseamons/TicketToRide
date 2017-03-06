@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout android:orientation="horizontal"
+<RelativeLayout
+    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/ttrmap"
@@ -21,7 +24,7 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/purpleNum"
+            android:id="@+id/purpleNum1"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:background="@color/purple"
