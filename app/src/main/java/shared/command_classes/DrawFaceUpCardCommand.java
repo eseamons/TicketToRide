@@ -12,7 +12,13 @@ import shared.Result;
 public class DrawFaceUpCardCommand extends Command {
 
     public Result execute()
-    {return null;}
+    {
+        JsonObject jsonObject = convertStringToJsonObject(info);
+        String auth = jsonObject.get("auth").getAsString();
+        int faceUpCardID = Integer.parseInt(jsonObject.get("faceUpCardID").getAsString());
+        boolean success = ServerFacade.getInstance().drawFaceUpCard(faceUpCardID, auth);
+        return new Result(success, "");
+    }
 
     public void executeOnClient()
     {

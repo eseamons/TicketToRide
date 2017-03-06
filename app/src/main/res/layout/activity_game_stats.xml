@@ -25,13 +25,13 @@
         android:id="@+id/editText"
         android:layout_width="500dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/sendButton"
         android:layout_alignLeft="@+id/listView"
         android:layout_alignStart="@+id/listView"
         android:layout_below="@+id/listView"
         android:ems="10"
-        android:inputType="text|textPersonName"
-        android:text="Type here..."
-        android:layout_above="@+id/sendButton" />
+        android:inputType="text"
+        android:text="Type here..." />
 
     <Button
         android:id="@+id/sendButton"
@@ -47,16 +47,17 @@
         android:id="@+id/player1Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/chatText"
-        android:layout_marginLeft="47dp"
-        android:layout_marginStart="47dp"
+        android:layout_marginLeft="51dp"
+        android:layout_marginStart="51dp"
         android:text="Player 1"
         android:textAllCaps="false"
         android:textColor="@color/blue"
         android:textSize="30sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp" />
 
     <TextView
         android:id="@+id/player3Text"

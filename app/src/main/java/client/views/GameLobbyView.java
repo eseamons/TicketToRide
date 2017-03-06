@@ -159,6 +159,9 @@ public class GameLobbyView extends AppCompatActivity implements Observer, IGameL
             player1Text.setText(players.get(3).getAccount().getUsername());
         if (players.size() >= 5)
             player1Text.setText(players.get(4).getAccount().getUsername());
+
+
+        //TODO: update chat?
     }
 
     public class SimpleImageArrayAdapter extends ArrayAdapter<Integer> {
