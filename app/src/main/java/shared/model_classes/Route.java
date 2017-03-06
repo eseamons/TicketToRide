@@ -13,6 +13,20 @@ public class Route {
     public int length;
     public int ownership; //0 = no one.  1-5 = players
 
+    public float start_x = -1;
+    public float start_y;
+
+    public float end_x;
+    public float end_y;
+
+    public void setCoords(float x1, float y1, float x2, float y2)
+    {
+        start_x = x1;
+        start_y = y1;
+        end_x = x2;
+        end_y = y2;
+    }
+
     public Route(String city1, String city2, CardColor color, int length)
     {
         this.city1 = city1;
