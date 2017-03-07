@@ -8,20 +8,20 @@ import java.util.List;
 import server.ServerFacade;
 import shared.Result;
 import shared.Serializer;
+import shared.command_data_classes.GetGamesCommandData;
 import shared.model_classes.GameLobby;
 
 public class GetGamesCommand extends Command
 {
     public Result execute()
     {
-        JsonObject jsonObject = convertStringToJsonObject(info);
-        String auth = jsonObject.get("auth").getAsString();
-        List<GameLobby> games = ServerFacade.getInstance().getServerGameList(auth);
+        String auth = ((GetGamesCommandData) info).getAuth();
+        List<GameLobby> gameLobbies = ServerFacade.getInstance().getServerGameList(auth);
         Result result = null;
-        if(games == null) {
+        if(gameLobbies == null) {
             result = new Result(false,"");
         } else {
-            result = new Result(true, Serializer.serialize(games));
+            result = new Result(true, gameLobbies.toArray());
         }
         return result;
     }

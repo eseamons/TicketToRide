@@ -1,20 +1,16 @@
 package shared.command_classes;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
 import server.ServerFacade;
 import shared.Result;
+import shared.command_data_classes.RegisterCommandData;
 
 public class RegisterCommand extends Command
 {
     @Override
     public Result execute()
     {
-        JsonObject jsonObject = convertStringToJsonObject(info);
-        String username = jsonObject.get("username").getAsString();
-        String password = jsonObject.get("password").getAsString();
+        String username = ((RegisterCommandData) info).getUsername();
+        String password = ((RegisterCommandData) info).getPassword();
         boolean success = ServerFacade.getInstance().register(username, password);
         return new Result(success, "");
     }

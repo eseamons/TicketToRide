@@ -58,7 +58,7 @@ public class ClientCommunicator {
                    and then I serialize the result object, which puts triple slashes in the json string
                    and makes it throws an error.
                  */
-                respData = respData.replace("\\\\","");
+
                 return (Result) Serializer.deserialize(respData);
             }
             else {

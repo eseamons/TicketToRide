@@ -1,10 +1,5 @@
 package shared.command_classes;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import java.util.List;
-
 import shared.Result;
 import shared.interfaces.ICommand;
 
@@ -14,14 +9,14 @@ import shared.interfaces.ICommand;
 
 public class Command implements ICommand {
 
-    protected String info;
+    protected Object info;
     protected int cmdID;
 
     //setters
-    public void setInfo(String info) { this.info = info; }
+    public void setInfo(Object info) { this.info = info; }
     public void setCmdID(int cmdID) { this.cmdID = cmdID; }
     //getters
-    public String getInfo() {
+    public Object getInfo() {
         return info;
     }
     public int getCmdID() { return cmdID;}
@@ -31,10 +26,6 @@ public class Command implements ICommand {
     @Override
     public Result execute() {
         return null;
-    }
-
-    public JsonObject convertStringToJsonObject(String info) {
-        return (new JsonParser()).parse(info).getAsJsonObject();
     }
 
 }

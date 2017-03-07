@@ -9,6 +9,7 @@ import java.util.List;
 import server.ServerFacade;
 import shared.Result;
 import shared.Serializer;
+import shared.command_data_classes.GetNewCommandsCommandData;
 import shared.model_classes.GameLobby;
 
 /**
@@ -19,20 +20,19 @@ public class GetNewCommandsCommand extends Command
 {
     public Result execute()
     {
-        JsonObject jsonObject = convertStringToJsonObject(info);
-        int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
-        String auth = jsonObject.get("auth").getAsString();
+        int gameID = ((GetNewCommandsCommandData) info).getGameLobbyID();
+        String auth = ((GetNewCommandsCommandData) info).getAuth();
         List<Command> cmds = ServerFacade.getInstance().getNewCommands(gameID, auth);
 
         if(cmds.size() != 0) {
             System.out.println("Test");
         }
 
-        Result result = null;
+        Result result;
         if(cmds == null) {
             result = new Result(false,"");
         } else {
-            result = new Result(true, Serializer.serializeList(cmds));
+            result = new Result(true, cmds.toArray());
         }
         return result;
     }

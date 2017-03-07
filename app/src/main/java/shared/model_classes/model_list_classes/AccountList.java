@@ -34,7 +34,7 @@ public class AccountList {
      * @return boolean for whether account was successfully registered
      */
     public boolean registerAccount(String username, String password) {
-
+        boolean successful = false;
         if (!usernameExists(username)) {
             //create new Account
             Account newAccount = new Account();
@@ -49,9 +49,10 @@ public class AccountList {
             //map authorization code and username to Account
             accountAuthMap.put(authCode, newAccount);
             accountUsernameMap.put(username, newAccount);
+            successful = true;
         }
 
-        return true;
+        return successful;
     }
 
     /**

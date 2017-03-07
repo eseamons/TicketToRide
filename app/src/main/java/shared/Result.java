@@ -4,19 +4,19 @@ public class Result
 {
 
     private boolean success;
-    private String info;
+    private Object info;
 
     public boolean isSuccess() {
         return success;
     }
 
-    public String getInfo() {
+    public Object getInfo() {
         return info;
     }
 
-    public Result(boolean suc, String inf)
+    public Result(boolean success, Object info)
     {
-        success = suc;
-        info = inf;
+        this.success = success;
+        this.info = info;
     }
 }

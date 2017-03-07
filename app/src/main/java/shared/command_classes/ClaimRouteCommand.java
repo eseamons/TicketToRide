@@ -8,6 +8,7 @@ import client.ClientFacade;
 import server.ServerFacade;
 import shared.Result;
 import shared.Serializer;
+import shared.command_data_classes.ClaimRouteCommandData;
 import shared.model_classes.Account;
 import shared.model_classes.Route;
 
@@ -17,11 +18,9 @@ import shared.model_classes.Route;
 
 public class ClaimRouteCommand extends Command {
     public Result execute() {
-        JsonObject jsonObject = convertStringToJsonObject(info);
-        String auth = jsonObject.get("auth").getAsString();
-        int gameID = jsonObject.get("gameID").getAsInt();
-        String routeString = jsonObject.get("route").getAsString();
-        Route route = (Route)Serializer.deserialize(routeString);
+        String auth = ((ClaimRouteCommandData) info).getAuth();
+        int gameID = ((ClaimRouteCommandData) info).getGameID();
+        Route route = ((ClaimRouteCommandData) info).getRoute();
 
         boolean success = ServerFacade.getInstance().claimRoute(gameID, route,auth);
         return new Result(success, auth);
@@ -29,11 +28,9 @@ public class ClaimRouteCommand extends Command {
 
     public void executeOnClient()
     {
-        JsonObject jsonObject = convertStringToJsonObject(info);
-        String auth = jsonObject.get("auth").getAsString();
-        int gameID = jsonObject.get("gameID").getAsInt();
-        String routeString = jsonObject.get("route").getAsString();
-        Route route = (Route)Serializer.deserialize(routeString);
+        String auth = ((ClaimRouteCommandData) info).getAuth();
+        int gameID = ((ClaimRouteCommandData) info).getGameID();
+        Route route = ((ClaimRouteCommandData) info).getRoute();
 
         ClientFacade clientFacade = new ClientFacade();
         clientFacade.RouteClaimedbyPlayer(gameID,route,auth);

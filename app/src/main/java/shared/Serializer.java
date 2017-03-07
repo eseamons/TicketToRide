@@ -31,10 +31,9 @@ public class Serializer {
         }
     }
 
-    public static String serializeList(Object obj) {
-        List<Object> objList = (List<Object>) obj;
+    public static String serializeArray(Object[] obj) {
         try {
-            String serializedString = JsonWriter.objectToJson(objList.toArray());
+            String serializedString = JsonWriter.objectToJson(obj);
             return serializedString;
         } catch(IOException e) {
             return null;
@@ -42,10 +41,10 @@ public class Serializer {
 
     }
 
-    public static Object deserializeList(String str) {
+    public static Object[] deserializeList(String str) {
         try {
             Object[] objArray = (Object[]) JsonReader.jsonToJava(str);
-            return new ArrayList<Object>(Arrays.asList(objArray));
+            return objArray;
         } catch (IOException e){
             return null;
         }
