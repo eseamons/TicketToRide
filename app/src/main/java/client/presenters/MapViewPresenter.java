@@ -29,7 +29,7 @@ public class MapViewPresenter implements Observer {
         ClientFacade client = new ClientFacade();
         List<CardColor> cards = client.getPlayerCards();
         List<DestinationCard> destinations = client.getDestinationList();
-        RoutesList routes = client.getRouteList();
+        RoutesList routes = client.getRoutesList();
         view.setDestinationBox(destinations);
         view.setPlayerCardViews(cards);
         view.drawRoutes(routes);

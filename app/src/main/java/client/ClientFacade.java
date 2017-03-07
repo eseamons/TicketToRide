@@ -13,10 +13,12 @@ import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
 import shared.model_classes.Route;
+import shared.model_classes.model_list_classes.RoutesList;
 
 public class ClientFacade implements IClient{
 
@@ -239,4 +241,20 @@ public class ClientFacade implements IClient{
         //TODO: all of the drawFaceUpCards on the server side need to have a gameID parameter so the server knows which game to add the info to.
         return false;
     }
+
+    public List<CardColor> getPlayerCards()
+    {
+        return null;
+    }
+
+    public List<DestinationCard> getDestinationList()
+    {
+        return null;
+    }
+
+    public RoutesList getRoutesList()
+    {
+      return null;
+    }
+
 }
