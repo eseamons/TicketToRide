@@ -118,7 +118,7 @@ public class ServerModel implements IServer{
 
     @Override
     public List<Command> getNewCommands(int commandID, String auth) {
-
+    //TODO: pass in the commandID, currently command ID is actually a gameID
         List<Command> newCommandList = new ArrayList<>();
 
         if(accountList.authCodeExists(auth))
@@ -185,6 +185,11 @@ public class ServerModel implements IServer{
             cmd.setCmdID(currentCmdID);
             gameLobbyList.addLobbyCommand(cmd);
             beginGameSuccessful = true;
+
+            //TODO: should create multiple commands that create the game...
+            //draw 3 train cards for every player in the game
+            //assign 3 destination cards to every player in the game
+            //set the 5 face up cards.
         }
 
         return beginGameSuccessful;
@@ -279,6 +284,8 @@ public class ServerModel implements IServer{
     @Override
     public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
         //TODO: the server needs to know which game to add it to.. right now this game is always null and so the method wont work
+        //TODO: who was working on this? How were you thinking we get the destination card to sent to all of these methods?
+        //TODO: does this ever set the info to send to the other clients?
         //Game currentGame = gameList.getGame(gameID);
         Game currentGame = null;
         DestinationCard destinationCard = null;
