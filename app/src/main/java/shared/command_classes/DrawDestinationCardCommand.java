@@ -25,12 +25,13 @@ public class DrawDestinationCardCommand extends Command {
 
     public void executeOnClient()
     {
-        ClientModel clientModel = ClientModel.getInstance();
-        JsonObject jsonObject = convertStringToJsonObject(info);
-        String destinationCardName = jsonObject.get("destinationCardName").getAsString();
-        int playerID = jsonObject.get("playerID").getAsInt();
-        String auth = jsonObject.get("auth").getAsString();
-        ClientFacade clientFacade = new ClientFacade();
+        //TODO: has not been implemented yet
+//        ClientModel clientModel = ClientModel.getInstance();
+//        JsonObject jsonObject = convertStringToJsonObject(info);
+//        String destinationCardName = jsonObject.get("destinationCardName").getAsString();
+//        int playerID = jsonObject.get("playerID").getAsInt();
+//        String auth = jsonObject.get("auth").getAsString();
+//        ClientFacade clientFacade = new ClientFacade();
 
     }
 }

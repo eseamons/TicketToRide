@@ -119,9 +119,9 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public List<Command> getNewCommands(int gameID, String auth)
+    public List<Command> getNewCommands(int commandID, String auth)
     {
-        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        String json = "{\"commandID\": \""+commandID+"\", \"auth\":\""+auth+"\"}";
         Command cmd = new GetNewCommandsCommand();
         cmd.setInfo(json);
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);

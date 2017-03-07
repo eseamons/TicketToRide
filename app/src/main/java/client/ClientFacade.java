@@ -8,6 +8,7 @@ import client.interfaces.IClient;
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
+import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.interfaces.ICommand;
@@ -153,6 +154,7 @@ public class ClientFacade implements IClient{
         int ID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.beginGame(ID, auth);
+        //TODO: is this supposed to always return null?
         return null;
     }
 
@@ -197,5 +199,44 @@ public class ClientFacade implements IClient{
         Game currentGame = clientModel.getCurrent_game();
         if(currentGame.getGameID() == gameID)
         {clientModel.claimRoute(route, auth);}
+    }
+
+    public boolean drawDeckCard(){
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        return serverProxy.drawDeckCard(auth, gameID);
+    }
+
+    public void playerDrewDeckCard(int gameID, int playerID, CardColor card) {
+        Game currentGame = clientModel.getCurrent_game();
+        if(currentGame.getGameID() == gameID)
+        {
+            clientModel.drawDeckCard(playerID, card);
+        }
+    }
+
+    public boolean drawDestinationCard(){
+//        String auth = clientModel.getAuthorization();
+//        int gameID = clientModel.getCurrent_game().getGameID();
+//        ServerProxy serverProxy = ServerProxy.getInstance();
+//        return serverProxy.drawDestinationCard()
+
+        //TODO: who was working on this? How were you thinking we get the destination card to sent to all of these methods?
+        return false;
+    }
+
+    public void playerDrewDestinationCard(){
+
+    }
+
+    public boolean drawFaceUpCard( CardColor card)
+    {
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        //return serverProxy.drawFaceUpCard(card, auth, gameID);
+        //TODO: all of the drawFaceUpCards on the server side need to have a gameID parameter so the server knows which game to add the info to.
+        return false;
     }
 }
