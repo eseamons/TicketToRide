@@ -278,6 +278,8 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
+        //TODO: the server needs to know which game to add it to.. right now this game is always null and so the method wont work
+        //Game currentGame = gameList.getGame(gameID);
         Game currentGame = null;
         DestinationCard destinationCard = null;
         boolean destinationCardDrawnSuccessfully = false;
@@ -303,10 +305,36 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawDeckCard(String auth) {
-        Game currentGame = null;
-        CardColor cardColor = currentGame.drawCard();
-        return false;
+    public boolean drawDeckCard(String auth, int gameID) {
+        boolean successful = false;
+        Game currentGame = gameList.getGame(gameID);
+
+        if (currentGame != null) {
+            CardColor cardColor = currentGame.drawCard();
+            Player player = playerAuthMap.get(auth);
+
+            if(cardColor != null && player != null)
+            {
+                successful = true;
+                player.addTrainCard(cardColor);
+                int playerID = player.getPlayerID();
+
+                int currentGameCmdID = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
+                Command cmd = new DrawDeckCardCommand();
+
+                String cardColorString = Serializer.serialize(cardColor);
+
+                String info = "{\"gameID\": \""+gameID+"\", \"cardColor\":\""+cardColorString+"\", \"playerID\":\"" + playerID + "\"}";
+                cmd.setInfo(info);
+                cmd.setCmdID(currentGameCmdID);
+                gameList.addGameCommand(cmd);
+            }
+        }
+
+
+
+        return successful;
     }
 
     @Override

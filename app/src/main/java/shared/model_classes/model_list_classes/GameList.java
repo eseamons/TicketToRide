@@ -58,8 +58,15 @@ public class GameList {
         return gameCommands.subList(commandID+1, gameCommands.size());
     }
 
-    public Game getGameByAuthCode(String auth) {
-        return null;
+    public Game getGameByAuthCode(String auth){
+        Game returnGame = null;
+
+        for(Game game : games) {
+            if(game.playerInGame(auth)) {
+                returnGame = game;
+            }
+        }
+        return returnGame;
     }
 
 }

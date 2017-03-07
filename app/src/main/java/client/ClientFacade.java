@@ -8,17 +8,14 @@ import client.interfaces.IClient;
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
-import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
-import shared.model_classes.DestinationCard;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
 import shared.model_classes.Route;
-import shared.model_classes.model_list_classes.RoutesList;
 
 public class ClientFacade implements IClient{
 
@@ -200,21 +197,5 @@ public class ClientFacade implements IClient{
         Game currentGame = clientModel.getCurrent_game();
         if(currentGame.getGameID() == gameID)
         {clientModel.claimRoute(route, auth);}
-    }
-
-    public RoutesList getRouteList()
-    {
-        return null;
-        //get route list
-    }
-
-    public List<DestinationCard> getDestinationList()
-    {
-        return null;
-    }
-
-    public List<CardColor> getPlayerCards()
-    {
-        return null;
     }
 }

@@ -91,7 +91,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
                 boolean success = gameListPresenter.joinGame();
 
                 if(success) {
-                    //TODO: should i start the new activity or does it do this somewhere else?
                     startActivity(new Intent(GameListView.this, GameLobbyView.class));
                 }
                 else {

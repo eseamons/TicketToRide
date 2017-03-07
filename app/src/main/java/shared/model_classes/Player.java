@@ -28,18 +28,21 @@ public class Player {
     public void setAccount(Account account) {
         this.account = account;
     }
+
     public ColorNum getColor() {
         return color;
     }
     public void setColor(ColorNum color) {
         this.color = color;
     }
+
     public List<CardColor> getTrainCards() {
         return trainCards;
     }
     public void setTrainCards(List<CardColor> trainCards) {
         this.trainCards = trainCards;
     }
+    public void addTrainCard(CardColor card){this.trainCards.add(card);}
 
     public int getPlayerID() {
         return playerID;

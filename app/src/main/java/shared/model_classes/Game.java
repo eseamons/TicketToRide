@@ -42,6 +42,10 @@ public class Game {
         return players.getAllPlayers();
     }
 
+    public Player getPlayerbyIndex(int ID){
+        Player p = players.getPlayer(ID);
+        return p;
+    }
 
     //Train Deck Methods
     public CardColor drawCard() {
@@ -87,7 +91,6 @@ public class Game {
     public boolean playerInGame(String auth) {
         return players.playerFound(auth);
     }
-
 
     public void addNewComment(String message) {
         comments.add(message);
