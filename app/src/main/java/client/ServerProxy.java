@@ -11,6 +11,7 @@ import shared.command_classes.AddCommentCommand;
 import shared.command_classes.ClaimRouteCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
+import shared.command_classes.DrawDeckCardCommand;
 import shared.command_classes.EndTurnCommand;
 import shared.command_classes.GetGamesCommand;
 import shared.command_classes.GetNewCommandsCommand;
@@ -197,8 +198,12 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean drawDeckCard(String auth) {
-        return false;
+    public boolean drawDeckCard(String auth, int gameID) {
+        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        Command cmd = new DrawDeckCardCommand();
+        cmd.setInfo(json);
+        Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+        return r.isSuccess();
     }
 
     @Override

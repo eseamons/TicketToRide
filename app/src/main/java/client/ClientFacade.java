@@ -8,6 +8,7 @@ import client.interfaces.IClient;
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
+import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.interfaces.ICommand;
@@ -153,6 +154,7 @@ public class ClientFacade implements IClient{
         int ID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.beginGame(ID, auth);
+        //TODO: is this supposed to always return null?
         return null;
     }
 
@@ -197,5 +199,21 @@ public class ClientFacade implements IClient{
         Game currentGame = clientModel.getCurrent_game();
         if(currentGame.getGameID() == gameID)
         {clientModel.claimRoute(route, auth);}
+    }
+
+    public boolean drawDeckCard(){
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        return serverProxy.drawDeckCard(auth, gameID);
+    }
+
+    public void playerDrewDeckCard(int gameID, int playerID, CardColor card)
+    {
+        Game currentGame = clientModel.getCurrent_game();
+        if(currentGame.getGameID() == gameID)
+        {
+            clientModel.drawDeckCard(playerID, card);
+        }
     }
 }
