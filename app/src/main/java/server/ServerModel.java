@@ -118,13 +118,11 @@ public class ServerModel implements IServer{
 
     @Override
     public List<Command> getNewCommands(int commandID, String auth) {
-    //TODO: pass in the commandID, currently command ID is actually a gameID
         List<Command> newCommandList = new ArrayList<>();
 
         if(accountList.authCodeExists(auth))
         {
             newCommandList = gameLobbyList.getNewLobbyCommands(commandID);
-
         }
 
         return newCommandList;

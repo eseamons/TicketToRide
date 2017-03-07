@@ -20,10 +20,9 @@ public class GetNewCommandsCommand extends Command
     public Result execute()
     {
         JsonObject jsonObject = convertStringToJsonObject(info);
-        int gameID = Integer.parseInt(jsonObject.get("gameID").getAsString());
+        int commandID = Integer.parseInt(jsonObject.get("commandID").getAsString());
         String auth = jsonObject.get("auth").getAsString();
-        //TODO: pass in the commandID
-        List<Command> cmds = ServerFacade.getInstance().getNewCommands(gameID, auth);
+        List<Command> cmds = ServerFacade.getInstance().getNewCommands(commandID, auth);
 
         if(cmds.size() != 0) {
             System.out.println("Test");

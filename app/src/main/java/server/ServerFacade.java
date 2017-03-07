@@ -43,9 +43,8 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public List<Command> getNewCommands(int ID, String auth) {
-        //TODO: pass in the commandID
-        return serverModel.getNewCommands(ID, auth);
+    public List<Command> getNewCommands(int commandID, String auth) {
+        return serverModel.getNewCommands(commandID, auth);
     }
 
     @Override
