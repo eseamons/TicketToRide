@@ -25,6 +25,7 @@ public class DrawDestinationCardCommand extends Command {
 
     public void executeOnClient()
     {
+        //TODO: has not been implemented yet
 //        ClientModel clientModel = ClientModel.getInstance();
 //        JsonObject jsonObject = convertStringToJsonObject(info);
 //        String destinationCardName = jsonObject.get("destinationCardName").getAsString();
