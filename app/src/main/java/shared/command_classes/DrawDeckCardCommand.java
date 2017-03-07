@@ -17,18 +17,17 @@ public class DrawDeckCardCommand extends Command {
     public Result execute()
     {
         String auth = ((DrawDeckCardCommandData) info).getAuth();
-        boolean success = ServerFacade.getInstance().drawDeckCard(auth);
+        int playerID = ((DrawDeckCardCommandData) info).getPlayerID();
+        boolean success = ServerFacade.getInstance().drawDeckCard(auth, playerID);
         return new Result(success, "");
     }
 
     public void executeOnClient()
     {
-        JsonObject jsonObject = convertStringToJsonObject(info);
-        int playerID = jsonObject.get("playerID").getAsInt();
-        int gameID = jsonObject.get("gameID").getAsInt();
-        String cardString = jsonObject.get("card").getAsString();
-
-        CardColor card = (CardColor) Serializer.deserialize(cardString);
+        String auth = ((DrawDeckCardCommandData) info).getAuth();
+        int playerID = ((DrawDeckCardCommandData) info).getPlayerID();
+        int gameID = ((DrawDeckCardCommandData) info).getGameID();
+        CardColor card = ((DrawDeckCardCommandData) info).getCard();
 
         ClientFacade clientFacade = new ClientFacade();
         clientFacade.playerDrewDeckCard(gameID,playerID ,card);

@@ -140,7 +140,8 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            return new ArrayList<GameLobby>(Arrays.asList((GameLobby[]) r.getInfo()));
+            GetGamesCommandData newCmdData = (GetGamesCommandData) r.getInfo();
+            return null;
         }
         else
         {
@@ -160,7 +161,8 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {
-            return new ArrayList<>(Arrays.asList((Command[]) r.getInfo()));
+            GetNewCommandsCommandData newCmdData = (GetNewCommandsCommandData) r.getInfo();
+            return null;
         }
         else
         {
@@ -244,7 +246,7 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean drawDeckCard(String auth) {
+    public boolean drawDeckCard(String auth, int playerID) {
         return false;
     }
 
