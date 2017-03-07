@@ -40,7 +40,7 @@ public class Poller
         {
             ClientFacade client = new ClientFacade();
             client.getNewCommands();
-            client.getServerGamesList(ClientModel.getInstance().getAuthorization());
+            //client.getServerGamesList(ClientModel.getInstance().getAuthorization());
             return null;
         }
 

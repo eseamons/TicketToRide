@@ -1,5 +1,6 @@
 package client.views;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -10,17 +11,23 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.erics.tickettoride.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import shared.CardColor;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.Route;
 import shared.model_classes.model_list_classes.RoutesList;
 
@@ -37,6 +44,11 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     TextView redNum;
     TextView greenNum;
     TextView wildNum;
+
+    TextView destView;
+
+    Button toDeck;
+    Button toStats;
 
     int test_num = 0;
     int cur_done = 3;
@@ -59,12 +71,30 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         greenNum = (TextView) findViewById(R.id.greenNum);
         wildNum = (TextView) findViewById(R.id.wildNum);
 
+        destView = (TextView) findViewById(R.id.map_destinationView);
+        destView.setMovementMethod(new ScrollingMovementMethod());
+
+        toStats = (Button) findViewById(R.id.button_TOSTATS);
+        toStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapViewActivity.this, GameStatsView.class));
+            }
+        });
+        toDeck = (Button) findViewById(R.id.button_TODECK);
+        toDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapViewActivity.this, GameDeckView.class));
+            }
+        });
 
         routes = new RoutesList();
         cur_done = routes.cur_done;
         for(int i = 0; i < cur_done; i++)
         {
-            routes.getRoute(i).ownership = 1;
+            int owner = i%5 + 1;
+            routes.getRoute(i).ownership = owner;
         }
 
 
@@ -89,7 +119,21 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             Log.d("SPACE", "ROUTE END");
         }
         drawRoutes(routes);
+        testCardNums();
+        setDestinationBox(new ArrayList<DestinationCard>());
         return true;
+    }
+
+    public void testCardNums()
+    {
+        List<CardColor> cards = new ArrayList<>();
+        cards.add(CardColor.RED);
+        cards.add(CardColor.RED);
+        cards.add(CardColor.BLUE);
+        cards.add(CardColor.ORANGE);
+        cards.add(CardColor.BLACK);
+        cards.add(CardColor.BLACK);
+        setPlayerCardViews(cards);
     }
 
 
@@ -112,12 +156,26 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             Route route = routes.getRoute(i);
             if(route.ownership != 0)
             {
-                paint.setColor(Color.RED);
+                paint.setColor(getColorByOwnerShip(route.ownership));
                 paint.setStrokeWidth(10);
                 canvas.drawLine(route.start_x,route.start_y,route.end_x,route.end_y,paint);
             }
         }
         map.setImageBitmap(mutableBitmap);
+    }
+
+    public int getColorByOwnerShip(int ownership)
+    {
+        int ret = Color.RED;
+        switch(ownership)
+        {
+            case 1: ret = Color.BLUE; break;
+            case 2: ret = Color.RED; break;
+            case 3: ret = Color.GREEN; break;
+            case 4: ret = Color.YELLOW; break;
+            case 5: ret = Color.BLACK; break;
+        }
+        return ret;
     }
 
     public void setPlayerCardViews(List<CardColor> playerCards)
@@ -175,9 +233,16 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
     }
 
-    public void setDestinationBox()
+    public void setDestinationBox(List<DestinationCard> destinationCards)
     {
-
+        StringBuilder sb = new StringBuilder();
+        for(int i=0; i < destinationCards.size(); i++)
+        {
+            DestinationCard dc = destinationCards.get(i);
+            sb.append(dc.toString() + "\n");
+        }
+        destView.setText(sb.toString());
+        destView.setText("HI\nNO\nLANCE\nPLEASE\nSAVEme\nNO316ENGLISHPLS");
     }
 
 

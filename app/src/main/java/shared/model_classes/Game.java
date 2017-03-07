@@ -73,17 +73,20 @@ public class Game {
         return null;
     }
 
-    public boolean setDestinationCardOwnership(String destinationCardName, int playerID) {
+    public boolean setDestinationCardOwnership(String destinationCardName, String auth) {
         DestinationCard destinationCard = destinationCardsList.getDestinationCardByName(destinationCardName);
         boolean destinationCardDrawnSuccessfully = false;
-        if(destinationCard.getOwnership() != -1) {
-            destinationCard.setOwnership(playerID);
+        if(destinationCard.getOwnership() == null) {
+            destinationCard.setOwnership(auth);
             destinationCardDrawnSuccessfully = true;
         }
 
         return destinationCardDrawnSuccessfully;
     }
 
+    public boolean playerInGame(String auth) {
+        return players.playerFound(auth);
+    }
 
     public void addNewComment(String message) {
         comments.add(message);
