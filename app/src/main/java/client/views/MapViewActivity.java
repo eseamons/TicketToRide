@@ -26,6 +26,7 @@ import com.example.erics.tickettoride.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import client.presenters.MapViewPresenter;
 import shared.CardColor;
 import shared.model_classes.DestinationCard;
 import shared.model_classes.Route;
@@ -33,6 +34,8 @@ import shared.model_classes.model_list_classes.RoutesList;
 
 public class MapViewActivity extends AppCompatActivity implements View.OnTouchListener
 {
+
+    MapViewPresenter presenter;
 
     ImageView map;
     TextView purpleNum;
@@ -89,6 +92,13 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             }
         });
 
+        createFakeRoutes();
+
+        presenter = new MapViewPresenter(this);
+    }
+
+    public void createFakeRoutes()
+    {
         routes = new RoutesList();
         cur_done = routes.cur_done;
         for(int i = 0; i < cur_done; i++)
@@ -96,9 +106,6 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             int owner = i%5 + 1;
             routes.getRoute(i).ownership = owner;
         }
-
-
-
     }
 
     @Override
