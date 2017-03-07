@@ -8,6 +8,7 @@ import java.util.Observer;
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
+import shared.CardColor;
 import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
@@ -123,7 +124,6 @@ public class ClientModel extends Observable
         if(gameID == currentGameLobby.getID())
         {
             currentGame = new Game(currentGameLobby);
-            //TODO: change view...
             //TODO: stop poller from getting game lobby commands and start get game commands
         }
         removeGameLobbyByID(gameID);
@@ -145,6 +145,11 @@ public class ClientModel extends Observable
 
     public void claimRoute(Route route, String auth) {
         currentGame.claimRoute(route,auth);
+    }
+
+    public void drawDeckCard(int PlayerID, CardColor card) {
+        Player p =currentGame.getPlayerbyIndex(PlayerID);
+        p.addTrainCard(card);
     }
 
 

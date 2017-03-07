@@ -11,6 +11,7 @@ import shared.command_classes.AddCommentCommand;
 import shared.command_classes.ClaimRouteCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
+import shared.command_classes.DrawDeckCardCommand;
 import shared.command_classes.EndTurnCommand;
 import shared.command_classes.GetGamesCommand;
 import shared.command_classes.GetNewCommandsCommand;

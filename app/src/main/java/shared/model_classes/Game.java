@@ -42,6 +42,10 @@ public class Game {
         return players.getAllPlayers();
     }
 
+    public Player getPlayerbyIndex(int ID){
+        Player p = players.getPlayer(ID);
+        return p;
+    }
 
     //Train Deck Methods
     public CardColor drawCard() {

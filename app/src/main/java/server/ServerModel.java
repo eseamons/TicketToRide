@@ -118,13 +118,11 @@ public class ServerModel implements IServer{
 
     @Override
     public List<Command> getNewCommands(int commandID, String auth) {
-
         List<Command> newCommandList = new ArrayList<>();
 
         if(accountList.authCodeExists(auth))
         {
             newCommandList = gameLobbyList.getNewLobbyCommands(commandID);
-
         }
 
         return newCommandList;
@@ -185,6 +183,11 @@ public class ServerModel implements IServer{
             cmd.setCmdID(currentCmdID);
             gameLobbyList.addLobbyCommand(cmd);
             beginGameSuccessful = true;
+
+            //TODO: should create multiple commands that create the game...
+            //draw 3 train cards for every player in the game
+            //assign 3 destination cards to every player in the game
+            //set the 5 face up cards.
         }
 
         return beginGameSuccessful;
@@ -278,6 +281,10 @@ public class ServerModel implements IServer{
 
     @Override
     public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
+        //TODO: the server needs to know which game to add it to.. right now this game is always null and so the method wont work
+        //TODO: who was working on this? How were you thinking we get the destination card to sent to all of these methods?
+        //TODO: does this ever set the info to send to the other clients?
+        //Game currentGame = gameList.getGame(gameID);
         Game currentGame = null;
         DestinationCard destinationCard = null;
         boolean destinationCardDrawnSuccessfully = false;
@@ -303,10 +310,36 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawDeckCard(String auth) {
-        Game currentGame = null;
-        CardColor cardColor = currentGame.drawCard();
-        return false;
+    public boolean drawDeckCard(String auth, int gameID) {
+        boolean successful = false;
+        Game currentGame = gameList.getGame(gameID);
+
+        if (currentGame != null) {
+            CardColor cardColor = currentGame.drawCard();
+            Player player = playerAuthMap.get(auth);
+
+            if(cardColor != null && player != null)
+            {
+                successful = true;
+                player.addTrainCard(cardColor);
+                int playerID = player.getPlayerID();
+
+                int currentGameCmdID = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
+                Command cmd = new DrawDeckCardCommand();
+
+                String cardColorString = Serializer.serialize(cardColor);
+
+                String info = "{\"gameID\": \""+gameID+"\", \"cardColor\":\""+cardColorString+"\", \"playerID\":\"" + playerID + "\"}";
+                cmd.setInfo(info);
+                cmd.setCmdID(currentGameCmdID);
+                gameList.addGameCommand(cmd);
+            }
+        }
+
+
+
+        return successful;
     }
 
     @Override
