@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 import com.example.erics.tickettoride.R;
 
 import client.interfaces.IGameDeckView;
+import client.presenters.GameDeckPresenter;
 import shared.CardColor;
 
 import static com.example.erics.tickettoride.R.drawable.black_card;
@@ -32,6 +34,8 @@ import static com.example.erics.tickettoride.R.drawable.yellow_card;
 
 public class GameDeckView extends AppCompatActivity implements IGameDeckView {
 
+    GameDeckPresenter presenter;
+
     TextView purple;
     TextView white;
     TextView blue;
@@ -42,6 +46,7 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
     TextView green;
     TextView wild;
     TextView trainsRemaining;
+    TextView destinationTickets;
     ImageButton deckButton;
     ImageButton faceUpCard0Button;
     ImageButton faceUpCard1Button;
@@ -74,6 +79,9 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
         faceUpCard4Button = (ImageButton) findViewById(R.id.faceUpButton4);
         mapButton = (Button) findViewById(R.id.mapButton);
         statsButton = (Button) findViewById(R.id.statsButton);
+
+        destinationTickets = (TextView) findViewById(R.id.destinationTicketView);
+        destinationTickets.setMovementMethod(new ScrollingMovementMethod());
 
 
         deckButton.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +139,8 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
                 startActivity(new Intent(GameDeckView.this, GameStatsView.class));
             }
         });
+
+        presenter = new GameDeckPresenter(this);
     }
 
     @Override
@@ -261,5 +271,10 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
             case BLACK: faceUpCard4Button.setImageDrawable(getDrawable(black_card)); break;
             case WILD: faceUpCard4Button.setImageDrawable(getDrawable(wild_card)); break;
         }
+    }
+
+    @Override
+    public void setDestinationTickets(String s) {
+        destinationTickets.setText(s);
     }
 }

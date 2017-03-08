@@ -19,6 +19,8 @@
         android:layout_alignLeft="@+id/chatText"
         android:layout_alignStart="@+id/chatText"
         android:layout_height="500dp"
+        android:maxLines = "100"
+        android:scrollbars = "vertical"
         android:id="@+id/chatBox" />
 
     <EditText
@@ -26,9 +28,9 @@
         android:layout_width="500dp"
         android:layout_height="wrap_content"
         android:layout_above="@+id/sendButton"
-        android:layout_alignLeft="@+id/listView"
-        android:layout_alignStart="@+id/listView"
-        android:layout_below="@+id/listView"
+        android:layout_alignLeft="@+id/chatBox"
+        android:layout_alignStart="@+id/chatBox"
+        android:layout_below="@+id/chatBox"
         android:ems="10"
         android:inputType="text"
         android:text="Type here..." />

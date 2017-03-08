@@ -194,9 +194,10 @@
         android:textColor="@color/white"
         android:textSize="26sp" />
 
-    <android.support.v7.widget.RecyclerView
+    <TextView
         android:id="@+id/destinationTicketView"
         android:scrollbars="vertical"
+        android:maxLines = "10"
         android:layout_width="500dp"
         android:layout_height="301dp"
         android:layout_alignParentBottom="true"

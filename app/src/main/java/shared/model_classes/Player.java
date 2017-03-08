@@ -77,6 +77,9 @@ public class Player {
         }
         destinationCards.remove(index);
     }
+    public List<DestinationCard> getDestinationCards(){
+        return destinationCards;
+    }
 
     public String getPlayerAuthCode() {
         return account.getAuthentication();
