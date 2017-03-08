@@ -202,6 +202,7 @@ public class ServerModel implements IServer{
             beginGameSuccessful = true;
 
             //TODO: should create multiple commands that create the game...
+            //everything past here should be on gameListCommands...
             //draw 3 train cards for every player in the game
             //assign 3 destination cards to every player in the game
             //set the 5 face up cards.
