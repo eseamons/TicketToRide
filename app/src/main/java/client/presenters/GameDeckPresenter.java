@@ -5,13 +5,10 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.ClientFacade;
-import client.ClientModel;
 import client.interfaces.IGameDeckPresenter;
 import client.views.GameDeckView;
 import shared.CardColor;
 import shared.model_classes.DestinationCard;
-import shared.model_classes.Game;
-import shared.model_classes.Player;
 
 /**
  * Created by sirla on 3/3/2017.

@@ -5,10 +5,8 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.ClientFacade;
-import client.ClientModel;
 import client.interfaces.IGameStatsPresenter;
 import client.views.GameStatsView;
-import shared.model_classes.Game;
 import shared.model_classes.Player;
 
 /**
