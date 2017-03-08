@@ -260,7 +260,23 @@ public class ClientFacade implements IClient{
 
     public void runAnimation()
     {
-
+        int time = 0;
+        switch(time)
+        {
+            //case 0: clientModel.
+        }
     }
+
+    public void initializeAnimation()
+    {
+        GameLobby fakeLobby = new GameLobby();
+        fakeLobby.setID(1);
+        fakeLobby.setMax_players(2);
+        fakeLobby.setName("ok");
+        fakeLobby.addNewPlayers(new Account());
+        fakeLobby.addNewPlayers(new Account());
+        Game game = new Game(fakeLobby);
+    }
+
 
 }
