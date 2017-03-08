@@ -174,6 +174,13 @@ public class ClientModel extends Observable
         }
     }
 
+    public void removeDestinationCard(int gameID, int playerID, DestinationCard destinationCard) {
+        if(gameID == currentGame.getGameID())
+        {
+            Player p = currentGame.getPlayerbyIndex(playerID);
+            p.removeDestinationCard(destinationCard);
+        }
+    }
 
         //NOT SURE WHERE THESE GO YET
     public Game getCurrent_game() {
@@ -189,7 +196,4 @@ public class ClientModel extends Observable
     }
 
 
-    public boolean discardDestinationCards(List<DestinationCard> discardedDestCards) {
-        return true;
-    }
 }

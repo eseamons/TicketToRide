@@ -4,8 +4,10 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import client.ClientFacade;
 import server.ServerFacade;
 import shared.Result;
+import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.RemoveDestinationCardCommandData;
 import shared.model_classes.DestinationCard;
 
@@ -26,6 +28,11 @@ public class RemoveDestinationCardCommand extends Command {
 
     public void executeOnClient()
     {
-        //TODO: has not been implemeted yet
+        DestinationCard destinationCard = ((DrawDestinationCardCommandData) info).getDestinationCard();
+        int gameID = ((DrawDestinationCardCommandData) info).getGameID();
+        int playerID = ((DrawDestinationCardCommandData) info).getPlayerID();
+
+        ClientFacade clientFacade = new ClientFacade();
+        clientFacade.playerRemovedDestinationCard(gameID, playerID, destinationCard);
     }
 }

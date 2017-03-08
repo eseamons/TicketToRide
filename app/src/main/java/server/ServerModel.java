@@ -17,6 +17,7 @@ import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.CreateGameCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.JoinGameCommandData;
+import shared.command_data_classes.RemoveDestinationCardCommandData;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
 import shared.model_classes.model_list_classes.*;
@@ -385,19 +386,19 @@ public class ServerModel implements IServer{
                 currentGame.returnDestinationCard(destinationCard, playerID);
 
                 //TODO:below here change to be game commands not lobby commands
-//                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
-//                gameLobbyList.incrementCurrentLobbyCommandID();
-//                Command cmd = new DrawDestinationCardCommand();
-//
-//                DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
-//                cmdData.setAuth(auth);
-//                cmdData.setGameID(gameID);
-//                cmdData.setDestinationCard(destinationCard);
-//                cmdData.setPlayerID(playerID);
-//
-//                cmd.setInfo(cmdData);
-//                cmd.setCmdID(currentCmdID);
-//                gameLobbyList.addLobbyCommand(cmd);
+                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+                gameLobbyList.incrementCurrentLobbyCommandID();
+                Command cmd = new DrawDestinationCardCommand();
+
+                RemoveDestinationCardCommandData cmdData = new RemoveDestinationCardCommandData();
+                cmdData.setAuth(auth);
+                cmdData.setGameID(gameID);
+                cmdData.setPlayerID(playerID);
+                cmdData.setDiscardedCard(destinationCard);
+
+                cmd.setInfo(cmdData);
+                cmd.setCmdID(currentCmdID);
+                gameLobbyList.addLobbyCommand(cmd);
             }
         }
         return successful;

@@ -257,6 +257,9 @@ public class ClientFacade implements IClient{
 
         return serverProxy.removeDestinationCard(discardedDestCard, gameID,auth);
     }
+    public void playerRemovedDestinationCard(int gameID, int playerID, DestinationCard destinationCard) {
+        clientModel.removeDestinationCard(gameID,playerID, destinationCard);
+    }
 
     public RoutesList getRoutesList()
     {
@@ -282,6 +285,7 @@ public class ClientFacade implements IClient{
         fakeLobby.addNewPlayers(new Account());
         Game game = new Game(fakeLobby);
     }
+
 
 
 }
