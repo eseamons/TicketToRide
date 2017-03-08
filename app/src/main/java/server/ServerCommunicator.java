@@ -1,5 +1,7 @@
 package server;
 
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
@@ -31,6 +33,8 @@ public class ServerCommunicator {
 
         System.out.println("Creating contexts");
         server.createContext("/command", new ExecCommandHandler());
+
+        server.createContext("/test", new TestHandler());
 
         System.out.println("Starting server");
         server.start();
