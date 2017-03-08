@@ -10,21 +10,20 @@ import shared.model_classes.DestinationCard;
  */
 
 public class RemoveDestinationCardCommandData {
-    List<DestinationCard> discardedCards;
+    DestinationCard discardedCard;
     private String auth;
     int gameID;
     int playerID;
 
     public RemoveDestinationCardCommandData() {
-        discardedCards = new ArrayList<>();
     }
 
-    public List<DestinationCard> getDiscardedCards() {
-        return discardedCards;
+    public DestinationCard getDiscardedCard() {
+        return discardedCard;
     }
 
-    public void setDiscardedCards(List<DestinationCard> discardedCards) {
-        this.discardedCards = discardedCards;
+    public void setDiscardedCard(DestinationCard discardedCard) {
+        this.discardedCard = discardedCard;
     }
 
     public String getAuth() {

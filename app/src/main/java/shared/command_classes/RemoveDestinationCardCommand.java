@@ -17,10 +17,10 @@ public class RemoveDestinationCardCommand extends Command {
 
     public Result execute()
     {
-        List<DestinationCard> destinationCards = ((RemoveDestinationCardCommandData) info).getDiscardedCards();
+        DestinationCard destinationCard = ((RemoveDestinationCardCommandData) info).getDiscardedCard();
         String auth = ((RemoveDestinationCardCommandData) info).getAuth();
         int gameID = ((RemoveDestinationCardCommandData)info).getGameID();
-        boolean success = ServerFacade.getInstance().removeDestinationCard(destinationCards,gameID, auth);
+        boolean success = ServerFacade.getInstance().removeDestinationCard(destinationCard,gameID, auth);
         return new Result(success, "");
     }
 

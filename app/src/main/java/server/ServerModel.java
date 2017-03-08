@@ -364,7 +364,7 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(List<DestinationCard> destinationCards,int gameID, String auth) {
+    public boolean removeDestinationCard(DestinationCard destinationCard,int gameID, String auth) {
 //        Game currentGame = null;
 //        Player player = playerAuthMap.get(auth);
 //        DestinationCard destinationCard = null;
@@ -382,7 +382,7 @@ public class ServerModel implements IServer{
             {
                 successful = true;
                 int playerID = player.getPlayerID();
-                currentGame.returnDestinationCards(destinationCards, playerID);
+                currentGame.returnDestinationCard(destinationCard, playerID);
 
                 //TODO:below here change to be game commands not lobby commands
 //                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();

@@ -68,13 +68,11 @@ public class Player {
         destinationCards.add(destinationCard);
     }
 
-    public void removeDestinationCard(List<DestinationCard>destinationCards) {
+    public void removeDestinationCard(DestinationCard destinationCard ) {
         int index = 0;
         for(int i = 0; i < destinationCards.size(); i++) {
-            for(DestinationCard card: destinationCards) {
-                if (destinationCards.get(i).getDestinationCardName() == card.getDestinationCardName()) {
+            if (destinationCards.get(i).getDestinationCardName() == destinationCard.getDestinationCardName()) {
                     destinationCards.remove(i);
-                }
             }
         }
     }

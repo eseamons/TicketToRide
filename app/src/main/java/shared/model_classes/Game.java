@@ -92,10 +92,10 @@ public class Game {
         DestinationCard card = destinationCardsList.drawCard(auth);
         return card;
     }
-    public void returnDestinationCards(List<DestinationCard> destinationCards, int playerID) {
-        destinationCardsList.discardCards(destinationCards);
+    public void returnDestinationCard(DestinationCard destinationCard, int playerID) {
+        destinationCardsList.discardCard(destinationCard);
         Player p = getPlayerbyIndex(playerID);
-        p.removeDestinationCard(destinationCards);
+        p.removeDestinationCard(destinationCard);
     }
 
     public boolean playerInGame(String auth) {

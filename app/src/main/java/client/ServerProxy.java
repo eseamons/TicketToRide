@@ -258,9 +258,9 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(List<DestinationCard> destinationCards, int gameID, String auth) {
+    public boolean removeDestinationCard(DestinationCard destinationCard, int gameID, String auth) {
         RemoveDestinationCardCommandData cmdData = new RemoveDestinationCardCommandData();
-        cmdData.setDiscardedCards(destinationCards);
+        cmdData.setDiscardedCard(destinationCard);
         cmdData.setAuth(auth);
         cmdData.setGameID(gameID);
 

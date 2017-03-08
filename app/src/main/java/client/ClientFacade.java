@@ -249,13 +249,13 @@ public class ClientFacade implements IClient{
         return null;
     }
 
-    public boolean discardDestinationCards(List<DestinationCard>discardedDestCards)
+    public boolean discardDestinationCards(DestinationCard discardedDestCard)
     {
         ServerProxy serverProxy = ServerProxy.getInstance();
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();
 
-        return serverProxy.removeDestinationCard(discardedDestCards, gameID,auth);
+        return serverProxy.removeDestinationCard(discardedDestCard, gameID,auth);
     }
 
     public RoutesList getRoutesList()
