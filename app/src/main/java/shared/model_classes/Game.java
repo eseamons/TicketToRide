@@ -21,6 +21,8 @@ public class Game {
     private DestinationCardsList destinationCardsList;
     private List<Command> commands;
     private List<String> comments = new ArrayList<>();
+    private int currentPlayer;
+
 
     public Game(GameLobby gameLobby) {
         gameID = gameLobby.getID();
@@ -29,7 +31,16 @@ public class Game {
         faceUpCards = new ArrayList<ColorNum>(5);
         destinationCardsList = new DestinationCardsList();
         routes = new RoutesList();
+        currentPlayer = 0;
     }
+
+    public int getCurrentPlayer() {
+        return currentPlayer;
+    }
+    public void setCurrentPlayer(int currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+    public void incrementCurrentPlayer() { this.currentPlayer++; }
 
     public RoutesList getRoutes(){return routes;}
     public int getGameID() {
