@@ -1,5 +1,7 @@
 package client;
 
+import android.graphics.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -41,6 +43,7 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         Account account = serverProxy.login(name, pass);
         ClientModel.getInstance().setAccount(account);
+        ClientModel.getInstance().setThis_Player();
         return account;
     }
 
@@ -169,6 +172,13 @@ public class ClientFacade implements IClient{
     methods needed for game play
     client methods are followed by their counterpart needed for receiving
 */
+
+
+    @Override
+    public List<Player> getGamePlayers() {
+        return clientModel.getCurrent_game().getPlayers();
+    }
+
     public void getNewGameCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
         int lastCommand = clientModel.getLastCommand();
@@ -246,9 +256,10 @@ public class ClientFacade implements IClient{
         return false;
     }
 
+    //get current player's list of trainCards
     public List<CardColor> getPlayerCards()
     {
-        return null;
+        return ClientModel.getInstance().getThis_player().getTrainCards();
     }
 
 
@@ -264,9 +275,10 @@ public class ClientFacade implements IClient{
         clientModel.drawDestinationCard(gameID, playerID, destinationCard);
     }
 
+    //current player's destinationCards
     public List<DestinationCard> getDestinationList()
     {
-        return null;
+        return clientModel.getInstance().getThis_player().getDestinationCards();
     }
 
     public boolean discardDestinationCards(DestinationCard discardedDestCard)
@@ -286,24 +298,50 @@ public class ClientFacade implements IClient{
       return clientModel.getInstance().getRoutesList();
     }
 
+
+    public static String next_cmd = "STUPID BUTTON";
     public void runAnimation()
     {
-        int time = 0;
+        int time = -1;
+        Game game = clientModel.getCurrent_game();
+        Player current = clientModel.getThis_player();
         switch(time)
         {
-            //case 0: clientModel.
+            case -1: next_cmd = "Claim Route for Player 1"; break;
+            case 0: game.stupidClaimRoute(11, 1); next_cmd = "Claim Route for Player 2 "; break;
+            case 1: game.stupidClaimRoute(20, 2); next_cmd = "Claim Route for Player 3 "; break;
+            case 2: game.stupidClaimRoute(24, 3); next_cmd = "Claim Route for Player 4 "; break;
+            case 3: game.stupidClaimRoute(26, 4); next_cmd = "Claim Route for Player 5 "; break;
+            case 4: game.stupidClaimRoute(11, 5); next_cmd = "Draw PURPLE for Current Player "; break;
+            case 5: current.addTrainCard(CardColor.PURPLE); next_cmd = "Draw WHITE for Current Player "; break;
+            case 6: current.addTrainCard(CardColor.WHITE); next_cmd = "Draw BLUE for Current Player "; break;
+            case 7: current.addTrainCard(CardColor.BLUE); next_cmd = "Draw YELLOW for Current Player "; break;
+            case 8: current.addTrainCard(CardColor.YELLOW); next_cmd = "Draw ORANGE for Current Player "; break;
+            case 9: current.addTrainCard(CardColor.ORANGE); next_cmd = "Draw BLACK for Current Player "; break;
+            case 10: current.addTrainCard(CardColor.BLACK); next_cmd = "Draw RED for Current Player "; break;
+            case 11: current.addTrainCard(CardColor.RED); next_cmd = "Draw GREEN for Current Player "; break;
+            case 12: current.addTrainCard(CardColor.GREEN); next_cmd = "Draw WILD for Current Player "; break;
+            case 13: current.addTrainCard(CardColor.WILD); next_cmd = "Add Dest Card to Current Player (Duluth-Houston) "; break;
+            case 14: current.addDestinationCard(new DestinationCard("Duluth", "Houston", 8)); next_cmd = "Add Red Card to Player 1"; break;
+            case 15: game.stupidAddCard(CardColor.RED, 1); next_cmd = "Add Red Card to Player 2 "; break;
+            case 16: game.stupidAddCard(CardColor.RED, 2); next_cmd = "Add Red Card to Player 3 "; break;
+            case 17: game.stupidAddCard(CardColor.RED, 3); next_cmd = "Add Red Card to Player 4 "; break;
+            case 18: game.stupidAddCard(CardColor.RED, 4); next_cmd = "Add Red Card to Player 5 "; break;
+            case 19: game.stupidAddCard(CardColor.RED, 5); next_cmd = "Add Destination card to player 1"; break;
+            case 20: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),1); next_cmd = "Add Destination card to player 2 "; break;
+            case 21: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),2); next_cmd = "Add Destination card to player 3 "; break;
+            case 22: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),3); next_cmd = "Add Destination card to player 4 "; break;
+            case 23: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),4); next_cmd = "Add Destination card to player 5 "; break;
+            case 24: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),5); next_cmd = "done "; break;
         }
+        time++;
+        clientModel.update();
     }
 
     public void initializeAnimation()
     {
-        GameLobby fakeLobby = new GameLobby();
-        fakeLobby.setID(1);
-        fakeLobby.setMax_players(2);
-        fakeLobby.setName("ok");
-        fakeLobby.addNewPlayers(new Account());
-        fakeLobby.addNewPlayers(new Account());
-        Game game = new Game(fakeLobby);
+
+
     }
 
 

@@ -44,9 +44,12 @@ public class ClientModel extends Observable
 
 
 
-    public void setThis_Player(int player_num)
+    public void setThis_Player()
     {
-        this_player = currentGame.getPlayerbyIndex(player_num);
+        Player p = new Player();
+        p.setAccount(account);
+        this_player = p;
+        //this_player = currentGame.getPlayerbyIndex(player_num);
     }
     //Methods needed for all classes
     private static ClientModel instance = new ClientModel();
@@ -61,9 +64,6 @@ public class ClientModel extends Observable
         return account.getAuthentication();
     }
 
-
-
-
     public RoutesList getRoutesList()
     {
         return currentGame.getRoutes();
@@ -76,9 +76,6 @@ public class ClientModel extends Observable
     public Account getAccount() {
         return account;
     }
-
-
-
 
     //methods needed for the gameListView
     public void setGameLobbyList(List<GameLobby> games) {
@@ -106,7 +103,7 @@ public class ClientModel extends Observable
     }
 
     public void playerJoinsGame(int gameID, Account account) {
-        if(currentGameLobby.getID() == gameID)
+        if(currentGameLobby != null && currentGameLobby.getID() == gameID)
         {
             currentGameLobby.addNewPlayers(account);
         }
@@ -115,8 +112,6 @@ public class ClientModel extends Observable
     public GameLobby getCurrent_game_lobby() {
         return currentGameLobby;
     }
-
-
 
 
     //methods needed for GameLobby View
@@ -204,6 +199,15 @@ public class ClientModel extends Observable
 
     public void setCommand_list(List<Command> command_list) {
         this.command_list = command_list;
+    }
+
+
+    public Player getThis_player() {
+        return this_player;
+    }
+
+    public void setThis_player(Player this_player) {
+        this.this_player = this_player;
     }
 
 

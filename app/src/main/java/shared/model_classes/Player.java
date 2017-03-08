@@ -84,4 +84,15 @@ public class Player {
         return account.getAuthentication();
     }
 
+    public String getName(){
+        return account.getUsername();
+    }
+
+    public int getTrainsRemaining() {
+        return trainsRemaining;
+    }
+
+    public void setTrainsRemaining(int trainsRemaining) {
+        this.trainsRemaining = trainsRemaining;
+    }
 }

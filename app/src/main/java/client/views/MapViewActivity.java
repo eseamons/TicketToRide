@@ -48,10 +48,52 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     TextView greenNum;
     TextView wildNum;
 
+    public void setPurpleNumText(String set) {
+        purpleNum.setText(set);
+    }
+
+    public void setWhiteNumText(String set) {
+        whiteNum.setText(set);;
+    }
+
+    public void setBlueNumText(String set) {
+        blueNum.setText(set);;
+    }
+
+    public void setYellowNumText(String set) {
+         yellowNum.setText(set);;
+    }
+
+    public void setOrangeNumText(String set) {
+         orangeNum.setText(set);;
+    }
+
+    public void setBlackNumText(String set) {
+            blackNum.setText(set);;
+    }
+
+    public void setRedNumText(String set) {
+         redNum.setText(set);;
+    }
+
+    public void setGreenNumText(String set) {
+         greenNum.setText(set);;
+    }
+
+    public void setWildNumText(String set) {
+         wildNum.setText(set);;
+    }
+
+    public void setDestViewText(String set) {
+         destView.setText(set);;
+    }
+
     TextView destView;
 
     Button toDeck;
     Button toStats;
+
+    Button StupidButton;
 
     int test_num = 0;
     int cur_done = 3;
@@ -92,9 +134,22 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             }
         });
 
-        createFakeRoutes();
+        StupidButton = (Button) findViewById(R.id.STUPIDBUTTON);
+        StupidButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.stupidButtonPressed();
+            }
+        });
+
+        //createFakeRoutes();
 
         presenter = new MapViewPresenter(this);
+    }
+
+    public void setStupidButtonText(String set)
+    {
+        StupidButton.setText(set);
     }
 
     public void createFakeRoutes()
@@ -108,11 +163,10 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         }
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event)
+    public void getCoords(View v, MotionEvent event)
     {
         if(event.getAction() != MotionEvent.ACTION_DOWN)
-            return true;
+            return;
         float x = event.getX();
         float y = event.getY();
         test_num++;
@@ -125,9 +179,10 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         {
             Log.d("SPACE", "ROUTE END");
         }
-        drawRoutes(routes);
-        testCardNums();
-        setDestinationBox(new ArrayList<DestinationCard>());
+    }
+    @Override
+    public boolean onTouch(View v, MotionEvent event)
+    {
         return true;
     }
 
@@ -140,7 +195,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         cards.add(CardColor.ORANGE);
         cards.add(CardColor.BLACK);
         cards.add(CardColor.BLACK);
-        setPlayerCardViews(cards);
+        presenter.setPlayerCardViews(cards);
     }
 
 
@@ -185,72 +240,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         return ret;
     }
 
-    public void setPlayerCardViews(List<CardColor> playerCards)
-    {
-        int redCards = 0;
-        int orangeCards = 0;
-        int yellowCards = 0;
-        int greenCards = 0;
-        int blueCards = 0;
-        int purpleCards = 0;
-        int whiteCards = 0;
-        int blackCards = 0;
-        int wildCards = 0;
 
-        for (int i = 0; i < playerCards.size(); i++) {
-            switch (playerCards.get(i)) {
-                case RED:
-                    redCards++;
-                    break;
-                case ORANGE:
-                    orangeCards++;
-                    break;
-                case YELLOW:
-                    yellowCards++;
-                    break;
-                case GREEN:
-                    greenCards++;
-                    break;
-                case BLUE:
-                    blueCards++;
-                    break;
-                case PURPLE:
-                    purpleCards++;
-                    break;
-                case WHITE:
-                    whiteCards++;
-                    break;
-                case BLACK:
-                    blackCards++;
-                    break;
-                case WILD:
-                    wildCards++;
-                    break;
-            }
-        }
-        purpleNum.setText("" + purpleCards);
-        whiteNum.setText("" + whiteCards);
-        blueNum.setText("" + blueCards);
-        yellowNum.setText("" + yellowCards);
-        orangeNum.setText("" + orangeCards);
-        blackNum.setText("" + blackCards);
-        redNum.setText("" + redCards);
-        greenNum.setText("" + greenCards);
-        wildNum.setText("" + wildCards);
-
-    }
-
-    public void setDestinationBox(List<DestinationCard> destinationCards)
-    {
-        StringBuilder sb = new StringBuilder();
-        for(int i=0; i < destinationCards.size(); i++)
-        {
-            DestinationCard dc = destinationCards.get(i);
-            sb.append(dc.toString() + "\n");
-        }
-        destView.setText(sb.toString());
-        destView.setText("HI\nNO\nLANCE\nPLEASE\nSAVEme\nNO316ENGLISHPLS");
-    }
 
 
 }

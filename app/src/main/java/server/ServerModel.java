@@ -149,9 +149,11 @@ public class ServerModel implements IServer{
             returnGameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
 
             if(returnGameLobby.getPlayers().size() < returnGameLobby.getMaxPlayers()) {
-                Player p = new Player();
+
                 Account acc = accountList.getAccountByAuthCode(auth);
-                p.setAccount(acc);
+
+                int playerIndex = returnGameLobby.addNewPlayers(acc);
+                Player p = returnGameLobby.getPlayers().get(playerIndex);
                 playerAuthMap.put(auth, p);
 
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
@@ -209,12 +211,15 @@ public class ServerModel implements IServer{
             List<Player> playersInGame = game.getPlayers();
             for( Player p: playersInGame)
             {
-                for( int i = 0; i< 3; i++)
+                String PlayerAuth = p.getPlayerAuthCode();
+                int gameID = game.getGameID();
+                for( int i = 0; i< 4; i++)
                 {
-                    String PlayerAuth = p.getPlayerAuthCode();
-                    int gameID = game.getGameID();
                     drawDeckCard(PlayerAuth, gameID);
-                   //drawDestinationCard(PlayerAuth,gameID);
+                }
+
+                for(int j = 0; j < 3; j++) {
+                    drawDestinationCard(gameID,PlayerAuth);
                 }
             }
             //TODO:set the 5 face up cards.
@@ -320,26 +325,6 @@ public class ServerModel implements IServer{
 
     }
 
-    /*TODO: fix the destinationCard methods..
-//    @Override
-//    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
-//        //the server needs to know which game to add it to.. right now this game is always null and so the method wont work
-//        //who was working on this? How were you thinking we get the destination card to sent to all of these methods?
-//        // does this ever set the info to send to the other clients?
-//        //Game currentGame = gameList.getGame(gameID);
-//        Game currentGame = null;
-//        DestinationCard destinationCard = null;
-//        boolean destinationCardDrawnSuccessfully = false;
-//        Player player = playerAuthMap.get(auth);
-//
-//        if(!currentGame.destinationCardIsOwned(destinationCardName)) {
-//            destinationCard = currentGame.getDestinationCardByName(destinationCardName);
-//            player.addDestinationCard(destinationCard);
-//            destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, auth);
-//        }
-//        return destinationCardDrawnSuccessfully;
-//    }
-*/
     @Override
     public boolean drawDestinationCard(int gameID, String auth) {
         boolean successful = false;
@@ -356,9 +341,7 @@ public class ServerModel implements IServer{
                 player.addDestinationCard(destinationCard);
                 int playerID = player.getPlayerID();
 
-                //TODO:below here change to be game commands not lobby commands
-                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
-                gameLobbyList.incrementCurrentLobbyCommandID();
+                int currentCmdID = gameList.getCurrentGameCommandID();
                 Command cmd = new DrawDestinationCardCommand();
 
                 DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
@@ -369,7 +352,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameLobbyList.addLobbyCommand(cmd);
+                gameList.addGameCommand(cmd);
             }
         }
         return successful;
