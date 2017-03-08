@@ -130,6 +130,8 @@
             android:text="DRAW DESTINATION"
             android:textSize="10dp" />
 
+
+
     </LinearLayout>
 
     <Button
@@ -153,5 +155,15 @@
         android:id="@+id/button_TOSTATS"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true" />
+
+    <Button
+        android:id="@+id/STUPIDBUTTON"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:text="STUPID BUTTON"
+        android:textSize="20dp"
+        android:layout_alignParentTop="true"
+
+        />
 </RelativeLayout>
 

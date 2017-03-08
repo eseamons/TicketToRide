@@ -71,6 +71,21 @@ public class Game {
         return successful;
     }
 
+    public boolean stupidClaimRoute(int route_num, int player_index) {
+        routes.getRoute(route_num).ownership = player_index;
+        return true;
+    }
+
+    public void stupidAddCard(CardColor card, int player_num)
+    {
+        getPlayerbyIndex(player_num-1).addTrainCard(card);
+    }
+
+    public void stupidAddDestinationCard(DestinationCard card, int player_num)
+    {
+        getPlayerbyIndex(player_num-1).addDestinationCard(card);
+    }
+
     //Destination Card Methods
     public boolean destinationCardIsOwned(String destinationCardName) {
         return false;

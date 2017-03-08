@@ -63,9 +63,6 @@ public class ClientModel extends Observable
         return account.getAuthentication();
     }
 
-
-
-
     public RoutesList getRoutesList()
     {
         return currentGame.getRoutes();
@@ -78,9 +75,6 @@ public class ClientModel extends Observable
     public Account getAccount() {
         return account;
     }
-
-
-
 
     //methods needed for the gameListView
     public void setGameLobbyList(List<GameLobby> games) {
@@ -117,8 +111,6 @@ public class ClientModel extends Observable
     public GameLobby getCurrent_game_lobby() {
         return currentGameLobby;
     }
-
-
 
 
     //methods needed for GameLobby View
