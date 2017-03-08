@@ -154,9 +154,9 @@ public class ClientFacade implements IClient{
     public Game beginGame() {
 
         String auth = clientModel.getAuthorization();
-        int ID = clientModel.getCurrent_game_lobby().getID();
+        int gameLobbyID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
-        boolean beginGameBool = serverProxy.beginGame(ID, auth);
+        boolean beginGameBool = serverProxy.beginGame(gameLobbyID, auth);
         //TODO: is this supposed to always return null?
         return null;
     }

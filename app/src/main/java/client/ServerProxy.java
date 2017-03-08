@@ -9,6 +9,7 @@ import shared.ColorNum;
 import shared.Result;
 import shared.Serializer;
 import shared.command_classes.AddCommentCommand;
+import shared.command_classes.BeginGameCommand;
 import shared.command_classes.ClaimRouteCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
@@ -181,7 +182,7 @@ public class ServerProxy implements IServer{
         cmdData.setGameLobbyID(gameLobbyID);
         cmdData.setAuth(auth);
 
-        Command cmd = new GetGamesCommand();
+        Command cmd = new BeginGameCommand();
         cmd.setInfo(cmdData);
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
 

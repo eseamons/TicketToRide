@@ -179,7 +179,8 @@ public class ServerModel implements IServer{
         {
 
             //Begin game
-            gameList.beginGame(gameLobbyList.getGameLobbyByID(gameLobbyID));
+            GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
+            gameList.beginGame(gameLobby);
 
             //remove game lobby
             gameLobbyList.removeLobby(gameLobbyID);

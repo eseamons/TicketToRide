@@ -58,8 +58,8 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean beginGame(int ID, String auth) {
-        return serverModel.beginGame(ID, auth);
+    public boolean beginGame(int gameLobbyID, String auth) {
+        return serverModel.beginGame(gameLobbyID, auth);
     }
 
     @Override
