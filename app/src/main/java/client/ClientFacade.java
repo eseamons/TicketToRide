@@ -257,7 +257,12 @@ public class ClientFacade implements IClient{
 
     public RoutesList getRoutesList()
     {
-      return null;
+      return clientModel.getInstance().getRoutesList();
+    }
+
+    public void runAnimation()
+    {
+
     }
 
 }

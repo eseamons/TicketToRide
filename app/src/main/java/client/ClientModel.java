@@ -36,10 +36,16 @@ public class ClientModel extends Observable
     private GameLobbyList gameLobbyList = new GameLobbyList();
     private GameLobby currentGameLobby;
     private Game currentGame;
+    private RoutesList routes = new RoutesList();
+    Player this_player;
     //private RoutesList routes = new RoutesList();
 
 
 
+    public void setThis_Player(int player_num)
+    {
+        this_player = currentGame.getPlayerbyIndex(player_num);
+    }
     //Methods needed for all classes
     private static ClientModel instance = new ClientModel();
 
@@ -56,6 +62,10 @@ public class ClientModel extends Observable
 
 
 
+    public RoutesList getRoutesList()
+    {
+        return routes;
+    }
     //methods needed for the login/register view
     public void setAccount(Account account) {
         this.account = account;
