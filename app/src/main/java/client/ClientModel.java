@@ -43,9 +43,12 @@ public class ClientModel extends Observable
 
 
 
-    public void setThis_Player(int player_num)
+    public void setThis_Player()
     {
-        this_player = currentGame.getPlayerbyIndex(player_num);
+        Player p = new Player();
+        p.setAccount(account);
+        this_player = p;
+        //this_player = currentGame.getPlayerbyIndex(player_num);
     }
     //Methods needed for all classes
     private static ClientModel instance = new ClientModel();
@@ -193,6 +196,15 @@ public class ClientModel extends Observable
 
     public void setCommand_list(List<Command> command_list) {
         this.command_list = command_list;
+    }
+
+
+    public Player getThis_player() {
+        return this_player;
+    }
+
+    public void setThis_player(Player this_player) {
+        this.this_player = this_player;
     }
 
 
