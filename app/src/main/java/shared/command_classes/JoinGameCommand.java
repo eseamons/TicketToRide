@@ -28,6 +28,7 @@ public class JoinGameCommand extends Command
     {
         int gameLobbyID = ((JoinGameCommandData) info).getGameLobbyID();
         Account account = ((JoinGameCommandData) info).getAccount();
+        String auth = ((JoinGameCommandData) info).getAuth();
         ClientFacade clientFacade = new ClientFacade();
         clientFacade.someoneJoinedGame(gameLobbyID, account);
     }

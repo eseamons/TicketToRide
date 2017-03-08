@@ -157,13 +157,13 @@ public class ServerModel implements IServer{
                 gameLobbyList.incrementCurrentLobbyCommandID();
                 Command cmd = new JoinGameCommand();
 
-                String accountString = Serializer.serialize(acc);
 
                 JoinGameCommandData cmdData = new JoinGameCommandData();
                 cmdData.setGameLobbyID(gameLobbyID);
                 cmdData.setAccount(acc);
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
+
                 gameLobbyList.addLobbyCommand(cmd);
             }
 

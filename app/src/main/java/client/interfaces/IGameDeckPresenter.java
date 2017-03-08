@@ -5,4 +5,6 @@ package client.interfaces;
  */
 
 public interface IGameDeckPresenter {
+    void setColors();
+    void setDestinations();
 }

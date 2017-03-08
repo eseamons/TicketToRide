@@ -34,6 +34,12 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
 
     @Override
     public void update(Observable observable, Object o) {
+        setColors();
+        setDestinations();
+    }
+
+    @Override
+    public void setColors() {
         ClientFacade client = new ClientFacade();
         List<CardColor> playerCards = client.getPlayerCards();
         int redCards = 0;
@@ -87,7 +93,11 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
         view.setGreenNum(greenCards);
         view.setWildNum(wildCards);
 
+    }
 
+    @Override
+    public void setDestinations() {
+        ClientFacade client = new ClientFacade();
         List<DestinationCard> destinations = client.getDestinationList();
         StringBuilder sb = new StringBuilder();
         for(int i=0; i < destinations.size(); i++)
