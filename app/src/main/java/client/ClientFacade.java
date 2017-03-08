@@ -41,6 +41,7 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         Account account = serverProxy.login(name, pass);
         ClientModel.getInstance().setAccount(account);
+        ClientModel.getInstance().setThis_Player();
         return account;
     }
 
@@ -226,9 +227,10 @@ public class ClientFacade implements IClient{
         return false;
     }
 
+    //get current player's list of trainCards
     public List<CardColor> getPlayerCards()
     {
-        return null;
+        return ClientModel.getInstance().getThis_player().getTrainCards();
     }
 
 
@@ -244,9 +246,10 @@ public class ClientFacade implements IClient{
         clientModel.drawDestinationCard(gameID, playerID, destinationCard);
     }
 
+    //current player's destinationCards
     public List<DestinationCard> getDestinationList()
     {
-        return null;
+        return clientModel.getInstance().getThis_player().getDestinationCards();
     }
 
     public boolean discardDestinationCards(DestinationCard discardedDestCard)
