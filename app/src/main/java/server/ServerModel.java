@@ -13,6 +13,7 @@ import shared.CardColor;
 import shared.ColorNum;
 import shared.Serializer;
 import shared.command_classes.*;
+import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.CreateGameCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.model_classes.*;
@@ -190,7 +191,12 @@ public class ServerModel implements IServer{
             int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
             gameLobbyList.incrementCurrentLobbyCommandID();
             Command cmd = new BeginGameCommand();
-            cmd.setInfo("" + gameLobbyID);
+
+            BeginGameCommandData cmdData = new BeginGameCommandData();
+            cmdData.setGameLobbyID(gameLobbyID);
+            cmdData.setAuth(auth);
+
+            cmd.setInfo(cmdData);
             cmd.setCmdID(currentCmdID);
             gameLobbyList.addLobbyCommand(cmd);
             beginGameSuccessful = true;
