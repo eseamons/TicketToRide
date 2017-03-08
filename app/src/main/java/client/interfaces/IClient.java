@@ -56,7 +56,7 @@ public interface IClient {
 
     public void addComment(int gameID, String message);
 
-    Game beginGame();
+    boolean beginGame();
 
     public void aGameStarted(int gameID);
 

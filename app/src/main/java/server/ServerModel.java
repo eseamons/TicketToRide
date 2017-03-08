@@ -15,6 +15,7 @@ import shared.Serializer;
 import shared.command_classes.*;
 import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.CreateGameCommandData;
+import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
@@ -181,7 +182,7 @@ public class ServerModel implements IServer{
 
             //Begin game
             GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
-            gameList.beginGame(gameLobby);
+            Game game = gameList.beginGame(gameLobby);
 
             //remove game lobby
             gameLobbyList.removeLobby(gameLobbyID);
@@ -203,9 +204,19 @@ public class ServerModel implements IServer{
 
             //TODO: should create multiple commands that create the game...
             //everything past here should be on gameListCommands...
-            //draw 3 train cards for every player in the game
-            //assign 3 destination cards to every player in the game
-            //set the 5 face up cards.
+
+            List<Player> playersInGame = game.getPlayers();
+            for( Player p: playersInGame)
+            {
+                for( int i = 0; i< 3; i++)
+                {
+                    String PlayerAuth = p.getPlayerAuthCode();
+                    int gameID = game.getGameID();
+                    drawDeckCard(PlayerAuth, gameID);
+                   //drawDestinationCard(PlayerAuth,gameID);
+                }
+            }
+            //TODO:set the 5 face up cards.
         }
 
         return beginGameSuccessful;
@@ -297,23 +308,63 @@ public class ServerModel implements IServer{
 
     }
 
+    /*TODO: fix the destinationCard methods..
+//    @Override
+//    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
+//        //the server needs to know which game to add it to.. right now this game is always null and so the method wont work
+//        //who was working on this? How were you thinking we get the destination card to sent to all of these methods?
+//        // does this ever set the info to send to the other clients?
+//        //Game currentGame = gameList.getGame(gameID);
+//        Game currentGame = null;
+//        DestinationCard destinationCard = null;
+//        boolean destinationCardDrawnSuccessfully = false;
+//        Player player = playerAuthMap.get(auth);
+//
+//        if(!currentGame.destinationCardIsOwned(destinationCardName)) {
+//            destinationCard = currentGame.getDestinationCardByName(destinationCardName);
+//            player.addDestinationCard(destinationCard);
+//            destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, auth);
+//        }
+//        return destinationCardDrawnSuccessfully;
+//    }
+*/
     @Override
-    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
-        //TODO: the server needs to know which game to add it to.. right now this game is always null and so the method wont work
-        //TODO: who was working on this? How were you thinking we get the destination card to sent to all of these methods?
-        //TODO: does this ever set the info to send to the other clients?
+    public boolean drawDestinationCard(int gameID, String auth) {
+        //the server needs to know which game to add it to.. right now this game is always null and so the method wont work
+        //who was working on this? How were you thinking we get the destination card to sent to all of these methods?
+        // does this ever set the info to send to the other clients?
         //Game currentGame = gameList.getGame(gameID);
-        Game currentGame = null;
-        DestinationCard destinationCard = null;
-        boolean destinationCardDrawnSuccessfully = false;
-        Player player = playerAuthMap.get(auth);
+        boolean successful = false;
+        Game currentGame = gameList.getGame(gameID);
 
-        if(!currentGame.destinationCardIsOwned(destinationCardName)) {
-            destinationCard = currentGame.getDestinationCardByName(destinationCardName);
-            player.addDestinationCard(destinationCard);
-            destinationCardDrawnSuccessfully = currentGame.setDestinationCardOwnership(destinationCardName, auth);
+        if(currentGame != null)
+        {
+            DestinationCard destinationCard = currentGame.drawDestinationCard(auth);
+            Player player = playerAuthMap.get(auth);
+
+            if(destinationCard != null && player != null)
+            {
+                successful = true;
+                player.addDestinationCard(destinationCard);
+                int playerID = player.getPlayerID();
+
+                //TODO:below here change to be game commands not lobby commands
+                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+                gameLobbyList.incrementCurrentLobbyCommandID();
+                Command cmd = new DrawDestinationCardCommand();
+
+                DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
+                cmdData.setAuth(auth);
+                cmdData.setGameID(gameID);
+                cmdData.setDestinationCard(destinationCard);
+                cmdData.setPlayerID(playerID);
+
+                cmd.setInfo(cmdData);
+                cmd.setCmdID(currentCmdID);
+                gameLobbyList.addLobbyCommand(cmd);
+            }
         }
-        return destinationCardDrawnSuccessfully;
+        return successful;
     }
 
     @Override
@@ -342,16 +393,19 @@ public class ServerModel implements IServer{
                 player.addTrainCard(cardColor);
                 int playerID = player.getPlayerID();
 
-                int currentGameCmdID = gameList.getCurrentGameCommandID();
-                gameList.incrementCurrentGameCommandID();
-                Command cmd = new DrawDeckCardCommand();
 
-                String cardColorString = Serializer.serialize(cardColor);
+//                TODO:change all of this...
+//                int currentGameCmdID = gameList.getCurrentGameCommandID();
+//                gameList.incrementCurrentGameCommandID();
+//                Command cmd = new DrawDeckCardCommand();
+//
+//                String cardColorString = Serializer.serialize(cardColor);
+//
+//                String info = "{\"gameID\": \""+gameID+"\", \"cardColor\":\""+cardColorString+"\", \"playerID\":\"" + playerID + "\"}";
+//                cmd.setInfo(info);
+//                cmd.setCmdID(currentGameCmdID);
+//                gameList.addGameCommand(cmd);
 
-                String info = "{\"gameID\": \""+gameID+"\", \"cardColor\":\""+cardColorString+"\", \"playerID\":\"" + playerID + "\"}";
-                cmd.setInfo(info);
-                cmd.setCmdID(currentGameCmdID);
-                gameList.addGameCommand(cmd);
             }
         }
 

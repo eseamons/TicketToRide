@@ -1,32 +1,35 @@
 package shared.command_data_classes;
 
+import shared.model_classes.DestinationCard;
+
 /**
  * Created by erics on 3/7/2017.
  */
 
 public class DrawDestinationCardCommandData {
     private String destinationCardName;
-    private int playerID;
+    private DestinationCard destinationCard;
+    private int gameID;
     private String auth;
+    int PlayerID;
 
     public DrawDestinationCardCommandData() {
 
     }
-
-    public String getDestinationCardName() {
-        return destinationCardName;
+    public DestinationCard getDestinationCard() {
+        return destinationCard;
     }
 
-    public void setDestinationCardName(String destinationCardName) {
-        this.destinationCardName = destinationCardName;
+    public void setDestinationCard(DestinationCard destinationCard) {
+        this.destinationCard = destinationCard;
     }
 
-    public int getPlayerID() {
-        return playerID;
+    public int getGameID() {
+        return gameID;
     }
 
-    public void setPlayerID(int playerID) {
-        this.playerID = playerID;
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
     }
 
     public String getAuth() {
@@ -35,5 +38,13 @@ public class DrawDestinationCardCommandData {
 
     public void setAuth(String auth) {
         this.auth = auth;
+    }
+
+    public int getPlayerID() {
+        return PlayerID;
+    }
+
+    public void setPlayerID(int playerID) {
+        PlayerID = playerID;
     }
 }

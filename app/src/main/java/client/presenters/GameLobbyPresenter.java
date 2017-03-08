@@ -73,11 +73,8 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
 
     public boolean beginGame()
     {
-        Context context = GameLobbyView.getInstance().getApplicationContext();
         ClientFacade client = new ClientFacade();
-        client.beginGame();
-        Toast.makeText(context,"Start Game!!",Toast.LENGTH_LONG);
-        return true;
+        return client.beginGame();
     }
 
 }

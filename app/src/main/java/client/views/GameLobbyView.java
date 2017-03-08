@@ -1,6 +1,7 @@
 package client.views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -81,8 +82,8 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameLobbyPresenter.getInstance().beginGame();
-                //TODO: switch views if successful
+                if(GameLobbyPresenter.getInstance().beginGame())
+                {startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));}
             }
         });
 
@@ -125,21 +126,8 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 
 
         //POLLER
-        GameLobbyPresenter.getInstance().getPlayers();
-        ClientModel model = ClientModel.getInstance();
-
-//        Spinner spinner1 = (Spinner) findViewById(R.id.spinner);
-//        //String[] spinnerArray1 = new String[] { "Red", "Green", "Blue", "Yellow", "Black"};
-//        SimpleImageArrayAdapter adapter1 = new SimpleImageArrayAdapter(this, new Integer[]{R.drawable.red, R.drawable.green, R.drawable.blue, R.drawable.yellow, R.drawable.black});
-//        spinner1.setAdapter(adapter1);
-//
-//        Spinner spinner2 = (Spinner) findViewById(R.id.spinner2);
-//
-//        Spinner spinner3 = (Spinner) findViewById(R.id.spinner3);
-//
-//        Spinner spinner4 = (Spinner) findViewById(R.id.spinner4);
-//
-//        Spinner spinner5 = (Spinner) findViewById(R.id.spinner5);
+//        GameLobbyPresenter.getInstance().getPlayers();
+//        ClientModel model = ClientModel.getInstance();
     }
 
 

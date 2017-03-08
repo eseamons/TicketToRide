@@ -24,12 +24,12 @@ public class GameList {
         games = new ArrayList<>();
     }
 
-    public boolean beginGame(GameLobby gameLobby) {
+    public Game beginGame(GameLobby gameLobby) {
         //create game
         Game newGame = new Game(gameLobby);
         games.add(newGame);
         gameCommands = new ArrayList<>();
-        return true;
+        return newGame;
     }
 
     //added everything below while working on EndTurnCommand (2/28)

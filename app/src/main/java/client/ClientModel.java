@@ -13,6 +13,7 @@ import shared.CardColor;
 import shared.command_classes.Command;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
@@ -130,6 +131,7 @@ public class ClientModel extends Observable
     }
 
     public void aGameStarted(int gameID) {
+
         if(gameID == currentGameLobby.getID())
         {
             currentGame = new Game(currentGameLobby);
@@ -162,6 +164,14 @@ public class ClientModel extends Observable
     public void drawDeckCard(int PlayerID, CardColor card) {
         Player p =currentGame.getPlayerbyIndex(PlayerID);
         p.addTrainCard(card);
+    }
+
+    public void drawDestinationCard(int gameID, int playerID, DestinationCard destinationCard) {
+        if(gameID == currentGame.getGameID())
+        {
+            Player p = currentGame.getPlayerbyIndex(playerID);
+            p.addDestinationCard(destinationCard);
+        }
     }
 
 

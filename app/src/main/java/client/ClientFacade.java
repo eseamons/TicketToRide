@@ -5,13 +5,9 @@ import java.util.List;
 import java.util.Observer;
 
 import client.interfaces.IClient;
-import client.presenters.GameListPresenter;
-import client.presenters.GameLobbyPresenter;
-import client.presenters.LoginPresenter;
 import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
-import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.DestinationCard;
 import shared.model_classes.Game;
@@ -150,15 +146,16 @@ public class ClientFacade implements IClient{
     public List<String> getGameComments(){
         return clientModel.getGameComments();
     }
+
     @Override
-    public Game beginGame() {
+    public boolean beginGame() {
 
         String auth = clientModel.getAuthorization();
         int gameLobbyID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.beginGame(gameLobbyID, auth);
         //TODO: is this supposed to always return null?
-        return null;
+        return beginGameBool;
     }
 
     @Override
@@ -220,17 +217,14 @@ public class ClientFacade implements IClient{
     }
 
     public boolean drawDestinationCard(){
-//        String auth = clientModel.getAuthorization();
-//        int gameID = clientModel.getCurrent_game().getGameID();
-//        ServerProxy serverProxy = ServerProxy.getInstance();
-//        return serverProxy.drawDestinationCard()
-
-        //TODO: who was working on this? How were you thinking we get the destination card to sent to all of these methods?
-        return false;
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        return serverProxy.drawDestinationCard(gameID,auth);
     }
 
-    public void playerDrewDestinationCard(){
-
+    public void playerDrewDestinationCard(int gameID, int playerID, DestinationCard destinationCard){
+        clientModel.drawDestinationCard(gameID, playerID, destinationCard);
     }
 
     public boolean drawFaceUpCard( CardColor card)

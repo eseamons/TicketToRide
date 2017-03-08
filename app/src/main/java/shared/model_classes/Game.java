@@ -6,6 +6,7 @@ import java.util.List;
 import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
+import shared.command_classes.DrawDestinationCardCommand;
 import shared.model_classes.model_list_classes.DestinationCardsList;
 import shared.model_classes.model_list_classes.PlayersList;
 import shared.model_classes.model_list_classes.RoutesList;
@@ -70,14 +71,13 @@ public class Game {
         return successful;
     }
 
+    //Destination Card Methods
     public boolean destinationCardIsOwned(String destinationCardName) {
         return false;
     }
-
     public DestinationCard getDestinationCardByName(String destinationCardName) {
         return null;
     }
-
     public boolean setDestinationCardOwnership(String destinationCardName, String auth) {
         DestinationCard destinationCard = destinationCardsList.getDestinationCardByName(destinationCardName);
         boolean destinationCardDrawnSuccessfully = false;
@@ -88,6 +88,11 @@ public class Game {
 
         return destinationCardDrawnSuccessfully;
     }
+    public DestinationCard drawDestinationCard(String auth) {
+        DestinationCard card = destinationCardsList.drawCard(auth);
+        return card;
+    }
+
 
     public boolean playerInGame(String auth) {
         return players.playerFound(auth);

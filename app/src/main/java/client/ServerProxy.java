@@ -14,6 +14,7 @@ import shared.command_classes.ClaimRouteCommand;
 import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
 import shared.command_classes.DrawDeckCardCommand;
+import shared.command_classes.DrawDestinationCardCommand;
 import shared.command_classes.EndTurnCommand;
 import shared.command_classes.GetGamesCommand;
 import shared.command_classes.GetNewCommandsCommand;
@@ -25,6 +26,7 @@ import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.ClaimRouteCommandData;
 import shared.command_data_classes.CreateGameCommandData;
+import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.GetGamesCommandData;
 import shared.command_data_classes.GetNewCommandsCommandData;
 import shared.command_data_classes.JoinGameCommandData;
@@ -241,8 +243,15 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCard(String destinationCardName, int playerID, String auth) {
-        return false;
+    public boolean drawDestinationCard(int gameID, String auth) {
+        DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
+        cmdData.setAuth(auth);
+        cmdData.setGameID(gameID);
+
+        Command cmd = new DrawDestinationCardCommand();
+        cmd.setInfo(cmdData);
+        Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+        return r.isSuccess();
     }
 
     @Override

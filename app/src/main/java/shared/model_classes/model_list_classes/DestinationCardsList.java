@@ -12,6 +12,7 @@ import shared.model_classes.DestinationCard;
 public class DestinationCardsList {
 
     private List<DestinationCard> destinationCardsList;
+    private List<DestinationCard> discardPile = new ArrayList<>();
 
     public DestinationCardsList() {
         destinationCardsList = new ArrayList<>();
@@ -63,5 +64,17 @@ public class DestinationCardsList {
 
     public DestinationCard getDestinationCardByName(String destinationCardName) {
         return null;
+    }
+
+    public DestinationCard drawCard(String auth) {
+        int min = 0;
+        int max = destinationCardsList.size();
+        int randomIndex = (int) Math.random()*(max-min)+min;
+
+        DestinationCard card =destinationCardsList.get(randomIndex);
+        card.setOwnership(auth);
+        destinationCardsList.remove(randomIndex);
+
+        return card;
     }
 }

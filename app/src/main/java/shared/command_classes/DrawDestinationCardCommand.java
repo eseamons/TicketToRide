@@ -7,6 +7,7 @@ import client.ClientModel;
 import server.ServerFacade;
 import shared.Result;
 import shared.command_data_classes.DrawDestinationCardCommandData;
+import shared.model_classes.DestinationCard;
 
 /**
  * Created by rebeccaredd on 2/22/17.
@@ -15,21 +16,19 @@ import shared.command_data_classes.DrawDestinationCardCommandData;
 public class DrawDestinationCardCommand extends Command {
     public Result execute()
     {
-        String destinationCardName = ((DrawDestinationCardCommandData) info).getDestinationCardName();
-        int playerID = ((DrawDestinationCardCommandData) info).getPlayerID();
+        int gameID = ((DrawDestinationCardCommandData) info).getGameID();
         String auth = ((DrawDestinationCardCommandData) info).getAuth();
-        boolean success = ServerFacade.getInstance().drawDestinationCard(destinationCardName,playerID, auth);
+        boolean success = ServerFacade.getInstance().drawDestinationCard(gameID, auth);
         return new Result(success, "");
     }
 
     public void executeOnClient()
     {
-        String destinationCardName = ((DrawDestinationCardCommandData) info).getDestinationCardName();
+        DestinationCard destinationCard = ((DrawDestinationCardCommandData) info).getDestinationCard();
+        int gameID = ((DrawDestinationCardCommandData) info).getGameID();
         int playerID = ((DrawDestinationCardCommandData) info).getPlayerID();
-        String auth = ((DrawDestinationCardCommandData) info).getAuth();
-
 
         ClientFacade clientFacade = new ClientFacade();
-
+        clientFacade.playerDrewDestinationCard(gameID, playerID, destinationCard);
     }
 }
