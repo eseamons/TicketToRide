@@ -122,8 +122,16 @@ public class GameLobbyList {
     }
 
     public List<Command> getNewLobbyCommands(int commandID) {
-        //TODO: maybe this should be size-1?
-        return lobbyCommands.subList(commandID+1, lobbyCommands.size());
+
+        List<Command> returnLobbyList = new ArrayList<>();
+
+        if(commandID == -1) {
+            return lobbyCommands;
+        }
+        else {
+            return lobbyCommands.subList(commandID, lobbyCommands.size());
+        }
+
     }
 
 }

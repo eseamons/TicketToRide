@@ -13,6 +13,7 @@ import shared.CardColor;
 import shared.ColorNum;
 import shared.Serializer;
 import shared.command_classes.*;
+import shared.command_data_classes.CreateGameCommandData;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
 import shared.model_classes.model_list_classes.*;
@@ -78,13 +79,19 @@ public class ServerModel implements IServer{
 
             newGameLobby = gameLobbyList.createGameLobby(gameLobbyName, max_player_num);
             int gameLobbyID = newGameLobby.getID();
-            String json = "{\"gameLobbyName\":\""+gameLobbyName+"\", \"max_player_num\":\""+max_player_num+"\", \"gameLobbyID\":\""+gameLobbyID+"\"}";
+
+
+            CreateGameCommandData cmdData = new CreateGameCommandData();
+            cmdData.setGameName(gameLobbyName);
+            cmdData.setGameLobbyID(gameLobbyID);
+            cmdData.setAuth(auth);
+            cmdData.setMaxPlayerNum(max_player_num);
 
             int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
             gameLobbyList.incrementCurrentLobbyCommandID();
 
             Command cmd = new CreateGameCommand();
-            cmd.setInfo(json);
+            cmd.setInfo(cmdData);
             cmd.setCmdID(currentCmdID);
             gameLobbyList.addLobbyCommand(cmd);
 

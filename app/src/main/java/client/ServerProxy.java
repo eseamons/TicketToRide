@@ -119,6 +119,8 @@ public class ServerProxy implements IServer{
 
         Command cmd = new JoinGameCommand();
         cmd.setInfo(cmdData);
+        cmd.setInfo(cmdData);
+
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r.isSuccess())
         {

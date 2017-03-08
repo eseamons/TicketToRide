@@ -15,7 +15,7 @@ public class JoinGameCommand extends Command
         int gameLobbyID = ((JoinGameCommandData) info).getGameLobbyID();
         String auth = ((JoinGameCommandData) info).getAuth();
         GameLobby gameLobby = ServerFacade.getInstance().joinGame(gameLobbyID, auth);
-        Result result = null;
+        Result result;
         if(gameLobby == null) {
             result = new Result(false,"");
         } else {

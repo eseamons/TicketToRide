@@ -1,6 +1,7 @@
 package client;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -32,7 +33,7 @@ public class ClientModel extends Observable
     }
 
     private Account account = null;
-    private List<ICommand> command_list = new ArrayList<>();
+    private List<Command> command_list = new ArrayList<Command>();
     private GameLobbyList gameLobbyList = new GameLobbyList();
     private GameLobby currentGameLobby;
     private Game currentGame;
@@ -81,7 +82,7 @@ public class ClientModel extends Observable
         return ((Command) command_list.get(command_list.size()-1)).getCmdID();
     }
 
-    public List<ICommand> getCommand_list() {
+    public List<Command> getCommand_list() {
         return command_list;
     }
 
@@ -162,7 +163,7 @@ public class ClientModel extends Observable
         this.currentGame = currentGame;
     }
 
-    public void setCommand_list(List<ICommand> command_list) {
+    public void setCommand_list(List<Command> command_list) {
         this.command_list = command_list;
     }
 

@@ -1,13 +1,9 @@
 package shared.command_classes;
 
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
 import java.util.List;
 
 import server.ServerFacade;
 import shared.Result;
-import shared.Serializer;
 import shared.command_data_classes.GetGamesCommandData;
 import shared.model_classes.GameLobby;
 
