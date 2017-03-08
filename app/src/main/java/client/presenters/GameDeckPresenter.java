@@ -20,11 +20,9 @@ import shared.model_classes.Player;
 public class GameDeckPresenter implements IGameDeckPresenter,Observer {
 
     GameDeckView view;
-    Game game;
 
     public GameDeckPresenter(GameDeckView gameDeckView){
         view = gameDeckView;
-        game = ClientModel.getInstance().getCurrent_game();
         ClientFacade client = new ClientFacade();
         client.setObserver(this);
     }

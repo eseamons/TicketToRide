@@ -73,4 +73,6 @@ public interface IClient {
 
     void RouteClaimedbyPlayer(int gameID, Route route, String auth);
 
+    List<Player> getGamePlayers();
+
 }

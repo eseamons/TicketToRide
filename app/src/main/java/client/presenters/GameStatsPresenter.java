@@ -29,7 +29,6 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
     @Override
     public void update(Observable observable, Object o) {
         int numberOfPlayers = game.getPlayers().size();
-        //TODO: trains remaining, and turn marker
         switch(numberOfPlayers){
             case 5:
                 Player player = game.getPlayerbyIndex(4);
