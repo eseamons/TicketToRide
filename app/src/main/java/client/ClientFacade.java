@@ -172,6 +172,13 @@ public class ClientFacade implements IClient{
     methods needed for game play
     client methods are followed by their counterpart needed for receiving
 */
+
+
+    @Override
+    public List<Player> getGamePlayers() {
+        return clientModel.getCurrent_game().getPlayers();
+    }
+
     @Override
     public boolean endTurn() {
         ServerProxy serverProxy = ServerProxy.getInstance();
