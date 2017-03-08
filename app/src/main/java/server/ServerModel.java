@@ -14,6 +14,7 @@ import shared.ColorNum;
 import shared.Serializer;
 import shared.command_classes.*;
 import shared.command_data_classes.CreateGameCommandData;
+import shared.command_data_classes.JoinGameCommandData;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
 import shared.model_classes.model_list_classes.*;
@@ -156,8 +157,10 @@ public class ServerModel implements IServer{
 
                 String accountString = Serializer.serialize(acc);
 
-                String info = "{\"gameLobbyID\": \""+gameLobbyID+"\", \"acc\":\""+accountString+"\"}";
-                cmd.setInfo(info);
+                JoinGameCommandData cmdData = new JoinGameCommandData();
+                cmdData.setGameLobbyID(gameLobbyID);
+                cmdData.setAccount(acc);
+                cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
                 gameLobbyList.addLobbyCommand(cmd);
             }

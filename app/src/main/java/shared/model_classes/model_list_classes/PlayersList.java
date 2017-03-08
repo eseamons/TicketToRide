@@ -54,6 +54,7 @@ public class PlayersList {
         {p.setColor(ColorNum.YELLOW);}
         if(players.size() == 4)
         {p.setColor(ColorNum.BLACK);}
+        players.add(p);
     }
 
     public void endTurn()
