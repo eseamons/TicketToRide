@@ -37,4 +37,6 @@ public interface IGameDeckView {
     void setFaceUpCard3(CardColor c);
 
     void setFaceUpCard4(CardColor c);
+
+    void setDestinationTickets(String s);
 }

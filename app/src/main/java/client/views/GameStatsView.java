@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,12 +15,15 @@ import com.example.erics.tickettoride.R;
 import org.w3c.dom.Text;
 
 import client.interfaces.IGameStatsView;
+import client.presenters.GameStatsPresenter;
 
 /**
  * Created by sirla on 3/3/2017.
  */
 
 public class GameStatsView extends AppCompatActivity implements IGameStatsView {
+
+    GameStatsPresenter presenter;
 
     TextView player1Name;
     TextView player1TrainCardsNum;
@@ -105,7 +109,9 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
         deckButton = (Button) findViewById(R.id.deckButton);
         mapButton = (Button) findViewById(R.id.mapButton);
         sendMessageButton = (Button) findViewById(R.id.sendButton);
+
         chatBox = (TextView) findViewById(R.id.chatBox);
+        chatBox.setMovementMethod(new ScrollingMovementMethod());
 
         deckButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,6 +133,8 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
                 //TODO: add functionality
             }
         });
+
+        presenter = new GameStatsPresenter(this);
     }
 
     @Override
