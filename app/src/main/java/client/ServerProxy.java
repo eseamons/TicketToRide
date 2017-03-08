@@ -44,8 +44,8 @@ import shared.model_classes.Route;
 public class ServerProxy implements IServer{
 
     private static ServerProxy instance = null;
-    //String urlpath = "http://10.0.2.2:8080/command";
-    String urlpath = "http://128.187.83.253:8080/command";
+    String urlpath = "http://10.0.2.2:8080/command";
+    //String urlpath = "http://128.187.83.253:8080/command";
     private ServerProxy() {
 
     }
