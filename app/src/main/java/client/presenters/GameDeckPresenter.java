@@ -21,13 +21,10 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
 
     GameDeckView view;
     Game game;
-    Player player;
 
     public GameDeckPresenter(GameDeckView gameDeckView){
         view = gameDeckView;
         game = ClientModel.getInstance().getCurrent_game();
-        player = game.getPlayerbyIndex(0);
-        //TODO: fix player
         ClientFacade client = new ClientFacade();
         client.setObserver(this);
     }
