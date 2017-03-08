@@ -174,7 +174,7 @@ public class ClientFacade implements IClient{
 
     @Override
     public List<Player> getGamePlayers() {
-        return clientModel.getInstance().getCurrent_game().getPlayers();
+        return clientModel.getCurrent_game().getPlayers();
     }
 
     @Override
