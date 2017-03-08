@@ -77,9 +77,7 @@ public class ClientFacade implements IClient{
         //Return was not in brackets... did this fix it?
         if(list_of_commands == null)
         {return;}
-        else {
-            System.out.println("Test");
-        }
+
 
         for(int i = 0; i < list_of_commands.size(); i++)
         {

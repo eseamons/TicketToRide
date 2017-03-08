@@ -2,6 +2,7 @@ package client;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import shared.ColorNum;
@@ -138,10 +139,11 @@ public class ServerProxy implements IServer{
         Command cmd = new GetGamesCommand();
         cmd.setInfo(cmdData);
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
+        if(r != null && r.isSuccess())
         {
             GetGamesCommandData newCmdData = (GetGamesCommandData) r.getInfo();
-            return null;
+            List<GameLobby> gameLobbies = Arrays.asList(newCmdData.getGameLobbies());
+            return gameLobbies;
         }
         else
         {
@@ -159,10 +161,10 @@ public class ServerProxy implements IServer{
         Command cmd = new GetNewCommandsCommand();
         cmd.setInfo(cmdData);
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
-        if(r.isSuccess())
+        if(r != null && r.isSuccess())
         {
             GetNewCommandsCommandData newCmdData = (GetNewCommandsCommandData) r.getInfo();
-            return null;
+            return Arrays.asList(newCmdData.getCmds());
         }
         else
         {
