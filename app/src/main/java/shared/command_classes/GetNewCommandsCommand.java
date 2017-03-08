@@ -24,15 +24,21 @@ public class GetNewCommandsCommand extends Command
         String auth = ((GetNewCommandsCommandData) info).getAuth();
         List<Command> cmds = ServerFacade.getInstance().getNewCommands(gameID, auth);
 
-        if(cmds.size() != 0) {
-            System.out.println("Test");
+        GetNewCommandsCommandData cmdData = new GetNewCommandsCommandData();
+        Command[] cmdArray = new Command[cmds.size()];
+
+        for(int i = 0; i < cmds.size(); i++) {
+            cmdArray[i] = cmds.get(i);
         }
+
+        cmdData.setCmds(cmdArray);
+
 
         Result result;
         if(cmds == null) {
             result = new Result(false,"");
         } else {
-            result = new Result(true, cmds.toArray());
+            result = new Result(true,cmdData);
         }
         return result;
     }

@@ -17,11 +17,20 @@ public class GetGamesCommand extends Command
     {
         String auth = ((GetGamesCommandData) info).getAuth();
         List<GameLobby> gameLobbies = ServerFacade.getInstance().getServerGameList(auth);
-        Result result = null;
+
+        GameLobby[] gameLobbiesArray = new GameLobby[gameLobbies.size()];
+
+        for(int i = 0; i < gameLobbies.size(); i++) {
+            gameLobbiesArray[i] = gameLobbies.get(i);
+        }
+
+        Result result;
         if(gameLobbies == null) {
             result = new Result(false,"");
         } else {
-            result = new Result(true, gameLobbies.toArray());
+            GetGamesCommandData cmdData = new GetGamesCommandData();
+            cmdData.setGameLobbies(gameLobbiesArray);
+            result = new Result(true, cmdData);
         }
         return result;
     }

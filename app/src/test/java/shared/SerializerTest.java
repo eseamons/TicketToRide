@@ -18,43 +18,13 @@ public class SerializerTest {
     @Test
     public void serialize() throws Exception {
 
-        Account account = new Account();
-        account.setUsername("eseamons");
-        account.setPassword("mypass");
-        account.setAuthentication("ajdk-3428-dfdk-234897");
-
-        Result r = new Result(true, account);
-        String json = Serializer.serialize(r);
-        Result result = (Result) Serializer.deserialize(json);
-        Account newAccount = (Account) result.getInfo();
+        List<Account> accountList = new ArrayList<Account>();
+        Object[] obs =  accountList.toArray();
+        Account[] accountArray = (Account[]) obs;
         System.out.println("Done");
+
     }
 
 
-    @Test
-    public void serializeList() throws Exception {
-
-        Account account = new Account();
-        account.setUsername("eseamons");
-        account.setPassword("mypass");
-        account.setAuthentication("ajdk-3428-dfdk-234897");
-
-        Account accountone = new Account();
-        accountone.setUsername("ale");
-        accountone.setPassword("alepass");
-        accountone.setAuthentication("urie-3847-ilpa-6372");
-
-        List<Account> accountList = new ArrayList<>();
-        accountList.add(account);
-        accountList.add(accountone);
-
-        String jsonList = Serializer.serialize(accountList.toArray());
-        Object[] objArray = Serializer.deserializeList(jsonList);
-
-        for(Object obj : objArray) {
-            Account tempAccount = (Account) obj;
-            System.out.println(tempAccount.getUsername());
-        }
-    }
 
 }

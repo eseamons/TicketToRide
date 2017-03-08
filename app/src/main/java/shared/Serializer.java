@@ -31,23 +31,4 @@ public class Serializer {
         }
     }
 
-    public static String serializeArray(Object[] obj) {
-        try {
-            String serializedString = JsonWriter.objectToJson(obj);
-            return serializedString;
-        } catch(IOException e) {
-            return null;
-        }
-
-    }
-
-    public static Object[] deserializeList(String str) {
-        try {
-            Object[] objArray = (Object[]) JsonReader.jsonToJava(str);
-            return objArray;
-        } catch (IOException e){
-            return null;
-        }
-    }
-
 }
