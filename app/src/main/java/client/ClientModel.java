@@ -104,10 +104,9 @@ public class ClientModel extends Observable
     }
 
     public void playerJoinsGame(int gameID, Account account) {
-        GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameID);
-        if(gameLobby != null)
+        if(currentGameLobby.getID() == gameID)
         {
-            gameLobby.addNewPlayers(account);
+            currentGameLobby.addNewPlayers(account);
         }
     }
 
