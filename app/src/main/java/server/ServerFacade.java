@@ -76,6 +76,11 @@ public class ServerFacade implements IServer{
     /*
         These are the functions used after starting the game
     */
+    public List<Command> getNewGameCommands(int commandID, String auth) {
+        return serverModel.getNewGameCommands(commandID, auth);
+
+    }
+
     @Override
     public boolean endTurn(int gameID, String auth) {
         return serverModel.endTurn(gameID,auth);
@@ -110,5 +115,6 @@ public class ServerFacade implements IServer{
     public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
+
 
 }

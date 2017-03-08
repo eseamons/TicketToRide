@@ -169,6 +169,26 @@ public class ClientFacade implements IClient{
     methods needed for game play
     client methods are followed by their counterpart needed for receiving
 */
+    public void getNewGameCommands() {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        int lastCommand = clientModel.getLastCommand();
+        String auth = clientModel.getAuthorization();
+
+        List<Command> listOfCommands = serverProxy.getNewGameCommands(lastCommand, auth);
+
+        //Return was not in brackets... did this fix it?
+        if(listOfCommands == null)
+        {return;}
+
+
+        for(int i = 0; i < listOfCommands.size(); i++)
+        {
+            Command cmd = (Command) listOfCommands.get(i);
+            cmd.executeOnClient();
+            clientModel.getGameCommandList().add(cmd);
+        }
+    }
+
     @Override
     public boolean endTurn() {
         ServerProxy serverProxy = ServerProxy.getInstance();

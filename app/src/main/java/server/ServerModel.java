@@ -255,6 +255,17 @@ public class ServerModel implements IServer{
         These are the functions used after starting the game
     */
     //added endTurn for the end turn Command (2/28)
+    public List<Command> getNewGameCommands(int commandID, String auth) {
+        List<Command> newCommandList = new ArrayList<>();
+
+        if(accountList.authCodeExists(auth))
+        {
+            newCommandList = gameList.getNewGameCommands(commandID);
+        }
+
+        return newCommandList;
+    }
+
     @Override
     public boolean endTurn(int gameID, String auth) {
         boolean endTurnSuccessful = false;
@@ -445,5 +456,6 @@ public class ServerModel implements IServer{
     public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
+
 
 }

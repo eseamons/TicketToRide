@@ -18,6 +18,7 @@ import shared.command_classes.DrawDestinationCardCommand;
 import shared.command_classes.EndTurnCommand;
 import shared.command_classes.GetGamesCommand;
 import shared.command_classes.GetNewCommandsCommand;
+import shared.command_classes.GetNewGameCommandsCommand;
 import shared.command_classes.JoinGameCommand;
 import shared.command_classes.LoginCommand;
 import shared.command_classes.RegisterCommand;
@@ -30,6 +31,7 @@ import shared.command_data_classes.CreateGameCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.GetGamesCommandData;
 import shared.command_data_classes.GetNewCommandsCommandData;
+import shared.command_data_classes.GetNewGameCommandsCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.LoginCommandData;
 import shared.command_data_classes.RegisterCommandData;
@@ -44,8 +46,8 @@ import shared.model_classes.Route;
 public class ServerProxy implements IServer{
 
     private static ServerProxy instance = null;
-    //String urlpath = "http://10.0.2.2:8080/command";
-    String urlpath = "http://128.187.83.253:8080/command";
+    String urlpath = "http://10.0.2.2:8080/command";
+    //String urlpath = "http://128.187.83.253:8080/command";
     private ServerProxy() {
 
     }
@@ -160,10 +162,10 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public List<Command> getNewCommands(int gameLobbyID, String auth)
+    public List<Command> getNewCommands(int commandID, String auth)
     {
         GetNewCommandsCommandData cmdData = new GetNewCommandsCommandData();
-        cmdData.setGameLobbyID(gameLobbyID);
+        cmdData.setCommandID(commandID);
         cmdData.setAuth(auth);
 
         Command cmd = new GetNewCommandsCommand();
@@ -221,6 +223,24 @@ public class ServerProxy implements IServer{
     /*
         These are the functions used after starting the game
     */
+    public List<Command> getNewGameCommands(int lastCommand, String auth) {
+        GetNewGameCommandsCommandData cmdData = new GetNewGameCommandsCommandData();
+        cmdData.setCommandID(lastCommand);
+        cmdData.setAuth(auth);
+
+        Command cmd = new GetNewGameCommandsCommand();
+        cmd.setInfo(cmdData);
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        if(r != null && r.isSuccess())
+        {
+            GetNewCommandsCommandData newCmdData = (GetNewCommandsCommandData) r.getInfo();
+            return Arrays.asList(newCmdData.getCmds());
+        }
+        else
+        {
+            return null;
+        }
+    }
 
     @Override
     public boolean endTurn(int gameID, String auth) {
@@ -279,5 +299,6 @@ public class ServerProxy implements IServer{
     public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
     }
+
 
 }

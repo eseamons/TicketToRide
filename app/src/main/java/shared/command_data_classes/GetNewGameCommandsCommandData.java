@@ -1,20 +1,18 @@
 package shared.command_data_classes;
 
-import java.util.List;
-
 import shared.command_classes.Command;
 
 /**
- * Created by erics on 3/6/2017.
+ * Created by rebeccaredd on 3/8/17.
  */
 
-public class GetNewCommandsCommandData {
+public class GetNewGameCommandsCommandData {
 
     private int commandID;
     private String auth;
     private Command[] cmds;
 
-    public GetNewCommandsCommandData() {
+    public GetNewGameCommandsCommandData() {
 
     }
 
