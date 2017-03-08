@@ -149,9 +149,11 @@ public class ServerModel implements IServer{
             returnGameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
 
             if(returnGameLobby.getPlayers().size() < returnGameLobby.getMaxPlayers()) {
-                Player p = new Player();
+
                 Account acc = accountList.getAccountByAuthCode(auth);
-                p.setAccount(acc);
+
+                int playerIndex = returnGameLobby.addNewPlayers(acc);
+                Player p = returnGameLobby.getPlayers().get(playerIndex);
                 playerAuthMap.put(auth, p);
 
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
