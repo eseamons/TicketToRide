@@ -30,6 +30,7 @@ public class Game {
         routes = new RoutesList();
     }
 
+    public RoutesList getRoutes(){return routes;}
     public int getGameID() {
         return gameID;
     }

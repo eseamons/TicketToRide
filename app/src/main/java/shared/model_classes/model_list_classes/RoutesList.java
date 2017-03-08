@@ -19,7 +19,7 @@ public class RoutesList {
 
     //added just so will compile
     //List<Route> routeList;
-    public int cur_done = 87+1; //this is for Michael to help harcoding his view
+    public int cur_done = 99+1; //this is for Michael to help harcoding his view
     public RoutesList()
     {
         availableRouteList.add(new Route("Vancouver", "Calgary", CardColor.WILD, 3));
@@ -193,21 +193,36 @@ public class RoutesList {
         availableRouteList.add(new Route("Pittsburgh", "Washington", CardColor.WILD, 2));
         getRoute(84).setCoords(2118,540,2268,603);
         availableRouteList.add(new Route("Pittsburgh", "New York", CardColor.WHITE, 2));
-        getRoute(85).setCoords(2287,455,2295,590);
+        getRoute(85).setCoords(2095,492,2239,421);
         availableRouteList.add(new Route("Pittsburgh", "New York", CardColor.GREEN, 2));
-        getRoute(86).setCoords(2315,455,2325,590);
+        getRoute(86).setCoords(2109,512,2254,435);
         availableRouteList.add(new Route("Pittsburgh", "Toronto", CardColor.WILD, 2));
         getRoute(87).setCoords(2055,357,2064,494);
         availableRouteList.add(new Route("Toronto", "Sault St Marie", CardColor.WILD, 2));
+        getRoute(88).setCoords(1800,296,1967,324);
         availableRouteList.add(new Route("Toronto", "Montreal", CardColor.WILD, 3));
+        getRoute(89).setCoords(2018,310,2205,174);
         availableRouteList.add(new Route("Montreal", "Sault St Marie", CardColor.BLACK, 5));
+        getRoute(90).setCoords(1780,270,2183,154);
         availableRouteList.add(new Route("Montreal", "New York", CardColor.BLUE, 3));
+        getRoute(91).setCoords(2225,197,2265,398);
         availableRouteList.add(new Route("Montreal", "Boston", CardColor.WILD, 2));
+        getRoute(92).setCoords(2271,171,2404,256);
         availableRouteList.add(new Route("Montreal", "Boston", CardColor.WILD, 2));
+        getRoute(93).setCoords(2256,185,2384,276);
         availableRouteList.add(new Route("Boston", "New York", CardColor.RED, 2));
+        getRoute(94).setCoords(2302,412,2393,296);
         availableRouteList.add(new Route("Boston", "New York", CardColor.YELLOW, 2));
+        getRoute(95).setCoords(2327,427,2418,310);
         availableRouteList.add(new Route("Washington", "New York", CardColor.BLACK, 2));
+        getRoute(96).setCoords(2287,455,2295,590);
         availableRouteList.add(new Route("Washington", "New York", CardColor.ORANGE, 2));
+        getRoute(97).setCoords(2315,455,2325,590);
+        availableRouteList.add(new Route("Seattle", "Portland", CardColor.ORANGE, 1));
+        getRoute(98).setCoords(233,330,202,390);
+        availableRouteList.add(new Route("Seattle", "Portland", CardColor.ORANGE, 1));
+        getRoute(99).setCoords(261,341,236,398);
+
 
     }
 
