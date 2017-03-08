@@ -5,6 +5,7 @@ import java.util.List;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.Account;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Route;
 
@@ -43,7 +44,7 @@ public interface IServer {
     boolean drawDestinationCard(int playerID, String auth);
 
 
-    boolean removeDestinationCard(String destinationCardName,  String auth);
+    boolean removeDestinationCard(List<DestinationCard> DiscardedDestinationCards, int gameID, String auth);
 
     boolean drawDeckCard(String auth, int gameID);
 

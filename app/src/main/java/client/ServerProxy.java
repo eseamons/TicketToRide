@@ -21,6 +21,7 @@ import shared.command_classes.GetNewCommandsCommand;
 import shared.command_classes.JoinGameCommand;
 import shared.command_classes.LoginCommand;
 import shared.command_classes.RegisterCommand;
+import shared.command_classes.RemoveDestinationCardCommand;
 import shared.command_classes.SetPlayerColorCommand;
 import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
@@ -32,9 +33,11 @@ import shared.command_data_classes.GetNewCommandsCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.LoginCommandData;
 import shared.command_data_classes.RegisterCommandData;
+import shared.command_data_classes.RemoveDestinationCardCommandData;
 import shared.command_data_classes.SetPlayerColorCommandData;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Route;
 
@@ -255,8 +258,16 @@ public class ServerProxy implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, String auth) {
-        return false;
+    public boolean removeDestinationCard(List<DestinationCard> destinationCards, int gameID, String auth) {
+        RemoveDestinationCardCommandData cmdData = new RemoveDestinationCardCommandData();
+        cmdData.setDiscardedCards(destinationCards);
+        cmdData.setAuth(auth);
+        cmdData.setGameID(gameID);
+
+        Command cmd = new RemoveDestinationCardCommand();
+        cmd.setInfo(cmdData);
+        Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+        return r.isSuccess();
     }
 
     @Override

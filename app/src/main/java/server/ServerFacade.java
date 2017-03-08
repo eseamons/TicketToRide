@@ -6,6 +6,7 @@ import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Route;
 
@@ -96,8 +97,8 @@ public class ServerFacade implements IServer{
 }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, String auth) {
-        return serverModel.removeDestinationCard(destinationCardName, auth);
+    public boolean removeDestinationCard(List<DestinationCard> destinationCards, int gameID, String auth) {
+        return serverModel.removeDestinationCard(destinationCards,gameID, auth);
     }
 
     @Override

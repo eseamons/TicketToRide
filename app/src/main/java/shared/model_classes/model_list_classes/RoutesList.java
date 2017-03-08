@@ -341,8 +341,6 @@ public class RoutesList {
 
     }
 
-
-
     public boolean claimRoute(Route routeToClaim, String auth)
     {
         for(int i = 0; i <availableRouteList.size(); i++)

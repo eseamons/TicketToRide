@@ -330,10 +330,6 @@ public class ServerModel implements IServer{
 */
     @Override
     public boolean drawDestinationCard(int gameID, String auth) {
-        //the server needs to know which game to add it to.. right now this game is always null and so the method wont work
-        //who was working on this? How were you thinking we get the destination card to sent to all of these methods?
-        // does this ever set the info to send to the other clients?
-        //Game currentGame = gameList.getGame(gameID);
         boolean successful = false;
         Game currentGame = gameList.getGame(gameID);
 
@@ -368,14 +364,44 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(String destinationCardName, String auth) {
-        Game currentGame = null;
-        Player player = playerAuthMap.get(auth);
-        DestinationCard destinationCard = null;
-        destinationCard = currentGame.getDestinationCardByName(destinationCardName);
-        destinationCard.setOwnership(auth);
-        player.removeDestinationCard(destinationCardName);
-        return true;
+    public boolean removeDestinationCard(List<DestinationCard> destinationCards,int gameID, String auth) {
+//        Game currentGame = null;
+//        Player player = playerAuthMap.get(auth);
+//        DestinationCard destinationCard = null;
+//        destinationCard = currentGame.getDestinationCardByName(destinationCardName);
+//        destinationCard.setOwnership(auth);
+//        player.removeDestinationCard(destinationCardName);
+        boolean successful = false;
+        Game currentGame = gameList.getGame(gameID);
+
+        if(currentGame != null)
+        {
+            Player player = playerAuthMap.get(auth);
+
+            if( player != null)
+            {
+                successful = true;
+                int playerID = player.getPlayerID();
+                currentGame.returnDestinationCards(destinationCards, playerID);
+
+                //TODO:below here change to be game commands not lobby commands
+//                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+//                gameLobbyList.incrementCurrentLobbyCommandID();
+//                Command cmd = new DrawDestinationCardCommand();
+//
+//                DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
+//                cmdData.setAuth(auth);
+//                cmdData.setGameID(gameID);
+//                cmdData.setDestinationCard(destinationCard);
+//                cmdData.setPlayerID(playerID);
+//
+//                cmd.setInfo(cmdData);
+//                cmd.setCmdID(currentCmdID);
+//                gameLobbyList.addLobbyCommand(cmd);
+            }
+        }
+        return successful;
+
     }
 
     @Override

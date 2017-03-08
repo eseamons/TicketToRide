@@ -92,7 +92,11 @@ public class Game {
         DestinationCard card = destinationCardsList.drawCard(auth);
         return card;
     }
-
+    public void returnDestinationCards(List<DestinationCard> destinationCards, int playerID) {
+        destinationCardsList.discardCards(destinationCards);
+        Player p = getPlayerbyIndex(playerID);
+        p.removeDestinationCard(destinationCards);
+    }
 
     public boolean playerInGame(String auth) {
         return players.playerFound(auth);
@@ -104,4 +108,6 @@ public class Game {
     public List<String> getAllComments() {
         return comments;
     }
+
+
 }

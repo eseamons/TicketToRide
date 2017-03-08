@@ -189,5 +189,7 @@ public class ClientModel extends Observable
     }
 
 
-
+    public boolean discardDestinationCards(List<DestinationCard> discardedDestCards) {
+        return true;
+    }
 }

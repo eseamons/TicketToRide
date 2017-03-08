@@ -77,4 +77,11 @@ public class DestinationCardsList {
 
         return card;
     }
+
+    public void discardCards(List<DestinationCard> destinationCards) {
+        for(DestinationCard card : destinationCards)
+        {
+            discardPile.add(card);
+        }
+    }
 }

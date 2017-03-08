@@ -68,14 +68,15 @@ public class Player {
         destinationCards.add(destinationCard);
     }
 
-    public void removeDestinationCard(String destinationCardName) {
+    public void removeDestinationCard(List<DestinationCard>destinationCards) {
         int index = 0;
         for(int i = 0; i < destinationCards.size(); i++) {
-            if(destinationCards.get(i).getDestinationCardName() == destinationCardName) {
-                index = i;
+            for(DestinationCard card: destinationCards) {
+                if (destinationCards.get(i).getDestinationCardName() == card.getDestinationCardName()) {
+                    destinationCards.remove(i);
+                }
             }
         }
-        destinationCards.remove(index);
     }
     public List<DestinationCard> getDestinationCards(){
         return destinationCards;

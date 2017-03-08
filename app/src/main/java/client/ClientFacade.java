@@ -201,6 +201,7 @@ public class ClientFacade implements IClient{
         {clientModel.claimRoute(route, auth);}
     }
 
+    //train deck commands
     public boolean drawDeckCard(){
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();
@@ -216,19 +217,7 @@ public class ClientFacade implements IClient{
         }
     }
 
-    public boolean drawDestinationCard(){
-        String auth = clientModel.getAuthorization();
-        int gameID = clientModel.getCurrent_game().getGameID();
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.drawDestinationCard(gameID,auth);
-    }
-
-    public void playerDrewDestinationCard(int gameID, int playerID, DestinationCard destinationCard){
-        clientModel.drawDestinationCard(gameID, playerID, destinationCard);
-    }
-
-    public boolean drawFaceUpCard( CardColor card)
-    {
+    public boolean drawFaceUpCard( CardColor card) {
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();
         ServerProxy serverProxy = ServerProxy.getInstance();
@@ -242,9 +231,31 @@ public class ClientFacade implements IClient{
         return null;
     }
 
+
+    //destination card commands
+    public boolean drawDestinationCard(){
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        return serverProxy.drawDestinationCard(gameID,auth);
+    }
+
+    public void playerDrewDestinationCard(int gameID, int playerID, DestinationCard destinationCard){
+        clientModel.drawDestinationCard(gameID, playerID, destinationCard);
+    }
+
     public List<DestinationCard> getDestinationList()
     {
         return null;
+    }
+
+    public boolean discardDestinationCards(List<DestinationCard>discardedDestCards)
+    {
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getCurrent_game().getGameID();
+
+        return serverProxy.removeDestinationCard(discardedDestCards, gameID,auth);
     }
 
     public RoutesList getRoutesList()
