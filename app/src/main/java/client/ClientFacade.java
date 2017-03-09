@@ -134,8 +134,7 @@ public class ClientFacade implements IClient{
 
     @Override
     public ArrayList<String> getChat() {
-        ArrayList<String> chatArray = new ArrayList<String>();
-        return chatArray;
+        return (ArrayList) clientModel.getCurrent_game().getChat();
     }
 
     @Override
@@ -345,7 +344,10 @@ public class ClientFacade implements IClient{
             case 26: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 27: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 28: game.endTurn(); next_cmd = "Turn goes to next player"; break;
-            case 29: game.endTurn(); next_cmd = "done"; break;
+            case 29: game.endTurn(); next_cmd = "Add new message"; break;
+            case 30: game.stupidAddComment("DUMMY1","Hello"); next_cmd = "Add new message"; break;
+            case 31: game.stupidAddComment("DUMMY2","Greetings"); next_cmd = "Add new message"; break;
+            case 32: game.stupidAddComment("DUMMY3","Good Evening, old chap"); next_cmd = "DONE"; break;
         }
         time++;
         clientModel.update();
@@ -378,7 +380,7 @@ public class ClientFacade implements IClient{
 
     public int getPlayerTurnItIs()
     {
-        return clientModel.getCurrent_game().getPlayerWhosTurnItIs();
+        return clientModel.ThisPlayersTurn();
     }
 
 

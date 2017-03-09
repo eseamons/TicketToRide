@@ -1,5 +1,6 @@
 package client.presenters;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -72,5 +73,14 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
                 view.setPlayer1PointsNum(player.getPoints());
                 view.setPlayer1TurnMarker(client.getPlayerTurnItIs() == 0);
         }
+
+        ArrayList<String> chat = client.getChat();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < chat.size(); i++)
+        {
+            sb.append(chat.get(i));
+            sb.append("\n\n");
+        }
+        view.setChatMessage(sb.toString());
     }
 }

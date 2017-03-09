@@ -146,6 +146,8 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
         return chatMessage.getText().toString();
     }
 
+    public void setChatMessage(String set) { chatBox.setText(set); }
+
     @Override
     public void setPlayer1Name(String s) {
         player1Name.setText(s);
