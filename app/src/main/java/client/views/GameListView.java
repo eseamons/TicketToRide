@@ -1,6 +1,7 @@
 package client.views;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -124,14 +125,21 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     }
 
     @Override
-    public void setSelectedGame(GameLobby gameLobby){selectedGame = gameLobby;}
+    public void setSelectedGame(GameLobby gameLobby)
+    {
+        selectedGame = gameLobby;
+
+    }
 
     @Override
     public void setAvailableGames(List<GameLobby> games) {
         availableGames = games;
 
+
         mAdapter = new RecyclerAdapter(availableGames);
         mRecyclerView.setAdapter(mAdapter);
+
+
      }
 
      public void SwitchToGameLobby()

@@ -1,7 +1,5 @@
 package client;
 
-import android.graphics.Color;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
@@ -16,9 +14,6 @@ import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
 import shared.model_classes.Route;
-import shared.model_classes.TrainCardDeck;
-import shared.model_classes.model_list_classes.DestinationCardsList;
-import shared.model_classes.model_list_classes.PlayersList;
 import shared.model_classes.model_list_classes.RoutesList;
 
 public class ClientFacade implements IClient{
@@ -69,7 +64,7 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public void getNewCommands() {
+    public int getNewCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
         int last_cmd = clientModel.getLastCommand();
         String auth = clientModel.getAuthorization();
@@ -78,7 +73,7 @@ public class ClientFacade implements IClient{
 
         //Return was not in brackets... did this fix it?
         if(list_of_commands == null)
-        {return;}
+        {return 0;}
 
 
         for(int i = 0; i < list_of_commands.size(); i++)
@@ -87,6 +82,7 @@ public class ClientFacade implements IClient{
             cmd.executeOnClient();
             clientModel.getCommand_list().add(cmd);
         }
+        return list_of_commands.size();
     }
 
     @Override

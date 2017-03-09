@@ -31,7 +31,7 @@ public interface IClient {
 
     List<GameLobby> getClientGamesList();
 
-    void getNewCommands();
+    int getNewCommands();
 
     boolean createGameLobby(String gameName, int maxPlayers);
 

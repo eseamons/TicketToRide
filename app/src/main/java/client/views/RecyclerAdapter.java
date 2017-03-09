@@ -1,5 +1,6 @@
 package client.views;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,10 +22,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.GameLo
 
     private List<GameLobby> availableGames;
     ViewGroup p;
+    TextView selectedGame;
 
     public static class GameLobbyHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        TextView mGameName;
+        public static TextView mGameName;
         TextView mGamePlayersNum;
         GameLobby mGameLobby;
 
@@ -47,6 +49,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.GameLo
         {
             GameListView gameListView = GameListView.getInstance();
             gameListView.setSelectedGame(mGameLobby);
+            mGameName.setTextColor(Color.RED);
         }
     }
 
