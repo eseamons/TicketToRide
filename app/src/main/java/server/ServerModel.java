@@ -15,6 +15,7 @@ import shared.Serializer;
 import shared.command_classes.*;
 import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.CreateGameCommandData;
+import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.RemoveDestinationCardCommandData;
@@ -341,7 +342,7 @@ public class ServerModel implements IServer{
                 player.addDestinationCard(destinationCard);
                 int playerID = player.getPlayerID();
 
-                int currentCmdID = gameList.getCurrentGameCommandID();
+                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
                 Command cmd = new DrawDestinationCardCommand();
 
                 DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
@@ -352,7 +353,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameList.addGameCommand(cmd);
+                gameLobbyList.addLobbyCommand(cmd);
             }
         }
         return successful;
@@ -416,6 +417,21 @@ public class ServerModel implements IServer{
 
 
 //                TODO:change all of this...
+
+                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+                Command cmd = new DrawDestinationCardCommand();
+
+                DrawDeckCardCommandData cmdData = new DrawDeckCardCommandData();
+                cmdData.setGameID(gameID);
+                cmdData.setPlayerID(playerID);
+                cmdData.setAuth(auth);
+                cmdData.setCard(cardColor);
+
+                cmd.setInfo(cmdData);
+                cmd.setCmdID(currentCmdID);
+                gameLobbyList.addLobbyCommand(cmd);
+
+
 //                int currentGameCmdID = gameList.getCurrentGameCommandID();
 //                gameList.incrementCurrentGameCommandID();
 //                Command cmd = new DrawDeckCardCommand();
