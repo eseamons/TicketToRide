@@ -73,6 +73,7 @@
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:nextFocusDown="@+id/editText4"
+                        android:nextFocusRight="@+id/editText4"
                         android:textSize="24sp" />
                 </LinearLayout>
 
