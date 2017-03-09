@@ -20,6 +20,7 @@ public class Player {
     public Player() {
         destinationCards = new ArrayList<>();
         trainCards = new ArrayList<>();
+        trainsRemaining = 45;
     }
 
     public Account getAccount() {
@@ -92,7 +93,8 @@ public class Player {
         return trainsRemaining;
     }
 
-    public void setTrainsRemaining(int trainsRemaining) {
-        this.trainsRemaining = trainsRemaining;
+    public void decreaseTrainsRemaining(int trains) {
+        trainsRemaining = trainsRemaining-trains;
     }
+
 }

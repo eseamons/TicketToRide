@@ -79,6 +79,18 @@ public class PlayersList {
             }
         }
     }
+    public void decreasePlayerTrainsRemaining(String auth, int numOfTrains)
+    {
+        for(int i = 0; i < players.size(); i ++)
+        {
+            Player tempPlayer = players.get(i);
+            String tempAuth = tempPlayer.getAccount().getAuthentication();
+            if(tempAuth.equals(auth))
+            {
+                tempPlayer.decreaseTrainsRemaining(numOfTrains);
+            }
+        }
+    }
 
 
     public boolean playerFound(String auth) {
