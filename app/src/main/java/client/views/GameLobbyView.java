@@ -121,9 +121,9 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         player5Text.setText("Empty");
 
         ChatList = (ListView) findViewById(R.id.ChatList);
-        List<String> chatArray = getChat();
-        ArrayAdapter<String> chatAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, chatArray);
-        ChatList.setAdapter(chatAdapter);
+        //List<String> chatArray = getChat();
+        //ArrayAdapter<String> chatAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, chatArray);
+        //ChatList.setAdapter(chatAdapter);
 
 
         //POLLER
