@@ -111,7 +111,7 @@ public class Game {
         Route r = routes.getRoute(route_num);
         r.ownership = player_num;
         Player p = getPlayerbyIndex(player_num-1);
-        p.setPoints(p.getPlayerID() + r.getPointValue());
+        p.setPoints(p.getPoints() + r.getPointValue());
         p.decreaseTrainsRemaining(r.length);
         return true;
     }

@@ -558,7 +558,7 @@
         android:layout_toLeftOf="@+id/player3Text"
         android:layout_toStartOf="@+id/player3Text"
         android:text="*"
-        android:textColor="@color/green"
+        android:textColor="@color/blue"
         android:textSize="36sp"
         android:visibility="invisible" />
 
@@ -570,7 +570,7 @@
         android:layout_toLeftOf="@+id/player1TrainCardsText"
         android:layout_toStartOf="@+id/player1TrainCardsText"
         android:text="*"
-        android:textColor="@color/blue"
+        android:textColor="@color/red"
         android:textSize="36sp"
         android:visibility="visible" />
 
@@ -594,7 +594,7 @@
         android:layout_toLeftOf="@+id/player2Text"
         android:layout_toStartOf="@+id/player2Text"
         android:text="*"
-        android:textColor="@color/red"
+        android:textColor="@color/green"
         android:textSize="36sp"
         android:visibility="invisible" />
 
