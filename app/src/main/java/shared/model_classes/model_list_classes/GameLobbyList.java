@@ -109,8 +109,12 @@ public class GameLobbyList {
         currentLobbyID++;
     }
 
-    public int getCurrentLobbyCommandID() {
-        return currentLobbyCommandID;
+    public int getCurrentLobbyCommandID()
+    {
+        return lobbyCommands.size()+1;
+        /*int ret = currentLobbyCommandID;
+        incrementCurrentLobbyCommandID();
+        return ret;*/
     }
 
     public void incrementCurrentLobbyCommandID() {

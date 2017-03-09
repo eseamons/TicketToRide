@@ -58,7 +58,7 @@ public class Poller
             super.onPostExecute(integer);
             //if(integer >0) {
                 ClientModel clientModel = ClientModel.getInstance();
-                if (clientModel.getListOfLobbies().size() > 0) {
+                if (clientModel.getListOfLobbies().size() > -1) {
                     clientModel.update();
                 }
             //}
