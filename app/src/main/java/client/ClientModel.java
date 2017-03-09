@@ -161,6 +161,10 @@ public class ClientModel extends Observable
         {currentGame.endTurn();}
     }
 
+    public List<CardColor> getFaceUpCards()
+    {
+        return currentGame.getFaceUpCards();
+    }
     public List<Player> getPlayers() {return currentGame.getPlayers();}
 
     public void claimRoute(Route route, String auth) {

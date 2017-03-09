@@ -373,6 +373,11 @@ public class ClientFacade implements IClient{
         gamelobby.addNewPlayers(acnt);
         gamelobby.setID(1);
         Game game = new Game(gamelobby);
+        game.setFaceUpCard(0, CardColor.RED);
+        game.setFaceUpCard(1, CardColor.BLACK);
+        game.setFaceUpCard(2, CardColor.BLUE);
+        game.setFaceUpCard(3, CardColor.WILD);
+        game.setFaceUpCard(4, CardColor.GREEN);
         clientModel.setCurrent_game(game);
         clientModel.setThis_player(game.getPlayerbyIndex(0));
 
@@ -381,6 +386,11 @@ public class ClientFacade implements IClient{
     public int getPlayerTurnItIs()
     {
         return clientModel.ThisPlayersTurn();
+    }
+
+    public List<CardColor> getFaceUpCards()
+    {
+        return clientModel.getFaceUpCards();
     }
 
 

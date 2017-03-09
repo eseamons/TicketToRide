@@ -17,7 +17,7 @@ public class Game {
     private int gameID;
     private PlayersList players;
     private TrainCardDeck trainCardDeck;
-    private List<ColorNum> faceUpCards;
+    private List<CardColor> faceUpCards;
     private RoutesList routes;
     private DestinationCardsList destinationCardsList;
     private List<Command> commands;
@@ -31,10 +31,22 @@ public class Game {
         gameID = gameLobby.getID();
         players = new PlayersList(gameLobby.getPlayers());
         trainCardDeck = TrainCardDeck.getInstance();
-        faceUpCards = new ArrayList<ColorNum>(5);
+        faceUpCards = new ArrayList<CardColor>(5);
         destinationCardsList = new DestinationCardsList();
         routes = new RoutesList();
         currentPlayer = 0;
+    }
+
+    public void setFaceUpCard(int index, CardColor c)
+    {
+        if(faceUpCards.size() > index)
+            faceUpCards.remove(index);
+        faceUpCards.add(index,c);
+    }
+
+    public List<CardColor> getFaceUpCards()
+    {
+        return faceUpCards;
     }
 
     public int getCurrentPlayer() {
