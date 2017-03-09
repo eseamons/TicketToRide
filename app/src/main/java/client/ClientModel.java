@@ -35,6 +35,7 @@ public class ClientModel extends Observable
 
     private Account account = null;
     private List<Command> command_list = new ArrayList<Command>();
+    private List<Command> gameCommandList = new ArrayList<Command>();
     private GameLobbyList gameLobbyList = new GameLobbyList();
     private GameLobby currentGameLobby;
     private Game currentGame;
@@ -145,6 +146,16 @@ public class ClientModel extends Observable
 
 
     //methods needed for game play
+    public int getLastGameCommand(){
+        if(gameCommandList.size() == 0)
+        {return -1;}
+        return ((Command)command_list.get(command_list.size()-1)).getCmdID();
+    }
+
+    public List<Command> getGameCommandList(){
+        return gameCommandList;
+    }
+
     public void endTurn(int gameID) {
         if(currentGame.getGameID() == gameID)
         {currentGame.endTurn();}

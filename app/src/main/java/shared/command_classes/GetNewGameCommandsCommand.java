@@ -1,30 +1,24 @@
 package shared.command_classes;
 
-import com.google.gson.JsonObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import server.ServerFacade;
 import shared.Result;
-import shared.Serializer;
 import shared.command_data_classes.GetNewCommandsCommandData;
-import shared.model_classes.GameLobby;
+import shared.command_data_classes.GetNewGameCommandsCommandData;
 
 /**
- * Created by Michaels on 2/12/2017.
+ * Created by rebeccaredd on 3/8/17.
  */
 
-public class GetNewCommandsCommand extends Command
-{
+public class GetNewGameCommandsCommand extends Command {
     public Result execute()
     {
-        int commandID = ((GetNewCommandsCommandData) info).getCommandID();
-        String auth = ((GetNewCommandsCommandData) info).getAuth();
-        List<Command> cmds = ServerFacade.getInstance().getNewCommands(commandID, auth);
+        int commandID = ((GetNewGameCommandsCommandData) info).getCommandID();
+        String auth = ((GetNewGameCommandsCommandData) info).getAuth();
+        List<Command> cmds = ServerFacade.getInstance().getNewGameCommands(commandID, auth);
 
-        GetNewCommandsCommandData cmdData = new GetNewCommandsCommandData();
+        GetNewGameCommandsCommandData cmdData = new GetNewGameCommandsCommandData();
         Command[] cmdArray = new Command[cmds.size()];
 
         for(int i = 0; i < cmds.size(); i++) {
