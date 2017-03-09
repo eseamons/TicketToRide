@@ -102,6 +102,7 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         GameLobby current_game_lobby = serverProxy.joinGame(gameID, clientModel.getAuthorization());
         clientModel.setCurrent_game_lobby(current_game_lobby);
+        clientModel.lobbySetPlayer_num();
         return current_game_lobby;
     }
 
@@ -155,6 +156,10 @@ public class ClientFacade implements IClient{
         int gameLobbyID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
         boolean beginGameBool = serverProxy.beginGame(gameLobbyID, auth);
+
+        Game game = new Game(clientModel.getInstance().getCurrent_game_lobby());
+        clientModel.setCurrent_game(game);
+        //clientModel.gameSetPlayer_num();
         //TODO: is this supposed to always return null?
         return beginGameBool;
     }
@@ -312,8 +317,8 @@ public class ClientFacade implements IClient{
     public void runAnimation()
     {
         //only to be used while initialization works
-        if(time == -1)
-            initializeAnimation();
+        //if(time == -1)
+            //initializeAnimation();
         // ^ ^ ^
 
         Game game = clientModel.getCurrent_game();

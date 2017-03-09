@@ -39,17 +39,27 @@ public class ClientModel extends Observable
     private GameLobbyList gameLobbyList = new GameLobbyList();
     private GameLobby currentGameLobby;
     private Game currentGame;
-    Player this_player;
+    private Player this_player;
+    private int player_num;
     //private RoutesList routes = new RoutesList();
 
 
+    public void gameSetPlayer_num()
+    {
+        player_num = currentGame.getPlayers().size() - 1;
+    }
+
+    public void lobbySetPlayer_num()
+    {
+        player_num = currentGameLobby.NumOfCurrentPlayers() - 1;
+    }
 
     public void setThis_Player()
     {
-        Player p = new Player();
-        p.setAccount(account);
-        this_player = p;
-        //this_player = currentGame.getPlayerbyIndex(player_num);
+        //Player p = new Player();
+        //p.setAccount(account);
+        //this_player = p;
+        this_player = currentGame.getPlayerbyIndex(player_num);
     }
     //Methods needed for all classes
     private static ClientModel instance = new ClientModel();
