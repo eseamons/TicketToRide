@@ -1,6 +1,7 @@
 package shared.model_classes;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 
@@ -44,7 +45,8 @@ public class TrainCardDeck {
     public CardColor drawCard() {
         int min = 0;
         int max = cardsInDeck.size();
-        int randomIndex = (int) Math.random()*(max-min)+min;
+        Random r = new Random();
+        int randomIndex = (int) (r.nextDouble() * (max - min) + min);
 
         CardColor cardColor =cardsInDeck.get(randomIndex);
         cardsInDeck.remove(randomIndex);

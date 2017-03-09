@@ -2,6 +2,7 @@ package shared.model_classes.model_list_classes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import shared.model_classes.DestinationCard;
 
@@ -69,7 +70,8 @@ public class DestinationCardsList {
     public DestinationCard drawCard(String auth) {
         int min = 0;
         int max = destinationCardsList.size();
-        int randomIndex = (int) Math.random()*(max-min)+min;
+        Random r = new Random();
+        int randomIndex = (int) (r.nextDouble() * (max - min) + min);
 
         DestinationCard card =destinationCardsList.get(randomIndex);
         card.setOwnership(auth);
