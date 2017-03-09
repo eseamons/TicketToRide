@@ -19,6 +19,7 @@ import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.RemoveDestinationCardCommandData;
+import shared.command_data_classes.SetFaceUpCardCommandData;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
 import shared.model_classes.model_list_classes.*;
@@ -227,11 +228,12 @@ public class ServerModel implements IServer{
             //Begin game
             GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
             Game game = gameList.beginGame(gameLobby);
-            game.setFaceUpCard(0,game.drawCard());
-            game.setFaceUpCard(1,game.drawCard());
-            game.setFaceUpCard(2,game.drawCard());
-            game.setFaceUpCard(3,game.drawCard());
-            game.setFaceUpCard(4,game.drawCard());
+            setFaceUpCard(game.drawCard(),0,gameLobbyID);
+            setFaceUpCard(game.drawCard(),1,gameLobbyID);
+            setFaceUpCard(game.drawCard(),2,gameLobbyID);
+            setFaceUpCard(game.drawCard(),3,gameLobbyID);
+            setFaceUpCard(game.drawCard(),4,gameLobbyID);
+
 
             //remove game lobby
             gameLobbyList.removeLobby(gameLobbyID);
@@ -499,6 +501,23 @@ public class ServerModel implements IServer{
     @Override
     public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
         return false;
+    }
+
+    public void setFaceUpCard(CardColor card, int cardIndex, int gameID)
+    {
+        int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+        Command cmd = new SetFaceUpCardCommand();
+
+        SetFaceUpCardCommandData cmdData = new SetFaceUpCardCommandData();
+        cmdData.setCard(card);
+        cmdData.setCardIndex(cardIndex);
+        cmdData.setGameID(gameID);
+
+        cmd.setInfo(cmdData);
+        cmd.setCmdID(currentCmdID);
+        gameLobbyList.addLobbyCommand(cmd);
+
+
     }
 
 

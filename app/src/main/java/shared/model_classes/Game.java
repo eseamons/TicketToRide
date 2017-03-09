@@ -40,8 +40,7 @@ public class Game {
     public void setFaceUpCard(int index, CardColor c)
     {
         if(faceUpCards.size() > index)
-            faceUpCards.remove(index);
-        faceUpCards.add(index,c);
+        {faceUpCards.set(index,c);}
     }
 
     public List<CardColor> getFaceUpCards()
