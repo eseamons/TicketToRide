@@ -210,7 +210,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         cards.add(CardColor.ORANGE);
         cards.add(CardColor.BLACK);
         cards.add(CardColor.BLACK);
-        presenter.setPlayerCardViews(cards);
+        //presenter.setPlayerCardViews(cards);
     }
 
     public void createFakeRoutes()

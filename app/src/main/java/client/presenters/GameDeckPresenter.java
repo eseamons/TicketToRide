@@ -33,8 +33,15 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
         setColors();
         setDestinations();
         setFaceUpCards();
+        setTrainsRemaining();
     }
 
+    public void setTrainsRemaining()
+    {
+        ClientFacade client = new ClientFacade();
+        int rem = client.getRemainingTrains();
+        view.setTrainsRemainingNum(rem);
+    }
     public void setFaceUpCards()
     {
         ClientFacade client = new ClientFacade();

@@ -82,5 +82,6 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
             sb.append("\n\n");
         }
         view.setChatMessage(sb.toString());
+
     }
 }

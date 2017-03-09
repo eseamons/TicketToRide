@@ -5,6 +5,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.ClientFacade;
+import client.interfaces.IMapPresenter;
 import client.views.MapViewActivity;
 import shared.CardColor;
 import shared.model_classes.DestinationCard;
@@ -14,7 +15,8 @@ import shared.model_classes.model_list_classes.RoutesList;
  * Created by Michaels on 3/7/2017.
  */
 
-public class MapViewPresenter implements Observer {
+public class MapViewPresenter implements Observer, IMapPresenter
+{
 
     MapViewActivity view;
 
@@ -27,22 +29,29 @@ public class MapViewPresenter implements Observer {
     }
     public void update(Observable o, Object arg)
     {
+        setDestinationBox();
+        setPlayerCardViews();
+        drawRoutes();
+
         ClientFacade client = new ClientFacade();
-        List<CardColor> cards = client.getPlayerCards();
-        List<DestinationCard> destinations = client.getDestinationList();
-        RoutesList routes = client.getRoutesList();
-        setDestinationBox(destinations);
-        setPlayerCardViews(cards);
-        view.drawRoutes(routes);
         view.setStupidButtonText(client.next_cmd);
     }
 
 
-
-
-
-    public void setPlayerCardViews(List<CardColor> playerCards)
+    public void drawRoutes()
     {
+        ClientFacade client = new ClientFacade();
+        RoutesList routes = client.getRoutesList();
+        view.drawRoutes(routes);
+    }
+
+
+
+    public void setPlayerCardViews()
+    {
+        ClientFacade client = new ClientFacade();
+        List<CardColor> playerCards = client.getPlayerCards();
+
         int redCards = 0;
         int orangeCards = 0;
         int yellowCards = 0;
@@ -98,8 +107,11 @@ public class MapViewPresenter implements Observer {
 
     }
 
-    public void setDestinationBox(List<DestinationCard> destinationCards)
+    public void setDestinationBox()
     {
+        ClientFacade client = new ClientFacade();
+        List<DestinationCard> destinationCards = client.getDestinationList();
+
         StringBuilder sb = new StringBuilder();
         for(int i=0; i < destinationCards.size(); i++)
         {

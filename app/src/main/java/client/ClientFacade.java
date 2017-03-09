@@ -265,6 +265,11 @@ public class ClientFacade implements IClient{
         return ClientModel.getInstance().getThis_player().getTrainCards();
     }
 
+    public int getRemainingTrains()
+    {
+        return clientModel.getThis_player().getTrainsRemaining();
+    }
+
 
     //destination card commands
     public boolean drawDestinationCard(){
