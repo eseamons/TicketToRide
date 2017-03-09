@@ -148,7 +148,7 @@ public class ClientModel extends Observable
 
         if(gameID == currentGameLobby.getID())
         {
-            currentGame = new Game(currentGameLobby);
+            //currentGame = new Game(currentGameLobby);
             //TODO: stop poller from getting game lobby commands and start get game commands
             //poller.stopGameLobbyListTimer();
             //poller.getGameCommands();
