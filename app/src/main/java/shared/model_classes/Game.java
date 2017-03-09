@@ -39,8 +39,8 @@ public class Game {
 
     public void setFaceUpCard(int index, CardColor c)
     {
-        if(faceUpCards.size() > index)
-        {faceUpCards.set(index,c);}
+        if(faceUpCards.size() > index) faceUpCards.remove(index);
+        faceUpCards.add(index,c);
     }
 
     public List<CardColor> getFaceUpCards()
