@@ -124,6 +124,7 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(GameStatsView.this, MapViewActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
 
 

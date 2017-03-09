@@ -39,6 +39,8 @@ public class MapViewPresenter implements Observer {
 
 
 
+
+
     public void setPlayerCardViews(List<CardColor> playerCards)
     {
         int redCards = 0;

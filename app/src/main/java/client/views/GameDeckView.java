@@ -129,7 +129,9 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GameDeckView.this, MapViewActivity.class));
+                Intent intent = new Intent(GameDeckView.this, MapViewActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
 
