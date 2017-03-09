@@ -78,6 +78,7 @@ public class Game {
         {
             int pointIncrease = route.getPointValue();
             players.increasePlayerScore(auth, pointIncrease );
+            players.decreasePlayerTrainsRemaining(auth, route.length);
         }
         return successful;
     }
