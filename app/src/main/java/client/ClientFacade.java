@@ -315,7 +315,7 @@ public class ClientFacade implements IClient{
             case 1: game.stupidClaimRoute(20, 2); next_cmd = "Claim Route for Player 3 "; break;
             case 2: game.stupidClaimRoute(24, 3); next_cmd = "Claim Route for Player 4 "; break;
             case 3: game.stupidClaimRoute(26, 4); next_cmd = "Claim Route for Player 5 "; break;
-            case 4: game.stupidClaimRoute(11, 5); next_cmd = "Draw PURPLE for Current Player "; break;
+            case 4: game.stupidClaimRoute(12, 5); next_cmd = "Draw PURPLE for Current Player "; break;
             case 5: current.addTrainCard(CardColor.PURPLE); next_cmd = "Draw WHITE for Current Player "; break;
             case 6: current.addTrainCard(CardColor.WHITE); next_cmd = "Draw BLUE for Current Player "; break;
             case 7: current.addTrainCard(CardColor.BLUE); next_cmd = "Draw YELLOW for Current Player "; break;
