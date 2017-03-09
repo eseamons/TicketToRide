@@ -190,10 +190,10 @@ public class ServerModel implements IServer{
                 Player p4 = returnGameLobby.getPlayers().get(playerIndex4);
                 Player p5 = returnGameLobby.getPlayers().get(playerIndex5);
                 playerAuthMap.put(auth, p);
-                playerAuthMap.put(auth, p2);
-                playerAuthMap.put(auth, p3);
-                playerAuthMap.put(auth, p4);
-                playerAuthMap.put(auth, p5);
+                playerAuthMap.put(acc2.getAuthentication(), p2);
+                playerAuthMap.put(acc3.getAuthentication(), p3);
+                playerAuthMap.put(acc4.getAuthentication(), p4);
+                playerAuthMap.put(acc5.getAuthentication(), p5);
 
 
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
