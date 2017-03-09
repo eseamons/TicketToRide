@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import com.example.erics.tickettoride.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import client.ClientFacade;
 import client.presenters.MapViewPresenter;
 import shared.CardColor;
 import shared.model_classes.DestinationCard;
@@ -145,7 +148,10 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         //createFakeRoutes();
 
         presenter = new MapViewPresenter(this);
+
     }
+
+
 
     public void setStupidButtonText(String set)
     {
@@ -183,8 +189,13 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
+        if(ClientFacade.time != -1)
+            presenter.update(null,null);
         return true;
     }
+
+
+
 
     public void testCardNums()
     {

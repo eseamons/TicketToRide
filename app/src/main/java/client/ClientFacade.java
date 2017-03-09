@@ -303,7 +303,7 @@ public class ClientFacade implements IClient{
 
 
     public static String next_cmd = "STUPID BUTTON";
-    static int time = -1;
+    public static int time = -1;
     public void runAnimation()
     {
         //only to be used while initialization works
