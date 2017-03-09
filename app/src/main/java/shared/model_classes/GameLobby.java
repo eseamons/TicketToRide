@@ -12,7 +12,7 @@ public class GameLobby {
     private int max_players;
     private int ID;
     private String name;
-    private List<String> comment_list;
+    private ArrayList<String> comment_list;
 
     public GameLobby() {
         ArrayList<Player> newPlayersList = new ArrayList<>();
@@ -32,6 +32,14 @@ public class GameLobby {
     }
     public Player getPlayer(int index){
         return playersList.getPlayer(index);
+    }
+
+    public ArrayList<String> getComment_list() {
+        return comment_list;
+    }
+
+    public void setComment_list(ArrayList<String> comment_list) {
+        this.comment_list = comment_list;
     }
 
     public int getMaxPlayers() {

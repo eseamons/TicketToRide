@@ -214,7 +214,7 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 
     public ArrayList<String> getChat() {
         ClientFacade cf = new ClientFacade();
-        ArrayList<String> chatArray = cf.getChat();
+        ArrayList<String> chatArray = cf.getLobbyChat();
 
         return chatArray;
     }

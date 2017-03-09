@@ -52,6 +52,8 @@ public interface IClient {
 
     ArrayList<String> getChat();
 
+    ArrayList<String> getLobbyChat();
+
     boolean sendMessage(String message);
 
     public void addComment(int gameID, String message);
