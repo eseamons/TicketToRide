@@ -405,6 +405,11 @@ public class ClientFacade implements IClient{
         return clientModel.getFaceUpCards();
     }
 
+    public void setThis_player()
+    {
+        clientModel.setThis_Player();
+    }
+
 
     public void setFaceUpCard(int gameID, CardColor card, int cardIndex) {
         if(clientModel.getCurrent_game().getGameID() == gameID)

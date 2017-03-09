@@ -110,6 +110,7 @@ public class MapViewPresenter implements Observer, IMapPresenter
     public void setDestinationBox()
     {
         ClientFacade client = new ClientFacade();
+        client.setThis_player();
         List<DestinationCard> destinationCards = client.getDestinationList();
 
         StringBuilder sb = new StringBuilder();
