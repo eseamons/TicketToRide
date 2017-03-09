@@ -39,27 +39,28 @@ public class Poller
 
 
     //Async task that has the code that was originally in the poller (Thank you Michael)
-    public class LobbyPolling extends AsyncTask<Void, Void, Void>
+    public class LobbyPolling extends AsyncTask<Void, Void, Integer>
     {
 
         //this gets all the info from the server(MODEL DOES NOT UPDATE)
         @Override
-        protected Void doInBackground(Void... params)
+        protected Integer doInBackground(Void... params)
         {
             ClientFacade client = new ClientFacade();
-            client.getNewCommands();
-            //client.getServerGamesList(ClientModel.getInstance().getAuthorization());
-            return null;
+            int NewCommands = client.getNewCommands();
+            return NewCommands;
         }
 
         //If there are any lobbies to show then the Model updates...
         //Would be better if it had a way to update only if the sixe of the list increased.
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            ClientModel clientModel = ClientModel.getInstance();
-            if(clientModel.getListOfLobbies().size() > 0) {
-                clientModel.update();
+        protected void onPostExecute(Integer integer) {
+            super.onPostExecute(integer);
+            if(integer >0) {
+                ClientModel clientModel = ClientModel.getInstance();
+                if (clientModel.getListOfLobbies().size() > 0) {
+                    clientModel.update();
+                }
             }
         }
     }
