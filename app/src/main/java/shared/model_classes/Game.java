@@ -24,7 +24,8 @@ public class Game {
     private int currentPlayer;
 
 
-    public Game(){}
+    public Game() {
+    }
 
     public Game(GameLobby gameLobby) {
         gameID = gameLobby.getID();
@@ -39,18 +40,30 @@ public class Game {
     public int getCurrentPlayer() {
         return currentPlayer;
     }
+
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;
     }
-    public void incrementCurrentPlayer() { this.currentPlayer++; }
 
-    public RoutesList getRoutes(){return routes;}
+    public void incrementCurrentPlayer() {
+        this.currentPlayer++;
+    }
+
+    public RoutesList getRoutes() {
+        return routes;
+    }
+
     public int getGameID() {
         return gameID;
     }
 
     public void endTurn() {
         players.endTurn();
+    }
+
+    public int getPlayerWhosTurnItIs()
+    {
+        return players.getCurrentPlayerID();
     }
 
     public List<Player> getPlayers() {
