@@ -23,6 +23,7 @@ public class MapViewPresenter implements Observer {
         view = act;
         ClientFacade client = new ClientFacade();
         client.setObserver(this);
+
     }
     public void update(Observable o, Object arg)
     {
@@ -35,6 +36,8 @@ public class MapViewPresenter implements Observer {
         view.drawRoutes(routes);
         view.setStupidButtonText(client.next_cmd);
     }
+
+
 
     public void setPlayerCardViews(List<CardColor> playerCards)
     {

@@ -24,6 +24,8 @@ public class Game {
     private int currentPlayer;
 
 
+    public Game(){}
+
     public Game(GameLobby gameLobby) {
         gameID = gameLobby.getID();
         players = new PlayersList(gameLobby.getPlayers());
@@ -83,8 +85,11 @@ public class Game {
         return successful;
     }
 
-    public boolean stupidClaimRoute(int route_num, int player_index) {
-        routes.getRoute(route_num).ownership = player_index;
+    public boolean stupidClaimRoute(int route_num, int player_num) {
+        Route r = routes.getRoute(route_num);
+        r.ownership = player_num;
+        Player p = getPlayerbyIndex(player_num-1);
+        p.setPoints(p.getPlayerID() + r.getPointValue());
         return true;
     }
 

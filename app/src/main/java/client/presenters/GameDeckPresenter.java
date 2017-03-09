@@ -22,6 +22,7 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
         view = gameDeckView;
         ClientFacade client = new ClientFacade();
         client.setObserver(this);
+        update(null,null);
     }
 
     @Override

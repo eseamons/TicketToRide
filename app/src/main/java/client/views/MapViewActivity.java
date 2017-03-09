@@ -7,6 +7,8 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import com.example.erics.tickettoride.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import client.ClientFacade;
 import client.presenters.MapViewPresenter;
 import shared.CardColor;
 import shared.model_classes.DestinationCard;
@@ -145,7 +148,10 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         //createFakeRoutes();
 
         presenter = new MapViewPresenter(this);
+
     }
+
+
 
     public void setStupidButtonText(String set)
     {
@@ -183,8 +189,13 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
+        if(ClientFacade.time != -1)
+            presenter.update(null,null);
         return true;
     }
+
+
+
 
     public void testCardNums()
     {
@@ -211,9 +222,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         Canvas canvas = new Canvas(mutableBitmap);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        if(test_num % 2 == 0)
-            canvas.drawLine(212,793,626,685,paint);
-        for(int i = 0; i < cur_done; i++)
+        for(int i = 0; i < routes.getSize(); i++)
         {
             Route route = routes.getRoute(i);
             if(route.ownership != 0)
@@ -231,9 +240,9 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         int ret = Color.RED;
         switch(ownership)
         {
-            case 1: ret = Color.BLUE; break;
-            case 2: ret = Color.RED; break;
-            case 3: ret = Color.GREEN; break;
+            case 1: ret = Color.RED; break;
+            case 2: ret = Color.GREEN; break;
+            case 3: ret = Color.BLUE; break;
             case 4: ret = Color.YELLOW; break;
             case 5: ret = Color.BLACK; break;
         }

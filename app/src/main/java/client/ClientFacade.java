@@ -16,6 +16,9 @@ import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Player;
 import shared.model_classes.Route;
+import shared.model_classes.TrainCardDeck;
+import shared.model_classes.model_list_classes.DestinationCardsList;
+import shared.model_classes.model_list_classes.PlayersList;
 import shared.model_classes.model_list_classes.RoutesList;
 
 public class ClientFacade implements IClient{
@@ -300,9 +303,14 @@ public class ClientFacade implements IClient{
 
 
     public static String next_cmd = "STUPID BUTTON";
+    public static int time = -1;
     public void runAnimation()
     {
-        int time = -1;
+        //only to be used while initialization works
+        if(time == -1)
+            initializeAnimation();
+        // ^ ^ ^
+
         Game game = clientModel.getCurrent_game();
         Player current = clientModel.getThis_player();
         switch(time)
@@ -340,7 +348,16 @@ public class ClientFacade implements IClient{
 
     public void initializeAnimation()
     {
-
+        GameLobby gamelobby = new GameLobby();
+        gamelobby.addNewPlayers(new Account());
+        gamelobby.addNewPlayers(new Account());
+        gamelobby.addNewPlayers(new Account());
+        gamelobby.addNewPlayers(new Account());
+        gamelobby.addNewPlayers(new Account());
+        gamelobby.setID(1);
+        Game game = new Game(gamelobby);
+        clientModel.setCurrent_game(game);
+        clientModel.setThis_player(game.getPlayerbyIndex(0));
 
     }
 

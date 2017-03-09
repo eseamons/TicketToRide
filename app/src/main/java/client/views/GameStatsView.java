@@ -123,7 +123,10 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(GameStatsView.this, MapViewActivity.class));
+                Intent intent = new Intent(GameStatsView.this, MapViewActivity.class);
+                startActivity(intent);
+
+
             }
         });
 

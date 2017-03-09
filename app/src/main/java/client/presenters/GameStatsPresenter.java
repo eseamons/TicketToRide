@@ -23,6 +23,7 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
         ClientFacade client = new ClientFacade();
         client.setObserver(this);
         players =  client.getGamePlayers();
+        update(null,null);
     }
 
     @Override

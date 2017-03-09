@@ -226,6 +226,11 @@ public class RoutesList {
 
     }
 
+    public int getSize()
+    {
+        return availableRouteList.size();
+    }
+
     public Route getRoute(String city1, String city2, CardColor color)
     {
         Route currentRoute = availableRouteList.get(0);
