@@ -19,7 +19,7 @@ public class Poller
                 LobbyPolling l = new LobbyPolling();
                 l.execute();
             }
-        }, 1, 1);
+        }, 1, 1000);
     }
 
 
@@ -56,12 +56,12 @@ public class Poller
         @Override
         protected void onPostExecute(Integer integer) {
             super.onPostExecute(integer);
-            if(integer >0) {
+            //if(integer >0) {
                 ClientModel clientModel = ClientModel.getInstance();
                 if (clientModel.getListOfLobbies().size() > 0) {
                     clientModel.update();
                 }
-            }
+            //}
         }
     }
 

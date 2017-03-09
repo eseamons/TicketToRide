@@ -387,6 +387,7 @@ public class ClientFacade implements IClient{
         clientModel.setCurrent_game(game);
         clientModel.setThis_player(game.getPlayerbyIndex(0));
 
+
     }
 
     public int getPlayerTurnItIs()
