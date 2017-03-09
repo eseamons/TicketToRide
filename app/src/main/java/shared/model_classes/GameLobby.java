@@ -17,6 +17,7 @@ public class GameLobby {
     public GameLobby() {
         ArrayList<Player> newPlayersList = new ArrayList<>();
         playersList = new PlayersList(newPlayersList);
+        comment_list = new ArrayList<>();
     }
 
     public int NumOfCurrentPlayers(){ return playersList.getSize();}
