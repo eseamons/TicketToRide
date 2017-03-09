@@ -227,6 +227,11 @@ public class ServerModel implements IServer{
             //Begin game
             GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
             Game game = gameList.beginGame(gameLobby);
+            game.setFaceUpCard(0,game.drawCard());
+            game.setFaceUpCard(1,game.drawCard());
+            game.setFaceUpCard(2,game.drawCard());
+            game.setFaceUpCard(3,game.drawCard());
+            game.setFaceUpCard(4,game.drawCard());
 
             //remove game lobby
             gameLobbyList.removeLobby(gameLobbyID);
