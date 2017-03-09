@@ -459,7 +459,7 @@ public class ServerModel implements IServer{
 //                TODO:change all of this...
 
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
-                Command cmd = new DrawDestinationCardCommand();
+                Command cmd = new DrawDeckCardCommand();
 
                 DrawDeckCardCommandData cmdData = new DrawDeckCardCommandData();
                 cmdData.setGameID(gameID);
