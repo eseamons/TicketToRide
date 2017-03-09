@@ -153,9 +153,48 @@ public class ServerModel implements IServer{
 
                 Account acc = accountList.getAccountByAuthCode(auth);
 
+                ////Dummy accounts
+                Account acc2 = new Account();
+                acc2.setAuthentication("jfkdsaj-34526-dury");
+                acc2.setPassword("pass2");
+                acc2.setUsername("user2");
+
+                Account acc3 = new Account();
+                acc3.setAuthentication("jfkdsaj-34526-dufdyusy");
+                acc3.setPassword("pass3");
+                acc3.setUsername("user3");
+
+                Account acc4 = new Account();
+                acc4.setAuthentication("jfkdsaj-34526-duady");
+                acc4.setPassword("pass4");
+                acc4.setUsername("user4");
+
+                Account acc5 = new Account();
+                acc5.setAuthentication("jfkdsaj-34526-dur78y");
+                acc5.setPassword("pass5");
+                acc5.setUsername("user5");
+
+
+
+
+
+
                 int playerIndex = returnGameLobby.addNewPlayers(acc);
+                int playerIndex2 = returnGameLobby.addNewPlayers(acc2);
+                int playerIndex3 = returnGameLobby.addNewPlayers(acc3);
+                int playerIndex4 = returnGameLobby.addNewPlayers(acc4);
+                int playerIndex5 = returnGameLobby.addNewPlayers(acc5);
                 Player p = returnGameLobby.getPlayers().get(playerIndex);
+                Player p2 = returnGameLobby.getPlayers().get(playerIndex2);
+                Player p3 = returnGameLobby.getPlayers().get(playerIndex3);
+                Player p4 = returnGameLobby.getPlayers().get(playerIndex4);
+                Player p5 = returnGameLobby.getPlayers().get(playerIndex5);
                 playerAuthMap.put(auth, p);
+                playerAuthMap.put(auth, p2);
+                playerAuthMap.put(auth, p3);
+                playerAuthMap.put(auth, p4);
+                playerAuthMap.put(auth, p5);
+
 
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
                 gameLobbyList.incrementCurrentLobbyCommandID();
@@ -169,6 +208,7 @@ public class ServerModel implements IServer{
                 cmd.setCmdID(currentCmdID);
 
                 gameLobbyList.addLobbyCommand(cmd);
+                ///////////////////////////////////////////////
             }
 
         }

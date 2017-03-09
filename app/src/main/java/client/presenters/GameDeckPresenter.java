@@ -1,5 +1,8 @@
 package client.presenters;
 
+import android.graphics.Color;
+import android.os.Build;
+
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,6 +32,28 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
     public void update(Observable observable, Object o) {
         setColors();
         setDestinations();
+        setFaceUpCards();
+        setTrainsRemaining();
+    }
+
+    public void setTrainsRemaining()
+    {
+        ClientFacade client = new ClientFacade();
+        int rem = client.getRemainingTrains();
+        view.setTrainsRemainingNum(rem);
+    }
+    public void setFaceUpCards()
+    {
+        ClientFacade client = new ClientFacade();
+        List<CardColor> cards = client.getFaceUpCards();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            view.setFaceUpCard0(cards.get(0));
+            view.setFaceUpCard1(cards.get(1));
+            view.setFaceUpCard2(cards.get(2));
+            view.setFaceUpCard3(cards.get(3));
+            view.setFaceUpCard4(cards.get(4));
+
+        }
     }
 
     @Override

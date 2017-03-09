@@ -29,13 +29,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.ClientFacade;
+import client.interfaces.IMapView;
 import client.presenters.MapViewPresenter;
 import shared.CardColor;
 import shared.model_classes.DestinationCard;
 import shared.model_classes.Route;
 import shared.model_classes.model_list_classes.RoutesList;
 
-public class MapViewActivity extends AppCompatActivity implements View.OnTouchListener
+public class MapViewActivity extends AppCompatActivity implements View.OnTouchListener, IMapView
 {
 
     MapViewPresenter presenter;
@@ -102,9 +103,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
     Button StupidButton;
 
-    int test_num = 0;
-    int cur_done = 3;
-    RoutesList routes;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -149,71 +148,20 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             }
         });
 
-        //createFakeRoutes();
-
         presenter = new MapViewPresenter(this);
 
     }
-
-
 
     public void setStupidButtonText(String set)
     {
         StupidButton.setText(set);
     }
 
-    public void createFakeRoutes()
-    {
-        routes = new RoutesList();
-        cur_done = routes.cur_done;
-        for(int i = 0; i < cur_done; i++)
-        {
-            int owner = i%5 + 1;
-            routes.getRoute(i).ownership = owner;
-        }
-    }
-
-    public void getCoords(View v, MotionEvent event)
-    {
-        if(event.getAction() != MotionEvent.ACTION_DOWN)
-            return;
-        float x = event.getX();
-        float y = event.getY();
-        test_num++;
-        purpleNum.setText("" + test_num);
-
-        //System.out.println("X: " + x + " Y: " + y);
-        System.out.println("X: " + x + " Y: " + y);
-
-        if(test_num % 2 == 0)
-        {
-            Log.d("SPACE", "ROUTE END");
-        }
-    }
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        if(ClientFacade.time != -1)
-            presenter.update(null,null);
         return true;
     }
-
-
-
-
-    public void testCardNums()
-    {
-        List<CardColor> cards = new ArrayList<>();
-        cards.add(CardColor.RED);
-        cards.add(CardColor.RED);
-        cards.add(CardColor.BLUE);
-        cards.add(CardColor.ORANGE);
-        cards.add(CardColor.BLACK);
-        cards.add(CardColor.BLACK);
-        presenter.setPlayerCardViews(cards);
-    }
-
-
 
     public void drawRoutes(RoutesList routes)
     {
@@ -253,7 +201,51 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         return ret;
     }
 
+    public void testCardNums()
+    {
+        List<CardColor> cards = new ArrayList<>();
+        cards.add(CardColor.RED);
+        cards.add(CardColor.RED);
+        cards.add(CardColor.BLUE);
+        cards.add(CardColor.ORANGE);
+        cards.add(CardColor.BLACK);
+        cards.add(CardColor.BLACK);
+        //presenter.setPlayerCardViews(cards);
+    }
 
+    public void createFakeRoutes()
+    {
+
+        int cur_done = 3;
+        RoutesList routes;
+        routes = new RoutesList();
+        cur_done = routes.cur_done;
+        for(int i = 0; i < cur_done; i++)
+        {
+            int owner = i%5 + 1;
+            routes.getRoute(i).ownership = owner;
+        }
+    }
+
+    int test_num = 0;
+    public void getCoords(View v, MotionEvent event)
+    {
+
+        if(event.getAction() != MotionEvent.ACTION_DOWN)
+            return;
+        float x = event.getX();
+        float y = event.getY();
+        test_num++;
+        purpleNum.setText("" + test_num);
+
+        //System.out.println("X: " + x + " Y: " + y);
+        System.out.println("X: " + x + " Y: " + y);
+
+        if(test_num % 2 == 0)
+        {
+            Log.d("SPACE", "ROUTE END");
+        }
+    }
 
 
 }

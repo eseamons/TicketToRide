@@ -121,9 +121,9 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         player5Text.setText("Empty");
 
         ChatList = (ListView) findViewById(R.id.ChatList);
-        List<String> chatArray = getChat();
-        ArrayAdapter<String> chatAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, chatArray);
-        ChatList.setAdapter(chatAdapter);
+        //List<String> chatArray = getChat();
+        //ArrayAdapter<String> chatAdapter = new ArrayAdapter<String>(this, R.layout.simple_list_item_1, chatArray);
+        //ChatList.setAdapter(chatAdapter);
 
 
         //POLLER
@@ -140,17 +140,18 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
             ClientFacade cf = new ClientFacade();
             List<Player> players = cf.getPlayers();
 
-            if (players.size() >= 1)
-                player1Text.setText(players.get(0).getAccount().getUsername());
-            if (players.size() >= 2)
-                player1Text.setText(players.get(1).getAccount().getUsername());
-            if (players.size() >= 3)
-                player1Text.setText(players.get(2).getAccount().getUsername());
-            if (players.size() >= 4)
-                player1Text.setText(players.get(3).getAccount().getUsername());
-            if (players.size() >= 5)
-                player1Text.setText(players.get(4).getAccount().getUsername());
-
+            if (player1Text != null) {
+                if (players.size() >= 1)
+                    player1Text.setText(players.get(0).getAccount().getUsername());
+                if (players.size() >= 2)
+                    player2Text.setText(players.get(1).getAccount().getUsername());
+                if (players.size() >= 3)
+                    player3Text.setText(players.get(2).getAccount().getUsername());
+                if (players.size() >= 4)
+                    player4Text.setText(players.get(3).getAccount().getUsername());
+                if (players.size() >= 5)
+                    player5Text.setText(players.get(4).getAccount().getUsername());
+            }
 
             //TODO: update chat?
 
@@ -214,7 +215,7 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
 
     public ArrayList<String> getChat() {
         ClientFacade cf = new ClientFacade();
-        ArrayList<String> chatArray = cf.getChat();
+        ArrayList<String> chatArray = cf.getLobbyChat();
 
         return chatArray;
     }
