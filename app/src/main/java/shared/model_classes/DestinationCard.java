@@ -38,6 +38,10 @@ public class DestinationCard {
         return city1 + " " + city2;
     }
 
+    public String toString()
+    {
+        return city1 + " to " + city2 + ": " + points + " points";
+    }
 
 
 

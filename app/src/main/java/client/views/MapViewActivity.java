@@ -211,9 +211,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         Canvas canvas = new Canvas(mutableBitmap);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
-        if(test_num % 2 == 0)
-            canvas.drawLine(212,793,626,685,paint);
-        for(int i = 0; i < cur_done; i++)
+        for(int i = 0; i < routes.getSize(); i++)
         {
             Route route = routes.getRoute(i);
             if(route.ownership != 0)
@@ -231,9 +229,9 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         int ret = Color.RED;
         switch(ownership)
         {
-            case 1: ret = Color.BLUE; break;
-            case 2: ret = Color.RED; break;
-            case 3: ret = Color.GREEN; break;
+            case 1: ret = Color.RED; break;
+            case 2: ret = Color.GREEN; break;
+            case 3: ret = Color.BLUE; break;
             case 4: ret = Color.YELLOW; break;
             case 5: ret = Color.BLACK; break;
         }
