@@ -41,7 +41,7 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         Account account = serverProxy.login(name, pass);
         ClientModel.getInstance().setAccount(account);
-        ClientModel.getInstance().setThis_Player();
+        ClientModel.getInstance().loginSetThis_Player();
         return account;
     }
 

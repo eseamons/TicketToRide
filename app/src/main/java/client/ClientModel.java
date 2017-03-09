@@ -61,6 +61,14 @@ public class ClientModel extends Observable
         //this_player = p;
         this_player = currentGame.getPlayerbyIndex(player_num);
     }
+
+    public void loginSetThis_Player()
+    {
+        Player p = new Player();
+        p.setAccount(account);
+        this_player = p;
+    }
+
     //Methods needed for all classes
     private static ClientModel instance = new ClientModel();
 
