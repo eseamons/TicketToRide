@@ -1,5 +1,6 @@
 package shared.model_classes;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +50,19 @@ public class Game {
         return gameID;
     }
 
+    public List<String> getChat()
+    {
+        return comments;
+    }
+
     public void endTurn() {
         players.endTurn();
     }
 
+    public int ThisPlayersTurn()
+    {
+        return players.getCurrentPlayerID();
+    }
     public List<Player> getPlayers() {
         return players.getAllPlayers();
     }
@@ -90,6 +100,7 @@ public class Game {
         r.ownership = player_num;
         Player p = getPlayerbyIndex(player_num-1);
         p.setPoints(p.getPlayerID() + r.getPointValue());
+        p.decreaseTrainsRemaining(r.length);
         return true;
     }
 
@@ -101,6 +112,12 @@ public class Game {
     public void stupidAddDestinationCard(DestinationCard card, int player_num)
     {
         getPlayerbyIndex(player_num-1).addDestinationCard(card);
+    }
+
+    public void stupidAddComment(String name, String message)
+    {
+        String add = name + ": " + message;
+        comments.add(add);
     }
 
     //Destination Card Methods

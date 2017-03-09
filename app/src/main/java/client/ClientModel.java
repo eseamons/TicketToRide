@@ -210,5 +210,10 @@ public class ClientModel extends Observable
         this.this_player = this_player;
     }
 
+    public int ThisPlayersTurn()
+    {
+        return currentGame.ThisPlayersTurn();
+    }
+
 
 }

@@ -91,6 +91,10 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
          destView.setText(set);;
     }
 
+    @Override
+    public void onBackPressed() {
+    }
+
     TextView destView;
 
     Button toDeck;

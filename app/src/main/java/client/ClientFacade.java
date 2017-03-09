@@ -130,8 +130,7 @@ public class ClientFacade implements IClient{
 
     @Override
     public ArrayList<String> getChat() {
-        ArrayList<String> chatArray = new ArrayList<String>();
-        return chatArray;
+        return (ArrayList) clientModel.getCurrent_game().getChat();
     }
 
     @Override
@@ -336,7 +335,15 @@ public class ClientFacade implements IClient{
             case 21: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),2); next_cmd = "Add Destination card to player 3 "; break;
             case 22: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),3); next_cmd = "Add Destination card to player 4 "; break;
             case 23: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),4); next_cmd = "Add Destination card to player 5 "; break;
-            case 24: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),5); next_cmd = "done "; break;
+            case 24: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),5); next_cmd = "Turn goes to next player "; break;
+            case 25: game.endTurn(); next_cmd = "Turn goes to next player"; break;
+            case 26: game.endTurn(); next_cmd = "Turn goes to next player"; break;
+            case 27: game.endTurn(); next_cmd = "Turn goes to next player"; break;
+            case 28: game.endTurn(); next_cmd = "Turn goes to next player"; break;
+            case 29: game.endTurn(); next_cmd = "Add new message"; break;
+            case 30: game.stupidAddComment("DUMMY1","Hello"); next_cmd = "Add new message"; break;
+            case 31: game.stupidAddComment("DUMMY2","Greetings"); next_cmd = "Add new message"; break;
+            case 32: game.stupidAddComment("DUMMY3","Good Evening, old chap"); next_cmd = "DONE"; break;
         }
         time++;
         clientModel.update();
@@ -345,16 +352,31 @@ public class ClientFacade implements IClient{
     public void initializeAnimation()
     {
         GameLobby gamelobby = new GameLobby();
-        gamelobby.addNewPlayers(new Account());
-        gamelobby.addNewPlayers(new Account());
-        gamelobby.addNewPlayers(new Account());
-        gamelobby.addNewPlayers(new Account());
-        gamelobby.addNewPlayers(new Account());
+        Account acnt = new Account();
+        acnt.setUsername("DUMMY1");
+        gamelobby.addNewPlayers(acnt);
+        acnt = new Account();
+        acnt.setUsername("DUMMY2");
+        gamelobby.addNewPlayers(acnt);
+        acnt = new Account();
+        acnt.setUsername("DUMMY3");
+        gamelobby.addNewPlayers(acnt);
+        acnt = new Account();
+        acnt.setUsername("DUMMY4");
+        gamelobby.addNewPlayers(acnt);
+        acnt = new Account();
+        acnt.setUsername("DUMMY5");
+        gamelobby.addNewPlayers(acnt);
         gamelobby.setID(1);
         Game game = new Game(gamelobby);
         clientModel.setCurrent_game(game);
         clientModel.setThis_player(game.getPlayerbyIndex(0));
 
+    }
+
+    public int getPlayerTurnItIs()
+    {
+        return clientModel.ThisPlayersTurn();
     }
 
 

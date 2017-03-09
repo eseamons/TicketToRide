@@ -1,5 +1,6 @@
 package client.presenters;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -29,6 +30,7 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
     @Override
     public void update(Observable observable, Object o) {
         int numberOfPlayers = players.size();
+        ClientFacade client = new ClientFacade();
         switch(numberOfPlayers){
             case 5:
                 Player player = players.get(4);
@@ -37,6 +39,7 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
                 view.setPlayer5DestinationCardsNum(player.getDestinationCards().size());
                 view.setPlayer5TrainsRemainingNum(player.getTrainsRemaining());
                 view.setPlayer5PointsNum(player.getPoints());
+                view.setPlayer5TurnMarker(client.getPlayerTurnItIs() == 4);
             case 4:
                 player = players.get(3);
                 view.setPlayer4Name(player.getName());
@@ -44,6 +47,7 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
                 view.setPlayer4DestinationCardsNum(player.getDestinationCards().size());
                 view.setPlayer4TrainsRemainingNum(player.getTrainsRemaining());
                 view.setPlayer4PointsNum(player.getPoints());
+                view.setPlayer4TurnMarker(client.getPlayerTurnItIs() == 3);
             case 3:
                 player = players.get(2);
                 view.setPlayer3Name(player.getName());
@@ -51,6 +55,7 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
                 view.setPlayer3DestinationCardsNum(player.getDestinationCards().size());
                 view.setPlayer3TrainsRemainingNum(player.getTrainsRemaining());
                 view.setPlayer3PointsNum(player.getPoints());
+                view.setPlayer3TurnMarker(client.getPlayerTurnItIs() == 2);
             case 2:
                 player = players.get(1);
                 view.setPlayer2Name(player.getName());
@@ -58,6 +63,7 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
                 view.setPlayer2DestinationCardsNum(player.getDestinationCards().size());
                 view.setPlayer2TrainsRemainingNum(player.getTrainsRemaining());
                 view.setPlayer2PointsNum(player.getPoints());
+                view.setPlayer2TurnMarker(client.getPlayerTurnItIs() == 1);
             case 1:
                 player = players.get(0);
                 view.setPlayer1Name(player.getName());
@@ -65,6 +71,16 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
                 view.setPlayer1DestinationCardsNum(player.getDestinationCards().size());
                 view.setPlayer1TrainsRemainingNum(player.getTrainsRemaining());
                 view.setPlayer1PointsNum(player.getPoints());
+                view.setPlayer1TurnMarker(client.getPlayerTurnItIs() == 0);
         }
+
+        ArrayList<String> chat = client.getChat();
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < chat.size(); i++)
+        {
+            sb.append(chat.get(i));
+            sb.append("\n\n");
+        }
+        view.setChatMessage(sb.toString());
     }
 }
