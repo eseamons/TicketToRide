@@ -14,12 +14,28 @@ import shared.model_classes.Route;
  */
 
 public class RoutesList {
+    /**
+     * availableRouteList
+     * List of all unclaimed routes in Ticket To Ride Game.
+     */
     private List<Route> availableRouteList = new ArrayList<>();
-    private Map<String,Route> playersClaimedRoutes = new HashMap<>();
+    /**
+     * playersClaimedRoutes
+     * Map that links a Player's authorization token to the Route(s)
+     * they own.
+     */
+    private Map<String,List<Route>> playersClaimedRoutes = new HashMap<>();
 
     //added just so will compile
     //List<Route> routeList;
     public int cur_done = 99+1; //this is for Michael to help harcoding his view
+
+    /**
+     * Constructor for RoutesList.
+     *
+     *
+     *
+     */
     public RoutesList()
     {
         availableRouteList.add(new Route("Vancouver", "Calgary", CardColor.WILD, 3));
@@ -356,7 +372,9 @@ public class RoutesList {
                 if(availableRoute.city2.equals(routeToClaim.city2))
                 {
                     availableRouteList.remove(i);
-                    playersClaimedRoutes.put(auth, availableRoute);
+                    List<Route> routeList = playersClaimedRoutes.remove(auth);
+                    routeList.add(availableRoute);
+                    playersClaimedRoutes.put(auth, routeList);
                     return true;
                 }
             }
