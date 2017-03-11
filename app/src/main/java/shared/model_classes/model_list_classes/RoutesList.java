@@ -28,13 +28,24 @@ public class RoutesList {
 
     //added just so will compile
     //List<Route> routeList;
-    public int cur_done = 99+1; //this is for Michael to help harcoding his view
+
+    /**
+     * CUR_DONE
+     * Current number of routes added to the list.
+     * (this is for Michael to help hard-coding his view)
+     */
+    public int CUR_DONE = 99+1;
 
     /**
      * Constructor for RoutesList.
      *
+     * Includes hard-coding in all of the Routes available in Ticket To Ride,
+     * a total of 100 routes.
+     * Also adds the coordinates for the two connected cities in each route.
+     * These coordinates are used within the MapView for drawing claimed routes.
      *
-     *
+     * @post availableRouteList.size() = 100
+     * @post availableRouteList contains all Routes on initial TTR gameboard.
      */
     public RoutesList()
     {
@@ -242,11 +253,31 @@ public class RoutesList {
 
     }
 
+    /**
+     * Returns the number of unclaimed routes.
+     *
+     * @pre none
+     *
+     * @return the number of Routes not yet claimed.
+     */
     public int getSize()
     {
         return availableRouteList.size();
     }
 
+    /**
+     * Returns the route that is specified by connecting city1, city2,
+     * with the same Route color as the 'color' param.
+     *
+     * @pre city1 must be a city in TTR
+     * @pre city2 must be a city in TTR, and be connected to city1 through a route.
+     * @pre color must be a possible Route color in TTR.
+     *
+     * @param city1 One of the cities connected by the Route.
+     * @param city2 The other city that isn't city1 connected by the Route.
+     * @param color The color of the Route
+     * @return The route specified by the cities and color.
+     */
     public Route getRoute(String city1, String city2, CardColor color)
     {
         Route currentRoute = availableRouteList.get(0);
@@ -264,11 +295,29 @@ public class RoutesList {
         return currentRoute;
     }
 
+    /**
+     * Returns the route that is at the specified index in the List of Unclaimed Routes.
+     *
+     * @pre index >= 0 and index < number of unclaimed routes.
+     * @param index The index of the desired route in the List of Unclaimed Routes
+     * @return the Route specified by the index parameter
+     */
     public Route getRoute(int index)
     {
         return availableRouteList.get(index);
     }
 
+
+    /**
+     * Returns a List of Routes for the specified player that he/she is able
+     * to claim at the time this method is called.
+     *
+     * @pre player 'p' must be a player within the current Game.
+     * @post none.
+     * @param p The player that is desired to find all claimable routes
+     * @return A list of Routes that the player 'p' is able to claim at the time
+     *          of the method call.
+     */
     public List<Route> getClaimableRoutes(Player p)
     {
         List<CardColor> playerCards = p.getTrainCards();
@@ -362,6 +411,19 @@ public class RoutesList {
 
     }
 
+    /**
+     *
+     *
+     * @pre routeToClaim must be an unclaimed route in the current TTR Game.
+     * @pre auth must be a player's authorization token of a player in the current TTR Game.
+     *
+     * @post availableRouteList.size()= oldsize - 1
+     * @post if returns true, player now has claimed the Route given in the param.
+     *
+     * @param routeToClaim The Route to be claimed
+     * @param auth The player's authorization token of the player claiming the Route.
+     * @return boolean true if player was able to claim route, or boolean false if not able.
+     */
     public boolean claimRoute(Route routeToClaim, String auth)
     {
         for(int i = 0; i <availableRouteList.size(); i++)

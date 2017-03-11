@@ -219,7 +219,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         int cur_done = 3;
         RoutesList routes;
         routes = new RoutesList();
-        cur_done = routes.cur_done;
+        cur_done = routes.CUR_DONE;
         for(int i = 0; i < cur_done; i++)
         {
             int owner = i%5 + 1;
