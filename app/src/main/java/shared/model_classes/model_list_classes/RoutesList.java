@@ -412,7 +412,7 @@ public class RoutesList {
     }
 
     /**
-     *
+     * Attempts to claim a Route by the Player that matches the given authorization token.
      *
      * @pre routeToClaim must be an unclaimed route in the current TTR Game.
      * @pre auth must be a player's authorization token of a player in the current TTR Game.
