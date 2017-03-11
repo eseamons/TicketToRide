@@ -25,6 +25,13 @@ public class GameLobby {
         return playersList.getAllPlayers();
     }
     public int addNewPlayers(Account playerAccount) {
+        for(Player p : playersList.getAllPlayers())
+        {
+            if (p.getPlayerAuthCode().equals( playerAccount.getAuthentication()))
+            {
+                return -1;
+            }
+        }
         Player player = new Player();
         player.setAccount(playerAccount);
         player.setPlayerID(playersList.getSize());
