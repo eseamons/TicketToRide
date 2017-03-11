@@ -41,7 +41,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.GameLo
         public void bindLobby(GameLobby gameLobby) {
             mGameLobby = gameLobby;
             mGameName.setText(gameLobby.getName());
-            mGamePlayersNum.setText(Integer.toString(gameLobby.getMaxPlayers()));
+            int playersInLobby = gameLobby.getPlayers().size();
+            String s = "Players in this Game: "+ playersInLobby;
+            mGamePlayersNum.setText(s);
         }
 
         @Override
