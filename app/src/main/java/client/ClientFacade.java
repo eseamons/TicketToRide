@@ -264,6 +264,21 @@ public class ClientFacade implements IClient{
         return false;
     }
 
+    public boolean drawFaceUpCard(int cardIndex)
+    {
+        //draws a face up card by index
+        //sends a drawFaceUpCard command to the server
+        return false;
+    }
+
+    public void retrieve3DestinationCards()
+    {
+        //when it is ones turn and they click draw destination cards; 3 cards pop up and the user can select which one it wants
+        //This will be called right when that button is clicked
+        //This function should ask the Server Proxy to bring back 3 Destination Cards and add them to the model
+
+    }
+
     //get current player's list of trainCards
     public List<CardColor> getPlayerCards()
     {
@@ -413,5 +428,10 @@ public class ClientFacade implements IClient{
 
     public void setFaceUpCard(int gameID, CardColor card, int cardIndex) {
             clientModel.SetFaceUpCard(card, cardIndex);
+    }
+
+    public CardColor getFaceUpCard(int cardIndex)
+    {
+        return clientModel.getFaceUpCard(cardIndex);
     }
 }

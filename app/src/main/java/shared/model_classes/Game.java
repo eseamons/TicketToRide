@@ -43,6 +43,12 @@ public class Game {
         faceUpCards.add(index,c);
     }
 
+    public CardColor getFaceUpCard(int cardIndex)
+    {
+        return faceUpCards.get(cardIndex);
+    }
+
+
     public List<CardColor> getFaceUpCards()
     {
         return faceUpCards;

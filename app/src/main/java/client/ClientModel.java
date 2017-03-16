@@ -238,4 +238,9 @@ public class ClientModel extends Observable
     public void SetFaceUpCard(CardColor card, int cardIndex) {
         currentGame.setFaceUpCard(cardIndex,card);
     }
+
+    public CardColor getFaceUpCard(int cardIndex)
+    {
+        return currentGame.getFaceUpCard(cardIndex);
+    }
 }
