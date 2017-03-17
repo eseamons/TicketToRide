@@ -1,5 +1,7 @@
 package shared.model_classes.model_list_classes;
 
+import android.graphics.Point;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -444,4 +446,58 @@ public class RoutesList {
         return false;
     }
 
+
+    //returns the route clicked according to its hitboxes, if no route was clicked then returns null
+    public Route getClickedRoute(Point click)
+    {
+        for(Route r : availableRouteList)
+        {
+            Point start = new Point((int)r.start_x,(int)r.start_y);
+            Point end = new Point((int) r.end_x, (int) r.end_y);
+            boolean isIn = contains(start,end,click);
+            //if(contains(start,end,click))
+            if(isIn)
+            {
+                return r;
+            }
+        }
+        return null;
+
+    }
+
+    //uses an algorithm to determine if a point is within tolerance (4) units of a line
+    public boolean contains(Point start, Point end, Point click)
+    {
+
+        double width = Math.abs( start.x - end.x );
+        double height = Math.abs( start.y - end.y );
+        double UL_y, UL_x;
+        if(start.x < end.x)
+            UL_x = start.x;
+        else
+            UL_x = end.x;
+        if(start.y < end.y)
+            UL_y = start.y;
+        else
+            UL_y = end.y;
+        if(click.x < UL_x || click.x > UL_x + width || click.y < UL_y || click.y > UL_y + height) //make sure its in the box
+            return false;
+
+
+        double tolerance = 4;
+
+        double x2 = end.x;
+        double x1 = start.x;
+        double x0 = click.x;
+
+        double y2 = end.y;
+        double y1 = start.y;
+        double y0 = click.y;
+
+        double top = Math.abs( (x2 - x1)*(y1 - y0) - (x1-x0)*(y2-y1));
+        double bot = Math.pow(Math.pow(x2-x1,2)+Math.pow(y2-y1,2),.5);
+        double d = top/bot;
+
+        return d <= tolerance; //line algorithm is within tolerance
+    }
 }

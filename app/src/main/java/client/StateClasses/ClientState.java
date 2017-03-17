@@ -1,5 +1,10 @@
 package client.StateClasses;
 
+import java.util.List;
+
+import shared.CardColor;
+import shared.model_classes.Route;
+
 /**
  * Created by Michaels on 3/16/2017.
  */
@@ -25,7 +30,7 @@ public abstract class ClientState {
 
     }
 
-    public void ClaimRouteButtonClicked() {
+    public void ClaimRouteButtonClicked(Route desiredRoute, List<CardColor> hand) {
 
     }
 

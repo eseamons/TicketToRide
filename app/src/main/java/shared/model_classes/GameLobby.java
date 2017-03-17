@@ -38,6 +38,16 @@ public class GameLobby {
         playersList.addPlayer(player);
         return playersList.getSize()-1;
     }
+
+    public void stupidAddPlayer(Account a)
+    {
+        Player player = new Player();
+        player.setAccount(a);
+        player.setPlayerID(playersList.getSize());
+        playersList.addPlayer(player);
+        playersList.addPlayer(player);
+    }
+
     public Player getPlayer(int index){
         return playersList.getPlayer(index);
     }

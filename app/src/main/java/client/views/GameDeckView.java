@@ -87,42 +87,42 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
         deckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add functionality
+                presenter.DeckCardClicked();
             }
         });
 
         faceUpCard0Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add functionality
+                presenter.FaceUp0Clicked();
             }
         });
 
         faceUpCard1Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add functionality
+                presenter.FaceUp1Clicked();
             }
         });
 
         faceUpCard2Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add functionality
+                presenter.FaceUp2Clicked();
             }
         });
 
         faceUpCard3Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add functionality
+                presenter.FaceUp3Clicked();
             }
         });
 
         faceUpCard4Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO: add functionality
+                presenter.FaceUp4Clicked();
             }
         });
 

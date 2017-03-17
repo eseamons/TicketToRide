@@ -8,6 +8,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.ClientFacade;
+import client.StateClasses.ClientState;
 import client.interfaces.IGameDeckPresenter;
 import client.views.GameDeckView;
 import shared.CardColor;
@@ -20,6 +21,7 @@ import shared.model_classes.DestinationCard;
 public class GameDeckPresenter implements IGameDeckPresenter,Observer {
 
     GameDeckView view;
+    ClientFacade client = new ClientFacade();
 
     public GameDeckPresenter(GameDeckView gameDeckView){
         view = gameDeckView;
@@ -125,4 +127,42 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
         }
         view.setDestinationTickets(sb.toString());
     }
+
+    public void DeckCardClicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.DeckCardClicked();
+    }
+
+
+    public void FaceUp0Clicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.FaceUp0Clicked();
+    }
+
+    public void FaceUp1Clicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.FaceUp1Clicked();
+    }
+
+    public void FaceUp2Clicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.FaceUp1Clicked();
+    }
+
+    public void FaceUp3Clicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.FaceUp3Clicked();
+    }
+
+    public void FaceUp4Clicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.FaceUp4Clicked();
+    }
+
 }

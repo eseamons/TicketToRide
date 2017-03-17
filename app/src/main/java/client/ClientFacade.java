@@ -1,9 +1,12 @@
 package client;
 
+import android.graphics.Point;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
+import client.StateClasses.ClientState;
 import client.interfaces.IClient;
 import shared.CardColor;
 import shared.ColorNum;
@@ -279,6 +282,11 @@ public class ClientFacade implements IClient{
 
     }
 
+    public Route getRouteByClick(Point click)
+    {
+        return getRoutesList().getClickedRoute(click);
+    }
+
     //get current player's list of trainCards
     public List<CardColor> getPlayerCards()
     {
@@ -333,7 +341,7 @@ public class ClientFacade implements IClient{
     {
         //only to be used while initialization works
         //if(time == -1)
-            //initializeAnimation();
+        //   initializeAnimation();
         // ^ ^ ^
 
         Game game = clientModel.getCurrent_game();
@@ -384,19 +392,19 @@ public class ClientFacade implements IClient{
         GameLobby gamelobby = new GameLobby();
         Account acnt = new Account();
         acnt.setUsername("DUMMY1");
-        gamelobby.addNewPlayers(acnt);
+        gamelobby.stupidAddPlayer(acnt);
         acnt = new Account();
         acnt.setUsername("DUMMY2");
-        gamelobby.addNewPlayers(acnt);
+        gamelobby.stupidAddPlayer(acnt);
         acnt = new Account();
         acnt.setUsername("DUMMY3");
-        gamelobby.addNewPlayers(acnt);
+        gamelobby.stupidAddPlayer(acnt);
         acnt = new Account();
         acnt.setUsername("DUMMY4");
-        gamelobby.addNewPlayers(acnt);
+        gamelobby.stupidAddPlayer(acnt);
         acnt = new Account();
         acnt.setUsername("DUMMY5");
-        gamelobby.addNewPlayers(acnt);
+        gamelobby.stupidAddPlayer(acnt);
         gamelobby.setID(1);
         Game game = new Game(gamelobby);
         game.setFaceUpCard(0, CardColor.RED);
@@ -433,5 +441,15 @@ public class ClientFacade implements IClient{
     public CardColor getFaceUpCard(int cardIndex)
     {
         return clientModel.getFaceUpCard(cardIndex);
+    }
+
+    public ClientState getCurrentState()
+    {
+        return clientModel.getCurrentState();
+    }
+
+    public void setClientState(ClientState state)
+    {
+        clientModel.setClientState(state);
     }
 }

@@ -1,14 +1,18 @@
 package client.presenters;
 
+import android.graphics.Point;
+
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 import client.ClientFacade;
+import client.StateClasses.ClientState;
 import client.interfaces.IMapPresenter;
 import client.views.MapViewActivity;
 import shared.CardColor;
 import shared.model_classes.DestinationCard;
+import shared.model_classes.Route;
 import shared.model_classes.model_list_classes.RoutesList;
 
 /**
@@ -19,11 +23,12 @@ public class MapViewPresenter implements Observer, IMapPresenter
 {
 
     MapViewActivity view;
+    ClientFacade client;
 
     public MapViewPresenter(MapViewActivity act)
     {
         view = act;
-        ClientFacade client = new ClientFacade();
+        client = new ClientFacade();
         client.setObserver(this);
 
     }
@@ -33,14 +38,12 @@ public class MapViewPresenter implements Observer, IMapPresenter
         setPlayerCardViews();
         drawRoutes();
 
-        ClientFacade client = new ClientFacade();
         view.setStupidButtonText(client.next_cmd);
     }
 
 
     public void drawRoutes()
     {
-        ClientFacade client = new ClientFacade();
         RoutesList routes = client.getRoutesList();
         view.drawRoutes(routes);
     }
@@ -49,7 +52,6 @@ public class MapViewPresenter implements Observer, IMapPresenter
 
     public void setPlayerCardViews()
     {
-        ClientFacade client = new ClientFacade();
         List<CardColor> playerCards = client.getPlayerCards();
 
         int redCards = 0;
@@ -129,4 +131,27 @@ public class MapViewPresenter implements Observer, IMapPresenter
         client.runAnimation();
 
     }
+
+    public void onTouch(Point click)
+    {
+        Route selected_route = client.getRouteByClick(click);
+        view.setSelectedRoute(selected_route);
+    }
+
+    public void claimRouteButtonPressed()
+    {
+        Route selected = view.getSelectedRoute();
+        if(selected == null)
+            return;
+        ClientState state = client.getCurrentState();
+        List<CardColor> hand = client.getPlayerCards();
+        state.ClaimRouteButtonClicked(selected, hand);
+    }
+
+    public void drawDestinationCardButtonPressed()
+    {
+        ClientState state = client.getCurrentState();
+        state.DrawDestinationCardButtonClicked();
+    }
+
 }

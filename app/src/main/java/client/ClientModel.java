@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
+import client.StateClasses.ClientState;
+import client.StateClasses.MyTurnState;
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
@@ -41,6 +43,8 @@ public class ClientModel extends Observable
     private Game currentGame;
     private Player this_player;
     private int player_num;
+    //
+    private ClientState state = new MyTurnState();
     //private RoutesList routes = new RoutesList();
 
 
@@ -52,6 +56,16 @@ public class ClientModel extends Observable
     public void lobbySetPlayer_num()
     {
         player_num = currentGameLobby.NumOfCurrentPlayers() - 1;
+    }
+
+    public ClientState getCurrentState()
+    {
+        return state;
+    }
+
+    public void setClientState(ClientState new_state)
+    {
+        state = new_state;
     }
 
     public void setThis_Player()

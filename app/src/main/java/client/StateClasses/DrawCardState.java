@@ -32,6 +32,7 @@ public class DrawCardState extends ClientState
         {
             client.drawFaceUpCard(cardIndex);
             //make client NotMyTurnState
+            client.setClientState(new NotMyTurnState());
         }
         else
         {

@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -51,6 +52,18 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     TextView redNum;
     TextView greenNum;
     TextView wildNum;
+
+    Route selectedRoute = null;
+
+    public Route getSelectedRoute()
+    {
+        return selectedRoute;
+    }
+
+    public void setSelectedRoute(Route r)
+    {
+        selectedRoute = r;
+    }
 
     public void setPurpleNumText(String set) {
         purpleNum.setText(set);
@@ -102,6 +115,8 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     Button toStats;
 
     Button StupidButton;
+    Button claimRouteButton;
+    Button drawDestinationCardButton;
 
 
     @Override
@@ -148,6 +163,21 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             }
         });
 
+        claimRouteButton = (Button) findViewById(R.id.claimRouteButton);
+        claimRouteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.claimRouteButtonPressed();
+            }
+        });
+
+        drawDestinationCardButton = (Button) findViewById(R.id.drawDestinationButton);
+        drawDestinationCardButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.drawDestinationCardButtonPressed();
+            }
+        });
         presenter = new MapViewPresenter(this);
 
     }
@@ -160,6 +190,11 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
+        if(event.getAction() == MotionEvent.ACTION_DOWN)
+        {
+            Point clicked = new Point((int) event.getX(), (int) event.getY());
+            presenter.onTouch(clicked);
+        }
         return true;
     }
 
@@ -174,6 +209,15 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         Canvas canvas = new Canvas(mutableBitmap);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
+        //draw the selected route as white or pink depending on if they can claim it
+        if(selectedRoute != null)
+        {
+            paint.setColor(Color.WHITE);
+            paint.setStrokeWidth(10);
+            canvas.drawLine(selectedRoute.start_x,selectedRoute.start_y,selectedRoute.end_x,selectedRoute.end_y,paint);
+        }
+
+        //draw all other routes with their ownership color
         for(int i = 0; i < routes.getSize(); i++)
         {
             Route route = routes.getRoute(i);
