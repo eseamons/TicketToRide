@@ -1,11 +1,14 @@
 package client.StateClasses;
 
+import client.ClientFacade;
+
 /**
  * Created by Michaels on 3/16/2017.
  */
 
 public class DrawDestinationCardState extends ClientState {
 
+    ClientFacade client = new ClientFacade();
     public DrawDestinationCardState()
     {
 
@@ -13,7 +16,7 @@ public class DrawDestinationCardState extends ClientState {
 
     public void toggleCard(int cardIndex)
     {
-        //switches the card between 'keep' and 'discard'
+        //TODO switches the card between 'keep' and 'discard'
     }
 
     public void DestinationCard1Clicked()
@@ -32,7 +35,8 @@ public class DrawDestinationCardState extends ClientState {
 
     public void DestinationConfirmedClicked()
     {
-
+        //TODO ask the client facade to keep desired ones and discared others
+        client.setClientState(new NotMyTurnState());
     }
 
 }
