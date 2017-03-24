@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/trainyard-in-winter"
+    android:background="@drawable/trainyard_in_winter"
     tools:context="client.views.GameOverView">
 
 
@@ -104,7 +104,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/trainyard-in-winter"
+        android:background="@drawable/trainyard_in_winter"
         android:orientation="vertical">
 
         <LinearLayout
