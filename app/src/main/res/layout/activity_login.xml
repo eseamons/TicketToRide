@@ -1,69 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/choo_tunnel2"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight=".4"
-        android:paddingTop="50dp"
+        android:orientation="horizontal"
+        android:paddingBottom="50dp"
         android:paddingLeft="100dp"
         android:paddingRight="100dp"
-        android:paddingBottom="50dp">
+        android:paddingTop="50dp">
 
         <TextView
+            android:id="@+id/ttrTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/ttrTitle"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="(Ticket To Ride)"
-            android:textSize="72sp"
             android:textColor="?android:attr/textColorPrimary"
-            android:gravity="center" />
+            android:textSize="72sp" />
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight=".6">
+        android:layout_weight=".6"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight=".5"
+            android:orientation="vertical"
             android:paddingBottom="50dp"
             android:paddingLeft="100dp"
             android:paddingRight="25dp">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".33"
                 android:gravity="center"
+                android:orientation="horizontal"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/loginBackground"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:paddingLeft="50dp">
 
                     <TextView
-                        android:text="Username:"
+                        android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView"
-                        android:textSize="24sp"
-                        android:textColor="?android:attr/textColorPrimary" />
+                        android:text="Username:"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="24sp" />
 
                     <EditText
                         android:id="@+id/editText3"
@@ -80,28 +82,28 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".33"
-                android:paddingTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:paddingBottom="15dp"
-                android:gravity="center">
+                android:paddingTop="15dp">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/loginBackground"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:paddingLeft="50dp">
 
                     <TextView
-                        android:text="Password:"
+                        android:id="@+id/textView2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView2"
+                        android:text="Password:"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="24sp" />
 
@@ -119,59 +121,59 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".33"
                 android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="25dp"
                 android:paddingLeft="100dp"
                 android:paddingRight="100dp"
-                android:paddingTop="25dp"
-                android:paddingBottom="25dp">
+                android:paddingTop="25dp">
 
                 <Button
-                    android:text="Login"
+                    android:id="@+id/button"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:id="@+id/button"
                     android:layout_weight="1"
+                    android:text="Login"
                     android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight=".5"
-            android:paddingRight="100dp"
+            android:orientation="vertical"
             android:paddingBottom="50dp"
-            android:paddingLeft="25dp">
+            android:paddingLeft="25dp"
+            android:paddingRight="100dp">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".33"
+                android:orientation="horizontal"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:paddingLeft="50dp"
                     android:background="@color/loginBackground"
-                    android:gravity="center">
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="50dp">
 
                     <TextView
-                        android:text="Username:"
+                        android:id="@+id/textView3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView3"
-                        android:textSize="24sp"
-                        android:textColor="?android:attr/textColorPrimary" />
+                        android:text="Username:"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="24sp" />
 
                     <EditText
                         android:id="@+id/editText5"
@@ -187,26 +189,26 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight=".33"
+                android:orientation="horizontal"
                 android:paddingBottom="15dp"
                 android:paddingTop="15dp">
 
                 <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@color/loginBackground"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:paddingLeft="50dp">
 
                     <TextView
-                        android:text="Password:"
+                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView4"
+                        android:text="Password:"
                         android:textColor="?android:attr/textColorPrimary"
                         android:textSize="24sp" />
 
@@ -224,21 +226,21 @@
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingBottom="25dp"
                 android:paddingLeft="100dp"
                 android:paddingRight="100dp"
-                android:gravity="center"
-                android:paddingTop="25dp"
-                android:paddingBottom="25dp">
+                android:paddingTop="25dp">
 
                 <Button
-                    android:text="Register"
+                    android:id="@+id/button2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/button2"
                     android:layout_weight="1"
+                    android:text="Register"
                     android:textSize="20sp" />
             </LinearLayout>
         </LinearLayout>

@@ -118,6 +118,8 @@ public class ClientFacade implements IClient{
 /*
     methods needed for GameLobby View
 */
+
+
     @Override
     public List<Player> getPlayers() {
         return clientModel.getCurrent_game_lobby().getPlayers();
@@ -178,6 +180,14 @@ public class ClientFacade implements IClient{
     methods needed for game play
     client methods are followed by their counterpart needed for receiving
 */
+
+
+    @Override
+    public Player getThisPlayer()
+    {
+        return clientModel.getThis_player();
+    }
+
 
     @Override
     public ArrayList<String> getChat() {
