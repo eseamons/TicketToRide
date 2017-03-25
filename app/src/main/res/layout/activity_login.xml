@@ -218,7 +218,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="textPersonName"
+                        android:inputType="textPassword"
                         android:nextFocusDown="@+id/editText3"
                         android:textSize="24sp" />
 
