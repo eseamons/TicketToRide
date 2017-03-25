@@ -301,7 +301,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r != null && r.isSuccess())
         {
-            GetNewCommandsCommandData newCmdData = (GetNewCommandsCommandData) r.getInfo();
+            GetNewGameCommandsCommandData newCmdData = (GetNewGameCommandsCommandData) r.getInfo();
             return Arrays.asList(newCmdData.getCmds());
         }
         else

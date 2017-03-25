@@ -31,7 +31,6 @@ public class Poller
         }, 1, 1000);
     }
 
-
     public void stopLobbyListTimer()
     { if(LobbyListTimer != null)
         LobbyListTimer.cancel();
@@ -80,13 +79,7 @@ public class Poller
 
     public class GamePolling extends AsyncTask<Void, Void, Void>
     {
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
 
-        }
-
-        //this gets all the info from the server(MODEL DOES NOT UPDATE)
         @Override
         protected Void doInBackground(Void... params)
         {
@@ -101,9 +94,8 @@ public class Poller
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             ClientModel clientModel = ClientModel.getInstance();
-            if(clientModel.getListOfLobbies().size() > 0) {
                 clientModel.update();
-            }
+
         }
     }
 }

@@ -372,7 +372,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameLobbyList.addLobbyCommand(cmd);
+                gameList.addGameCommand(cmd);
             }
         }
         return successful;
@@ -477,7 +477,7 @@ public class ServerModel implements IServer{
 
         cmd.setInfo(cmdData);
         cmd.setCmdID(currentCmdID);
-        gameLobbyList.addLobbyCommand(cmd);
+        gameList.addGameCommand(cmd);
 
 
     }

@@ -202,7 +202,7 @@ public class ClientFacade implements IClient{
 
     public void getNewGameCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        int lastCommand = clientModel.getLastCommand();
+        int lastCommand = clientModel.getLastGameCommand();
         String auth = clientModel.getAuthorization();
 
         List<Command> listOfCommands = serverProxy.getNewGameCommands(lastCommand, auth);
@@ -210,7 +210,6 @@ public class ClientFacade implements IClient{
         //Return was not in brackets... did this fix it?
         if(listOfCommands == null)
         {return;}
-
 
         for(int i = 0; i < listOfCommands.size(); i++)
         {
