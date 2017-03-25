@@ -49,7 +49,6 @@ public class ServerProxy implements IServer{
     private static ServerProxy instance = null;
     String urlpath = "http://10.0.2.2:8080/command";
     //String urlpath = "http://192.168.253.175:8080/command";
-    String urlpath = "http://10.0.2.2:8080/command";
 
     //precondition - none
     //postcondition - none
