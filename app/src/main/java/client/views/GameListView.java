@@ -101,7 +101,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             }
         });
 
-        Poller p = new Poller();
+        Poller p = Poller.getInstance();
         p.runGetLobbyCommands();
 
     }

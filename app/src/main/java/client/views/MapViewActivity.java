@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import client.ClientFacade;
+import client.Poller;
 import client.interfaces.IMapView;
 import client.presenters.MapViewPresenter;
 import shared.CardColor;
@@ -180,6 +181,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         });
         presenter = new MapViewPresenter(this);
 
+        Poller.getInstance().runGetGameCommands();
     }
 
     public void setStupidButtonText(String set)

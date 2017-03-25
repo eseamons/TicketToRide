@@ -445,7 +445,7 @@ public class ClientFacade implements IClient{
 
 
     public void setFaceUpCard(int gameID, CardColor card, int cardIndex) {
-            clientModel.SetFaceUpCard(card, cardIndex);
+        clientModel.SetFaceUpCard(card, cardIndex);
     }
 
     public CardColor getFaceUpCard(int cardIndex)

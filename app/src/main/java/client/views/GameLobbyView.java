@@ -83,7 +83,9 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
             @Override
             public void onClick(View v) {
                 if(GameLobbyPresenter.getInstance().beginGame())
-                {startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));
+                {
+                    Poller.getInstance().stopLobbyListTimer();
+                    startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));
                 }
             }
         });

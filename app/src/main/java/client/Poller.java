@@ -8,11 +8,21 @@ import java.util.TimerTask;
 public class Poller
 {
     Timer LobbyListTimer = new Timer();
+    Timer GameCommandTimer = new Timer();
+    static Poller instance = new Poller();
+
+    private Poller(){}
+
+    public static Poller getInstance() {
+        return  instance;
+    }
+
     public void runGetLobbyCommands()
     {
 
         //this calls the Async task over and over again. The numbers 1,1 tell it how often to run
         //the higher the numbers the SLOWER it runs.
+        //LobbyListTimer = new Timer();
         LobbyListTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -24,17 +34,20 @@ public class Poller
 
 
     public void stopLobbyListTimer()
-    { LobbyListTimer.cancel();}
+    { if(LobbyListTimer != null)
+        LobbyListTimer.cancel();
+    }
 
     public void runGetGameCommands()
     {
-        LobbyListTimer.schedule(new TimerTask() {
+        //GameCommandTimer = new Timer();
+        GameCommandTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 GamePolling gamePoller = new GamePolling();
                 gamePoller.execute();
             }
-        }, 1, 1);
+        }, 1, 1000);
     }
 
 
@@ -68,6 +81,11 @@ public class Poller
 
     public class GamePolling extends AsyncTask<Void, Void, Void>
     {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
 
         //this gets all the info from the server(MODEL DOES NOT UPDATE)
         @Override
@@ -84,9 +102,7 @@ public class Poller
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             ClientModel clientModel = ClientModel.getInstance();
-            if(clientModel.getListOfLobbies().size() > 0) {
-                clientModel.update();
-            }
+            clientModel.update();
         }
     }
 }
