@@ -8,6 +8,7 @@ import java.util.TimerTask;
 public class Poller
 {
     Timer LobbyListTimer = new Timer();
+    private int lobbynum = 0;
     public void runGetLobbyCommands()
     {
 

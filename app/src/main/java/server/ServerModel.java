@@ -17,6 +17,7 @@ import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.CreateGameCommandData;
 import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
+import shared.command_data_classes.EndTurnCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.RemoveDestinationCardCommandData;
 import shared.command_data_classes.SetFaceUpCardCommandData;
@@ -154,26 +155,6 @@ public class ServerModel implements IServer{
 
                 Account acc = accountList.getAccountByAuthCode(auth);
 
-                ////Dummy accounts
-                Account acc2 = new Account();
-                acc2.setAuthentication("jfkdsaj-34526-dury");
-                acc2.setPassword("pass2");
-                acc2.setUsername("user2");
-
-                Account acc3 = new Account();
-                acc3.setAuthentication("jfkdsaj-34526-dufdyusy");
-                acc3.setPassword("pass3");
-                acc3.setUsername("user3");
-
-                Account acc4 = new Account();
-                acc4.setAuthentication("jfkdsaj-34526-duady");
-                acc4.setPassword("pass4");
-                acc4.setUsername("user4");
-
-                Account acc5 = new Account();
-                acc5.setAuthentication("jfkdsaj-34526-dur78y");
-                acc5.setPassword("pass5");
-                acc5.setUsername("user5");
 
 
 
@@ -181,20 +162,8 @@ public class ServerModel implements IServer{
 
 
                 int playerIndex = returnGameLobby.addNewPlayers(acc);
-                int playerIndex2 = returnGameLobby.addNewPlayers(acc2);
-                int playerIndex3 = returnGameLobby.addNewPlayers(acc3);
-                int playerIndex4 = returnGameLobby.addNewPlayers(acc4);
-                int playerIndex5 = returnGameLobby.addNewPlayers(acc5);
                 Player p = returnGameLobby.getPlayers().get(playerIndex);
-                Player p2 = returnGameLobby.getPlayers().get(playerIndex2);
-                Player p3 = returnGameLobby.getPlayers().get(playerIndex3);
-                Player p4 = returnGameLobby.getPlayers().get(playerIndex4);
-                Player p5 = returnGameLobby.getPlayers().get(playerIndex5);
                 playerAuthMap.put(auth, p);
-                playerAuthMap.put(acc2.getAuthentication(), p2);
-                playerAuthMap.put(acc3.getAuthentication(), p3);
-                playerAuthMap.put(acc4.getAuthentication(), p4);
-                playerAuthMap.put(acc5.getAuthentication(), p5);
 
 
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
@@ -329,13 +298,15 @@ public class ServerModel implements IServer{
             endTurnSuccessful = true;
             game.endTurn();
 
-            String json = "{ \"gameID\":\""+gameID+"\"}";
+            EndTurnCommandData cmdData = new EndTurnCommandData();
+            cmdData.setGameID(gameID);
 
             int currentCmdId = gameList.getCurrentGameCommandID();
             gameList.incrementCurrentGameCommandID();
 
             Command cmd = new EndTurnCommand();
-            cmd.setInfo(json);
+            cmd.setInfo(cmdData);
+            cmd.setAuth(auth);
             cmd.setCmdID(currentCmdId);
             gameList.addGameCommand(cmd);
         }
@@ -389,7 +360,8 @@ public class ServerModel implements IServer{
                 player.addDestinationCard(destinationCard);
                 int playerID = player.getPlayerID();
 
-                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+                int currentCmdID = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
                 Command cmd = new DrawDestinationCardCommand();
 
                 DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
@@ -428,8 +400,8 @@ public class ServerModel implements IServer{
                 currentGame.returnDestinationCard(destinationCard, playerID);
 
                 //TODO:below here change to be game commands not lobby commands
-                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
-                gameLobbyList.incrementCurrentLobbyCommandID();
+                int currentCmdID = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
                 Command cmd = new DrawDestinationCardCommand();
 
                 RemoveDestinationCardCommandData cmdData = new RemoveDestinationCardCommandData();
@@ -440,7 +412,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameLobbyList.addLobbyCommand(cmd);
+                gameList.addGameCommand(cmd);
             }
         }
         return successful;
@@ -465,7 +437,8 @@ public class ServerModel implements IServer{
 
 //                TODO:change all of this...
 
-                int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+                int currentCmdID = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
                 Command cmd = new DrawDeckCardCommand();
 
                 DrawDeckCardCommandData cmdData = new DrawDeckCardCommandData();
@@ -476,19 +449,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameLobbyList.addLobbyCommand(cmd);
-
-
-//                int currentGameCmdID = gameList.getCurrentGameCommandID();
-//                gameList.incrementCurrentGameCommandID();
-//                Command cmd = new DrawDeckCardCommand();
-//
-//                String cardColorString = Serializer.serialize(cardColor);
-//
-//                String info = "{\"gameID\": \""+gameID+"\", \"cardColor\":\""+cardColorString+"\", \"playerID\":\"" + playerID + "\"}";
-//                cmd.setInfo(info);
-//                cmd.setCmdID(currentGameCmdID);
-//                gameList.addGameCommand(cmd);
+                gameList.addGameCommand(cmd);
 
             }
         }
@@ -505,7 +466,8 @@ public class ServerModel implements IServer{
 
     public void setFaceUpCard(CardColor card, int cardIndex, int gameID)
     {
-        int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
+        int currentCmdID = gameList.getCurrentGameCommandID();
+        gameList.incrementCurrentGameCommandID();
         Command cmd = new SetFaceUpCardCommand();
 
         SetFaceUpCardCommandData cmdData = new SetFaceUpCardCommandData();

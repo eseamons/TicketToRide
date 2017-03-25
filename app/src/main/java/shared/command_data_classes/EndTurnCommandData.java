@@ -6,7 +6,6 @@ package shared.command_data_classes;
 
 public class EndTurnCommandData {
     private int gameID;
-    private String auth;
 
     public EndTurnCommandData() {
 
@@ -18,13 +17,5 @@ public class EndTurnCommandData {
 
     public void setGameID(int gameID) {
         this.gameID = gameID;
-    }
-
-    public String getAuth() {
-        return auth;
-    }
-
-    public void setAuth(String auth) {
-        this.auth = auth;
     }
 }
