@@ -22,7 +22,6 @@ public class Poller
 
         //this calls the Async task over and over again. The numbers 1,1 tell it how often to run
         //the higher the numbers the SLOWER it runs.
-        //LobbyListTimer = new Timer();
         LobbyListTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -102,7 +101,9 @@ public class Poller
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             ClientModel clientModel = ClientModel.getInstance();
-            clientModel.update();
+            if(clientModel.getListOfLobbies().size() > 0) {
+                clientModel.update();
+            }
         }
     }
 }

@@ -138,8 +138,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         mAdapter = new RecyclerAdapter(availableGames);
         mRecyclerView.setAdapter(mAdapter);
-
-
      }
 
      public void SwitchToGameLobby()
