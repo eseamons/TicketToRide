@@ -124,9 +124,9 @@ public class ClientModel extends Observable
 
     public void setPlayerThroughAuthCode()
     {
-        for(int i = 0; i < currentGameLobby.getPlayers().size(); i++)
+        for(int i = 0; i < currentGame.getPlayers().size(); i++)
         {
-            Player p = currentGameLobby.getPlayer(i);
+            Player p = currentGame.getPlayerbyIndex(i);
             if(p.getPlayerAuthCode().equals(getAuthorization()))
             {
                 this_player = p;
@@ -222,9 +222,10 @@ public class ClientModel extends Observable
 
         if(gameID == currentGameLobby.getID())
         {
-            setPlayerThroughAuthCode();
+
             currentGame = new Game(currentGameLobby);
             GameLobbyPresenter.getInstance().beginNonMainPlayerGame();
+            setPlayerThroughAuthCode();
             //TODO: stop poller from getting game lobby commands and start get game commands
             //poller.stopGameLobbyListTimer();
             //poller.getGameCommands();
