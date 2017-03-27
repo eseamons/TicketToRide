@@ -47,8 +47,8 @@ public class ServerProxy implements IServer{
 
     //CLASS INVARIANT - auth should be a valid authorization code
     private static ServerProxy instance = null;
-    String urlpath = "http://10.0.2.2:8080/command";
-    //String urlpath = "http://192.168.1.111:8080/command";
+    //String urlpath = "http://10.0.2.2:8080/command";
+    String urlpath = "http://10.24.69.148:8080/command";
     //String urlpath = "http://192.168.253.175:8080/command";
 
     //precondition - none
