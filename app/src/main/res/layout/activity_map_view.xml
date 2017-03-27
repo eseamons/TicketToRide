@@ -180,11 +180,10 @@
         android:id="@+id/destinationCard1Button"
         android:layout_width="200dp"
         android:layout_height="75dp"
-        android:layout_marginBottom="64dp"
         android:layout_marginLeft="88dp"
         android:layout_marginStart="88dp"
-        android:text="Button"
-        android:layout_alignParentBottom="true"
+        android:text="Destination Card 1"
+        android:layout_above="@+id/linearLayout"
         android:layout_toRightOf="@+id/button_TODECK"
         android:layout_toEndOf="@+id/button_TODECK" />
 
@@ -193,22 +192,22 @@
         android:layout_width="200dp"
         android:layout_height="75dp"
         android:text="Destination Card 2"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/destinationCard1Button"
-        android:layout_toEndOf="@+id/destinationCard1Button"
         android:layout_marginLeft="104dp"
-        android:layout_marginStart="104dp" />
+        android:layout_marginStart="104dp"
+        android:layout_above="@+id/linearLayout"
+        android:layout_toRightOf="@+id/destinationCard1Button"
+        android:layout_toEndOf="@+id/destinationCard1Button" />
 
     <Button
         android:id="@+id/destinationCard3Button"
         android:layout_width="200dp"
         android:layout_height="75dp"
-        android:layout_alignBottom="@+id/linearLayout"
         android:layout_marginLeft="109dp"
         android:layout_marginStart="109dp"
-        android:layout_toEndOf="@+id/destinationCard2Button"
+        android:text="Destination Card 3"
+        android:layout_above="@+id/linearLayout"
         android:layout_toRightOf="@+id/destinationCard2Button"
-        android:text="Destination Card 3" />
+        android:layout_toEndOf="@+id/destinationCard2Button" />
 
     <Button
         android:id="@+id/ConfirmDestinationButton"
