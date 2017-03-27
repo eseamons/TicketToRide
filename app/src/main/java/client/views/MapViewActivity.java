@@ -282,6 +282,22 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
         setDestinationCardsAcceptanceVisibility(false);
 
+        //if this causes problems, just comment this part out. Testing GameOver scheisse
+        if (GameOverView.getInstance().GameOver)
+        {
+            toDeck.setVisibility(View.GONE);
+            DestinationCardButton[0].setVisibility(View.GONE);
+            DestinationCardButton[1].setVisibility(View.GONE);
+            DestinationCardButton[2].setVisibility(View.GONE);
+            DestinationConfirmButton.setVisibility(View.GONE);
+            StupidButton.setVisibility(View.GONE);
+            toStats.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(MapViewActivity.this, GameOverView.class));
+                }
+            });
+        }
 
     }
 
