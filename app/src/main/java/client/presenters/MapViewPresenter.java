@@ -8,6 +8,7 @@ import java.util.Observer;
 
 import client.ClientFacade;
 import client.StateClasses.ClientState;
+import client.StateClasses.DrawDestinationCardState;
 import client.interfaces.IMapPresenter;
 import client.views.MapViewActivity;
 import shared.CardColor;
@@ -25,30 +26,35 @@ public class MapViewPresenter implements Observer, IMapPresenter
     MapViewActivity view;
     ClientFacade client;
 
+
     public MapViewPresenter(MapViewActivity act)
     {
         view = act;
         client = new ClientFacade();
         client.setObserver(this);
-
     }
+
     public void update(Observable o, Object arg)
     {
         setDestinationBox();
         setPlayerCardViews();
         drawRoutes();
+        setDestinationCardVisiblity();
 
         view.setStupidButtonText(client.next_cmd);
     }
 
+    public void setDestinationCardVisiblity()
+    {
+        boolean visible = client.shouldShowDestinationCard();
+        view.setDestinationCardsAcceptanceVisibility(visible);
+    }
 
     public void drawRoutes()
     {
         RoutesList routes = client.getRoutesList();
         view.drawRoutes(routes);
     }
-
-
 
     public void setPlayerCardViews()
     {
@@ -136,6 +142,9 @@ public class MapViewPresenter implements Observer, IMapPresenter
     {
         Route selected_route = client.getRouteByClick(click);
         view.setSelectedRoute(selected_route);
+        boolean canClaim = client.canClaimRoute(selected_route);
+        view.setCanClaimSelected(canClaim);
+        update(null,null);
     }
 
     public void claimRouteButtonPressed()
@@ -144,8 +153,7 @@ public class MapViewPresenter implements Observer, IMapPresenter
         if(selected == null)
             return;
         ClientState state = client.getCurrentState();
-        List<CardColor> hand = client.getPlayerCards();
-        state.ClaimRouteButtonClicked(selected, hand);
+        state.ClaimRouteButtonClicked(selected);
     }
 
     public void drawDestinationCardButtonPressed()
@@ -154,4 +162,27 @@ public class MapViewPresenter implements Observer, IMapPresenter
         state.DrawDestinationCardButtonClicked();
     }
 
+    public void destinationCard1ButtonClicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.DestinationCard1Clicked();
+    }
+
+    public void destinationCard2ButtonClicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.DestinationCard2Clicked();
+    }
+
+    public void destinationCard3ButtonClicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.DestinationCard3Clicked();
+    }
+
+    public void destinationConfirmButtonClicked()
+    {
+        ClientState state = client.getCurrentState();
+        state.DestinationConfirmedClicked();
+    }
 }

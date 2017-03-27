@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.StateClasses.ClientState;
+import client.StateClasses.DrawDestinationCardState;
 import client.StateClasses.MyTurnState;
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
@@ -256,5 +257,26 @@ public class ClientModel extends Observable
     public CardColor getFaceUpCard(int cardIndex)
     {
         return currentGame.getFaceUpCard(cardIndex);
+    }
+
+    public boolean shouldShowDestinationCard()
+    {
+        return state instanceof DrawDestinationCardState;
+    }
+
+    public boolean canClaimRoute(Route desiredRoute)
+    {
+        if(desiredRoute == null)
+            return false;
+        List<CardColor> hand = getThis_player().getTrainCards();
+        int count = 0;
+        for(int i = 0; i < hand.size(); i++)
+        {
+            if(hand.get(i) == desiredRoute.color)
+            {
+                count++;
+            }
+        }
+        return count >= desiredRoute.length;
     }
 }

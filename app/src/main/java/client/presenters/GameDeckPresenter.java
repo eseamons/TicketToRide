@@ -150,7 +150,7 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
     public void FaceUp2Clicked()
     {
         ClientState state = client.getCurrentState();
-        state.FaceUp1Clicked();
+        state.FaceUp2Clicked();
     }
 
     public void FaceUp3Clicked()

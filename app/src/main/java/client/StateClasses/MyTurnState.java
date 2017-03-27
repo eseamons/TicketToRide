@@ -28,7 +28,7 @@ public class MyTurnState extends ClientState
 
     public void ClaimRouteButtonClicked(Route desiredRoute, List<CardColor> hand)
     {
-        if(canClaimRoute(desiredRoute, hand))
+        if(client.canClaimRoute(desiredRoute))
         {
             client.ClaimRoute(desiredRoute);
         }
@@ -39,18 +39,7 @@ public class MyTurnState extends ClientState
 
     }
 
-    public boolean canClaimRoute(Route desiredRoute, List<CardColor> hand)
-    {
-        int count = 0;
-        for(int i = 0; i < hand.size(); i++)
-        {
-            if(hand.get(i) == desiredRoute.color)
-            {
-                count++;
-            }
-        }
-        return count >= desiredRoute.length;
-    }
+
 
     public void DeckCardClicked()
     {

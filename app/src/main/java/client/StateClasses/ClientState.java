@@ -30,7 +30,7 @@ public abstract class ClientState {
 
     }
 
-    public void ClaimRouteButtonClicked(Route desiredRoute, List<CardColor> hand) {
+    public void ClaimRouteButtonClicked(Route desiredRoute) {
 
     }
 
@@ -58,4 +58,6 @@ public abstract class ClientState {
     {
 
     }
+
+
 }

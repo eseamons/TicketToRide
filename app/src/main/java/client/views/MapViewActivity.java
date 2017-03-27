@@ -54,6 +54,12 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     TextView wildNum;
 
     Route selectedRoute = null;
+    boolean canClaimSelected = false;
+
+    public void setCanClaimSelected(boolean set)
+    {
+        canClaimSelected = set;
+    }
 
     public Route getSelectedRoute()
     {
@@ -118,6 +124,9 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     Button claimRouteButton;
     Button drawDestinationCardButton;
 
+    Button[] DestinationCardButton;
+    Button DestinationConfirmButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -180,6 +189,41 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         });
         presenter = new MapViewPresenter(this);
 
+        DestinationCardButton = new Button[3];
+
+        DestinationCardButton[0] = (Button) findViewById(R.id.destinationCard1Button);
+        DestinationCardButton[0].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.destinationCard1ButtonClicked();
+            }
+        });
+
+        DestinationCardButton[1] = (Button) findViewById(R.id.destinationCard2Button);
+        DestinationCardButton[1].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.destinationCard2ButtonClicked();
+            }
+        });
+
+        DestinationCardButton[2] = (Button) findViewById(R.id.destinationCard3Button);
+        DestinationCardButton[2].setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.destinationCard3ButtonClicked();
+            }
+        });
+
+        DestinationConfirmButton = (Button) findViewById(R.id.ConfirmDestinationButton);
+        DestinationConfirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.destinationConfirmButtonClicked();
+            }
+        });
+
+
     }
 
     public void setStupidButtonText(String set)
@@ -212,7 +256,10 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         //draw the selected route as white or pink depending on if they can claim it
         if(selectedRoute != null)
         {
-            paint.setColor(Color.WHITE);
+            if(canClaimSelected)
+                paint.setColor(Color.WHITE);
+            else
+                paint.setColor(Color.MAGENTA);
             paint.setStrokeWidth(10);
             canvas.drawLine(selectedRoute.start_x,selectedRoute.start_y,selectedRoute.end_x,selectedRoute.end_y,paint);
         }
@@ -289,6 +336,22 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         {
             Log.d("SPACE", "ROUTE END");
         }
+    }
+
+
+    public void setDestinationCardsAcceptanceVisibility(boolean vis)
+    {
+        for(int i = 0; i < DestinationCardButton.length; i++)
+        {
+            if(!vis)
+                DestinationCardButton[i].setVisibility(View.INVISIBLE);
+            else
+                DestinationCardButton[i].setVisibility(View.VISIBLE);
+        }
+        if(!vis)
+            DestinationConfirmButton.setVisibility(View.INVISIBLE);
+        else
+            DestinationConfirmButton.setVisibility(View.VISIBLE);
     }
 
 

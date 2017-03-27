@@ -340,8 +340,8 @@ public class ClientFacade implements IClient{
     public void runAnimation()
     {
         //only to be used while initialization works
-        //if(time == -1)
-        //   initializeAnimation();
+        if(time == -1)
+           initializeAnimation();
         // ^ ^ ^
 
         Game game = clientModel.getCurrent_game();
@@ -451,5 +451,15 @@ public class ClientFacade implements IClient{
     public void setClientState(ClientState state)
     {
         clientModel.setClientState(state);
+    }
+
+    public boolean shouldShowDestinationCard()
+    {
+        return clientModel.shouldShowDestinationCard();
+    }
+
+    public boolean canClaimRoute(Route desiredRoute)
+    {
+        return clientModel.canClaimRoute(desiredRoute);
     }
 }

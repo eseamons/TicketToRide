@@ -465,13 +465,14 @@ public class RoutesList {
 
     }
 
-    //uses an algorithm to determine if a point is within tolerance (4) units of a line
+    //uses an algorithm to determine if a point is within tolerance (8) units of a line
     public boolean contains(Point start, Point end, Point click)
     {
+        double tolerance = 8;
 
         double width = Math.abs( start.x - end.x );
         double height = Math.abs( start.y - end.y );
-        double UL_y, UL_x;
+        double UL_y, UL_x, UR_x, UR_y;
         if(start.x < end.x)
             UL_x = start.x;
         else
@@ -480,11 +481,17 @@ public class RoutesList {
             UL_y = start.y;
         else
             UL_y = end.y;
-        if(click.x < UL_x || click.x > UL_x + width || click.y < UL_y || click.y > UL_y + height) //make sure its in the box
+
+        //finds the edges of the box aroudn the route
+        UR_x = UL_x + width + tolerance;
+        UR_y = UL_y + height + tolerance;
+        UL_x -= tolerance;
+        UL_y -= tolerance;
+        if(click.x < UL_x || click.x > UR_x || click.y < UL_y || click.y > UR_y) //make sure its in the box
             return false;
 
 
-        double tolerance = 4;
+
 
         double x2 = end.x;
         double x1 = start.x;
