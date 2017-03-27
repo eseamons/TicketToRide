@@ -22,42 +22,47 @@ public abstract class ClientState {
 
     }
 
-    public void DestinationConfirmedClicked() {
+    public String DestinationConfirmedClicked() {
+        return "";
+    }
+
+    public String DrawDestinationCardButtonClicked() {
+        return defaultResponse();
+    }
+
+    public String ClaimRouteButtonClicked(Route desiredRoute) {
+        return "";
+    }
+
+    public String DeckCardClicked() {
+        return defaultResponse();
 
     }
 
-    public void DrawDestinationCardButtonClicked() {
-
+    public String FaceUp0Clicked() {
+        return defaultResponse();
     }
 
-    public void ClaimRouteButtonClicked(Route desiredRoute) {
-
+    public String FaceUp1Clicked() {
+        return defaultResponse();
     }
 
-    public void DeckCardClicked() {
-
+    public String FaceUp2Clicked() {
+        return defaultResponse();
     }
 
-    public void FaceUp0Clicked() {
-
+    public String FaceUp3Clicked() {
+        return defaultResponse();
     }
 
-    public void FaceUp1Clicked() {
-
-    }
-
-    public void FaceUp2Clicked() {
-
-    }
-
-    public void FaceUp3Clicked() {
-
-    }
-
-    public void FaceUp4Clicked()
+    public String FaceUp4Clicked()
     {
-
+        return defaultResponse();
     }
 
+    public String defaultResponse()
+    {
+        return "";
+    }
 
 }

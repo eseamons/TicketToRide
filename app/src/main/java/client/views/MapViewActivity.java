@@ -137,13 +137,70 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         map.setOnTouchListener(this);
 
         purpleNum = (TextView) findViewById(R.id.purpleNum1);
+        purpleNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("YUP, THAT TASTED PURPLE");
+                presenter.setDesiredToUseCardColor(CardColor.PURPLE);
+            }
+        });
+
         whiteNum = (TextView) findViewById(R.id.whiteNum);
+        whiteNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.setDesiredToUseCardColor(CardColor.WHITE);
+            }
+        });
+
         blueNum = (TextView) findViewById(R.id.blueNum);
+        blueNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.setDesiredToUseCardColor(CardColor.BLUE);
+            }
+        });
+
         yellowNum = (TextView) findViewById(R.id.yellowNum);
+        yellowNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.setDesiredToUseCardColor(CardColor.YELLOW);
+            }
+        });
+
         orangeNum = (TextView) findViewById(R.id.orangeNum);
+        orangeNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.setDesiredToUseCardColor(CardColor.ORANGE);
+            }
+        });
+
         blackNum = (TextView) findViewById(R.id.blackNum);
+        blackNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.setDesiredToUseCardColor(CardColor.BLACK);
+            }
+        });
+
         redNum = (TextView) findViewById(R.id.redNum);
+        redNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.setDesiredToUseCardColor(CardColor.RED);
+            }
+        });
+
         greenNum = (TextView) findViewById(R.id.greenNum);
+        greenNum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.setDesiredToUseCardColor(CardColor.GREEN);
+            }
+        });
+
         wildNum = (TextView) findViewById(R.id.wildNum);
 
         destView = (TextView) findViewById(R.id.map_destinationView);
@@ -222,6 +279,8 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
                 presenter.destinationConfirmButtonClicked();
             }
         });
+
+        setDestinationCardsAcceptanceVisibility(false);
 
 
     }
@@ -352,6 +411,19 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             DestinationConfirmButton.setVisibility(View.INVISIBLE);
         else
             DestinationConfirmButton.setVisibility(View.VISIBLE);
+    }
+
+    public void setDestinationCardText(DestinationCard[] dests, boolean[] acceptance)
+    {
+        for(int i = 0; i < dests.length; i++)
+        {
+            String text = dests[i].toString();
+            if(acceptance[i])
+                text += " (KEEP)";
+            else
+                text += " (DISCARD)";
+            DestinationCardButton[i].setText(text);
+        }
     }
 
 

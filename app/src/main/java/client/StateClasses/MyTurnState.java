@@ -19,32 +19,33 @@ public class MyTurnState extends ClientState
         client = new ClientFacade();
     }
 
-    public void DrawDestinationCardButtonClicked()
+    public String DrawDestinationCardButtonClicked()
     {
         client.retrieve3DestinationCards();
         client.setClientState(new DrawDestinationCardState());
-        //set state to DrawDestinationCardState
+        return "";
     }
 
-    public void ClaimRouteButtonClicked(Route desiredRoute, List<CardColor> hand)
+    public String ClaimRouteButtonClicked(Route desiredRoute)
     {
         if(client.canClaimRoute(desiredRoute))
         {
             client.ClaimRoute(desiredRoute);
+            client.setClientState(new NotMyTurnState());
+            return "";
         }
         else
         {
-            //TODO create a toast saying not enough cards
+            return "Not enough cards to claim route";
         }
 
     }
 
-
-
-    public void DeckCardClicked()
+    public String DeckCardClicked()
     {
         client.drawDeckCard();
         client.setClientState(new DrawCardState());
+        return "";
     }
 
     public boolean isWild(int index)
@@ -52,44 +53,43 @@ public class MyTurnState extends ClientState
         return client.getFaceUpCard(index) == CardColor.WILD;
     }
 
-    public void templateFaceUpClicked(int cardIndex)
+    public String templateFaceUpClicked(int cardIndex)
     {
         client.drawFaceUpCard(cardIndex);
         if(isWild(cardIndex))
         {
             client.setClientState(new NotMyTurnState());
-            //set to NotMyTurnState
         }
         else
         {
             client.setClientState(new DrawCardState());
-            //set to DrawCardState
         }
+        return "";
     }
 
-    public void FaceUp0Clicked()
+    public String FaceUp0Clicked()
     {
-        templateFaceUpClicked(0);
+        return templateFaceUpClicked(0);
     }
 
-    public void FaceUp1Clicked()
+    public String FaceUp1Clicked()
     {
-        templateFaceUpClicked(1);
+        return templateFaceUpClicked(1);
     }
 
-    public void FaceUp2Clicked()
+    public String FaceUp2Clicked()
     {
-        templateFaceUpClicked(2);
+        return templateFaceUpClicked(2);
     }
 
-    public void FaceUp3Clicked()
+    public String FaceUp3Clicked()
     {
-        templateFaceUpClicked(3);
+        return templateFaceUpClicked(3);
     }
 
-    public void FaceUp4Clicked()
+    public String FaceUp4Clicked()
     {
-        templateFaceUpClicked(4);
+        return templateFaceUpClicked(4);
     }
 
 }

@@ -9,46 +9,78 @@ import client.ClientFacade;
 public class DrawDestinationCardState extends ClientState {
 
     ClientFacade client = new ClientFacade();
-    boolean[] destinationCardsAcceptance;
 
     public DrawDestinationCardState()
     {
-        destinationCardsAcceptance = new boolean[3];
-        for(int i = 0; i < destinationCardsAcceptance.length; i++)
-        {
-            destinationCardsAcceptance[i] = true;
-        }
-        //view.setDestinationCardsAcceptanceVisibility(true);
+        client.intializeDestinationCardsAcceptance();
     }
 
 
-    public void DestinationConfirmedClicked()
+    public String DestinationConfirmedClicked()
     {
-        //TODO ask the client facade to keep desired ones and discared others
-        client.setClientState(new NotMyTurnState());
+        if(client.canConfirmDestinationCards())
+        {
+            client.setClientState(new NotMyTurnState());
+            client.confirmDestinationCards();
+            return "";
+        }
+        else
+        {
+            return "Must keep at least 1 destination card and 2 if it is the beginning of game";
+        }
+
     }
 
     @Override
     public void DestinationCard1Clicked()
     {
-        toggleDestinationCardAcceptance(0);
+        client.toggleDestinationCardsAcceptance(0);
     }
 
 
     public void DestinationCard2Clicked()
     {
-        toggleDestinationCardAcceptance(1);
+        client.toggleDestinationCardsAcceptance(1);
     }
 
     public void DestinationCard3Clicked()
     {
-        toggleDestinationCardAcceptance(2);
+        client.toggleDestinationCardsAcceptance(2);
     }
 
-    public void toggleDestinationCardAcceptance(int i)
+    public String DrawDestinationCardButtonClicked() {
+        return "You have already drawn the destination cards";
+    }
+
+    public String DeckCardClicked()
     {
-        destinationCardsAcceptance[i] = !destinationCardsAcceptance[i];
+        return defaultDrawCardResponse();
     }
 
+    public String FaceUp0Clicked() {
+        return defaultDrawCardResponse();
+    }
+
+    public String FaceUp1Clicked() {
+        return defaultDrawCardResponse();
+    }
+
+    public String FaceUp2Clicked() {
+        return defaultDrawCardResponse();
+    }
+
+    public String FaceUp3Clicked() {
+        return defaultDrawCardResponse();
+    }
+
+    public String FaceUp4Clicked()
+    {
+        return defaultDrawCardResponse();
+    }
+
+    public String defaultDrawCardResponse()
+    {
+        return "You cannot draw train cards while selected your destination cards";
+    }
 
 }
