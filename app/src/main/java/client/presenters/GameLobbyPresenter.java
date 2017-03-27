@@ -77,4 +77,8 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
         return client.beginGame();
     }
 
+    public void beginNonMainPlayerGame(){
+        GameLobbyView.getInstance().clickTheStartButton();
+    }
+
 }

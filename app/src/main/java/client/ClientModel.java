@@ -1,5 +1,7 @@
 package client;
 
+import android.widget.Button;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -160,10 +162,13 @@ public class ClientModel extends Observable
 
         if(gameID == currentGameLobby.getID())
         {
-            //currentGame = new Game(currentGameLobby);
+            currentGame = new Game(currentGameLobby);
+            GameLobbyPresenter.getInstance().beginNonMainPlayerGame();
             //TODO: stop poller from getting game lobby commands and start get game commands
             //poller.stopGameLobbyListTimer();
             //poller.getGameCommands();
+
+
 
         }
         removeGameLobbyByID(gameID);

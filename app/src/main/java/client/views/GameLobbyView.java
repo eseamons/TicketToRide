@@ -222,4 +222,9 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         return chatArray;
     }
 
+    public void clickTheStartButton(){
+        Poller.getInstance().stopLobbyListTimer();
+        startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));
+    }
+
 }
