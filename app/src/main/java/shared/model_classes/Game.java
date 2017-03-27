@@ -2,6 +2,7 @@ package shared.model_classes;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import shared.CardColor;
@@ -17,7 +18,7 @@ public class Game {
     private int gameID;
     private PlayersList players;
     private TrainCardDeck trainCardDeck;
-    private List<CardColor> faceUpCards;
+    private CardColor[] faceUpCards;
     private RoutesList routes;
     private DestinationCardsList destinationCardsList;
     private List<Command> commands;
@@ -31,7 +32,7 @@ public class Game {
         gameID = gameLobby.getID();
         players = new PlayersList(gameLobby.getPlayers());
         trainCardDeck = TrainCardDeck.getInstance();
-        faceUpCards = new ArrayList<CardColor>(5);
+        faceUpCards = new CardColor[5];
         destinationCardsList = new DestinationCardsList();
         routes = new RoutesList();
         currentPlayer = 0;
@@ -39,19 +40,18 @@ public class Game {
 
     public void setFaceUpCard(int index, CardColor c)
     {
-        if(faceUpCards.size() > index) faceUpCards.remove(index);
-        faceUpCards.add(index,c);
+        faceUpCards[index] =c;
     }
 
     public CardColor getFaceUpCard(int cardIndex)
     {
-        return faceUpCards.get(cardIndex);
+        return faceUpCards[cardIndex];
     }
 
 
     public List<CardColor> getFaceUpCards()
     {
-        return faceUpCards;
+        return Arrays.asList(faceUpCards);
     }
 
     public int getCurrentPlayer() {

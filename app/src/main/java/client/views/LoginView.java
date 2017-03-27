@@ -1,12 +1,14 @@
 package client.views;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.erics.tickettoride.R;
@@ -15,6 +17,8 @@ import client.interfaces.ILoginView;
 import client.presenters.LoginPresenter;
 
 public class LoginView extends AppCompatActivity implements ILoginView {
+
+    private TextView ttrTitle;
 
     private EditText loginUN;
     private EditText loginPW;
@@ -41,6 +45,10 @@ public class LoginView extends AppCompatActivity implements ILoginView {
         setContentView(R.layout.activity_login);
 
         instance = this;
+
+        ttrTitle = (TextView) findViewById(R.id.ttrTitle);
+        Typeface HOWDY_font = Typeface.createFromAsset(getAssets(), "fonts/RioGrande.ttf");
+        ttrTitle.setTypeface(HOWDY_font);
 
         loginUN = (EditText) findViewById(R.id.editText3);
         loginPW = (EditText) findViewById(R.id.editText4);

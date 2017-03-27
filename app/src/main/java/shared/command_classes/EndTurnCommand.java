@@ -16,7 +16,6 @@ public class EndTurnCommand extends Command{
     public Result execute()
     {
         int gameID = ((EndTurnCommandData) info).getGameID();
-        String auth = ((EndTurnCommandData) info).getAuth();
         boolean success = ServerFacade.getInstance().endTurn(gameID, auth);
         return new Result(success, auth);
     }

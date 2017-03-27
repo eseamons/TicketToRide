@@ -67,6 +67,8 @@ public interface IClient {
     methods needed for game play
     client methods are followed by thier counterpart needed for receiving
 */
+    public Player getThisPlayer();
+
     boolean endTurn();
 
     public void aTurnEnded(int gameID);

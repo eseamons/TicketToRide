@@ -8,6 +8,15 @@ import java.util.TimerTask;
 public class Poller
 {
     Timer LobbyListTimer = new Timer();
+    Timer GameCommandTimer = new Timer();
+    static Poller instance = new Poller();
+
+    private Poller(){}
+
+    public static Poller getInstance() {
+        return  instance;
+    }
+
     public void runGetLobbyCommands()
     {
 
@@ -22,19 +31,21 @@ public class Poller
         }, 1, 1000);
     }
 
-
     public void stopLobbyListTimer()
-    { LobbyListTimer.cancel();}
+    { if(LobbyListTimer != null)
+        LobbyListTimer.cancel();
+    }
 
     public void runGetGameCommands()
     {
-        LobbyListTimer.schedule(new TimerTask() {
+        //GameCommandTimer = new Timer();
+        GameCommandTimer.schedule(new TimerTask() {
             @Override
             public void run() {
                 GamePolling gamePoller = new GamePolling();
                 gamePoller.execute();
             }
-        }, 1, 1);
+        }, 1, 1000);
     }
 
 
@@ -69,7 +80,6 @@ public class Poller
     public class GamePolling extends AsyncTask<Void, Void, Void>
     {
 
-        //this gets all the info from the server(MODEL DOES NOT UPDATE)
         @Override
         protected Void doInBackground(Void... params)
         {
@@ -84,9 +94,8 @@ public class Poller
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             ClientModel clientModel = ClientModel.getInstance();
-            if(clientModel.getListOfLobbies().size() > 0) {
                 clientModel.update();
-            }
+
         }
     }
 }

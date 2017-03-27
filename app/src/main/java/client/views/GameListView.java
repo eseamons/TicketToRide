@@ -101,7 +101,7 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
             }
         });
 
-        Poller p = new Poller();
+        Poller p = Poller.getInstance();
         p.runGetLobbyCommands();
 
     }
@@ -138,8 +138,6 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
 
         mAdapter = new RecyclerAdapter(availableGames);
         mRecyclerView.setAdapter(mAdapter);
-
-
      }
 
      public void SwitchToGameLobby()

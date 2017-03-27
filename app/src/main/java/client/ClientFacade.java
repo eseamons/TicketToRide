@@ -118,6 +118,8 @@ public class ClientFacade implements IClient{
 /*
     methods needed for GameLobby View
 */
+
+
     @Override
     public List<Player> getPlayers() {
         return clientModel.getCurrent_game_lobby().getPlayers();
@@ -179,6 +181,14 @@ public class ClientFacade implements IClient{
     client methods are followed by their counterpart needed for receiving
 */
 
+
+    @Override
+    public Player getThisPlayer()
+    {
+        return clientModel.getThis_player();
+    }
+
+
     @Override
     public ArrayList<String> getChat() {
         return (ArrayList) clientModel.getCurrent_game().getChat();
@@ -192,7 +202,7 @@ public class ClientFacade implements IClient{
 
     public void getNewGameCommands() {
         ServerProxy serverProxy = ServerProxy.getInstance();
-        int lastCommand = clientModel.getLastCommand();
+        int lastCommand = clientModel.getLastGameCommand();
         String auth = clientModel.getAuthorization();
 
         List<Command> listOfCommands = serverProxy.getNewGameCommands(lastCommand, auth);
@@ -200,7 +210,6 @@ public class ClientFacade implements IClient{
         //Return was not in brackets... did this fix it?
         if(listOfCommands == null)
         {return;}
-
 
         for(int i = 0; i < listOfCommands.size(); i++)
         {
@@ -435,7 +444,7 @@ public class ClientFacade implements IClient{
 
 
     public void setFaceUpCard(int gameID, CardColor card, int cardIndex) {
-            clientModel.SetFaceUpCard(card, cardIndex);
+        clientModel.SetFaceUpCard(card, cardIndex);
     }
 
     public CardColor getFaceUpCard(int cardIndex)

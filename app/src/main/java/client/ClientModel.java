@@ -179,7 +179,7 @@ public class ClientModel extends Observable
     public int getLastGameCommand(){
         if(gameCommandList.size() == 0)
         {return -1;}
-        return ((Command)command_list.get(command_list.size()-1)).getCmdID();
+        return ((Command)gameCommandList.get(gameCommandList.size()-1)).getCmdID();
     }
 
     public List<Command> getGameCommandList(){

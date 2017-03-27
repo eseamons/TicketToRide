@@ -47,7 +47,7 @@ public class ServerProxy implements IServer{
 
     //CLASS INVARIANT - auth should be a valid authorization code
     private static ServerProxy instance = null;
-    String urlpath = "http://10.24.70.91:8080/command";
+    String urlpath = "http://10.0.2.2:8080/command";
     //String urlpath = "http://192.168.253.175:8080/command";
 
     //precondition - none
@@ -301,7 +301,7 @@ public class ServerProxy implements IServer{
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
         if(r != null && r.isSuccess())
         {
-            GetNewCommandsCommandData newCmdData = (GetNewCommandsCommandData) r.getInfo();
+            GetNewGameCommandsCommandData newCmdData = (GetNewGameCommandsCommandData) r.getInfo();
             return Arrays.asList(newCmdData.getCmds());
         }
         else
