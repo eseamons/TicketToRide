@@ -101,7 +101,7 @@ public class ClientModel extends Observable
 
     public void lobbySetPlayer_num()
     {
-        player_num = currentGameLobby.NumOfCurrentPlayers() - 1;
+        player_num = currentGameLobby.NumOfCurrentPlayers();
     }
 
     public ClientState getCurrentState()
@@ -114,12 +114,24 @@ public class ClientModel extends Observable
         state = new_state;
     }
 
-    public void setThis_Player()
+//    public void setThis_Player()
+//    {
+//        //Player p = new Player();
+//        //p.setAccount(account);
+//        //this_player = p;
+//        this_player = currentGame.getPlayerbyIndex(player_num);
+//    }
+
+    public void setPlayerThroughAuthCode()
     {
-        //Player p = new Player();
-        //p.setAccount(account);
-        //this_player = p;
-        this_player = currentGame.getPlayerbyIndex(player_num);
+        for(int i = 0; i < currentGameLobby.getPlayers().size(); i++)
+        {
+            Player p = currentGameLobby.getPlayer(i);
+            if(p.getPlayerAuthCode().equals(getAuthorization()))
+            {
+                this_player = p;
+            }
+        }
     }
 
     public void loginSetThis_Player()
@@ -210,6 +222,7 @@ public class ClientModel extends Observable
 
         if(gameID == currentGameLobby.getID())
         {
+            setPlayerThroughAuthCode();
             currentGame = new Game(currentGameLobby);
             GameLobbyPresenter.getInstance().beginNonMainPlayerGame();
             //TODO: stop poller from getting game lobby commands and start get game commands
