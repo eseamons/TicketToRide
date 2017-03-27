@@ -155,12 +155,6 @@ public class ServerModel implements IServer{
 
                 Account acc = accountList.getAccountByAuthCode(auth);
 
-
-
-
-
-
-
                 int playerIndex = returnGameLobby.addNewPlayers(acc);
                 Player p = returnGameLobby.getPlayers().get(playerIndex);
                 playerAuthMap.put(auth, p);
@@ -169,7 +163,6 @@ public class ServerModel implements IServer{
                 int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
                 gameLobbyList.incrementCurrentLobbyCommandID();
                 Command cmd = new JoinGameCommand();
-
 
                 JoinGameCommandData cmdData = new JoinGameCommandData();
                 cmdData.setGameLobbyID(gameLobbyID);

@@ -1,6 +1,7 @@
 package client.presenters;
 
 import android.graphics.Point;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Observable;
@@ -27,13 +28,17 @@ public class MapViewPresenter implements Observer, IMapPresenter
     MapViewActivity view;
     ClientFacade client;
 
-
     public MapViewPresenter(MapViewActivity act)
     {
         view = act;
         client = new ClientFacade();
         client.setObserver(this);
         Poller.getInstance().runGetGameCommands();
+    }
+
+    public void setDesiredToUseCardColor(CardColor color)
+    {
+        client.setToUseColor(color);
     }
 
     public void update(Observable o, Object arg)
@@ -50,6 +55,12 @@ public class MapViewPresenter implements Observer, IMapPresenter
     {
         boolean visible = client.shouldShowDestinationCard();
         view.setDestinationCardsAcceptanceVisibility(visible);
+        if(visible)
+        {
+            boolean[] acceptance = client.getDestinationCardsAcceptance();
+            DestinationCard[] dests = client.getChoosableDestinationCards();
+            view.setDestinationCardText(dests, acceptance);
+        }
     }
 
     public void drawRoutes()
@@ -152,39 +163,71 @@ public class MapViewPresenter implements Observer, IMapPresenter
     public void claimRouteButtonPressed()
     {
         Route selected = view.getSelectedRoute();
-        if(selected == null)
+        if(selected == null  && selected.ownership != 0)
+        {
+            printToast("No route selected");
             return;
+        }
         ClientState state = client.getCurrentState();
-        state.ClaimRouteButtonClicked(selected);
+        String text = state.ClaimRouteButtonClicked(selected);
+        if(text != "")
+        {
+            printToast(text);
+        }
+
     }
 
     public void drawDestinationCardButtonPressed()
     {
         ClientState state = client.getCurrentState();
-        state.DrawDestinationCardButtonClicked();
+        String text = state.DrawDestinationCardButtonClicked();
+        if(text != "")
+        {
+            printToast(text);
+        }
+        setDestinationCardVisiblity();
     }
 
     public void destinationCard1ButtonClicked()
     {
-        ClientState state = client.getCurrentState();
-        state.DestinationCard1Clicked();
+        templateDestinationCardButtonClicked(1);
     }
 
     public void destinationCard2ButtonClicked()
     {
-        ClientState state = client.getCurrentState();
-        state.DestinationCard2Clicked();
+        templateDestinationCardButtonClicked(2);
     }
 
     public void destinationCard3ButtonClicked()
     {
+        templateDestinationCardButtonClicked(3);
+    }
+
+    public void templateDestinationCardButtonClicked(int n)
+    {
         ClientState state = client.getCurrentState();
-        state.DestinationCard3Clicked();
+        switch(n)
+        {
+            case 1: state.DestinationCard1Clicked(); break;
+            case 2: state.DestinationCard2Clicked(); break;
+            case 3: state.DestinationCard3Clicked(); break;
+        }
+        setDestinationCardVisiblity();
     }
 
     public void destinationConfirmButtonClicked()
     {
         ClientState state = client.getCurrentState();
-        state.DestinationConfirmedClicked();
+        String text = state.DestinationConfirmedClicked();
+        if(text != "")
+        {
+            printToast(text);
+        }
+        setDestinationCardVisiblity();
+    }
+
+    public void printToast(String text)
+    {
+        Toast.makeText(view.getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 }

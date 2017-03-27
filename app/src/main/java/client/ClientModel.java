@@ -1,5 +1,7 @@
 package client;
 
+import android.widget.Button;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -46,8 +48,51 @@ public class ClientModel extends Observable
     private int player_num;
     //
     private ClientState state = new MyTurnState();
-    //private RoutesList routes = new RoutesList();
 
+    //when claim a route of no color, it will use this color to claim the route
+    private CardColor desiredToUseColor = CardColor.PURPLE;
+    //private RoutesList routes = new RoutesList();
+    private boolean[] destinationCardsAcceptance;
+
+    //this array
+    public void intializeDestinationCardsAcceptance()
+    {
+        destinationCardsAcceptance = new boolean[3];
+        for(int i = 0; i < destinationCardsAcceptance.length; i++)
+        {
+            destinationCardsAcceptance[i] = true;
+        }
+    }
+
+
+    //change this int to 1 the first time confirm destination cards is called
+    //the games rules dictate that the first turn you need to keep 2, but any subsequent time only 1 is required
+    private int MINIMUM_REQUIRED_DESTINATION_CARDS_NEEDED_TO_CONFIRM = 2;
+    public boolean canConfirmDestinationCards()
+    {
+        int count = 0;
+        for(int i = 0; i < destinationCardsAcceptance.length; i++)
+        {
+            if(destinationCardsAcceptance[i])
+                count++;
+        }
+        return count >= MINIMUM_REQUIRED_DESTINATION_CARDS_NEEDED_TO_CONFIRM;
+    }
+
+    public boolean[] getDestinationCardsAcceptance()
+    {
+        return destinationCardsAcceptance;
+    }
+
+    public void toggleDestinationCardsAcceptance(int n)
+    {
+        destinationCardsAcceptance[n] = !destinationCardsAcceptance[n];
+    }
+
+    public void setDesiredToUseColor(CardColor color)
+    {
+        desiredToUseColor = color;
+    }
 
     public void gameSetPlayer_num()
     {
@@ -139,6 +184,11 @@ public class ClientModel extends Observable
         gameLobbyList.getGameLobbyByID(gameID).addNewPlayers(account);
     }
 
+    public void setCurrentGameByID(int gameID)
+    {
+        currentGameLobby = gameLobbyList.getGameLobbyByID(gameID);
+    }
+
     public GameLobby getCurrent_game_lobby() {
         return currentGameLobby;
     }
@@ -160,10 +210,13 @@ public class ClientModel extends Observable
 
         if(gameID == currentGameLobby.getID())
         {
-            //currentGame = new Game(currentGameLobby);
+            currentGame = new Game(currentGameLobby);
+            GameLobbyPresenter.getInstance().beginNonMainPlayerGame();
             //TODO: stop poller from getting game lobby commands and start get game commands
             //poller.stopGameLobbyListTimer();
             //poller.getGameCommands();
+
+
 
         }
         removeGameLobbyByID(gameID);
@@ -268,15 +321,21 @@ public class ClientModel extends Observable
     {
         if(desiredRoute == null)
             return false;
+        CardColor desiredColor = desiredRoute.color;
+        if(desiredColor == CardColor.WILD)
+            desiredColor = desiredToUseColor;
         List<CardColor> hand = getThis_player().getTrainCards();
         int count = 0;
         for(int i = 0; i < hand.size(); i++)
         {
-            if(hand.get(i) == desiredRoute.color)
+            CardColor current_color = hand.get(i);
+            if(current_color == desiredColor || current_color == CardColor.WILD)
             {
                 count++;
             }
         }
         return count >= desiredRoute.length;
     }
+
+
 }
