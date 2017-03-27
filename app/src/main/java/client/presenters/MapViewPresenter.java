@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.ClientFacade;
+import client.Poller;
 import client.StateClasses.ClientState;
 import client.StateClasses.DrawDestinationCardState;
 import client.interfaces.IMapPresenter;
@@ -32,6 +33,7 @@ public class MapViewPresenter implements Observer, IMapPresenter
         view = act;
         client = new ClientFacade();
         client.setObserver(this);
+        Poller.getInstance().runGetGameCommands();
     }
 
     public void update(Observable o, Object arg)
