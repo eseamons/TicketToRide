@@ -2,6 +2,7 @@ package client.StateClasses;
 
 import client.ClientFacade;
 import shared.CardColor;
+import shared.model_classes.Route;
 
 /**
  * Created by Michaels on 3/16/2017.
@@ -16,9 +17,11 @@ public class DrawCardState extends ClientState
         client = new ClientFacade();
     }
 
-    public void DeckCardClicked()
+    public String DeckCardClicked()
     {
         client.drawDeckCard();
+        client.setClientState(new NotMyTurnState());
+        return "";
     }
 
     public boolean isWild(int index)
@@ -26,42 +29,51 @@ public class DrawCardState extends ClientState
         return client.getFaceUpCard(index) == CardColor.WILD;
     }
 
-    public void templateFaceUpClicked(int cardIndex)
+    public String templateFaceUpClicked(int cardIndex)
     {
         if(!isWild(cardIndex))
         {
             client.drawFaceUpCard(cardIndex);
-            //make client NotMyTurnState
             client.setClientState(new NotMyTurnState());
+            return "";
         }
         else
         {
-            //TODO make toast saying cannot draw wild card after drawn 1 card
+            return "Cannot draw a wild after 1 card is already drawn";
         }
     }
 
-    public void FaceUp0Clicked()
+    public String FaceUp0Clicked()
     {
-        templateFaceUpClicked(0);
+        return templateFaceUpClicked(0);
     }
 
-    public void FaceUp1Clicked()
+    public String FaceUp1Clicked()
     {
-        templateFaceUpClicked(1);
+        return templateFaceUpClicked(1);
     }
 
-    public void FaceUp2Clicked()
+    public String FaceUp2Clicked()
     {
-        templateFaceUpClicked(2);
+        return templateFaceUpClicked(2);
     }
 
-    public void FaceUp3Clicked()
+    public String FaceUp3Clicked()
     {
-        templateFaceUpClicked(3);
+        return templateFaceUpClicked(3);
     }
 
-    public void FaceUp4Clicked()
+    public String FaceUp4Clicked()
     {
-        templateFaceUpClicked(4);
+        return templateFaceUpClicked(4);
+    }
+
+    public String DrawDestinationCardButtonClicked() {
+        return "You cannot draw destination cards after drawing a train card";
+    }
+
+    public String ClaimRouteButtonClicked(Route desiredRoute)
+    {
+        return "You cannot claim a route after drawing a train card";
     }
 }

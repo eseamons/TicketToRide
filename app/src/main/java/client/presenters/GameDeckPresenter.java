@@ -2,6 +2,7 @@ package client.presenters;
 
 import android.graphics.Color;
 import android.os.Build;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Observable;
@@ -131,38 +132,60 @@ public class GameDeckPresenter implements IGameDeckPresenter,Observer {
     public void DeckCardClicked()
     {
         ClientState state = client.getCurrentState();
-        state.DeckCardClicked();
+        String text = state.DeckCardClicked();
+        if(text != "")
+        {
+            printToast(text);
+        }
     }
 
 
     public void FaceUp0Clicked()
     {
-        ClientState state = client.getCurrentState();
-        state.FaceUp0Clicked();
+        templateFaceUpClick(0);
     }
 
     public void FaceUp1Clicked()
     {
-        ClientState state = client.getCurrentState();
-        state.FaceUp1Clicked();
+        templateFaceUpClick(1);
     }
 
     public void FaceUp2Clicked()
     {
-        ClientState state = client.getCurrentState();
-        state.FaceUp2Clicked();
+        templateFaceUpClick(2);
     }
 
     public void FaceUp3Clicked()
     {
-        ClientState state = client.getCurrentState();
-        state.FaceUp3Clicked();
+        templateFaceUpClick(3);
     }
 
     public void FaceUp4Clicked()
     {
+        templateFaceUpClick(4);
+    }
+
+    public void templateFaceUpClick(int n)
+    {
         ClientState state = client.getCurrentState();
-        state.FaceUp4Clicked();
+        String text = "";
+        switch(n)
+        {
+            case 0: text = state.FaceUp0Clicked(); break;
+            case 1: text = state.FaceUp1Clicked(); break;
+            case 2: text = state.FaceUp2Clicked(); break;
+            case 3: text = state.FaceUp3Clicked(); break;
+            case 4: text = state.FaceUp4Clicked(); break;
+        }
+        if(text != "")
+        {
+            printToast(text);
+        }
+    }
+
+    public void printToast(String text)
+    {
+        Toast.makeText(view.getApplicationContext(), text, Toast.LENGTH_SHORT).show();
     }
 
 }

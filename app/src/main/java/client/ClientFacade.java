@@ -471,4 +471,48 @@ public class ClientFacade implements IClient{
     {
         return clientModel.canClaimRoute(desiredRoute);
     }
+
+    public void setToUseColor(CardColor color)
+    {
+        clientModel.setDesiredToUseColor(color);
+    }
+
+    public boolean[] getDestinationCardsAcceptance()
+    {
+        return clientModel.getDestinationCardsAcceptance();
+    }
+
+    public void intializeDestinationCardsAcceptance()
+    {
+        clientModel.intializeDestinationCardsAcceptance();
+    }
+
+    public void toggleDestinationCardsAcceptance(int n)
+    {
+        clientModel.toggleDestinationCardsAcceptance(n);
+    }
+
+    //this function returns the 3 destination cards stored in the model which the player can
+    //either keep or discard  this array (or list) is created when the draw destination card command is used
+    public DestinationCard[] getChoosableDestinationCards()
+    {
+        //this returns a dummy atm until this works in the model
+        DestinationCard[] dests = new DestinationCard[3];
+        dests[0] = new DestinationCard("Los Angeles", "New York", 21);
+        dests[1] = new DestinationCard("Duluth", "Houston", 8);
+        dests[2] = new DestinationCard("Sault St Marie", "Nashville", 8);
+        return dests;
+    }
+
+    //TODO this function is called when the destination card choices are confirmed.  The 3 destination Cards should be stored
+    //in the model as well as a boolean array of which cards are to be kept (true) and discarded (false)
+    public void confirmDestinationCards()
+    {
+
+    }
+
+    public boolean canConfirmDestinationCards()
+    {
+        return clientModel.canConfirmDestinationCards();
+    }
 }
