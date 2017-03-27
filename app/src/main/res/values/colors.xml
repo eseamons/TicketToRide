@@ -15,4 +15,11 @@
     <color name="red">#ef0000</color>
     <color name="green">#00b446</color>
     <color name="gray">#808080</color>
+    <color name="gold">#bcad43</color>
+    <color name="silver">#6b7694</color>
+    <color name="bronze3">#b05c36</color>
+    <color name="bronze2">#bf7864</color>
+    <color name="bronze">#996600</color>
+    <color name="tin">#e7e6e2</color>
+    <color name="copper">#cc6724</color>
 </resources>

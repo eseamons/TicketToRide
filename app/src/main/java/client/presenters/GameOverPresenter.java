@@ -1,5 +1,7 @@
 package client.presenters;
 
+import android.content.Intent;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -8,6 +10,8 @@ import java.util.Observer;
 import client.ClientFacade;
 import client.interfaces.IGameOverPresenter;
 import client.views.GameOverView;
+import client.views.GameStatsView;
+import client.views.MapViewActivity;
 import shared.model_classes.Player;
 
 /**

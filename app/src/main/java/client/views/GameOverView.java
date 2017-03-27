@@ -1,5 +1,6 @@
 package client.views;
 
+import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -42,6 +43,8 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
     Button QuitBtn;
     Button MapBtn;
 
+    public boolean GameOver = false;
+
     GameOverPresenter presenter;
 
 
@@ -57,6 +60,8 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_over);
+
+        GameOver = true;
 
         victory = (ImageView) findViewById(R.id.victoryPic);
         defeat = (ImageView) findViewById(R.id.victoryPic);
@@ -89,6 +94,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
             @Override
             public void onClick(View v) {
                 presenter.Quit();
+                startActivity(new Intent(GameOverView.this, GameListView.class));
             }
         });
 
@@ -97,6 +103,9 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
             @Override
             public void onClick(View v) {
                 presenter.ToFinishedMap();
+                Intent intent = new Intent(GameOverView.this, MapViewActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
 

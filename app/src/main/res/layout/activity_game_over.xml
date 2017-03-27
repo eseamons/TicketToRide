@@ -104,7 +104,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/trainyard_in_winter"
         android:orientation="vertical">
 
         <LinearLayout
@@ -127,8 +126,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.3"
                 android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.5"
+                android:shadowRadius="1.6"
                 android:text="1st"
-                android:textSize="52sp" />
+                android:textColor="@color/gold"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player1Name"
@@ -137,7 +142,9 @@
                 android:layout_weight=".8"
                 android:gravity="center"
                 android:text="US Economy"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player1Points"
@@ -146,7 +153,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="911 pts"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -162,8 +171,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.3"
                 android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.5"
+                android:shadowRadius="1.6"
                 android:text="2nd"
-                android:textSize="52sp" />
+                android:textColor="@color/silver"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player2Name"
@@ -172,7 +187,9 @@
                 android:layout_weight=".8"
                 android:gravity="center"
                 android:text="Keryx"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player2Points"
@@ -181,7 +198,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="420 pts"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -197,8 +216,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.3"
                 android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.5"
+                android:shadowRadius="1.6"
                 android:text="3rd"
-                android:textSize="52sp" />
+                android:textColor="@color/bronze"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player3Name"
@@ -207,7 +232,9 @@
                 android:layout_weight=".8"
                 android:gravity="center"
                 android:text="C. Mens"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player3Points"
@@ -216,7 +243,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="69 pts"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -232,8 +261,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.3"
                 android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.5"
+                android:shadowRadius="1.6"
                 android:text="4th"
-                android:textSize="52sp" />
+                android:textColor="@color/tin"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player4Name"
@@ -242,7 +277,9 @@
                 android:layout_weight=".8"
                 android:gravity="center"
                 android:text="bredd"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player4Points"
@@ -251,7 +288,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="42 pts"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -267,8 +306,14 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.3"
                 android:gravity="center"
+                android:shadowColor="#000000"
+                android:shadowDx="1.5"
+                android:shadowDy="1.5"
+                android:shadowRadius="1.6"
                 android:text="5th"
-                android:textSize="52sp" />
+                android:textColor="@color/bronze3"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player5Name"
@@ -277,7 +322,9 @@
                 android:layout_weight=".8"
                 android:gravity="center"
                 android:text="FailCow17"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/player5Points"
@@ -286,7 +333,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="17 pts"
-                android:textSize="52sp" />
+                android:textColor="@color/black"
+                android:textSize="52sp"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
