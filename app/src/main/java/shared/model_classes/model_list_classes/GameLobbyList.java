@@ -65,7 +65,15 @@ public class GameLobbyList {
     }
 
     public GameLobby getGameLobbyByID(int gameLobbyID) {
-        return lobbies.get(gameLobbyID - 1);
+        for(int i = 0; i < lobbies.size(); i++)
+        {
+            GameLobby current_gameLobby = lobbies.get(i);
+            if(current_gameLobby.getID() == gameLobbyID)
+            {
+                return current_gameLobby;
+            }
+        }
+        return null;
     }
 
     public void addLobby(GameLobby gameLobby){

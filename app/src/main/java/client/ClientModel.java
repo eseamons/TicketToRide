@@ -184,6 +184,11 @@ public class ClientModel extends Observable
         gameLobbyList.getGameLobbyByID(gameID).addNewPlayers(account);
     }
 
+    public void setCurrentGameByID(int gameID)
+    {
+        currentGameLobby = gameLobbyList.getGameLobbyByID(gameID);
+    }
+
     public GameLobby getCurrent_game_lobby() {
         return currentGameLobby;
     }

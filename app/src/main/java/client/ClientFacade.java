@@ -105,6 +105,7 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         GameLobby current_game_lobby = serverProxy.joinGame(gameID, clientModel.getAuthorization());
         clientModel.setCurrent_game_lobby(current_game_lobby);
+        clientModel.setCurrentGameByID(gameID);
         clientModel.lobbySetPlayer_num();
         return current_game_lobby;
     }
