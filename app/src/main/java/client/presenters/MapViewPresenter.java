@@ -163,7 +163,7 @@ public class MapViewPresenter implements Observer, IMapPresenter
     public void claimRouteButtonPressed()
     {
         Route selected = view.getSelectedRoute();
-        if(selected == null  && selected.ownership != 0)
+        if(selected == null  || selected.ownership != 0)
         {
             printToast("No route selected");
             return;
