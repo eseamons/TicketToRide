@@ -31,7 +31,7 @@ public class MyTurnState extends ClientState
         if(client.canClaimRoute(desiredRoute))
         {
             client.ClaimRoute(desiredRoute);
-            client.setClientState(new NotMyTurnState());
+            client.endTurn();
             return "";
         }
         else
@@ -58,7 +58,7 @@ public class MyTurnState extends ClientState
         client.drawFaceUpCard(cardIndex);
         if(isWild(cardIndex))
         {
-            client.setClientState(new NotMyTurnState());
+            client.endTurn();
         }
         else
         {

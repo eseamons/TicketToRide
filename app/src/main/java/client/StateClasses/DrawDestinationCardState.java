@@ -20,8 +20,8 @@ public class DrawDestinationCardState extends ClientState {
     {
         if(client.canConfirmDestinationCards())
         {
-            client.setClientState(new NotMyTurnState());
             client.confirmDestinationCards();
+            client.endTurn();
             return "";
         }
         else

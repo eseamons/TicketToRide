@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Observer;
 
 import client.StateClasses.ClientState;
+import client.StateClasses.NotMyTurnState;
 import client.interfaces.IClient;
 import shared.CardColor;
 import shared.ColorNum;
@@ -222,6 +223,7 @@ public class ClientFacade implements IClient{
 
     @Override
     public boolean endTurn() {
+        setClientState(new NotMyTurnState());
         ServerProxy serverProxy = ServerProxy.getInstance();
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();

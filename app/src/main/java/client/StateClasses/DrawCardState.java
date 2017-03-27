@@ -20,7 +20,7 @@ public class DrawCardState extends ClientState
     public String DeckCardClicked()
     {
         client.drawDeckCard();
-        client.setClientState(new NotMyTurnState());
+        client.endTurn();
         return "";
     }
 
@@ -34,7 +34,7 @@ public class DrawCardState extends ClientState
         if(!isWild(cardIndex))
         {
             client.drawFaceUpCard(cardIndex);
-            client.setClientState(new NotMyTurnState());
+            client.endTurn();
             return "";
         }
         else
