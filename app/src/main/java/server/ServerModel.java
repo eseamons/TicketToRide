@@ -15,6 +15,7 @@ import shared.Serializer;
 import shared.command_classes.*;
 import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
+import shared.command_data_classes.ClaimRouteCommandData;
 import shared.command_data_classes.CreateGameCommandData;
 import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
@@ -323,18 +324,16 @@ public class ServerModel implements IServer{
 
             if(routeClaimed == true) {
 
-                String routeString = null;
-
-
-                routeString = Serializer.serialize(route);
-
-                String json = "{ \"gameID\":\"" + gameID + "\", \"route\":\"" + routeString + "\", \"auth\":\"" +auth+ "\"}";
+                ClaimRouteCommandData cmdData = new ClaimRouteCommandData();
+                cmdData.setGameID(gameID);
+                cmdData.setAuth(auth);
+                cmdData.setRoute(route);
 
                 int currentCmdId = gameList.getCurrentGameCommandID();
                 gameList.incrementCurrentGameCommandID();
 
                 Command cmd = new ClaimRouteCommand();
-                cmd.setInfo(json);
+                cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdId);
                 gameList.addGameCommand(cmd);
             }

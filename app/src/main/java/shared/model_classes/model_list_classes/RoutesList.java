@@ -436,7 +436,8 @@ public class RoutesList {
                 if(availableRoute.city2.equals(routeToClaim.city2))
                 {
                     availableRouteList.remove(i);
-                    List<Route> routeList = playersClaimedRoutes.remove(auth);
+                    List<Route> routeList = playersClaimedRoutes.get(auth);
+                    playersClaimedRoutes.remove(auth);
                     routeList.add(availableRoute);
                     playersClaimedRoutes.put(auth, routeList);
                     return true;
