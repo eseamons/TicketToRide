@@ -437,6 +437,9 @@ public class RoutesList {
                 {
                     availableRouteList.remove(i);
                     List<Route> routeList = playersClaimedRoutes.get(auth);
+                    if(routeList == null)
+                    {routeList = new ArrayList<>();}
+
                     playersClaimedRoutes.remove(auth);
                     routeList.add(availableRoute);
                     playersClaimedRoutes.put(auth, routeList);

@@ -357,7 +357,11 @@ public class ServerProxy implements IServer{
         Command cmd = new ClaimRouteCommand();
         cmd.setInfo(cmdData);
         Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+
+        if(r == null)
+        {return false;}
         return r.isSuccess();
+
     }
 
     //@param gameID - the ID of the client drawing a destination card
