@@ -123,6 +123,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     Button StupidButton;
     Button claimRouteButton;
     Button drawDestinationCardButton;
+    Button gameOverButton;
 
     Button[] DestinationCardButton;
     Button DestinationConfirmButton;
@@ -244,6 +245,15 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
                 presenter.drawDestinationCardButtonPressed();
             }
         });
+
+        gameOverButton = (Button) findViewById(R.id.button_QUIT);
+        gameOverButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MapViewActivity.this, GameOverView.class));
+            }
+        });
+
         presenter = new MapViewPresenter(this);
 
         DestinationCardButton = new Button[3];
