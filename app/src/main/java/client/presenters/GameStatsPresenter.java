@@ -30,7 +30,7 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
     public void sendMessage(String message) {
         ClientFacade facade = new ClientFacade();
         facade.sendMessage(message);
-        view.setChatMessage(message);
+        //view.setChatMessage(message);
     }
 
     @Override

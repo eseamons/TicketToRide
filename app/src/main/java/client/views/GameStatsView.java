@@ -134,7 +134,7 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
         sendMessageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                presenter.sendMessage(chatBox.getText().toString());
+                presenter.sendMessage(chatMessage.getText().toString());
             }
         });
 
