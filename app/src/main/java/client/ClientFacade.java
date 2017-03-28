@@ -296,7 +296,9 @@ public class ClientFacade implements IClient{
         //when it is ones turn and they click draw destination cards; 3 cards pop up and the user can select which one it wants
         //This will be called right when that button is clicked
         //This function should ask the Server Proxy to bring back 3 Destination Cards and add them to the model
-
+        drawDestinationCard();
+        drawDestinationCard();
+        drawDestinationCard();
     }
 
     public Route getRouteByClick(Point click)
@@ -324,6 +326,7 @@ public class ClientFacade implements IClient{
         return serverProxy.drawDestinationCard(gameID,auth);
     }
 
+    //check if player drew destination card
     public void playerDrewDestinationCard(int gameID, int playerID, DestinationCard destinationCard){
         clientModel.drawDestinationCard(gameID, playerID, destinationCard);
     }
