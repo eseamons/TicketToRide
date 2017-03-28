@@ -15,12 +15,14 @@ public class Player {
     private List<DestinationCard> destinationCards;
     private int trainsRemaining;
     private int playerID;  // 1-5
+    private DestinationCard[] choosableDestinationCards;
 
 
     public Player() {
         destinationCards = new ArrayList<>();
         trainCards = new ArrayList<>();
         trainsRemaining = 45;
+        choosableDestinationCards = new DestinationCard[3];
     }
 
     public Account getAccount() {
