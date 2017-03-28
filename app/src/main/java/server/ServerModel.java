@@ -13,6 +13,7 @@ import shared.CardColor;
 import shared.ColorNum;
 import shared.Serializer;
 import shared.command_classes.*;
+import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.CreateGameCommandData;
 import shared.command_data_classes.DrawDeckCardCommandData;
@@ -127,7 +128,7 @@ public class ServerModel implements IServer{
      */
     public void addCommand(Command cmd)
     {
-        gameLobbyList.addLobbyCommand(cmd);
+        gameList.addGameCommand(cmd);
     }
 
     @Override
@@ -248,20 +249,24 @@ public class ServerModel implements IServer{
     @Override
     public boolean addComment(String message, String auth) {
         boolean addCommentSuccessful = false;
-        GameLobby lobby = gameLobbyList.addCommentToGameLobby(message,auth);
+        Game game = gameList.getGameByAuthCode(auth);
 
-        if (lobby != null) {
+        if (game != null) {
+            game.addComment(message);
             addCommentSuccessful = true;
-            int gameLobbyID = lobby.getID();
-            String json = "{\"message\": \""+message+"\", \"gameLobbyID\":\""+gameLobbyID+"\"}";
+            int gameID = game.getGameID();
+            AddCommentCommandData cmdData = new AddCommentCommandData();
+            cmdData.setGameID(gameID);
+            cmdData.setAuth(auth);
+            cmdData.setMessage(message);
 
-            int currentCmdID = gameLobbyList.getCurrentLobbyCommandID();
-            gameLobbyList.incrementCurrentLobbyCommandID();
+            int currentCmdID = gameList.getCurrentGameCommandID();
+            gameList.incrementCurrentGameCommandID();
 
             Command cmd = new AddCommentCommand();
-            cmd.setInfo(json);
+            cmd.setInfo(cmdData);
             cmd.setCmdID(currentCmdID);
-            gameLobbyList.addLobbyCommand(cmd);
+            gameList.addGameCommand(cmd);
         }
         return addCommentSuccessful;
     }

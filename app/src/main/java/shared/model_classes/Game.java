@@ -131,10 +131,9 @@ public class Game {
         getPlayerbyIndex(player_num-1).addDestinationCard(card);
     }
 
-    public void stupidAddComment(String name, String message)
+    public void addComment(String message)
     {
-        String add = name + ": " + message;
-        comments.add(add);
+        comments.add(message);
     }
 
     //Destination Card Methods

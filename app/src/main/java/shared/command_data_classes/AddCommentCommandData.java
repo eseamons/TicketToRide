@@ -8,7 +8,7 @@ public class AddCommentCommandData {
 
     private String message;
     private String auth;
-    private int gameLobbyID;
+    private int gameID;
 
     public AddCommentCommandData() {
 
@@ -30,11 +30,11 @@ public class AddCommentCommandData {
         this.auth = auth;
     }
 
-    public int getGameLobbyID() {
-        return gameLobbyID;
+    public int getGameID() {
+        return gameID;
     }
 
-    public void setGameLobbyID(int gameLobbyID) {
-        this.gameLobbyID = gameLobbyID;
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
     }
 }

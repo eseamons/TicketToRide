@@ -27,6 +27,12 @@ public class GameStatsPresenter implements IGameStatsPresenter,Observer{
         update(null,null);
     }
 
+    public void sendMessage(String message) {
+        ClientFacade facade = new ClientFacade();
+        facade.sendMessage(message);
+        view.setChatMessage(message);
+    }
+
     @Override
     public void update(Observable observable, Object o) {
         int numberOfPlayers = players.size();

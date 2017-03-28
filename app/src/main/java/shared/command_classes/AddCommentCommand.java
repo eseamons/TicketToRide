@@ -16,7 +16,7 @@ public class AddCommentCommand extends Command
         String auth = ((AddCommentCommandData) info).getAuth();
         boolean success = ServerFacade.getInstance().addComment(message, auth);
 
-        return new Result(success, "");
+        return new Result(success, this);
     }
 
     public void executeOnClient()

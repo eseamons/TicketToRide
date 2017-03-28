@@ -5,4 +5,5 @@ package client.interfaces;
  */
 
 public interface IGameStatsPresenter {
+    void sendMessage(String message);
 }
