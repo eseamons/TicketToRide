@@ -220,7 +220,7 @@ public class ClientModel extends Observable
 
     public void aGameStarted(int gameID) {
 
-        if(gameID == currentGameLobby.getID())
+        if(currentGameLobby != null && gameID == currentGameLobby.getID())
         {
 
             currentGame = new Game(currentGameLobby);
@@ -229,9 +229,6 @@ public class ClientModel extends Observable
             //TODO: stop poller from getting game lobby commands and start get game commands
             //poller.stopGameLobbyListTimer();
             //poller.getGameCommands();
-
-
-
         }
         removeGameLobbyByID(gameID);
     }

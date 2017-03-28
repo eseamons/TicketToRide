@@ -112,8 +112,8 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
-        return false;
+    public boolean drawFaceUpCard(int faceUpCardID, String auth, int gameID) {
+        return serverModel.drawFaceUpCard(faceUpCardID, auth, gameID);
     }
 
 

@@ -2,9 +2,12 @@ package shared.command_classes;
 
 import com.google.gson.JsonObject;
 
+import client.ClientFacade;
 import server.ServerFacade;
+import shared.CardColor;
 import shared.ColorNum;
 import shared.Result;
+import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawFaceUpCardCommandData;
 
 /**
@@ -15,14 +18,22 @@ public class DrawFaceUpCardCommand extends Command {
 
     public Result execute()
     {
-        String auth = ((DrawFaceUpCardCommandData) info).getAuth();
-        ColorNum faceUpCardID = ((DrawFaceUpCardCommandData) info).getFaceUpCardID();
-        boolean success = ServerFacade.getInstance().drawFaceUpCard(faceUpCardID, auth);
+        DrawFaceUpCardCommandData data = (DrawFaceUpCardCommandData)info;
+        String auth = data.getAuth();
+        int faceUpCardID = data.getFaceUpCardID();
+        int gameID = data.getGameID();
+        boolean success = ServerFacade.getInstance().drawFaceUpCard(faceUpCardID, auth, gameID);
         return new Result(success, "");
     }
 
     public void executeOnClient()
     {
-        //TODO: has not been implemeted yet
+        DrawFaceUpCardCommandData data = (DrawFaceUpCardCommandData)info;
+        int playerID = data.getPlayerID();
+        int gameID = data.getGameID();
+        CardColor card = data.getCardColor();
+
+        ClientFacade clientFacade = new ClientFacade();
+        clientFacade.playerDrewDeckCard(gameID,playerID ,card);
     }
 }

@@ -15,6 +15,7 @@ import shared.command_classes.Command;
 import shared.command_classes.CreateGameCommand;
 import shared.command_classes.DrawDeckCardCommand;
 import shared.command_classes.DrawDestinationCardCommand;
+import shared.command_classes.DrawFaceUpCardCommand;
 import shared.command_classes.EndTurnCommand;
 import shared.command_classes.GetGamesCommand;
 import shared.command_classes.GetNewCommandsCommand;
@@ -28,7 +29,10 @@ import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.ClaimRouteCommandData;
 import shared.command_data_classes.CreateGameCommandData;
+import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
+import shared.command_data_classes.DrawFaceUpCardCommandData;
+import shared.command_data_classes.EndTurnCommandData;
 import shared.command_data_classes.GetGamesCommandData;
 import shared.command_data_classes.GetNewCommandsCommandData;
 import shared.command_data_classes.GetNewGameCommandsCommandData;
@@ -241,6 +245,9 @@ public class ServerProxy implements IServer{
         cmd.setInfo(cmdData);
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
 
+        if(r== null)
+        {return false;}
+
         return r.isSuccess();
     }
 
@@ -317,10 +324,17 @@ public class ServerProxy implements IServer{
     //@postcondition - an EndTurnCommand should be sent to the server and then executed and stored
     @Override
     public boolean endTurn(int gameID, String auth) {
-        String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        //String json = "{\"gameID\": \""+gameID+"\", \"auth\":\""+auth+"\"}";
+        EndTurnCommandData cmdData = new EndTurnCommandData();
+        cmdData.setGameID(gameID);
+        cmdData.setAuth(auth);
         Command cmd = new EndTurnCommand();
-        cmd.setInfo(json);
+        cmd.setInfo(cmdData);
         Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+
+        if(r == null)
+        {return false;}
+
         return r.isSuccess();
     }
 
@@ -393,7 +407,19 @@ public class ServerProxy implements IServer{
     //@postcondition - a drawDeckCommand is sent to the server, and then executed and stored
     @Override
     public boolean drawDeckCard(String auth, int playerID) {
-        return false;
+        DrawDeckCardCommandData cmdData = new DrawDeckCardCommandData();
+        cmdData.setAuth(auth);
+        cmdData.setPlayerID(playerID);
+        int gameID = ClientModel.getInstance().getCurrent_game().getGameID();
+        cmdData.setGameID(gameID);
+
+        Command cmd = new DrawDeckCardCommand();
+        cmd.setInfo(cmdData);
+        Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+        if(r == null)
+        {return false;}
+        else
+        {return r.isSuccess();}
     }
 
     //param faceUpCardID - the index of the card being drawn
@@ -402,8 +428,27 @@ public class ServerProxy implements IServer{
     //@precondition - auth should be a valid authorization code
     //@return returns true if sucessful, false otherwise
     @Override
-    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
-        return false;
+    public boolean drawFaceUpCard(int faceUpCardID, String auth, int GameID) {
+        DrawFaceUpCardCommandData cmdData = new DrawFaceUpCardCommandData();
+        cmdData.setAuth(auth);
+        cmdData.setFaceUpCardID(faceUpCardID);
+        cmdData.setGameID(GameID);
+
+        Command cmd = new DrawFaceUpCardCommand();
+        cmd.setInfo(cmdData);
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        if(r== null)
+        {return false;}
+        else
+        {return r.isSuccess();}
+
+//        if(r != null && r.isSuccess())
+//        {
+//            //pull the new commands out and process?
+//            return true;
+//        }
+//        else
+//        {return false;}
     }
 
 }

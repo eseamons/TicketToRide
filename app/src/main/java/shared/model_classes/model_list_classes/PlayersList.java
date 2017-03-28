@@ -150,7 +150,7 @@ public class PlayersList {
     {
         currentPlayerID++;
 
-        if(currentPlayerID== numOfPlayers)
+        if(currentPlayerID == numOfPlayers)
         {currentPlayerID =0;}
 
         currentPlayer = players.get(currentPlayerID);

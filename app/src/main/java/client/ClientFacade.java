@@ -283,7 +283,12 @@ public class ClientFacade implements IClient{
     {
         //draws a face up card by index
         //sends a drawFaceUpCard command to the server
-        return false;
+        Game currentGame = clientModel.getCurrent_game();
+        String auth = clientModel.getAuthorization();
+        int gameID = currentGame.getGameID();
+
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        return serverProxy.drawFaceUpCard(cardIndex, auth, gameID);
     }
 
     public void retrieve3DestinationCards()
@@ -391,9 +396,9 @@ public class ClientFacade implements IClient{
             case 27: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 28: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 29: game.endTurn(); next_cmd = "Add new message"; break;
-            case 30: game.stupidAddComment("DUMMY1","Hello"); next_cmd = "Add new message"; break;
-            case 31: game.stupidAddComment("DUMMY2","Greetings"); next_cmd = "Add new message"; break;
-            case 32: game.stupidAddComment("DUMMY3","Good Evening, old chap"); next_cmd = "DONE"; break;
+//            case 30: game.stupidAddComment("DUMMY1","Hello"); next_cmd = "Add new message"; break;
+//            case 31: game.stupidAddComment("DUMMY2","Greetings"); next_cmd = "Add new message"; break;
+//            case 32: game.stupidAddComment("DUMMY3","Good Evening, old chap"); next_cmd = "DONE"; break;
         }
         time++;
         clientModel.update();

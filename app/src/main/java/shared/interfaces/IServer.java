@@ -2,6 +2,7 @@ package shared.interfaces;
 
 import java.util.List;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.Account;
@@ -48,6 +49,6 @@ public interface IServer {
 
     boolean drawDeckCard(String auth, int gameID);
 
-    boolean drawFaceUpCard(ColorNum faceUpCardID, String auth);
+    boolean drawFaceUpCard(int faceUpCardID, String auth, int gameID);
 
 }

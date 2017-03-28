@@ -18,6 +18,7 @@ import shared.command_data_classes.BeginGameCommandData;
 import shared.command_data_classes.CreateGameCommandData;
 import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
+import shared.command_data_classes.DrawFaceUpCardCommandData;
 import shared.command_data_classes.EndTurnCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.RemoveDestinationCardCommandData;
@@ -432,9 +433,6 @@ public class ServerModel implements IServer{
                 player.addTrainCard(cardColor);
                 int playerID = player.getPlayerID();
 
-
-//                TODO:change all of this...
-
                 int currentCmdID = gameList.getCurrentGameCommandID();
                 gameList.incrementCurrentGameCommandID();
                 Command cmd = new DrawDeckCardCommand();
@@ -458,12 +456,51 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawFaceUpCard(ColorNum faceUpCardID, String auth) {
-        return false;
+    public boolean drawFaceUpCard(int faceUpCardID, String auth, int gameID) {
+        boolean successful = false;
+        Game currentGame = gameList.getGame(gameID);
+
+        if (currentGame != null) {
+            CardColor cardColor = currentGame.getFaceUpCard(faceUpCardID);
+            Player player = playerAuthMap.get(auth);
+
+            if(cardColor != null && player != null)
+            {
+                successful = true;
+                player.addTrainCard(cardColor);
+
+                int playerID = player.getPlayerID();
+
+                int currentCmdID = gameList.getCurrentGameCommandID();
+                gameList.incrementCurrentGameCommandID();
+                Command cmd = new DrawFaceUpCardCommand();
+
+                DrawFaceUpCardCommandData cmdData = new DrawFaceUpCardCommandData();
+                cmdData.setGameID(gameID);
+                cmdData.setAuth(auth);
+                cmdData.setCardColor(cardColor);
+                cmdData.setPlayerID(playerID);
+
+                cmd.setInfo(cmdData);
+                cmd.setCmdID(currentCmdID);
+                gameList.addGameCommand(cmd);
+
+                //replaces the card that you drew.. hopefully
+                setFaceUpCard(currentGame.drawCard(),faceUpCardID,gameID);
+
+            }
+        }
+
+
+
+        return successful;
     }
 
     public void setFaceUpCard(CardColor card, int cardIndex, int gameID)
     {
+        Game currentGame = gameList.getGame(gameID);
+        currentGame.setFaceUpCard(cardIndex, card);
+
         int currentCmdID = gameList.getCurrentGameCommandID();
         gameList.incrementCurrentGameCommandID();
         Command cmd = new SetFaceUpCardCommand();
@@ -477,7 +514,7 @@ public class ServerModel implements IServer{
         cmd.setCmdID(currentCmdID);
         gameList.addGameCommand(cmd);
 
-
+        //TODO: if 3 wilds are face up then all face up cards need to be discarded and replaced
     }
 
 

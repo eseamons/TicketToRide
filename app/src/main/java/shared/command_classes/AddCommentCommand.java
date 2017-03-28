@@ -22,7 +22,7 @@ public class AddCommentCommand extends Command
     public void executeOnClient()
     {
         String message = ((AddCommentCommandData) info).getMessage();
-        int gameID = ((AddCommentCommandData) info).getGameLobbyID();
+        int gameID = ((AddCommentCommandData) info).getGameID();
         ClientFacade clientFacade = new ClientFacade();
         clientFacade.addComment(gameID,message);
     }
