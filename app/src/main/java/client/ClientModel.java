@@ -47,7 +47,6 @@ public class ClientModel extends Observable
     private Game currentGame;
     private Player this_player;
     private int player_num;
-    private boolean gameIsOver = false;
     //
     private ClientState state = new NotMyTurnState();
 
@@ -59,12 +58,7 @@ public class ClientModel extends Observable
 
     public boolean isGameOver()
     {
-        return gameIsOver;
-    }
-
-    public void endGame()
-    {
-        gameIsOver= true;
+        return currentGame.isGameOver();
     }
 
     //this array
@@ -283,7 +277,9 @@ public class ClientModel extends Observable
         {
             currentGame.endTurn();
             if(currentGame.getCurrentPlayer() == this_player.getPlayerID())
-            { calculateTurn();}
+            {
+                calculateTurn();
+            }
         }
     }
 
@@ -293,7 +289,8 @@ public class ClientModel extends Observable
     }
     public List<Player> getPlayers() {return currentGame.getPlayers();}
 
-    public void claimRoute(Route route, String auth, CardColor colorOfCardUsed) {
+    public void claimRoute(Route route, String auth, CardColor colorOfCardUsed)
+    {
         currentGame.claimRoute(route,auth,colorOfCardUsed);
     }
 
