@@ -107,5 +107,13 @@ public class Player {
         return choosableDestinationCards;
     }
 
+    public void confirmDestinationCard(int cardIndex) {
+        destinationCards.add(choosableDestinationCards[cardIndex]);
+        choosableDestinationCards[cardIndex] = null;
+    }
+
+    public void discardDestinationCard(int cardIndex) {
+        choosableDestinationCards[cardIndex] = null;
+    }
 
 }

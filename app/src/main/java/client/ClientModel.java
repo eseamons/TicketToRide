@@ -384,4 +384,27 @@ public class ClientModel extends Observable
     }
 
 
+    public DestinationCard[] getChooseableDestinationCards() {
+        return this_player.getAllChooseableDestinationCards();
+    }
+
+    public boolean[] addConfirmedDestinationCardsToPlayer() {
+
+        for(int i = 0; i < destinationCardsAcceptance.length; i++) {
+            if(destinationCardsAcceptance[i] == true) {
+                this_player.confirmDestinationCard(i);
+            }
+            else {
+                this_player.discardDestinationCard(i);
+            }
+
+        }
+
+        boolean[] tempAcceptance = destinationCardsAcceptance;
+
+        destinationCardsAcceptance = new boolean[]{true,true,true};
+        return tempAcceptance;
+    }
+
+
 }

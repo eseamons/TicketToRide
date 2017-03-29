@@ -506,7 +506,7 @@ public class ClientFacade implements IClient{
     //in the model as well as a boolean array of which cards are to be kept (true) and discarded (false)
     public void confirmDestinationCards()
     {
-
+        clientModel.addConfirmedDestinationCardsToPlayer();
     }
 
     public boolean canConfirmDestinationCards()
