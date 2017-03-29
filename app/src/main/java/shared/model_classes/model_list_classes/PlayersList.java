@@ -204,6 +204,24 @@ public class PlayersList {
         }
     }
 
+    public boolean twoOrLessTrains(String auth)
+    {
+        return getPlayerByAuthCode(auth).twoOrLessTrains();
+    }
+
+    public Player getPlayerByAuthCode(String auth)
+    {
+        for(int i = 0; i < players.size(); i++)
+        {
+            Player p = players.get(i);
+            if(p.getPlayerAuthCode().equals(auth))
+            {
+                return p;
+            }
+        }
+        return null;
+    }
+
     /**
      * Returns true if the player with authentication token auth is in the game/list. False otherwise
      *

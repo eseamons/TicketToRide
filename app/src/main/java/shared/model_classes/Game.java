@@ -31,6 +31,7 @@ public class Game {
     public Game(GameLobby gameLobby) {
         gameID = gameLobby.getID();
         players = new PlayersList(gameLobby.getPlayers());
+        LastTurnsLeft = players.getSize() + 1;
         trainCardDeck = TrainCardDeck.getInstance();
         faceUpCards = new CardColor[5];
         destinationCardsList = new DestinationCardsList();
@@ -72,8 +73,23 @@ public class Game {
         return comments;
     }
 
+    private boolean lastTurn = false;
+    private int LastTurnsLeft;
     public void endTurn() {
+        if(lastTurn)
+        {
+            LastTurnsLeft--;
+            if(LastTurnsLeft == 0)
+            {
+                endGame();
+            }
+        }
         players.endTurn();
+    }
+
+    public void endGame()
+    {
+
     }
 
     public int ThisPlayersTurn()
@@ -108,6 +124,10 @@ public class Game {
             int pointIncrease = route.getPointValue();
             players.increasePlayerScore(auth, pointIncrease );
             players.decreasePlayerTrainsRemaining(auth, route.length);
+            if(players.twoOrLessTrains(auth))
+            {
+                lastTurn = true;
+            }
         }
         return successful;
     }
