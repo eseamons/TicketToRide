@@ -109,5 +109,37 @@ public class Player {
         return choosableDestinationCards;
     }
 
+    public void confirmDestinationCard(int cardIndex) {
+        destinationCards.add(choosableDestinationCards[cardIndex]);
+        choosableDestinationCards[cardIndex] = null;
+    }
 
+    public void discardDestinationCard(int cardIndex) {
+        choosableDestinationCards[cardIndex] = null;
+    }
+
+    public void removeCards(CardColor colorOfCardUsed, int length) {
+        int numberOfCardsToRemove = length;
+        for(int i = 0; i <trainCards.size(); i++)
+        {
+            CardColor c = trainCards.get(i);
+            if(c == colorOfCardUsed && numberOfCardsToRemove > 0)
+            {
+                trainCards.remove(i);
+                numberOfCardsToRemove--;
+            }
+        }
+        if(numberOfCardsToRemove >0)
+        {
+            for(int j = 0; j <trainCards.size(); j++)
+            {
+                CardColor c = trainCards.get(j);
+                if(c == CardColor.WILD && numberOfCardsToRemove > 0)
+                {
+                    trainCards.remove(j);
+                    numberOfCardsToRemove--;
+                }
+            }
+        }
+    }
 }

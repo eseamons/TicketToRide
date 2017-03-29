@@ -110,6 +110,8 @@ public class ClientModel extends Observable
         desiredToUseColor = color;
     }
 
+    public CardColor getDesiredToUseColor() {return desiredToUseColor;}
+
     public void gameSetPlayer_num()
     {
         player_num = currentGame.getPlayers().size() - 1;
@@ -129,14 +131,6 @@ public class ClientModel extends Observable
     {
         state = new_state;
     }
-
-//    public void setThis_Player()
-//    {
-//        //Player p = new Player();
-//        //p.setAccount(account);
-//        //this_player = p;
-//        this_player = currentGame.getPlayerbyIndex(player_num);
-//    }
 
     public void setPlayerThroughAuthCode()
     {
@@ -255,11 +249,9 @@ public class ClientModel extends Observable
     }
 
     private boolean first = true;
-    public void calculateTurn()
-    {
+    public void calculateTurn() {
         if(first)
         {
-            //depending on how we do it; we need to draw the cards here
             state = new DrawDestinationCardState();
             first = false;
         }
@@ -301,8 +293,8 @@ public class ClientModel extends Observable
     }
     public List<Player> getPlayers() {return currentGame.getPlayers();}
 
-    public void claimRoute(Route route, String auth) {
-        currentGame.claimRoute(route,auth);
+    public void claimRoute(Route route, String auth, CardColor colorOfCardUsed) {
+        currentGame.claimRoute(route,auth,colorOfCardUsed);
     }
 
     public void drawDeckCard(int PlayerID, CardColor card) {
@@ -393,6 +385,29 @@ public class ClientModel extends Observable
             }
         }
         return count >= desiredRoute.length;
+    }
+
+
+    public DestinationCard[] getChooseableDestinationCards() {
+        return this_player.getAllChooseableDestinationCards();
+    }
+
+    public boolean[] addConfirmedDestinationCardsToPlayer() {
+
+        for(int i = 0; i < destinationCardsAcceptance.length; i++) {
+            if(destinationCardsAcceptance[i] == true) {
+                this_player.confirmDestinationCard(i);
+            }
+            else {
+                this_player.discardDestinationCard(i);
+            }
+
+        }
+
+        boolean[] tempAcceptance = destinationCardsAcceptance;
+
+        destinationCardsAcceptance = new boolean[]{true,true,true};
+        return tempAcceptance;
     }
 
 

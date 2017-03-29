@@ -117,13 +117,15 @@ public class Game {
     }
 
     //other actions for game
-    public boolean claimRoute(Route route, String auth) {
-        boolean successful =  routes.claimRoute(route,auth);
+    public boolean claimRoute(Route route, String auth, CardColor colorOfCardUsed) {
+
+        boolean successful =  routes.claimRoute(route,auth, players.getCurrentPlayerID());
         if(successful)
         {
             int pointIncrease = route.getPointValue();
             players.increasePlayerScore(auth, pointIncrease );
             players.decreasePlayerTrainsRemaining(auth, route.length);
+            players.removeCards(auth, colorOfCardUsed, route.length);
             if(players.twoOrLessTrains(auth))
             {
                 lastTurn = true;

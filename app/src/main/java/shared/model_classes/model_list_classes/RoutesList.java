@@ -426,7 +426,7 @@ public class RoutesList {
      * @param auth The player's authorization token of the player claiming the Route.
      * @return boolean true if player was able to claim route, or boolean false if not able.
      */
-    public boolean claimRoute(Route routeToClaim, String auth)
+    public boolean claimRoute(Route routeToClaim, String auth, int playerID)
     {
         for(int i = 0; i <availableRouteList.size(); i++)
         {
@@ -435,14 +435,16 @@ public class RoutesList {
             {
                 if(availableRoute.city2.equals(routeToClaim.city2))
                 {
-                    availableRouteList.remove(i);
+//                    availableRouteList.remove(i);
                     List<Route> routeList = playersClaimedRoutes.get(auth);
                     if(routeList == null)
                     {routeList = new ArrayList<>();}
-
-                    playersClaimedRoutes.remove(auth);
+//
+//                    playersClaimedRoutes.remove(auth);
                     routeList.add(availableRoute);
-                    playersClaimedRoutes.put(auth, routeList);
+//                    playersClaimedRoutes.put(auth, routeList);
+
+                    availableRoute.ownership = playerID+1;
                     return true;
                 }
             }

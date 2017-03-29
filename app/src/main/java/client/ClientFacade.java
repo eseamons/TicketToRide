@@ -247,16 +247,17 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();
+        CardColor colorOfCardsUsed = clientModel.getDesiredToUseColor();
 
-        boolean successful = serverProxy.claimRoute(gameID, route,auth);
+        boolean successful = serverProxy.claimRoute(gameID, route,auth, colorOfCardsUsed);
         return successful;
     }
 
     @Override
-    public void RouteClaimedbyPlayer(int gameID, Route route, String auth) {
+    public void RouteClaimedbyPlayer(int gameID, Route route, String auth, CardColor colorOfCardUsed) {
         Game currentGame = clientModel.getCurrent_game();
         if(currentGame.getGameID() == gameID)
-        {clientModel.claimRoute(route, auth);}
+        {clientModel.claimRoute(route, auth, colorOfCardUsed);}
     }
 
     //train deck commands
@@ -506,7 +507,7 @@ public class ClientFacade implements IClient{
     //in the model as well as a boolean array of which cards are to be kept (true) and discarded (false)
     public void confirmDestinationCards()
     {
-
+        clientModel.addConfirmedDestinationCardsToPlayer();
     }
 
     public boolean canConfirmDestinationCards()

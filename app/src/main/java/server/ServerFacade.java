@@ -2,6 +2,7 @@ package server;
 
 import java.util.List;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.Result;
 import shared.command_classes.Command;
@@ -88,8 +89,8 @@ public class ServerFacade implements IServer{
     }
 
     @Override
-    public boolean claimRoute(int gameID, Route routeClaimed, String auth) {
-        return serverModel.claimRoute(gameID, routeClaimed, auth);
+    public boolean claimRoute(int gameID, Route routeClaimed, String auth, CardColor colorOfCardsUsed) {
+        return serverModel.claimRoute(gameID, routeClaimed, auth, colorOfCardsUsed);
 
     }
 
