@@ -85,6 +85,10 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
                 if(GameLobbyPresenter.getInstance().beginGame())
                 {
                     Poller.getInstance().stopLobbyListTimer();
+
+                    if(ClientModel.getInstance().getThis_player().getPlayerID() == 0)
+                    {ClientModel.getInstance().calculateTurn();}
+
                     startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));
                 }
             }

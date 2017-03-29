@@ -186,6 +186,8 @@ public class ClientFacade implements IClient{
     client methods are followed by their counterpart needed for receiving
 */
 
+    public void calculateTurn()
+    {clientModel.calculateTurn();}
 
     @Override
     public Player getThisPlayer()

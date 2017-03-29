@@ -69,15 +69,18 @@ public class ClientModel extends Observable
     //change this int to 1 the first time confirm destination cards is called
     //the games rules dictate that the first turn you need to keep 2, but any subsequent time only 1 is required
     private int MINIMUM_REQUIRED_DESTINATION_CARDS_NEEDED_TO_CONFIRM = 2;
-    public boolean canConfirmDestinationCards()
-    {
+    public boolean canConfirmDestinationCards() {
         int count = 0;
-        for(int i = 0; i < destinationCardsAcceptance.length; i++)
-        {
-            if(destinationCardsAcceptance[i])
+        for (int i = 0; i < destinationCardsAcceptance.length; i++) {
+            if (destinationCardsAcceptance[i])
                 count++;
         }
-        return count >= MINIMUM_REQUIRED_DESTINATION_CARDS_NEEDED_TO_CONFIRM;
+        boolean ret = (count >= MINIMUM_REQUIRED_DESTINATION_CARDS_NEEDED_TO_CONFIRM);
+        if (ret)
+        {
+            MINIMUM_REQUIRED_DESTINATION_CARDS_NEEDED_TO_CONFIRM = 1;
+        }
+        return ret;
     }
 
     public boolean[] getDestinationCardsAcceptance()
@@ -229,10 +232,29 @@ public class ClientModel extends Observable
             setPlayerThroughAuthCode();
             //TODO: stop poller from getting game lobby commands and start get game commands
             //Poller.getInstance().stopLobbyListTimer();
+
+        }
+        if(gameID == currentGameLobby.getID())
+        {
             if(this_player.getPlayerID() == 0)
-            {state = new MyTurnState();}
+            {calculateTurn();}
         }
         removeGameLobbyByID(gameID);
+    }
+
+    private boolean first = true;
+    public void calculateTurn()
+    {
+        if(first)
+        {
+            //depending on how we do it; we need to draw the cards here
+            state = new DrawDestinationCardState();
+            first = false;
+        }
+        else
+        {
+            state = new MyTurnState();
+        }
     }
 
     public void removeGameLobbyByID(int gameID) {
@@ -257,7 +279,7 @@ public class ClientModel extends Observable
         {
             currentGame.endTurn();
             if(currentGame.getCurrentPlayer() == this_player.getPlayerID())
-            {state = new MyTurnState();}
+            { calculateTurn();}
         }
     }
 
