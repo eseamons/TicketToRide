@@ -186,6 +186,8 @@ public class ClientFacade implements IClient{
     client methods are followed by their counterpart needed for receiving
 */
 
+    public void calculateTurn()
+    {clientModel.calculateTurn();}
 
     @Override
     public Player getThisPlayer()
@@ -309,7 +311,8 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         Result r = serverProxy.drawDestinationCards(gameID,auth);
         Command cmd = (Command) r.getInfo();
-        //cmd.executeOnClient();
+        clientModel.getGameCommandList().add(cmd);
+        cmd.executeOnClient();
         return r.isSuccess();
     }
 
@@ -494,11 +497,8 @@ public class ClientFacade implements IClient{
     //either keep or discard  this array (or list) is created when the draw destination card command is used
     public DestinationCard[] getChoosableDestinationCards()
     {
-        //this returns a dummy atm until this works in the model
-        DestinationCard[] dests = new DestinationCard[3];
-        dests[0] = new DestinationCard("Los Angeles", "New York", 21);
-        dests[1] = new DestinationCard("Duluth", "Houston", 8);
-        dests[2] = new DestinationCard("Sault St Marie", "Nashville", 8);
+        Player thisPlayer = ClientModel.getInstance().getThis_player();
+        DestinationCard[] dests = thisPlayer.getAllChooseableDestinationCards();
         return dests;
     }
 
