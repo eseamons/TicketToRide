@@ -3,6 +3,7 @@ package server;
 import java.util.List;
 
 import shared.ColorNum;
+import shared.Result;
 import shared.command_classes.Command;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
@@ -97,7 +98,7 @@ public class ServerFacade implements IServer{
 //        return serverModel.drawDestinationCard(destinationCardName, playerID, auth);
 //    }
     @Override
-    public boolean drawDestinationCards(int gameID, String auth) {
+    public Result drawDestinationCards(int gameID, String auth) {
     return serverModel.drawDestinationCards(gameID, auth);
 }
 

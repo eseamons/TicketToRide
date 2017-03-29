@@ -7,7 +7,6 @@ import shared.model_classes.DestinationCard;
  */
 
 public class DrawDestinationCardCommandData {
-    private String destinationCardName;
     private DestinationCard[] destinationCards;
     private int gameID;
     private String auth;

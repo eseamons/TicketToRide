@@ -11,6 +11,7 @@ import java.util.Map;
 
 import shared.CardColor;
 import shared.ColorNum;
+import shared.Result;
 import shared.Serializer;
 import shared.command_classes.*;
 import shared.command_data_classes.AddCommentCommandData;
@@ -339,9 +340,10 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCards(int gameID, String auth) {
+    public Result drawDestinationCards(int gameID, String auth) {
         boolean successful = false;
         Game currentGame = gameList.getGame(gameID);
+        Command cmd = null;
 
         if(currentGame != null)
         {
@@ -360,7 +362,7 @@ public class ServerModel implements IServer{
 
                 int currentCmdID = gameList.getCurrentGameCommandID();
                 gameList.incrementCurrentGameCommandID();
-                Command cmd = new DrawDestinationCardCommand();
+                cmd = new DrawDestinationCardCommand();
 
                 DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
                 cmdData.setAuth(auth);
@@ -372,10 +374,16 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
+                cmd.setAuth(auth);
                 gameList.addGameCommand(cmd);
             }
         }
-        return successful;
+
+        Result result = new Result(successful, cmd);
+
+
+
+        return result;
     }
 
     @Override

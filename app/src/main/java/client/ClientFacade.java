@@ -11,6 +11,7 @@ import client.StateClasses.NotMyTurnState;
 import client.interfaces.IClient;
 import shared.CardColor;
 import shared.ColorNum;
+import shared.Result;
 import shared.command_classes.Command;
 import shared.model_classes.Account;
 import shared.model_classes.DestinationCard;
@@ -284,16 +285,6 @@ public class ClientFacade implements IClient{
         return serverProxy.drawFaceUpCard(cardIndex, auth, gameID);
     }
 
-    public void retrieve3DestinationCards()
-    {
-        //when it is ones turn and they click draw destination cards; 3 cards pop up and the user can select which one it wants
-        //This will be called right when that button is clicked
-        //This function should ask the Server Proxy to bring back 3 Destination Cards and add them to the model
-        drawDestinationCard();
-        drawDestinationCard();
-        drawDestinationCard();
-    }
-
     public Route getRouteByClick(Point click)
     {
         return getRoutesList().getClickedRoute(click);
@@ -312,11 +303,14 @@ public class ClientFacade implements IClient{
 
 
     //destination card commands
-    public boolean drawDestinationCard(){
+    public boolean retrieve3DestinationCards(){
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.drawDestinationCards(gameID,auth);
+        Result r = serverProxy.drawDestinationCards(gameID,auth);
+        Command cmd = (Command) r.getInfo();
+        //cmd.executeOnClient();
+        return r.isSuccess();
     }
 
     //check if player drew destination card

@@ -18,8 +18,7 @@ public class DrawDestinationCardCommand extends Command {
     {
         int gameID = ((DrawDestinationCardCommandData) info).getGameID();
         String auth = ((DrawDestinationCardCommandData) info).getAuth();
-        boolean success = ServerFacade.getInstance().drawDestinationCards(gameID, auth);
-        return new Result(success, "");
+        return ServerFacade.getInstance().drawDestinationCards(gameID, auth);
     }
 
     public void executeOnClient()
