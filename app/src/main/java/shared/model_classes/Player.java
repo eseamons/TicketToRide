@@ -99,8 +99,14 @@ public class Player {
         trainsRemaining = trainsRemaining-trains;
     }
 
+    public boolean twoOrLessTrains() { return trainsRemaining <= 2; }
+
     public void setChoosableDestinationCard(DestinationCard card, int index) {
         choosableDestinationCards[index] = card;
+    }
+
+    public DestinationCard[] getAllChooseableDestinationCards() {
+        return choosableDestinationCards;
     }
 
 

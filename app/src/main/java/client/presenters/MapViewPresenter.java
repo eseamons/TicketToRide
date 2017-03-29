@@ -186,7 +186,6 @@ public class MapViewPresenter implements Observer, IMapPresenter
             printToast(text);
         }
         // piggyback command
-        client.retrieve3DestinationCards();
         setDestinationCardVisiblity();
     }
 
