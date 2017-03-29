@@ -55,7 +55,7 @@ public class Game {
     }
 
     public int getCurrentPlayer() {
-        return currentPlayer;
+        return players.getCurrentPlayerID();
     }
     public void setCurrentPlayer(int currentPlayer) {
         this.currentPlayer = currentPlayer;

@@ -11,6 +11,7 @@ import java.util.Observer;
 import client.StateClasses.ClientState;
 import client.StateClasses.DrawDestinationCardState;
 import client.StateClasses.MyTurnState;
+import client.StateClasses.NotMyTurnState;
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
@@ -47,7 +48,7 @@ public class ClientModel extends Observable
     private Player this_player;
     private int player_num;
     //
-    private ClientState state = new MyTurnState();
+    private ClientState state = new NotMyTurnState();
 
     //when claim a route of no color, it will use this color to claim the route
     private CardColor desiredToUseColor = CardColor.PURPLE;
@@ -227,8 +228,9 @@ public class ClientModel extends Observable
             GameLobbyPresenter.getInstance().beginNonMainPlayerGame();
             setPlayerThroughAuthCode();
             //TODO: stop poller from getting game lobby commands and start get game commands
-            //poller.stopGameLobbyListTimer();
-            //poller.getGameCommands();
+            //Poller.getInstance().stopLobbyListTimer();
+            if(this_player.getPlayerID() == 0)
+            {state = new MyTurnState();}
         }
         removeGameLobbyByID(gameID);
     }
@@ -252,7 +254,11 @@ public class ClientModel extends Observable
 
     public void endTurn(int gameID) {
         if(currentGame.getGameID() == gameID)
-        {currentGame.endTurn();}
+        {
+            currentGame.endTurn();
+            if(currentGame.getCurrentPlayer() == this_player.getPlayerID())
+            {state = new MyTurnState();}
+        }
     }
 
     public List<CardColor> getFaceUpCards()
@@ -293,6 +299,8 @@ public class ClientModel extends Observable
 
     public void setCurrent_game(Game currentGame) {
         this.currentGame = currentGame;
+        if(this_player.getPlayerID() == 0)
+        {state = new MyTurnState();}
     }
 
     public void setCommand_list(List<Command> command_list) {

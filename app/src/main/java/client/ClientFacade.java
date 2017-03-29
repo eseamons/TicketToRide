@@ -174,6 +174,8 @@ public class ClientFacade implements IClient{
     @Override
     public void aGameStarted(int gameID){
         clientModel.aGameStarted(gameID);
+
+
     }
 
 
@@ -268,15 +270,6 @@ public class ClientFacade implements IClient{
         {
             clientModel.drawDeckCard(playerID, card);
         }
-    }
-
-    public boolean drawFaceUpCard( CardColor card) {
-        String auth = clientModel.getAuthorization();
-        int gameID = clientModel.getCurrent_game().getGameID();
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        //return serverProxy.drawFaceUpCard(card, auth, gameID);
-        //TODO: all of the drawFaceUpCards on the server side need to have a gameID parameter so the server knows which game to add the info to.
-        return false;
     }
 
     public boolean drawFaceUpCard(int cardIndex)
