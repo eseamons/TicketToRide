@@ -6,6 +6,7 @@ import java.io.IOException;
 
 import client.ClientFacade;
 import server.ServerFacade;
+import shared.CardColor;
 import shared.Result;
 import shared.Serializer;
 import shared.command_data_classes.ClaimRouteCommandData;
@@ -21,8 +22,9 @@ public class ClaimRouteCommand extends Command {
         String auth = ((ClaimRouteCommandData) info).getAuth();
         int gameID = ((ClaimRouteCommandData) info).getGameID();
         Route route = ((ClaimRouteCommandData) info).getRoute();
+        CardColor colorOfCardsUsed = ((ClaimRouteCommandData)info).getColorOfCardsUsed();
 
-        boolean success = ServerFacade.getInstance().claimRoute(gameID, route,auth);
+        boolean success = ServerFacade.getInstance().claimRoute(gameID, route,auth, colorOfCardsUsed);
         return new Result(success, auth);
     }
 
@@ -31,9 +33,10 @@ public class ClaimRouteCommand extends Command {
         String auth = ((ClaimRouteCommandData) info).getAuth();
         int gameID = ((ClaimRouteCommandData) info).getGameID();
         Route route = ((ClaimRouteCommandData) info).getRoute();
+        CardColor colorOfCardsUsed = ((ClaimRouteCommandData)info).getColorOfCardsUsed();
 
         ClientFacade clientFacade = new ClientFacade();
-        clientFacade.RouteClaimedbyPlayer(gameID,route,auth);
+        clientFacade.RouteClaimedbyPlayer(gameID,route,auth, colorOfCardsUsed);
 
 
     }

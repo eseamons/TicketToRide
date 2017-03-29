@@ -6,6 +6,7 @@ import java.util.Observer;
 
 import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
+import shared.CardColor;
 import shared.ColorNum;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
@@ -75,7 +76,7 @@ public interface IClient {
 
     public boolean ClaimRoute(Route route);
 
-    void RouteClaimedbyPlayer(int gameID, Route route, String auth);
+    void RouteClaimedbyPlayer(int gameID, Route route, String auth, CardColor colorOfCardUsed);
 
     List<Player> getGamePlayers();
 

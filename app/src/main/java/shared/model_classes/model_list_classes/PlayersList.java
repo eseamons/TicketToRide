@@ -2,6 +2,7 @@ package shared.model_classes.model_list_classes;
 
 import java.util.List;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.Player;
@@ -204,6 +205,24 @@ public class PlayersList {
         }
     }
 
+    public boolean twoOrLessTrains(String auth)
+    {
+        return getPlayerByAuthCode(auth).twoOrLessTrains();
+    }
+
+    public Player getPlayerByAuthCode(String auth)
+    {
+        for(int i = 0; i < players.size(); i++)
+        {
+            Player p = players.get(i);
+            if(p.getPlayerAuthCode().equals(auth))
+            {
+                return p;
+            }
+        }
+        return null;
+    }
+
     /**
      * Returns true if the player with authentication token auth is in the game/list. False otherwise
      *
@@ -223,4 +242,15 @@ public class PlayersList {
         return playerFound;
     }
 
+    public void removeCards(String auth, CardColor colorOfCardUsed, int length) {
+        for(int i = 0; i < players.size(); i ++)
+        {
+            Player tempPlayer = players.get(i);
+            String tempAuth = tempPlayer.getAccount().getAuthentication();
+            if(tempAuth.equals(auth))
+            {
+                tempPlayer.removeCards(colorOfCardUsed, length);
+            }
+        }
+    }
 }

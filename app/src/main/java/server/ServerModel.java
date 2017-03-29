@@ -311,13 +311,13 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean claimRoute(int gameID, Route route, String auth) {
+    public boolean claimRoute(int gameID, Route route, String auth, CardColor colorOfCardsUsed) {
         boolean routeClaimed = false;
         Game game = gameList.getGame(gameID);
 
         if (game != null)
         {
-            routeClaimed = game.claimRoute(route, auth);
+            routeClaimed = game.claimRoute(route, auth, colorOfCardsUsed);
 
             if(routeClaimed == true) {
 
@@ -325,6 +325,7 @@ public class ServerModel implements IServer{
                 cmdData.setGameID(gameID);
                 cmdData.setAuth(auth);
                 cmdData.setRoute(route);
+                cmdData.setColorOfCardsUsed(colorOfCardsUsed);
 
                 int currentCmdId = gameList.getCurrentGameCommandID();
                 gameList.incrementCurrentGameCommandID();

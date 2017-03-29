@@ -40,7 +40,7 @@ public interface IServer {
     */
     boolean endTurn(int gameID, String auth);
 
-    boolean claimRoute(int gameID, Route routeClaimed, String auth);
+    boolean claimRoute(int gameID, Route routeClaimed, String auth, CardColor colorOfCardsUsed);
 
 //    boolean drawDestinationCard(String destinationCardName, int playerID, String auth);
     Result drawDestinationCards(int playerID, String auth);
