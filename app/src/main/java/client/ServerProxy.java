@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.Result;
 import shared.Serializer;
@@ -347,11 +348,14 @@ public class ServerProxy implements IServer{
     //@return returns true if sucessful, false if not
     //@postcondition - a claimRouteCommand is sent to the server and then executed and stored
     @Override
-    public boolean claimRoute(int gameID, Route routeClaimed, String auth) {
+    public boolean claimRoute(int gameID, Route routeClaimed, String auth, CardColor colorOfCardUsed) {
+
         ClaimRouteCommandData cmdData = new ClaimRouteCommandData();
         cmdData.setGameID(gameID);
         cmdData.setRoute(routeClaimed);
         cmdData.setAuth(auth);
+        cmdData.setColorOfCardsUsed(colorOfCardUsed);
+        cmdData.setNumOfCardsUsed(routeClaimed.length);
 
 
         Command cmd = new ClaimRouteCommand();

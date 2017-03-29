@@ -42,7 +42,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="client.views.GameOverView"></activity>
+        <activity android:name="client.views.GameOverView"
+            android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

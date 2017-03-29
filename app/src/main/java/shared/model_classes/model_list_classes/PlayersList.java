@@ -2,6 +2,7 @@ package shared.model_classes.model_list_classes;
 
 import java.util.List;
 
+import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.Player;
@@ -223,4 +224,15 @@ public class PlayersList {
         return playerFound;
     }
 
+    public void removeCards(String auth, CardColor colorOfCardUsed, int length) {
+        for(int i = 0; i < players.size(); i ++)
+        {
+            Player tempPlayer = players.get(i);
+            String tempAuth = tempPlayer.getAccount().getAuthentication();
+            if(tempAuth.equals(auth))
+            {
+                tempPlayer.removeCards(colorOfCardUsed, length);
+            }
+        }
+    }
 }
