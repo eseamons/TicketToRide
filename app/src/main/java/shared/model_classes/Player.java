@@ -103,5 +103,9 @@ public class Player {
         choosableDestinationCards[index] = card;
     }
 
+    public DestinationCard[] getAllChooseableDestinationCards() {
+        return choosableDestinationCards;
+    }
+
 
 }

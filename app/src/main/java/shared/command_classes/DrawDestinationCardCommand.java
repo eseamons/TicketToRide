@@ -21,13 +21,18 @@ public class DrawDestinationCardCommand extends Command {
         return ServerFacade.getInstance().drawDestinationCards(gameID, auth);
     }
 
-    public void executeOnClient()
-    {
+    public void executeOnClient() {
         DestinationCard[] destinationCards = ((DrawDestinationCardCommandData) info).getDestinationCards();
+
+
         int gameID = ((DrawDestinationCardCommandData) info).getGameID();
         int playerID = ((DrawDestinationCardCommandData) info).getPlayerID();
+        String auth = ((DrawDestinationCardCommandData) info).getAuth();
 
-        ClientFacade clientFacade = new ClientFacade();
-        clientFacade.playerDrewDestinationCards(gameID, playerID, destinationCards);
+        String playerAuth = ClientModel.getInstance().getAuthorization();
+        if (auth.equals(playerAuth)) {
+            ClientFacade clientFacade = new ClientFacade();
+            clientFacade.playerDrewDestinationCards(gameID, playerID, destinationCards);
+        }
     }
 }
