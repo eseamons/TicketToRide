@@ -231,9 +231,7 @@ public class ServerModel implements IServer{
                     drawDeckCard(PlayerAuth, gameID);
                 }
 
-                for(int j = 0; j < 3; j++) {
-                    drawDestinationCard(gameID,PlayerAuth);
-                }
+                    drawDestinationCards(gameID,PlayerAuth);
             }
             //TODO:set the 5 face up cards.
         }
@@ -343,19 +341,23 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean drawDestinationCard(int gameID, String auth) {
+    public boolean drawDestinationCards(int gameID, String auth) {
         boolean successful = false;
         Game currentGame = gameList.getGame(gameID);
 
         if(currentGame != null)
         {
-            DestinationCard destinationCard = currentGame.drawDestinationCard(auth);
+            DestinationCard cardOne = currentGame.drawDestinationCard(auth);
+            DestinationCard cardTwo = currentGame.drawDestinationCard(auth);
+            DestinationCard cardThree = currentGame.drawDestinationCard(auth);
             Player player = playerAuthMap.get(auth);
 
-            if(destinationCard != null && player != null)
+            if(cardOne != null && cardTwo != null && cardThree != null && player != null)
             {
                 successful = true;
-                player.addDestinationCard(destinationCard);
+                player.setChoosableDestinationCard(cardOne, 0);
+                player.setChoosableDestinationCard(cardOne, 1);
+                player.setChoosableDestinationCard(cardOne, 2);
                 int playerID = player.getPlayerID();
 
                 int currentCmdID = gameList.getCurrentGameCommandID();
@@ -365,7 +367,9 @@ public class ServerModel implements IServer{
                 DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
                 cmdData.setAuth(auth);
                 cmdData.setGameID(gameID);
-                cmdData.setDestinationCard(destinationCard);
+                cmdData.setDestinationCard(cardOne,0);
+                cmdData.setDestinationCard(cardTwo,1);
+                cmdData.setDestinationCard(cardThree,2);
                 cmdData.setPlayerID(playerID);
 
                 cmd.setInfo(cmdData);

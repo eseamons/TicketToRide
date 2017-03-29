@@ -371,7 +371,7 @@ public class ServerProxy implements IServer{
     //@return  return true if sucessful, false otherwise
     //@postcondition - a drawDestinationCardCommand is sent to the server and then executed and stored
     @Override
-    public boolean drawDestinationCard(int gameID, String auth) {
+    public boolean drawDestinationCards(int gameID, String auth) {
         DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
         cmdData.setAuth(auth);
         cmdData.setGameID(gameID);

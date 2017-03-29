@@ -42,7 +42,7 @@ public interface IServer {
     boolean claimRoute(int gameID, Route routeClaimed, String auth);
 
 //    boolean drawDestinationCard(String destinationCardName, int playerID, String auth);
-    boolean drawDestinationCard(int playerID, String auth);
+    boolean drawDestinationCards(int playerID, String auth);
 
 
     boolean removeDestinationCard(DestinationCard DiscardedDestinationCard, int gameID, String auth);

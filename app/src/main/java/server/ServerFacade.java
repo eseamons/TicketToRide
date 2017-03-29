@@ -97,8 +97,8 @@ public class ServerFacade implements IServer{
 //        return serverModel.drawDestinationCard(destinationCardName, playerID, auth);
 //    }
     @Override
-    public boolean drawDestinationCard(int gameID, String auth) {
-    return serverModel.drawDestinationCard(gameID, auth);
+    public boolean drawDestinationCards(int gameID, String auth) {
+    return serverModel.drawDestinationCards(gameID, auth);
 }
 
     @Override

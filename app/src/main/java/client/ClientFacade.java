@@ -316,12 +316,12 @@ public class ClientFacade implements IClient{
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.drawDestinationCard(gameID,auth);
+        return serverProxy.drawDestinationCards(gameID,auth);
     }
 
     //check if player drew destination card
-    public void playerDrewDestinationCard(int gameID, int playerID, DestinationCard destinationCard){
-        clientModel.drawDestinationCard(gameID, playerID, destinationCard);
+    public void playerDrewDestinationCards(int gameID, int playerID, DestinationCard[] destinationCards){
+        clientModel.drawDestinationCards(gameID, playerID, destinationCards);
     }
 
     //current player's destinationCards

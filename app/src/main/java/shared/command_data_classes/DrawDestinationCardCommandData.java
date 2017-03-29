@@ -8,20 +8,20 @@ import shared.model_classes.DestinationCard;
 
 public class DrawDestinationCardCommandData {
     private String destinationCardName;
-    private DestinationCard destinationCard;
+    private DestinationCard[] destinationCards;
     private int gameID;
     private String auth;
     int PlayerID;
 
     public DrawDestinationCardCommandData() {
-
+        destinationCards = new DestinationCard[3];
     }
-    public DestinationCard getDestinationCard() {
-        return destinationCard;
+    public DestinationCard[] getDestinationCards() {
+        return destinationCards;
     }
 
-    public void setDestinationCard(DestinationCard destinationCard) {
-        this.destinationCard = destinationCard;
+    public void setDestinationCard(DestinationCard destinationCard, int index) {
+        this.destinationCards[index] = destinationCard;
     }
 
     public int getGameID() {

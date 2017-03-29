@@ -28,7 +28,7 @@ public class RemoveDestinationCardCommand extends Command {
 
     public void executeOnClient()
     {
-        DestinationCard destinationCard = ((DrawDestinationCardCommandData) info).getDestinationCard();
+        DestinationCard destinationCard = ((RemoveDestinationCardCommandData) info).getDiscardedCard();
         int gameID = ((DrawDestinationCardCommandData) info).getGameID();
         int playerID = ((DrawDestinationCardCommandData) info).getPlayerID();
 

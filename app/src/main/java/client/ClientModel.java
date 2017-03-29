@@ -276,11 +276,13 @@ public class ClientModel extends Observable
         p.addTrainCard(card);
     }
 
-    public void drawDestinationCard(int gameID, int playerID, DestinationCard destinationCard) {
+    public void drawDestinationCards(int gameID, int playerID, DestinationCard[] destinationCards) {
         if(gameID == currentGame.getGameID())
         {
             Player p = currentGame.getPlayerbyIndex(playerID);
-            p.addDestinationCard(destinationCard);
+            p.setChoosableDestinationCard(destinationCards[0],0);
+            p.setChoosableDestinationCard(destinationCards[1],1);
+            p.setChoosableDestinationCard(destinationCards[2],2);
         }
     }
 
@@ -307,6 +309,9 @@ public class ClientModel extends Observable
         this.command_list = command_list;
     }
 
+    public void addGameCommand(Command cmd) {
+        gameCommandList.add(cmd);
+    }
 
     public Player getThis_player() {
         return this_player;
