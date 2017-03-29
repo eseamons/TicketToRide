@@ -230,8 +230,6 @@ public class ServerModel implements IServer{
                 {
                     drawDeckCard(PlayerAuth, gameID);
                 }
-
-                    drawDestinationCards(gameID,PlayerAuth);
             }
             //TODO:set the 5 face up cards.
         }
