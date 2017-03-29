@@ -47,6 +47,7 @@ public class ClientModel extends Observable
     private Game currentGame;
     private Player this_player;
     private int player_num;
+    private boolean gameIsOver = false;
     //
     private ClientState state = new NotMyTurnState();
 
@@ -54,6 +55,17 @@ public class ClientModel extends Observable
     private CardColor desiredToUseColor = CardColor.PURPLE;
     //private RoutesList routes = new RoutesList();
     private boolean[] destinationCardsAcceptance;
+
+
+    public boolean isGameOver()
+    {
+        return gameIsOver;
+    }
+
+    public void endGame()
+    {
+        gameIsOver= true;
+    }
 
     //this array
     public void intializeDestinationCardsAcceptance()

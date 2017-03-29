@@ -47,8 +47,22 @@ public class MapViewPresenter implements Observer, IMapPresenter
         setPlayerCardViews();
         drawRoutes();
         setDestinationCardVisiblity();
+        isGameOver();
 
         view.setStupidButtonText(client.next_cmd);
+    }
+
+    boolean firstGameOverPoll = true;
+    public void isGameOver()
+    {
+        if(firstGameOverPoll)
+        {
+            view.goToGameOverView();
+        }
+        if ( client.isGameOver() )
+        {
+            view.setGameOverMapView();
+        }
     }
 
     public void setDestinationCardVisiblity()

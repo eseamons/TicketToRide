@@ -311,6 +311,24 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
     }
 
+    public void goToGameOverView()
+    {
+        startActivity(new Intent(MapViewActivity.this, GameOverView.class));
+    }
+
+    public void setGameOverMapView()
+    {
+        claimRouteButton.setVisibility(View.INVISIBLE);
+        drawDestinationCardButton.setVisibility(View.INVISIBLE);
+        toDeck.setVisibility(View.INVISIBLE);
+        toStats.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MapViewActivity.this, GameOverView.class));
+            }
+        });
+    }
+
     public void setStupidButtonText(String set)
     {
         StupidButton.setText(set);
@@ -451,6 +469,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             DestinationCardButton[i].setText(text);
         }
     }
+
 
 
 }
