@@ -55,12 +55,14 @@ public class MapViewPresenter implements Observer, IMapPresenter
     boolean firstGameOverPoll = true;
     public void isGameOver()
     {
-        if(firstGameOverPoll)
-        {
-            view.goToGameOverView();
-        }
+
         if ( client.isGameOver() )
         {
+            if(firstGameOverPoll)
+            {
+                view.goToGameOverView();
+                firstGameOverPoll = false;
+            }
             view.setGameOverMapView();
         }
     }

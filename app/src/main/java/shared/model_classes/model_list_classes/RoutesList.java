@@ -435,17 +435,21 @@ public class RoutesList {
             {
                 if(availableRoute.city2.equals(routeToClaim.city2))
                 {
-//                    availableRouteList.remove(i);
-                    List<Route> routeList = playersClaimedRoutes.get(auth);
-                    if(routeList == null)
-                    {routeList = new ArrayList<>();}
+                    if(availableRoute.color == routeToClaim.color)
+                    {
+                        //                    availableRouteList.remove(i);
+                        List<Route> routeList = playersClaimedRoutes.get(auth);
+                        if(routeList == null)
+                        {routeList = new ArrayList<>();}
 //
 //                    playersClaimedRoutes.remove(auth);
-                    routeList.add(availableRoute);
+                        routeList.add(availableRoute);
 //                    playersClaimedRoutes.put(auth, routeList);
 
-                    availableRoute.ownership = playerID+1;
-                    return true;
+                        availableRoute.ownership = playerID+1;
+                        return true;
+                    }
+
                 }
             }
         }
