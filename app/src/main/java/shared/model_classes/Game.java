@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import server.ServerFacade;
 import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
@@ -75,22 +76,31 @@ public class Game {
 
     private boolean lastTurn = false;
     private int LastTurnsLeft;
-    public void endTurn() {
+    private boolean gameIsOver = false;
+
+    public boolean isGameOver()
+    {
+        return gameIsOver;
+    }
+
+    public void endTurn()
+    {
+        players.endTurn();
+        calculateLastTurns();
+    }
+
+    public void calculateLastTurns()
+    {
         if(lastTurn)
         {
             LastTurnsLeft--;
             if(LastTurnsLeft == 0)
             {
-                endGame();
+                gameIsOver = true;
             }
         }
-        players.endTurn();
     }
 
-    public void endGame()
-    {
-
-    }
 
     public int ThisPlayersTurn()
     {

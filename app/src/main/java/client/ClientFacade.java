@@ -514,4 +514,14 @@ public class ClientFacade implements IClient{
     {
         return clientModel.canConfirmDestinationCards();
     }
+
+    public boolean isGameOver()
+    {
+        return clientModel.isGameOver();
+    }
+
+    public void endGame()
+    {
+        clientModel.endGame();
+    }
 }

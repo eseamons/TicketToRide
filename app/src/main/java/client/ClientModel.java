@@ -55,6 +55,12 @@ public class ClientModel extends Observable
     //private RoutesList routes = new RoutesList();
     private boolean[] destinationCardsAcceptance;
 
+
+    public boolean isGameOver()
+    {
+        return currentGame.isGameOver();
+    }
+
     //this array
     public void intializeDestinationCardsAcceptance()
     {
@@ -273,7 +279,9 @@ public class ClientModel extends Observable
         {
             currentGame.endTurn();
             if(currentGame.getCurrentPlayer() == this_player.getPlayerID())
-            { calculateTurn();}
+            {
+                calculateTurn();
+            }
         }
     }
 
@@ -283,7 +291,8 @@ public class ClientModel extends Observable
     }
     public List<Player> getPlayers() {return currentGame.getPlayers();}
 
-    public void claimRoute(Route route, String auth, CardColor colorOfCardUsed) {
+    public void claimRoute(Route route, String auth, CardColor colorOfCardUsed)
+    {
         currentGame.claimRoute(route,auth,colorOfCardUsed);
     }
 

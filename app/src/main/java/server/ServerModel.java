@@ -306,6 +306,7 @@ public class ServerModel implements IServer{
             cmd.setAuth(auth);
             cmd.setCmdID(currentCmdId);
             gameList.addGameCommand(cmd);
+
         }
         return endTurnSuccessful;
     }
