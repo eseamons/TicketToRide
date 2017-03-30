@@ -50,6 +50,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
 
     private static GameOverView instance = new GameOverView();
 
+    public static boolean viewFinished = false;
     public static GameOverView getInstance()
     {
         return instance;
@@ -87,6 +88,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
         player4 = (TextView) findViewById(R.id.player4Place);
         player5 = (TextView) findViewById(R.id.player5Place);
 
+        //presenter = new GameOverPresenter();
         presenter = GameOverPresenter.getInstance();
 
         QuitBtn = (Button) findViewById(R.id.QuitBtn);
@@ -110,7 +112,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
         });
 
 
-
+        viewFinished = true;
 
     }
 

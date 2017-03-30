@@ -1,6 +1,7 @@
 package client.presenters;
 
 import android.content.Intent;
+import android.os.Build;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,12 @@ public class GameOverPresenter implements IGameOverPresenter, Observer {
         return instance;
     }
 
+    public GameOverPresenter()
+    {
+        ClientFacade client = new ClientFacade();
+        client.setObserver(this);
+    }
+
     @Override
     public void Quit() {
 
@@ -45,7 +52,7 @@ public class GameOverPresenter implements IGameOverPresenter, Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-        if (!updated)
+        if (GameOverView.viewFinished)
         {
             view = GameOverView.getInstance();
 
