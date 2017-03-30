@@ -294,6 +294,12 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
         setDestinationCardsAcceptanceVisibility(false);
 
         //if this causes problems, just comment this part out. Testing GameOver scheisse
+        update();
+
+    }
+
+    public void update()
+    {
         if (GameOverView.getInstance().GameOver)
         {
             toDeck.setVisibility(View.GONE);
@@ -302,14 +308,18 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             DestinationCardButton[2].setVisibility(View.GONE);
             DestinationConfirmButton.setVisibility(View.GONE);
             StupidButton.setVisibility(View.GONE);
-            toStats.setOnClickListener(new View.OnClickListener() {
+            toStats.setVisibility(View.GONE);
+            gameOverButton.setText("BACK TO END SCREEN");
+            gameOverButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     startActivity(new Intent(MapViewActivity.this, GameOverView.class));
                 }
             });
+            drawDestinationCardButton.setVisibility(View.GONE);
+            claimRouteButton.setVisibility(View.GONE);
+            //gameOverButton.setVisibility(View.GONE);
         }
-
     }
 
     public void goToGameOverView()
@@ -338,12 +348,14 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
     @Override
     public boolean onTouch(View v, MotionEvent event)
     {
-        if(event.getAction() == MotionEvent.ACTION_DOWN)
-        {
-            Point clicked = new Point((int) event.getX(), (int) event.getY());
-            presenter.onTouch(clicked);
+        if (!GameOverView.getInstance().GameOver) {
+            if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                Point clicked = new Point((int) event.getX(), (int) event.getY());
+                presenter.onTouch(clicked);
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void drawRoutes(RoutesList routes)

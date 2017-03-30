@@ -36,6 +36,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
     TextView player3Score;
     TextView player4Score;
     TextView player5Score;
+    TextView player2;
     TextView player3;
     TextView player4;
     TextView player5;
@@ -64,8 +65,10 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
 
         GameOver = true;
 
+        instance = this;
+
         victory = (ImageView) findViewById(R.id.victoryPic);
-        defeat = (ImageView) findViewById(R.id.victoryPic);
+        defeat = (ImageView) findViewById(R.id.defeatPic);
 
         ribbon1 = (ImageView) findViewById(R.id.ribbon1);
         ribbon2 = (ImageView) findViewById(R.id.ribbon2);
@@ -84,6 +87,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
         player4Score = (TextView) findViewById(R.id.player4Points);
         player5Score = (TextView) findViewById(R.id.player5Points);
 
+        player2 = (TextView) findViewById(R.id.player2Place);
         player3 = (TextView) findViewById(R.id.player3Place);
         player4 = (TextView) findViewById(R.id.player4Place);
         player5 = (TextView) findViewById(R.id.player5Place);
@@ -169,31 +173,38 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
 
     @Override
     public void setPlayer1Score(int points) {
-        player1Score.setText(points);
+        player1Score.setText(Integer.toString(points));
     }
 
     @Override
     public void setPlayer2Score(int points) {
-        player2Score.setText(points);
+        player2Score.setText(Integer.toString(points));
 
     }
 
     @Override
     public void setPlayer3Score(int points) {
-        player3Score.setText(points);
+        player3Score.setText(Integer.toString(points));
 
     }
 
     @Override
     public void setPlayer4Score(int points) {
-        player4Score.setText(points);
+        player4Score.setText(Integer.toString(points));
 
     }
 
     @Override
     public void setPlayer5Score(int points) {
-        player5Score.setText(points);
+        player5Score.setText(Integer.toString(points));
 
+    }
+
+    public void player2Invis()
+    {
+        player2.setText("");
+        player2Name.setText("");
+        player2Score.setText("");
     }
 
     @Override
@@ -219,14 +230,14 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
 
     @Override
     public void setVictory() {
-        defeat.setVisibility(View.INVISIBLE);
+        defeat.setVisibility(View.GONE);
         victory.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void setDefeat() {
         defeat.setVisibility(View.VISIBLE);
-        victory.setVisibility(View.INVISIBLE);
+        victory.setVisibility(View.GONE);
     }
 
     @Override
