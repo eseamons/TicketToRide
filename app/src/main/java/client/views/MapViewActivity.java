@@ -229,6 +229,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
                 presenter.stupidButtonPressed();
             }
         });
+        StupidButton.setVisibility(View.INVISIBLE);
 
         claimRouteButton = (Button) findViewById(R.id.claimRouteButton);
         claimRouteButton.setOnClickListener(new View.OnClickListener() {

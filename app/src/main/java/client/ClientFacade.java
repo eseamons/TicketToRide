@@ -265,7 +265,10 @@ public class ClientFacade implements IClient{
         String auth = clientModel.getAuthorization();
         int gameID = clientModel.getCurrent_game().getGameID();
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.drawDeckCard(auth, gameID);
+
+        boolean variable = serverProxy.drawDeckCard(auth, gameID);
+        getNewGameCommands();
+        return variable;
     }
 
     public void playerDrewDeckCard(int gameID, int playerID, CardColor card) {
@@ -285,7 +288,9 @@ public class ClientFacade implements IClient{
         int gameID = currentGame.getGameID();
 
         ServerProxy serverProxy = ServerProxy.getInstance();
-        return serverProxy.drawFaceUpCard(cardIndex, auth, gameID);
+        boolean variable = serverProxy.drawFaceUpCard(cardIndex, auth, gameID);
+        getNewGameCommands();
+        return variable;
     }
 
     public Route getRouteByClick(Point click)

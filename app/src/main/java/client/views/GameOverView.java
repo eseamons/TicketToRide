@@ -87,6 +87,7 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
         player4 = (TextView) findViewById(R.id.player4Place);
         player5 = (TextView) findViewById(R.id.player5Place);
 
+        //presenter = new GameOverPresenter();
         presenter = GameOverPresenter.getInstance();
 
         QuitBtn = (Button) findViewById(R.id.QuitBtn);
@@ -108,7 +109,6 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
                 startActivity(intent);
             }
         });
-
 
 
 
