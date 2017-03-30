@@ -49,6 +49,8 @@ public class MapViewPresenter implements Observer, IMapPresenter
         setDestinationCardVisiblity();
         isGameOver();
 
+        view.update();
+
         view.setStupidButtonText(client.next_cmd);
     }
 

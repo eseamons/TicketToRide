@@ -58,7 +58,7 @@ public class GameOverPresenter implements IGameOverPresenter, Observer {
 
             ClientFacade cf = new ClientFacade();
             Player thisPlayer = cf.getThisPlayer();
-            List<Player> players = cf.getPlayers();
+            List<Player> players = cf.getGamePlayers();
 
             if (players.size() < 5)
                 view.player5Invis();
@@ -66,6 +66,8 @@ public class GameOverPresenter implements IGameOverPresenter, Observer {
                 view.player4Invis();
             if (players.size() < 3)
                 view.player3Invis();
+            if (players.size() < 2)
+                view.player2Invis();
 
             int playerCount = players.size();
             List<Player> playersCopy = new ArrayList<Player>(players);
@@ -87,8 +89,13 @@ public class GameOverPresenter implements IGameOverPresenter, Observer {
                         view.setPlayer1Name(first.getName());
                         view.setPlayer1Score(first.getPoints());
 
-                        if (first.equals(thisPlayer))
+                        if (first.equals(thisPlayer)) {
                             view.setRibbon1();
+                            view.setVictory();
+                        }
+                        else{
+                            view.setDefeat();
+                        }
                         break;
                     case 1:
                         Player second = sortedPlayers.get(i);
@@ -140,7 +147,7 @@ public class GameOverPresenter implements IGameOverPresenter, Observer {
     public int findNextHighest(List<Player> players)
     {
         int high = 0;
-        int highIndex = -1;
+        int highIndex = 0;
         Player currentPlayer;
         for (int i = 0; i < players.size(); i++)
         {
