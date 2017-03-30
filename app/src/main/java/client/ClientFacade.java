@@ -334,17 +334,17 @@ public class ClientFacade implements IClient{
         return clientModel.getInstance().getThis_player().getDestinationCards();
     }
 
-    public boolean discardDestinationCards(DestinationCard discardedDestCard)
-    {
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        String auth = clientModel.getAuthorization();
-        int gameID = clientModel.getCurrent_game().getGameID();
-
-        return serverProxy.removeDestinationCard(discardedDestCard, gameID,auth);
-    }
-    public void playerRemovedDestinationCard(int gameID, int playerID, DestinationCard destinationCard) {
-        clientModel.removeDestinationCard(gameID,playerID, destinationCard);
-    }
+//    public boolean discardDestinationCards(DestinationCard discardedDestCard)
+//    {
+//        ServerProxy serverProxy = ServerProxy.getInstance();
+//        String auth = clientModel.getAuthorization();
+//        int gameID = clientModel.getCurrent_game().getGameID();
+//
+//        return serverProxy.removeDestinationCard(discardedDestCard, gameID,auth);
+//    }
+//    public void playerRemovedDestinationCard(int gameID, int playerID, DestinationCard destinationCard) {
+//        clientModel.removeDestinationCard(gameID,playerID, destinationCard);
+//    }
 
     public RoutesList getRoutesList()
     {
@@ -513,7 +513,12 @@ public class ClientFacade implements IClient{
     //in the model as well as a boolean array of which cards are to be kept (true) and discarded (false)
     public void confirmDestinationCards()
     {
-        clientModel.addConfirmedDestinationCardsToPlayer();
+        boolean[] acceptedCards = clientModel.addConfirmedDestinationCardsToPlayer();
+        int gameID = clientModel.getCurrent_game().getGameID();
+        int playerID = clientModel.getThis_player().getPlayerID();
+        String auth = clientModel.getAuthorization();
+        ServerProxy proxy = ServerProxy.getInstance();
+        proxy.removeDestinationCard(gameID, playerID, acceptedCards, auth);
     }
 
     public boolean canConfirmDestinationCards()

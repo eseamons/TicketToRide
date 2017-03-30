@@ -1,10 +1,6 @@
 package server;
 
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +8,6 @@ import java.util.Map;
 import shared.CardColor;
 import shared.ColorNum;
 import shared.Result;
-import shared.Serializer;
 import shared.command_classes.*;
 import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
@@ -23,7 +18,7 @@ import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.DrawFaceUpCardCommandData;
 import shared.command_data_classes.EndTurnCommandData;
 import shared.command_data_classes.JoinGameCommandData;
-import shared.command_data_classes.RemoveDestinationCardCommandData;
+import shared.command_data_classes.ConfirmDestinationCardCommandData;
 import shared.command_data_classes.SetFaceUpCardCommandData;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
@@ -389,15 +384,10 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(DestinationCard destinationCard,int gameID, String auth) {
-//        Game currentGame = null;
-//        Player player = playerAuthMap.get(auth);
-//        DestinationCard destinationCard = null;
-//        destinationCard = currentGame.getDestinationCardByName(destinationCardName);
-//        destinationCard.setOwnership(auth);
-//        player.removeDestinationCard(destinationCardName);
+    public boolean removeDestinationCard(int gameID, int playerID, boolean[] acceptedCards, String auth) {
+        Game currentGame = null;
         boolean successful = false;
-        Game currentGame = gameList.getGame(gameID);
+       currentGame = gameList.getGame(gameID);
 
         if(currentGame != null)
         {
@@ -406,19 +396,15 @@ public class ServerModel implements IServer{
             if( player != null)
             {
                 successful = true;
-                int playerID = player.getPlayerID();
-                currentGame.returnDestinationCard(destinationCard, playerID);
-
-                //TODO:below here change to be game commands not lobby commands
                 int currentCmdID = gameList.getCurrentGameCommandID();
                 gameList.incrementCurrentGameCommandID();
-                Command cmd = new DrawDestinationCardCommand();
+                Command cmd = new ConfirmDestinationCardCommand();
 
-                RemoveDestinationCardCommandData cmdData = new RemoveDestinationCardCommandData();
+                ConfirmDestinationCardCommandData cmdData = new ConfirmDestinationCardCommandData();
                 cmdData.setAuth(auth);
                 cmdData.setGameID(gameID);
                 cmdData.setPlayerID(playerID);
-                cmdData.setDiscardedCard(destinationCard);
+                cmdData.setConfirmedCards(acceptedCards);
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
