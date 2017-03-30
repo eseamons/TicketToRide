@@ -312,8 +312,9 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         Result r = serverProxy.drawDestinationCards(gameID,auth);
         Command cmd = (Command) r.getInfo();
-        clientModel.getGameCommandList().add(cmd);
-        cmd.executeOnClient();
+        //clientModel.getGameCommandList().add(cmd);
+        //cmd.executeOnClient();
+        getNewGameCommands();
         return r.isSuccess();
     }
 
@@ -520,8 +521,4 @@ public class ClientFacade implements IClient{
         return clientModel.isGameOver();
     }
 
-    public void endGame()
-    {
-        clientModel.endGame();
-    }
 }

@@ -6,6 +6,7 @@ import shared.CardColor;
 import shared.ColorNum;
 import shared.command_classes.Command;
 import shared.model_classes.Player;
+import shared.model_classes.Route;
 
 /**
  * Created by rebeccaredd on 2/28/17.
@@ -242,14 +243,14 @@ public class PlayersList {
         return playerFound;
     }
 
-    public void removeCards(String auth, CardColor colorOfCardUsed, int length) {
+    public void removeCards(String auth, CardColor colorOfCardUsed, Route route) {
         for(int i = 0; i < players.size(); i ++)
         {
             Player tempPlayer = players.get(i);
             String tempAuth = tempPlayer.getAccount().getAuthentication();
             if(tempAuth.equals(auth))
             {
-                tempPlayer.removeCards(colorOfCardUsed, length);
+                tempPlayer.removeCards(colorOfCardUsed, route);
             }
         }
     }

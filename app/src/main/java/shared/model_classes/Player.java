@@ -118,16 +118,30 @@ public class Player {
         choosableDestinationCards[cardIndex] = null;
     }
 
-    public void removeCards(CardColor colorOfCardUsed, int length) {
-        int numberOfCardsToRemove = length;
+    public void removeCards(CardColor colorOfCardUsed, Route route) {
+        int numberOfCardsToRemove = route.length;
         for(int i = 0; i <trainCards.size(); i++)
         {
             CardColor c = trainCards.get(i);
-            if(c == colorOfCardUsed && numberOfCardsToRemove > 0)
+            if(route.color == CardColor.WILD)
             {
-                trainCards.remove(i);
-                numberOfCardsToRemove--;
+                if(c == colorOfCardUsed && numberOfCardsToRemove > 0)
+                {
+                    trainCards.remove(i);
+                    i--;
+                    numberOfCardsToRemove--;
+                }
             }
+            else
+            {
+                if(c == route.color && numberOfCardsToRemove > 0)
+                {
+                    trainCards.remove(i);
+                    i--;
+                    numberOfCardsToRemove--;
+                }
+            }
+
         }
         if(numberOfCardsToRemove >0)
         {
@@ -137,6 +151,7 @@ public class Player {
                 if(c == CardColor.WILD && numberOfCardsToRemove > 0)
                 {
                     trainCards.remove(j);
+                    j--;
                     numberOfCardsToRemove--;
                 }
             }
