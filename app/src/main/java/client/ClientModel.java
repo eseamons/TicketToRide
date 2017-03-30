@@ -240,6 +240,8 @@ public class ClientModel extends Observable
     public void calculateTurn() {
         if(first)
         {
+            ClientFacade clientFacade = new ClientFacade();
+            clientFacade.retrieve3DestinationCards();
             state = new DrawDestinationCardState();
             first = false;
         }
