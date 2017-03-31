@@ -27,6 +27,8 @@ public class LoginView extends AppCompatActivity implements ILoginView {
     private Button loginButton;
     private Button registerButton;
 
+    private EditText IPAdressEditText;
+
     private static LoginView instance = new LoginView();
 
     public static LoginView getInstance()
@@ -54,6 +56,8 @@ public class LoginView extends AppCompatActivity implements ILoginView {
         loginPW = (EditText) findViewById(R.id.editText4);
         registerUN = (EditText) findViewById(R.id.editText5);
         registerPW = (EditText) findViewById(R.id.editText6);
+
+        IPAdressEditText = (EditText) findViewById(R.id.ipAddress);
 
         loginButton = (Button) findViewById(R.id.button);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -88,8 +92,10 @@ public class LoginView extends AppCompatActivity implements ILoginView {
                 }
             }
         });
+
     }
 
+    public String getIPAddress() { return IPAdressEditText.getText().toString();}
     @Override
     public String getUsername() {
         return loginUN.getText().toString();
