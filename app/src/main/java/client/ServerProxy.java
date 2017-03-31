@@ -1,14 +1,11 @@
 package client;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import shared.CardColor;
 import shared.ColorNum;
 import shared.Result;
-import shared.Serializer;
 import shared.command_classes.AddCommentCommand;
 import shared.command_classes.BeginGameCommand;
 import shared.command_classes.ClaimRouteCommand;
@@ -24,7 +21,7 @@ import shared.command_classes.GetNewGameCommandsCommand;
 import shared.command_classes.JoinGameCommand;
 import shared.command_classes.LoginCommand;
 import shared.command_classes.RegisterCommand;
-import shared.command_classes.RemoveDestinationCardCommand;
+import shared.command_classes.ConfirmDestinationCardCommand;
 import shared.command_classes.SetPlayerColorCommand;
 import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
@@ -40,7 +37,7 @@ import shared.command_data_classes.GetNewGameCommandsCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.LoginCommandData;
 import shared.command_data_classes.RegisterCommandData;
-import shared.command_data_classes.RemoveDestinationCardCommandData;
+import shared.command_data_classes.ConfirmDestinationCardCommandData;
 import shared.command_data_classes.SetPlayerColorCommandData;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
@@ -400,13 +397,14 @@ public class ServerProxy implements IServer{
     //@return returns true if sucessful, false otherwise
     //@postcondition - a removeDestinationCard comand is sent to the server and then executed and stored
     @Override
-    public boolean removeDestinationCard(DestinationCard destinationCard, int gameID, String auth) {
-        RemoveDestinationCardCommandData cmdData = new RemoveDestinationCardCommandData();
-        cmdData.setDiscardedCard(destinationCard);
+    public boolean removeDestinationCard(int gameID, int playerID, boolean[] acceptedCards, String auth) {
+        ConfirmDestinationCardCommandData cmdData = new ConfirmDestinationCardCommandData();
+        cmdData.setConfirmedCards(acceptedCards);
         cmdData.setAuth(auth);
         cmdData.setGameID(gameID);
+        cmdData.setPlayerID(playerID);
 
-        Command cmd = new RemoveDestinationCardCommand();
+        Command cmd = new ConfirmDestinationCardCommand();
         cmd.setInfo(cmdData);
         Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
         return r.isSuccess();
