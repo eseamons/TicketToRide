@@ -1,6 +1,7 @@
 package client.presenters;
 
 import client.ClientFacade;
+import client.ServerProxy;
 import client.interfaces.ILoginPresenter;
 import client.views.LoginView;
 import shared.model_classes.Account;
@@ -45,6 +46,8 @@ public class LoginPresenter implements ILoginPresenter{
         String username = loginView.getUsername();
         String password = loginView.getPassword();
 
+        String IP = loginView.getIPAddress();
+        ServerProxy.setURL(IP);
         //clear login fields
         loginView.clearloginUsername();
         loginView.clearLoginPassword();

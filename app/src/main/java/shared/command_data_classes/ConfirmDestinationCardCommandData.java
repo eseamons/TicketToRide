@@ -9,21 +9,15 @@ import shared.model_classes.DestinationCard;
  * Created by erics on 3/6/2017.
  */
 
-public class RemoveDestinationCardCommandData {
-    DestinationCard discardedCard;
+public class ConfirmDestinationCardCommandData {
     private String auth;
-    int gameID;
-    int playerID;
+    private int gameID;
+    private int playerID;
+    private boolean [] confirmedCards;
 
-    public RemoveDestinationCardCommandData() {
-    }
 
-    public DestinationCard getDiscardedCard() {
-        return discardedCard;
-    }
+    public ConfirmDestinationCardCommandData() {
 
-    public void setDiscardedCard(DestinationCard discardedCard) {
-        this.discardedCard = discardedCard;
     }
 
     public String getAuth() {
@@ -48,5 +42,13 @@ public class RemoveDestinationCardCommandData {
 
     public void setPlayerID(int playerID) {
         this.playerID = playerID;
+    }
+
+    public boolean[] getConfirmedCards() {
+        return confirmedCards;
+    }
+
+    public void setConfirmedCards(boolean[] confirmedCards) {
+        this.confirmedCards = confirmedCards;
     }
 }
