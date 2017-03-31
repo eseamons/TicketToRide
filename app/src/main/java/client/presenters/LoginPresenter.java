@@ -28,6 +28,9 @@ public class LoginPresenter implements ILoginPresenter{
         loginView.clearRegisUsername();
         loginView.clearRegisPassword();
 
+        String IP = loginView.getIPAddress();
+        ServerProxy.setURL(IP);
+
         boolean successful = false;
         if(!registerPW.equals("") && !registerUN.equals("")) {
             successful = clientFacade.register(registerUN, registerPW);
