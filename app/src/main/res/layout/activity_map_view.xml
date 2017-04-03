@@ -151,7 +151,8 @@
         android:layout_above="@+id/linearLayout"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:text="GameOver" />
+        android:text="GameOver"
+        android:visibility="gone" />
 
     <Button
         android:layout_width="40dp"
