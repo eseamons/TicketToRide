@@ -21,8 +21,9 @@ public class MyTurnState extends ClientState
 
     public String DrawDestinationCardButtonClicked()
     {
-        client.retrieve3DestinationCards();
         client.setClientState(new DrawDestinationCardState());
+        client.retrieve3DestinationCards();
+
         return "";
     }
 
@@ -30,8 +31,9 @@ public class MyTurnState extends ClientState
     {
         if(client.canClaimRoute(desiredRoute))
         {
-            client.ClaimRoute(desiredRoute);
             client.endTurn();
+            client.ClaimRoute(desiredRoute);
+
             return "";
         }
         else
@@ -43,8 +45,8 @@ public class MyTurnState extends ClientState
 
     public String DeckCardClicked()
     {
-        client.drawDeckCard();
         client.setClientState(new DrawCardState());
+        client.drawDeckCard();
         return "";
     }
 
@@ -55,7 +57,6 @@ public class MyTurnState extends ClientState
 
     public String templateFaceUpClicked(int cardIndex)
     {
-        client.drawFaceUpCard(cardIndex);
         if(isWild(cardIndex))
         {
             client.endTurn();
@@ -64,6 +65,7 @@ public class MyTurnState extends ClientState
         {
             client.setClientState(new DrawCardState());
         }
+        client.drawFaceUpCard(cardIndex);
         return "";
     }
 

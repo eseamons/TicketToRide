@@ -19,8 +19,8 @@ public class DrawCardState extends ClientState
 
     public String DeckCardClicked()
     {
-        client.drawDeckCard();
         client.endTurn();
+        client.drawDeckCard();
         return "";
     }
 
@@ -33,8 +33,9 @@ public class DrawCardState extends ClientState
     {
         if(!isWild(cardIndex))
         {
-            client.drawFaceUpCard(cardIndex);
             client.endTurn();
+            client.drawFaceUpCard(cardIndex);
+
             return "";
         }
         else

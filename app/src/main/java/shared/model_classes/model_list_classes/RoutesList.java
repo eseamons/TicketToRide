@@ -10,6 +10,7 @@ import java.util.Map;
 import shared.CardColor;
 import shared.model_classes.Player;
 import shared.model_classes.Route;
+import shared.model_classes.RouteNode;
 
 /**
  * Created by Maynson on 3/1/2017.
@@ -516,5 +517,19 @@ public class RoutesList {
         double d = top/bot;
 
         return d <= tolerance; //line algorithm is within tolerance
+    }
+
+    Map<String, RouteNode> dataNodes = new HashMap<>();
+    public void createNodeList()
+    {
+        for(int i=0; i< availableRouteList.size(); i++)
+        {
+            Route r = availableRouteList.get(i);
+            String key = r.toString();
+            if(!dataNodes.containsKey(key))
+            {
+                dataNodes.put(key, new RouteNode());
+            }
+        }
     }
 }
