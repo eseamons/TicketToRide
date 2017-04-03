@@ -10,10 +10,27 @@ public class RouteNode
 {
     private String city1;
     private String city2;
+    boolean visited = false;
     public RouteNode()
     {
         neighbors = new ArrayList();
     }
+
+    public void markVisited()
+    {
+        visited = true;
+    }
+
+    public void cleanVisited()
+    {
+        visited = false;
+    }
+
+    public boolean isVisited()
+    {
+        return visited;
+    }
+
 
     public void setCities(String c1, String c2)
     {
@@ -34,6 +51,21 @@ public class RouteNode
     public ArrayList<String> getNeighbors()
     {
         return neighbors;
+    }
+
+    public String getCity1()
+    {
+        return city1;
+    }
+
+    public String getCity2()
+    {
+        return city2;
+    }
+
+    public boolean isEqual(RouteNode r)
+    {
+        return city1 == r.city1 && city2 == r.city2;
     }
 
 
