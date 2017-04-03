@@ -532,4 +532,9 @@ public class ClientFacade implements IClient{
         return clientModel.isGameOver();
     }
 
+    public int getAmountOfPlayersInCurrentGame()
+    {
+        return getPlayers().size();
+    }
+
 }

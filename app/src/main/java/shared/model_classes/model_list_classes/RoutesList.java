@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
+import client.ClientFacade;
 import shared.CardColor;
+import shared.model_classes.NodeMap;
 import shared.model_classes.Player;
 import shared.model_classes.Route;
 import shared.model_classes.RouteNode;
@@ -519,17 +522,26 @@ public class RoutesList {
         return d <= tolerance; //line algorithm is within tolerance
     }
 
-    Map<String, RouteNode> dataNodes = new HashMap<>();
+
+    ArrayList<NodeMap> nodeMaps = new ArrayList<>();
     public void createNodeList()
     {
+        ClientFacade client = new ClientFacade();
+        for(int i = 0; i < client.getAmountOfPlayersInCurrentGame(); i++)
+        {
+            nodeMaps.add(new NodeMap());
+        }
         for(int i=0; i< availableRouteList.size(); i++)
         {
             Route r = availableRouteList.get(i);
-            String key = r.toString();
-            if(!dataNodes.containsKey(key))
+            if(r.ownership != 0)
             {
-                dataNodes.put(key, new RouteNode());
+                RouteNode rn = new RouteNode();
+                rn.setCities(r.city1,r.city2);
+                nodeMaps.get(i+1).addDataNode(rn);
             }
         }
     }
+
+
 }
