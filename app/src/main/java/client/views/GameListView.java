@@ -115,6 +115,9 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
     @Override
     public int getNumberOfPlayers() {
         String numOfPlayers = maxPlayers.getText().toString();
+        if(numOfPlayers.equals(""))
+        {return -1;}
+
         int num = Integer.parseInt(numOfPlayers);
         return num;
     }
@@ -144,4 +147,8 @@ public class GameListView extends AppCompatActivity implements IGameListView  {
      {
          startActivity(new Intent(GameListView.this, GameLobbyView.class));
      }
+
+    @Override
+    public void onBackPressed() {
+    }
 }
