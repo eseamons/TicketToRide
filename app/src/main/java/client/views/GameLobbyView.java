@@ -231,4 +231,7 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));
     }
 
+    @Override
+    public void onBackPressed() {
+    }
 }
