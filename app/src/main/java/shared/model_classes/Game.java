@@ -206,5 +206,10 @@ public class Game {
         return comments;
     }
 
+    public void performEndGameCalculations()
+    {
+        routes.performEndGameCalculations();
+    }
+
 
 }

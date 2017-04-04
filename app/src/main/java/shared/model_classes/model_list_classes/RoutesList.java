@@ -2,6 +2,7 @@ package shared.model_classes.model_list_classes;
 
 import android.graphics.Point;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.Map;
 import java.util.Vector;
 
 import client.ClientFacade;
+import client.StateClasses.ClientState;
 import shared.CardColor;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.NodeMap;
 import shared.model_classes.Player;
 import shared.model_classes.Route;
@@ -203,7 +206,7 @@ public class RoutesList {
         getRoute(72).setCoords(1765,1093,1971,864);
         availableRouteList.add(new Route("New Orleans", "Atlanta", CardColor.ORANGE, 4));
         getRoute(73).setCoords(1790,1109,1990,888);
-        availableRouteList.add(new Route("New Orleans", "Miami", CardColor.RED, 4));
+        availableRouteList.add(new Route("New Orleans", "Miami", CardColor.RED, 6));
         getRoute(74).setCoords(1812,1121,2271,1198);
         availableRouteList.add(new Route("Atlanta", "Raleigh", CardColor.WILD, 2));
         getRoute(75).setCoords(2007,840,2138,754);
@@ -523,11 +526,20 @@ public class RoutesList {
     }
 
 
+    public void performEndGameCalculations()
+    {
+        createNodeList();
+        calculateDestinationCardPoint();
+        awardLongestPath();
+    }
+
     ArrayList<NodeMap> nodeMaps = new ArrayList<>();
     public void createNodeList()
     {
         ClientFacade client = new ClientFacade();
-        for(int i = 0; i < client.getAmountOfPlayersInCurrentGame(); i++)
+        int amountOfPlayers = client.getAmountOfPlayersInCurrentGame();
+        //int amountOfPlayers = 5;
+        for(int i = 0; i < amountOfPlayers; i++)
         {
             nodeMaps.add(new NodeMap());
         }
@@ -538,10 +550,89 @@ public class RoutesList {
             {
                 RouteNode rn = new RouteNode();
                 rn.setCities(r.city1,r.city2);
-                nodeMaps.get(i+1).addDataNode(rn);
+                rn.setLength(r.length);
+                nodeMaps.get(r.ownership-1).addDataNode(rn);
             }
         }
     }
+
+    public void calculateDestinationCardPoint()
+    {
+        ClientFacade client = new ClientFacade();
+        List<Player> players = client.getPlayers();
+        //IF U WANT TEST ArrayList<Player> players = stupidPlayers;
+        for(int playerIndex = 0; playerIndex < players.size(); playerIndex++)
+        {
+            Player p = players.get(playerIndex);
+            for(DestinationCard dc : p.getDestinationCards())
+            {
+                if(nodeMaps.get(playerIndex).isReachableFrom(dc.getCity1(),dc.getCity2()))
+                {
+                    p.incrementPoints(dc.getPoints());
+                }
+                else
+                {
+                    p.decrementPoints(dc.getPoints());
+                }
+            }
+        }
+    }
+
+    ArrayList<Player> stupidPlayers = new ArrayList();
+    public void setStupidPlayers(ArrayList<Player> le_stupid)
+    {
+        stupidPlayers = le_stupid;
+    }
+    //this is used to help test to see if DFS and Dikstras work or not
+    public void stupidClaimRoute(String city1, String city2, int playerOwnership)
+    {
+        for(Route r: availableRouteList)
+        {
+            if(citiesMatch(city1,city2,r) && r.ownership == 0)
+            {
+                r.ownership = playerOwnership;
+                return;
+            }
+        }
+    }
+
+    public boolean citiesMatch(String city1, String city2, Route r)
+    {
+        return (city1 == r.city1 && city2 == r.city2) || (city1 == r.city2 && city2 == r.city1);
+    }
+
+    private int AWARD_FOR_LONGEST_PATH = 10;
+    public void awardLongestPath()
+    {
+        ClientFacade client = new ClientFacade();
+        List<Player> players = client.getPlayers();
+        //test: ArrayList<Player> players = stupidPlayers;
+        ArrayList<Integer> indexes_of_player_with_longest = new ArrayList<>();
+        int longest_path = -1;
+        for(int i = 0; i < players.size(); i++)
+        {
+            int cur_longest_path = nodeMaps.get(i).findLargestRoute();
+            System.out.println("player " + (i+1) + " longest path: " + cur_longest_path);
+            if(cur_longest_path > longest_path)
+            {
+                longest_path = cur_longest_path;
+                indexes_of_player_with_longest = new ArrayList<>();
+                indexes_of_player_with_longest.add(i);
+            }
+            else if(cur_longest_path == longest_path)
+            {
+                indexes_of_player_with_longest.add(i);
+            }
+        }
+
+        //award points now
+        for(int i = 0; i < indexes_of_player_with_longest.size(); i++)
+        {
+            int cur_index = indexes_of_player_with_longest.get(i);
+            players.get(cur_index).incrementPoints(AWARD_FOR_LONGEST_PATH);
+        }
+    }
+
 
 
 }

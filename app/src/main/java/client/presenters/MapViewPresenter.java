@@ -62,6 +62,7 @@ public class MapViewPresenter implements Observer, IMapPresenter
         {
             if(firstGameOverPoll)
             {
+                client.performEndGameCalculations();
                 view.goToGameOverView();
                 firstGameOverPoll = false;
             }

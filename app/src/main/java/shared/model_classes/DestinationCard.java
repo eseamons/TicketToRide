@@ -18,6 +18,16 @@ public class DestinationCard {
         ownershipAuth = null;
     }
 
+    public String getCity1()
+    {
+        return city1;
+    }
+
+    public String getCity2()
+    {
+        return city2;
+    }
+
 
     //setters
     public void setOwnership(String auth) {

@@ -1,5 +1,6 @@
 package shared.model_classes;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -10,6 +11,7 @@ public class RouteNode
 {
     private String city1;
     private String city2;
+    private int length;
     boolean visited = false;
     public RouteNode()
     {
@@ -32,15 +34,28 @@ public class RouteNode
     }
 
 
+    public void setLength(int l)
+    {
+        length = l;
+    }
+
+    public int getLength()
+    {
+        return length;
+    }
+
     public void setCities(String c1, String c2)
     {
         city1 = c1;
         city2 = c2;
     }
-    ArrayList<String> neighbors;
-    public void addNeighbor(String neighbor)
+    ArrayList<RouteNode> neighbors;
+    public void addNeighbor(RouteNode neighbor)
     {
-        neighbors.add(neighbor);
+        if(!neighbors.contains(neighbor) && !isEqual(neighbor))
+        {
+            neighbors.add(neighbor);
+        }
     }
 
     public boolean hasNeighbor(String cont)
@@ -48,7 +63,7 @@ public class RouteNode
         return neighbors.contains(cont);
     }
 
-    public ArrayList<String> getNeighbors()
+    public ArrayList<RouteNode> getNeighbors()
     {
         return neighbors;
     }

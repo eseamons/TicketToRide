@@ -157,4 +157,15 @@ public class Player {
             }
         }
     }
+
+    //used to increment point from destination cards in RoutesList class
+    public void incrementPoints(int more_points)
+    {
+        points += more_points;
+    }
+
+    public void decrementPoints(int less_points)
+    {
+        points -= less_points;
+    }
 }
