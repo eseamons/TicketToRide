@@ -118,8 +118,10 @@ public class Player {
         choosableDestinationCards[cardIndex] = null;
     }
 
-    public void removeCards(CardColor colorOfCardUsed, Route route) {
+    public List<CardColor> removeCards(CardColor colorOfCardUsed, Route route) {
         int numberOfCardsToRemove = route.length;
+        ArrayList<CardColor> cardsUsed = new ArrayList<>();
+
         for(int i = 0; i <trainCards.size(); i++)
         {
             CardColor c = trainCards.get(i);
@@ -128,6 +130,7 @@ public class Player {
                 if(c == colorOfCardUsed && numberOfCardsToRemove > 0)
                 {
                     trainCards.remove(i);
+                    cardsUsed.add(c);
                     i--;
                     numberOfCardsToRemove--;
                 }
@@ -137,6 +140,7 @@ public class Player {
                 if(c == route.color && numberOfCardsToRemove > 0)
                 {
                     trainCards.remove(i);
+                    cardsUsed.add(c);
                     i--;
                     numberOfCardsToRemove--;
                 }
@@ -151,11 +155,14 @@ public class Player {
                 if(c == CardColor.WILD && numberOfCardsToRemove > 0)
                 {
                     trainCards.remove(j);
+                    cardsUsed.add(c);
                     j--;
                     numberOfCardsToRemove--;
                 }
             }
         }
+
+        return cardsUsed;
     }
 
     //used to increment point from destination cards in RoutesList class

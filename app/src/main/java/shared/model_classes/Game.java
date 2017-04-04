@@ -122,6 +122,7 @@ public class Game {
     public void addCardsToDiscard(List<CardColor> cardColors) {
         trainCardDeck.addCardsToDiscard(cardColors);
     }
+    public int getDiscardPileSize(){return trainCardDeck.getDiscardPileSize();}
     public void reShuffleTrainCards(){
         trainCardDeck.reShuffleDeck();
     }
@@ -135,7 +136,8 @@ public class Game {
             int pointIncrease = route.getPointValue();
             players.increasePlayerScore(auth, pointIncrease );
             players.decreasePlayerTrainsRemaining(auth, route.length);
-            players.removeCards(auth, colorOfCardUsed, route);
+            List <CardColor> cardsUsed = players.removeCards(auth, colorOfCardUsed, route);
+            trainCardDeck.addCardsToDiscard(cardsUsed);
             if(players.twoOrLessTrains(auth))
             {
                 lastTurn = true;
@@ -144,24 +146,7 @@ public class Game {
         return successful;
     }
 
-    public boolean stupidClaimRoute(int route_num, int player_num) {
-        Route r = routes.getRoute(route_num);
-        r.ownership = player_num;
-        Player p = getPlayerbyIndex(player_num-1);
-        p.setPoints(p.getPoints() + r.getPointValue());
-        p.decreaseTrainsRemaining(r.length);
-        return true;
-    }
 
-    public void stupidAddCard(CardColor card, int player_num)
-    {
-        getPlayerbyIndex(player_num-1).addTrainCard(card);
-    }
-
-    public void stupidAddDestinationCard(DestinationCard card, int player_num)
-    {
-        getPlayerbyIndex(player_num-1).addDestinationCard(card);
-    }
 
     public void addComment(String message)
     {
@@ -212,4 +197,30 @@ public class Game {
     }
 
 
+
+
+
+
+
+
+//stupid functions.
+
+    public boolean stupidClaimRoute(int route_num, int player_num) {
+        Route r = routes.getRoute(route_num);
+        r.ownership = player_num;
+        Player p = getPlayerbyIndex(player_num-1);
+        p.setPoints(p.getPoints() + r.getPointValue());
+        p.decreaseTrainsRemaining(r.length);
+        return true;
+    }
+
+    public void stupidAddCard(CardColor card, int player_num)
+    {
+        getPlayerbyIndex(player_num-1).addTrainCard(card);
+    }
+
+    public void stupidAddDestinationCard(DestinationCard card, int player_num)
+    {
+        getPlayerbyIndex(player_num-1).addDestinationCard(card);
+    }
 }
