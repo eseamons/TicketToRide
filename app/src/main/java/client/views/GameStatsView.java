@@ -175,7 +175,14 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer1TurnMarker(boolean b) {
-        if(b) player1TurnMarker.setVisibility(View.VISIBLE);
+        if(b)
+        {
+            player1TurnMarker.setVisibility(View.VISIBLE);
+            player2TurnMarker.setVisibility(View.INVISIBLE);
+            player3TurnMarker.setVisibility(View.INVISIBLE);
+            player4TurnMarker.setVisibility(View.INVISIBLE);
+            player5TurnMarker.setVisibility(View.INVISIBLE);
+        }
         else player1TurnMarker.setVisibility(View.INVISIBLE);
     }
 
@@ -206,7 +213,14 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer2TurnMarker(boolean b) {
-        if(b) player2TurnMarker.setVisibility(View.VISIBLE);
+        if(b)
+        {
+            player1TurnMarker.setVisibility(View.INVISIBLE);
+            player2TurnMarker.setVisibility(View.VISIBLE);
+            player3TurnMarker.setVisibility(View.INVISIBLE);
+            player4TurnMarker.setVisibility(View.INVISIBLE);
+            player5TurnMarker.setVisibility(View.INVISIBLE);
+        }
         else player2TurnMarker.setVisibility(View.INVISIBLE);
     }
 
@@ -237,7 +251,14 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer3TurnMarker(boolean b) {
-        if(b) player3TurnMarker.setVisibility(View.VISIBLE);
+        if(b)
+        {
+            player1TurnMarker.setVisibility(View.INVISIBLE);
+            player2TurnMarker.setVisibility(View.INVISIBLE);
+            player3TurnMarker.setVisibility(View.VISIBLE);
+            player4TurnMarker.setVisibility(View.INVISIBLE);
+            player5TurnMarker.setVisibility(View.INVISIBLE);
+        }
         else player3TurnMarker.setVisibility(View.INVISIBLE);
     }
 
@@ -268,7 +289,14 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer4TurnMarker(boolean b) {
-        if(b) player4TurnMarker.setVisibility(View.VISIBLE);
+        if(b)
+        {
+            player1TurnMarker.setVisibility(View.INVISIBLE);
+            player2TurnMarker.setVisibility(View.INVISIBLE);
+            player3TurnMarker.setVisibility(View.INVISIBLE);
+            player4TurnMarker.setVisibility(View.VISIBLE);
+            player5TurnMarker.setVisibility(View.INVISIBLE);
+        }
         else player4TurnMarker.setVisibility(View.INVISIBLE);
     }
 
@@ -299,7 +327,14 @@ public class GameStatsView extends AppCompatActivity implements IGameStatsView {
 
     @Override
     public void setPlayer5TurnMarker(boolean b) {
-        if(b) player5TurnMarker.setVisibility(View.VISIBLE);
+        if(b)
+        {
+            player1TurnMarker.setVisibility(View.INVISIBLE);
+            player2TurnMarker.setVisibility(View.INVISIBLE);
+            player3TurnMarker.setVisibility(View.INVISIBLE);
+            player4TurnMarker.setVisibility(View.INVISIBLE);
+            player5TurnMarker.setVisibility(View.VISIBLE);
+        }
         else player5TurnMarker.setVisibility(View.INVISIBLE);
     }
 }
