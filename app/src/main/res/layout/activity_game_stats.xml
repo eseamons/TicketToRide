@@ -33,7 +33,7 @@
         android:layout_below="@+id/chatBox"
         android:ems="10"
         android:inputType="text"
-        android:text="Type here..." />
+        android:hint="Type here..." />
 
     <Button
         android:id="@+id/sendButton"
