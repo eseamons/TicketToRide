@@ -61,7 +61,7 @@ public class PlayersList {
     {
         players = listOfPlayers;
         numOfPlayers = listOfPlayers.size();
-        currentPlayerID =0;
+        currentPlayerID = 0;
     }
 
     /**
