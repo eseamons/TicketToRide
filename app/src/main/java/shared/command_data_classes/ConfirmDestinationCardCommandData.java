@@ -13,7 +13,8 @@ public class ConfirmDestinationCardCommandData {
     private String auth;
     private int gameID;
     private int playerID;
-    private boolean [] confirmedCards;
+    private boolean [] confirmedCardsbool;
+    private DestinationCard[] confirmedCards;
 
 
     public ConfirmDestinationCardCommandData() {
@@ -44,11 +45,20 @@ public class ConfirmDestinationCardCommandData {
         this.playerID = playerID;
     }
 
-    public boolean[] getConfirmedCards() {
-        return confirmedCards;
+    public boolean[] getConfirmedCardsBools() {
+        return confirmedCardsbool;
     }
 
-    public void setConfirmedCards(boolean[] confirmedCards) {
+    public void setConfirmedCardsBools(boolean[] confirmedCardsbool) {
+        this.confirmedCardsbool = confirmedCardsbool;
+    }
+
+    public void setConfirmedCards(DestinationCard[] confirmedCards) {
         this.confirmedCards = confirmedCards;
     }
+
+    public DestinationCard[] getConfirmedCards() {
+        return this.confirmedCards;
+    }
+
 }

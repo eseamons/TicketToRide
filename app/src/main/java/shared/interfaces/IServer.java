@@ -46,7 +46,7 @@ public interface IServer {
     Result drawDestinationCards(int playerID, String auth);
 
 
-    boolean removeDestinationCard(int gameID, int playerID, boolean[] acceptedCards, String auth);
+    boolean removeDestinationCard(int gameID, int playerID, DestinationCard[] acceptedCards, boolean[] acceptedCardsBools, String auth);
 
     boolean drawDeckCard(String auth, int gameID);
 

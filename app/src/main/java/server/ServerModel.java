@@ -395,7 +395,7 @@ public class ServerModel implements IServer{
     }
 
     @Override
-    public boolean removeDestinationCard(int gameID, int playerID, boolean[] acceptedCards, String auth) {
+    public boolean removeDestinationCard(int gameID, int playerID, DestinationCard[] acceptedCards, boolean[] acceptedCardsBools, String auth) {
         Game currentGame = null;
         boolean successful = false;
        currentGame = gameList.getGame(gameID);
@@ -415,7 +415,7 @@ public class ServerModel implements IServer{
                 cmdData.setAuth(auth);
                 cmdData.setGameID(gameID);
                 cmdData.setPlayerID(playerID);
-                cmdData.setConfirmedCards(acceptedCards);
+                cmdData.setConfirmedCardsBools(acceptedCardsBools);
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
