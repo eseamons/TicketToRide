@@ -59,7 +59,7 @@ public class NodeMap
 
     private boolean DFS(String cur, String target)
     {
-        if(cur == target)
+        if(cur.equals(target))
             return true;
         ArrayList<RouteNode> start = dataNodes.get(cur);
         for(RouteNode rn : start)
@@ -67,7 +67,7 @@ public class NodeMap
             if(!rn.isVisited())
             {
                 rn.markVisited();
-                if(cur == rn.getCity1())
+                if(cur.equals(rn.getCity1()))
                 {
                     return DFS(rn.getCity2(), target);
                 }
@@ -156,7 +156,7 @@ public class NodeMap
 
     private boolean isNeighbor(RouteNode r1, RouteNode r2)
     {
-        return r1.getCity1() == r2.getCity1() || r1.getCity1() == r2.getCity2() || r1.getCity2() == r2.getCity1() || r1.getCity2() == r1.getCity2();
+        return r1.getCity1().equals(r2.getCity1()) || r1.getCity1().equals(r2.getCity2()) || r1.getCity2().equals(r2.getCity1()) || r1.getCity2().equals(r1.getCity2());
     }
 
     private void fillInNeighbors()
