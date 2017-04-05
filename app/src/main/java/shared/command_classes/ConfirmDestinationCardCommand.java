@@ -1,5 +1,6 @@
 package shared.command_classes;
 
+import client.ClientFacade;
 import client.ClientModel;
 import server.ServerFacade;
 import shared.Result;
@@ -26,16 +27,23 @@ public class ConfirmDestinationCardCommand extends Command {
 
     public void executeOnClient()
     {
-        ClientModel model = ClientModel.getInstance();
+        ClientFacade client = new ClientFacade();
         boolean[] confirmedCardsBools = ((ConfirmDestinationCardCommandData) info).getConfirmedCardsBools();
         DestinationCard[] confirmedCards = ((ConfirmDestinationCardCommandData) info).getConfirmedCards();
         int gameID = ((ConfirmDestinationCardCommandData) info).getGameID();
         int playerID = ((ConfirmDestinationCardCommandData) info).getPlayerID();
-        Player thisPlayer = model.getThis_player();
 
-        if(playerID != thisPlayer.getPlayerID()) {
+        for(int i = 0; i < confirmedCards.length; i++)
+        {
+            if(confirmedCardsBools[i])
+            {
+                DestinationCard dc = confirmedCards[i];
+                client.addDestinationCardToPlayerIndex(playerID,dc);
+            }
 
         }
+
+
 
 
     }

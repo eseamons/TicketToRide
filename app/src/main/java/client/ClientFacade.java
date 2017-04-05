@@ -537,7 +537,7 @@ public class ClientFacade implements IClient{
     public void confirmDestinationCards()
     {
         DestinationCard[]  acceptedCards = clientModel.getConfirmedCards();
-        boolean[] acceptedCardsBools = clientModel.addConfirmedDestinationCardsToPlayer();
+        boolean[] acceptedCardsBools = clientModel.getDestinationCardsAcceptance();
         int gameID = clientModel.getCurrent_game().getGameID();
         int playerID = clientModel.getThis_player().getPlayerID();
         String auth = clientModel.getAuthorization();
