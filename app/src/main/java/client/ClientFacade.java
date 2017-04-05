@@ -280,20 +280,6 @@ public class ClientFacade implements IClient{
         }
     }
 
-    public boolean drawFaceUpCard(int cardIndex)
-    {
-        //draws a face up card by index
-        //sends a drawFaceUpCard command to the server
-        Game currentGame = clientModel.getCurrent_game();
-        String auth = clientModel.getAuthorization();
-        int gameID = currentGame.getGameID();
-
-        ServerProxy serverProxy = ServerProxy.getInstance();
-        boolean variable = serverProxy.drawFaceUpCard(cardIndex, auth, gameID);
-        getNewGameCommands();
-        return variable;
-    }
-
     public Route getRouteByClick(Point click)
     {
         return getRoutesList().getClickedRoute(click);
@@ -441,16 +427,29 @@ public class ClientFacade implements IClient{
         return clientModel.ThisPlayersTurn();
     }
 
-    public List<CardColor> getFaceUpCards()
-    {
-        return clientModel.getFaceUpCards();
-    }
-
     public void setThis_player()
     {
         clientModel.setPlayerThroughAuthCode();
     }
 
+    public List<CardColor> getFaceUpCards()
+    {
+        return clientModel.getFaceUpCards();
+    }
+
+    public boolean drawFaceUpCard(int cardIndex)
+    {
+        //draws a face up card by index
+        //sends a drawFaceUpCard command to the server
+        Game currentGame = clientModel.getCurrent_game();
+        String auth = clientModel.getAuthorization();
+        int gameID = currentGame.getGameID();
+
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        boolean variable = serverProxy.drawFaceUpCard(cardIndex, auth, gameID);
+        getNewGameCommands();
+        return variable;
+    }
 
     public void setFaceUpCard(int gameID, CardColor card, int cardIndex) {
         clientModel.SetFaceUpCard(card, cardIndex);
@@ -460,6 +459,29 @@ public class ClientFacade implements IClient{
     {
         return clientModel.getFaceUpCard(cardIndex);
     }
+
+
+    public boolean replaceFaceUpCards() {
+        Game currentGame = clientModel.getCurrent_game();
+        int gameID = currentGame.getGameID();
+        List<CardColor> discaredFaceUpCards = currentGame.getFaceUpCards();
+
+        ServerProxy serverProxy = ServerProxy.getInstance();
+        boolean successful = serverProxy.replaceFaceUpCards(gameID);
+
+        if (successful)
+        {currentGame.addCardsToDiscard(discaredFaceUpCards);}
+
+        return successful;
+    }
+
+    public void replaceAllFaceUpCards(int gameID, List<CardColor> newCards) {
+        if(gameID == clientModel.getCurrent_game().getGameID())
+        {
+            clientModel.ReplaceAllFaceUpCards(newCards);
+        }
+    }
+
 
     public ClientState getCurrentState()
     {
@@ -541,5 +563,7 @@ public class ClientFacade implements IClient{
     {
         return getPlayers().size();
     }
+
+
 
 }

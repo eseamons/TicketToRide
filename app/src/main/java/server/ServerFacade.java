@@ -119,4 +119,7 @@ public class ServerFacade implements IServer{
     }
 
 
+    public boolean replaceAllFaceUpCards(int gameID) {
+        return serverModel.replaceAllFaceUpCards(gameID);
+    }
 }

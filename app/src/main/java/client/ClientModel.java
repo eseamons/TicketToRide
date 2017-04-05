@@ -354,6 +354,29 @@ public class ClientModel extends Observable
 
     public void SetFaceUpCard(CardColor card, int cardIndex) {
         currentGame.setFaceUpCard(cardIndex,card);
+
+        List<CardColor> faceUpCards = currentGame.getFaceUpCards();
+        int numOfFaceUpWilds =0;
+        for(int i =0 ; i <5; i ++)
+        {
+            if(faceUpCards.get(i) != null)
+            {
+                if(faceUpCards.get(i).equals(CardColor.WILD))
+                {numOfFaceUpWilds = numOfFaceUpWilds+1;}
+            }
+        }
+        if(numOfFaceUpWilds>2)
+        {
+            ClientFacade clientFacade = new ClientFacade();
+            clientFacade.replaceFaceUpCards();
+        }
+    }
+    public void ReplaceAllFaceUpCards(List<CardColor> newFaceUpCards)
+    {
+        for(int i = 0; i <5; i++)
+        {
+            currentGame.setFaceUpCard(i, newFaceUpCards.get(i));
+        }
     }
 
     public CardColor getFaceUpCard(int cardIndex)

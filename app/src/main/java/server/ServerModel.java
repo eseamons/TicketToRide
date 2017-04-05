@@ -19,6 +19,7 @@ import shared.command_data_classes.DrawFaceUpCardCommandData;
 import shared.command_data_classes.EndTurnCommandData;
 import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.ConfirmDestinationCardCommandData;
+import shared.command_data_classes.ReplaceAllFaceUpCardsCommandData;
 import shared.command_data_classes.SetFaceUpCardCommandData;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
@@ -519,9 +520,40 @@ public class ServerModel implements IServer{
         cmd.setInfo(cmdData);
         cmd.setCmdID(currentCmdID);
         gameList.addGameCommand(cmd);
-
-        //TODO: if 3 wilds are face up then all face up cards need to be discarded and replaced
     }
 
 
+    public boolean replaceAllFaceUpCards(int gameID) {
+        boolean successful = false;
+        Game currentGame = gameList.getGame(gameID);
+        if(currentGame != null)
+        {
+            successful = true;
+
+            List<CardColor> discardedFaceUpCards = currentGame.getFaceUpCards();
+            currentGame.addCardsToDiscard(discardedFaceUpCards);
+
+
+            ArrayList<CardColor> newFaceUpCards = new ArrayList<>();
+            for(int i = 0; i < 5; i++)
+            {
+                CardColor c = currentGame.drawCard();
+                currentGame.setFaceUpCard(i, c);
+                newFaceUpCards.add(c);
+            }
+
+            ReplaceAllFaceUpCardsCommandData cmdData = new ReplaceAllFaceUpCardsCommandData();
+            cmdData.setNewFaceUpCards(newFaceUpCards);
+            cmdData.setGameID(gameID);
+
+
+            int currentCmdID = gameList.getCurrentGameCommandID();
+            gameList.incrementCurrentGameCommandID();
+            Command cmd = new ReplaceAllFaceUpCardsCommand();
+            cmd.setInfo(cmdData);
+            cmd.setCmdID(currentCmdID);
+            gameList.addGameCommand(cmd);
+        }
+        return successful;
+    }
 }

@@ -22,6 +22,7 @@ import shared.command_classes.JoinGameCommand;
 import shared.command_classes.LoginCommand;
 import shared.command_classes.RegisterCommand;
 import shared.command_classes.ConfirmDestinationCardCommand;
+import shared.command_classes.ReplaceAllFaceUpCardsCommand;
 import shared.command_classes.SetPlayerColorCommand;
 import shared.command_data_classes.AddCommentCommandData;
 import shared.command_data_classes.BeginGameCommandData;
@@ -38,6 +39,7 @@ import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.LoginCommandData;
 import shared.command_data_classes.RegisterCommandData;
 import shared.command_data_classes.ConfirmDestinationCardCommandData;
+import shared.command_data_classes.ReplaceAllFaceUpCardsCommandData;
 import shared.command_data_classes.SetPlayerColorCommandData;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
@@ -453,13 +455,18 @@ public class ServerProxy implements IServer{
         else
         {return r.isSuccess();}
 
-//        if(r != null && r.isSuccess())
-//        {
-//            //pull the new commands out and process?
-//            return true;
-//        }
-//        else
-//        {return false;}
     }
 
+    public boolean replaceFaceUpCards(int gameID) {
+        ReplaceAllFaceUpCardsCommandData cmdData = new ReplaceAllFaceUpCardsCommandData();
+        cmdData.setGameID(gameID);
+
+        Command cmd = new ReplaceAllFaceUpCardsCommand();
+        cmd.setInfo(cmdData);
+        Result r = ClientCommunicator.getInstance().send(urlpath, cmd);
+        if(r == null)
+        {return false;}
+        else
+        {return r.isSuccess();}
+    }
 }

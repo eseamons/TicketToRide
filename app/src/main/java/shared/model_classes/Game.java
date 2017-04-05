@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import client.ClientFacade;
 import server.ServerFacade;
 import shared.CardColor;
 import shared.ColorNum;
@@ -34,7 +35,7 @@ public class Game {
         players = new PlayersList(gameLobby.getPlayers());
         LastTurnsLeft = players.getSize() + 1;
         trainCardDeck = TrainCardDeck.getInstance();
-        faceUpCards = new CardColor[5];
+        faceUpCards = new CardColor[5];//new CardColor[]{null, null, null, null, null};
         destinationCardsList = new DestinationCardsList();
         routes = new RoutesList();
         currentPlayer = 0;
