@@ -160,6 +160,15 @@ public class ClientFacade implements IClient{
     @Override
     public boolean beginGame() {
 
+        //Testing if FIRST player pressed beginGame.
+        Account account = clientModel.getAccount();
+        List<Player> players = getPlayers();
+        if (!players.get(0).getAccount().getAuthentication().equals(account.getAuthentication()))
+        {
+            return false;
+        }
+
+
         String auth = clientModel.getAuthorization();
         int gameLobbyID = clientModel.getCurrent_game_lobby().getID();
         ServerProxy serverProxy = ServerProxy.getInstance();
