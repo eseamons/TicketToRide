@@ -397,6 +397,7 @@ public class ClientModel extends Observable
         if(desiredColor == CardColor.WILD)
             desiredColor = desiredToUseColor;
         List<CardColor> hand = getThis_player().getTrainCards();
+        int trainsRemaining = getThis_player().getTrainsRemaining();
         int count = 0;
         for(int i = 0; i < hand.size(); i++)
         {
@@ -406,7 +407,7 @@ public class ClientModel extends Observable
                 count++;
             }
         }
-        return count >= desiredRoute.length;
+        return count >= desiredRoute.length && trainsRemaining >= desiredRoute.length;
     }
 
 
