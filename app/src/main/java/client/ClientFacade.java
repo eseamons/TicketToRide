@@ -536,12 +536,13 @@ public class ClientFacade implements IClient{
     //in the model as well as a boolean array of which cards are to be kept (true) and discarded (false)
     public void confirmDestinationCards()
     {
-        boolean[] acceptedCards = clientModel.addConfirmedDestinationCardsToPlayer();
+        DestinationCard[]  acceptedCards = clientModel.getConfirmedCards();
+        boolean[] acceptedCardsBools = clientModel.addConfirmedDestinationCardsToPlayer();
         int gameID = clientModel.getCurrent_game().getGameID();
         int playerID = clientModel.getThis_player().getPlayerID();
         String auth = clientModel.getAuthorization();
         ServerProxy proxy = ServerProxy.getInstance();
-        proxy.removeDestinationCard(gameID, playerID, acceptedCards, auth);
+        proxy.removeDestinationCard(gameID, playerID, acceptedCards, acceptedCardsBools, auth);
     }
 
     public boolean canConfirmDestinationCards()

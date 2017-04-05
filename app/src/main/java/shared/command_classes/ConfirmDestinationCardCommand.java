@@ -1,9 +1,11 @@
 package shared.command_classes;
 
+import client.ClientModel;
 import server.ServerFacade;
 import shared.Result;
 import shared.command_data_classes.ConfirmDestinationCardCommandData;
 import shared.model_classes.DestinationCard;
+import shared.model_classes.Player;
 
 /**
  * Created by rebeccaredd on 2/22/17.
@@ -24,9 +26,16 @@ public class ConfirmDestinationCardCommand extends Command {
 
     public void executeOnClient()
     {
-        boolean[] confirmedCards = ((ConfirmDestinationCardCommandData) info).getConfirmedCardsBools();
+        ClientModel model = ClientModel.getInstance();
+        boolean[] confirmedCardsBools = ((ConfirmDestinationCardCommandData) info).getConfirmedCardsBools();
+        DestinationCard[] confirmedCards = ((ConfirmDestinationCardCommandData) info).getConfirmedCards();
         int gameID = ((ConfirmDestinationCardCommandData) info).getGameID();
         int playerID = ((ConfirmDestinationCardCommandData) info).getPlayerID();
+        Player thisPlayer = model.getThis_player();
+
+        if(playerID != thisPlayer.getPlayerID()) {
+
+        }
 
     }
 }

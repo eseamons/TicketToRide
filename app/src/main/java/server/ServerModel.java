@@ -416,6 +416,7 @@ public class ServerModel implements IServer{
                 cmdData.setGameID(gameID);
                 cmdData.setPlayerID(playerID);
                 cmdData.setConfirmedCardsBools(acceptedCardsBools);
+                cmdData.setConfirmedCards(acceptedCards);
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);

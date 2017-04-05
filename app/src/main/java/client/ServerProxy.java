@@ -43,6 +43,7 @@ import shared.command_data_classes.ReplaceAllFaceUpCardsCommandData;
 import shared.command_data_classes.SetPlayerColorCommandData;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
+import shared.model_classes.DestinationCard;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Route;
 
@@ -398,9 +399,10 @@ public class ServerProxy implements IServer{
     //@return returns true if sucessful, false otherwise
     //@postcondition - a removeDestinationCard comand is sent to the server and then executed and stored
     @Override
-    public boolean removeDestinationCard(int gameID, int playerID, boolean[] acceptedCardsBools, String auth) {
+    public boolean removeDestinationCard(int gameID, int playerID, DestinationCard[] acceptedCards, boolean[] acceptedCardsBools, String auth) {
         ConfirmDestinationCardCommandData cmdData = new ConfirmDestinationCardCommandData();
         cmdData.setConfirmedCardsBools(acceptedCardsBools);
+        cmdData.setConfirmedCards(acceptedCards);
         cmdData.setAuth(auth);
         cmdData.setGameID(gameID);
         cmdData.setPlayerID(playerID);
