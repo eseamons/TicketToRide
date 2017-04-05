@@ -151,10 +151,11 @@ public class ServerModel implements IServer{
         if(accountList.authCodeExists(auth)) {
             returnGameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
 
-            if(returnGameLobby.getPlayers().size() < returnGameLobby.getMaxPlayers()) {
+            if(returnGameLobby.getPlayers().size() < returnGameLobby.getMaxPlayers()
+                    && !returnGameLobby.authCodeExistsInLobby(auth)) {
+
 
                 Account acc = accountList.getAccountByAuthCode(auth);
-
                 int playerIndex = returnGameLobby.addNewPlayers(acc);
                 Player p = returnGameLobby.getPlayers().get(playerIndex);
                 playerAuthMap.put(auth, p);
