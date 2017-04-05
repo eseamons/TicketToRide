@@ -439,4 +439,9 @@ public class ClientModel extends Observable
     }
 
 
+    public DestinationCard[] getConfirmedCards() {
+        return this_player.getAllChooseableDestinationCards();
+    }
+
+
 }

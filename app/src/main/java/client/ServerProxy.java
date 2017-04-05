@@ -399,8 +399,9 @@ public class ServerProxy implements IServer{
     //@return returns true if sucessful, false otherwise
     //@postcondition - a removeDestinationCard comand is sent to the server and then executed and stored
     @Override
-    public boolean removeDestinationCard(int gameID, int playerID, boolean[] acceptedCards, String auth) {
+    public boolean removeDestinationCard(int gameID, int playerID, DestinationCard[] acceptedCards, boolean[] acceptedCardsBools, String auth) {
         ConfirmDestinationCardCommandData cmdData = new ConfirmDestinationCardCommandData();
+        cmdData.setConfirmedCardsBools(acceptedCardsBools);
         cmdData.setConfirmedCards(acceptedCards);
         cmdData.setAuth(auth);
         cmdData.setGameID(gameID);

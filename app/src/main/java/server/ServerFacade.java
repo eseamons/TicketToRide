@@ -104,8 +104,8 @@ public class ServerFacade implements IServer{
 }
 
     @Override
-    public boolean removeDestinationCard(int gameID, int playerID, boolean[] acceptedCards, String auth) {
-        return serverModel.removeDestinationCard(gameID, playerID, acceptedCards, auth);
+    public boolean removeDestinationCard(int gameID, int playerID, DestinationCard[] acceptedCards, boolean[] acceptedCardsBools, String auth) {
+        return serverModel.removeDestinationCard(gameID, playerID, acceptedCards, acceptedCardsBools, auth);
     }
 
     @Override
