@@ -56,7 +56,7 @@ public class Player {
     }
 
     public boolean authCodeMatchesAccount(String auth) {
-        return account.getAuthentication() == auth;
+        return account.getAuthentication().equals(auth);
     }
 
 
