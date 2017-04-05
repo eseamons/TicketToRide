@@ -31,9 +31,9 @@ public class MyTurnState extends ClientState
     {
         if(client.canClaimRoute(desiredRoute))
         {
-            client.endTurn();
-            client.ClaimRoute(desiredRoute);
 
+            client.ClaimRoute(desiredRoute);
+            client.endTurn();
             return "";
         }
         else
@@ -57,6 +57,7 @@ public class MyTurnState extends ClientState
 
     public String templateFaceUpClicked(int cardIndex)
     {
+        client.drawFaceUpCard(cardIndex);
         if(isWild(cardIndex))
         {
             client.endTurn();
@@ -65,7 +66,7 @@ public class MyTurnState extends ClientState
         {
             client.setClientState(new DrawCardState());
         }
-        client.drawFaceUpCard(cardIndex);
+
         return "";
     }
 
