@@ -560,7 +560,7 @@ public class RoutesList {
     {
         ClientFacade client = new ClientFacade();
         List<Player> players = client.getPlayers();
-        //IF U WANT TEST ArrayList<Player> players = stupidPlayers;
+        //ArrayList<Player> players = stupidPlayers;
         for(int playerIndex = 0; playerIndex < players.size(); playerIndex++)
         {
             Player p = players.get(playerIndex);
@@ -606,7 +606,7 @@ public class RoutesList {
     {
         ClientFacade client = new ClientFacade();
         List<Player> players = client.getPlayers();
-        //test: ArrayList<Player> players = stupidPlayers;
+        //ArrayList<Player> players = stupidPlayers;
         ArrayList<Integer> indexes_of_player_with_longest = new ArrayList<>();
         int longest_path = -1;
         for(int i = 0; i < players.size(); i++)
