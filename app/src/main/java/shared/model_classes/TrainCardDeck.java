@@ -43,6 +43,14 @@ public class TrainCardDeck {
     }
 
     public CardColor drawCard() {
+
+        if(cardsInDeck.size() == 0)
+        {
+            reShuffleDeck();
+            if(cardsInDeck.size() == 0)
+            {return CardColor.EMPTY;}
+        }
+
         int min = 0;
         int max = cardsInDeck.size();
         Random r = new Random();
@@ -73,4 +81,6 @@ public class TrainCardDeck {
         discardDeck = new ArrayList<>();
     }
 
+    public int getDiscardPileSize()
+    {return discardDeck.size();}
 }

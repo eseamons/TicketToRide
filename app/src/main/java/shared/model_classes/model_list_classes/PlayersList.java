@@ -243,15 +243,16 @@ public class PlayersList {
         return playerFound;
     }
 
-    public void removeCards(String auth, CardColor colorOfCardUsed, Route route) {
+    public List<CardColor> removeCards(String auth, CardColor colorOfCardUsed, Route route) {
         for(int i = 0; i < players.size(); i ++)
         {
             Player tempPlayer = players.get(i);
             String tempAuth = tempPlayer.getAccount().getAuthentication();
             if(tempAuth.equals(auth))
             {
-                tempPlayer.removeCards(colorOfCardUsed, route);
+                return tempPlayer.removeCards(colorOfCardUsed, route);
             }
         }
+        return null;
     }
 }

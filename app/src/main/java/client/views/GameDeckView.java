@@ -208,6 +208,8 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
             case WHITE: faceUpCard0Button.setImageDrawable(getDrawable(white_card)); break;
             case BLACK: faceUpCard0Button.setImageDrawable(getDrawable(black_card)); break;
             case WILD: faceUpCard0Button.setImageDrawable(getDrawable(wild_card)); break;
+            default:
+                faceUpCard0Button.setVisibility(View.INVISIBLE); break;
         }
     }
 
@@ -224,6 +226,8 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
             case WHITE: faceUpCard1Button.setImageDrawable(getDrawable(white_card)); break;
             case BLACK: faceUpCard1Button.setImageDrawable(getDrawable(black_card)); break;
             case WILD: faceUpCard1Button.setImageDrawable(getDrawable(wild_card)); break;
+            default:
+                faceUpCard1Button.setVisibility(View.INVISIBLE); break;
         }
     }
 
@@ -240,6 +244,8 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
             case WHITE: faceUpCard2Button.setImageDrawable(getDrawable(white_card)); break;
             case BLACK: faceUpCard2Button.setImageDrawable(getDrawable(black_card)); break;
             case WILD: faceUpCard2Button.setImageDrawable(getDrawable(wild_card)); break;
+            default:
+                faceUpCard2Button.setVisibility(View.INVISIBLE); break;
         }
     }
 
@@ -256,6 +262,8 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
             case WHITE: faceUpCard3Button.setImageDrawable(getDrawable(white_card)); break;
             case BLACK: faceUpCard3Button.setImageDrawable(getDrawable(black_card)); break;
             case WILD: faceUpCard3Button.setImageDrawable(getDrawable(wild_card)); break;
+            default:
+                faceUpCard3Button.setVisibility(View.INVISIBLE); break;
         }
     }
 
@@ -272,6 +280,8 @@ public class GameDeckView extends AppCompatActivity implements IGameDeckView {
             case WHITE: faceUpCard4Button.setImageDrawable(getDrawable(white_card)); break;
             case BLACK: faceUpCard4Button.setImageDrawable(getDrawable(black_card)); break;
             case WILD: faceUpCard4Button.setImageDrawable(getDrawable(wild_card)); break;
+            default:
+                faceUpCard4Button.setVisibility(View.INVISIBLE); break;
         }
     }
 

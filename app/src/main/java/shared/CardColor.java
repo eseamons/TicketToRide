@@ -5,5 +5,5 @@ package shared;
  */
 
 public enum CardColor {
-    RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE, BLACK, WILD
+    RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE, WHITE, BLACK, WILD, EMPTY
 }

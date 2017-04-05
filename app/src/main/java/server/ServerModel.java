@@ -331,6 +331,15 @@ public class ServerModel implements IServer{
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdId);
                 gameList.addGameCommand(cmd);
+
+                for(int i = 0; i < 5; i ++)
+                {
+                    if(game.getFaceUpCards().get(i).equals(CardColor.EMPTY) )//&& game.getDiscardPileSize() != 0)
+                    {
+                        setFaceUpCard(game.drawCard(), i, gameID);
+                    }
+                }
+
             }
         }
         return routeClaimed;
