@@ -19,7 +19,7 @@ public class DrawCardState extends ClientState
 
     public String DeckCardClicked()
     {
-
+        client.setClientState(new NotMyTurnState());
         client.drawDeckCard();
         client.endTurn();
         return "";
@@ -27,14 +27,14 @@ public class DrawCardState extends ClientState
 
     public boolean isWild(int index)
     {
-        return client.getFaceUpCard(index) == CardColor.WILD;
+        return client.getFaceUpCard(index).equals(CardColor.WILD);
     }
 
     public String templateFaceUpClicked(int cardIndex)
     {
         if(!isWild(cardIndex))
         {
-
+            client.setClientState(new NotMyTurnState());
             client.drawFaceUpCard(cardIndex);
             client.endTurn();
 

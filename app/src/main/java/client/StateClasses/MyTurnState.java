@@ -33,6 +33,7 @@ public class MyTurnState extends ClientState
         {
 
             client.ClaimRoute(desiredRoute);
+            client.setClientState(new NotMyTurnState());
             client.endTurn();
             return "";
         }
@@ -52,12 +53,12 @@ public class MyTurnState extends ClientState
 
     public boolean isWild(int index)
     {
-        return client.getFaceUpCard(index) == CardColor.WILD;
+        return client.getFaceUpCard(index).equals(CardColor.WILD);
     }
 
     public String templateFaceUpClicked(int cardIndex)
     {
-        client.drawFaceUpCard(cardIndex);
+
         if(isWild(cardIndex))
         {
             client.endTurn();
@@ -66,6 +67,7 @@ public class MyTurnState extends ClientState
         {
             client.setClientState(new DrawCardState());
         }
+        client.drawFaceUpCard(cardIndex);
 
         return "";
     }

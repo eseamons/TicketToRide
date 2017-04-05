@@ -565,5 +565,10 @@ public class ClientFacade implements IClient{
     }
 
 
+    public void addDestinationCardToPlayerIndex(int playerIndex, DestinationCard dc)
+    {
+        clientModel.addDestinationCardToPlayerIndex(playerIndex,dc);
+    }
+
 
 }

@@ -29,5 +29,6 @@ public class ConfirmDestinationCardCommand extends Command {
         int gameID = ((ConfirmDestinationCardCommandData) info).getGameID();
         int playerID = ((ConfirmDestinationCardCommandData) info).getPlayerID();
 
+
     }
 }

@@ -433,5 +433,10 @@ public class ClientModel extends Observable
         return tempAcceptance;
     }
 
+    public void addDestinationCardToPlayerIndex(int playerIndex, DestinationCard dc)
+    {
+        currentGame.getPlayers().get(playerIndex).addDestinationCard(dc);
+    }
+
 
 }
