@@ -318,7 +318,7 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
             });
             drawDestinationCardButton.setVisibility(View.GONE);
             claimRouteButton.setVisibility(View.GONE);
-            //gameOverButton.setVisibility(View.GONE);
+            gameOverButton.setVisibility(View.VISIBLE);
         }
     }
 
