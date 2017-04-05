@@ -131,7 +131,8 @@ public class Game {
     //other actions for game
     public boolean claimRoute(Route route, String auth, CardColor colorOfCardUsed) {
 
-        boolean successful =  routes.claimRoute(route,auth, players.getCurrentPlayerID());
+        int playerID = getPlayerIndexByAuthCode(auth);
+        boolean successful =  routes.claimRoute(route,auth, playerID);
         if(successful)
         {
             int pointIncrease = route.getPointValue();
@@ -198,6 +199,18 @@ public class Game {
     }
 
 
+    public int getPlayerIndexByAuthCode(String auth)
+    {
+        List<Player> players = getPlayers();
+        for(int i = 0; i < players.size(); i++)
+        {
+            if(players.get(i).getPlayerAuthCode().equals(auth))
+            {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 
