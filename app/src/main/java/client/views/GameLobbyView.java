@@ -95,7 +95,12 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
                     startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));
                 }
                 else{
-                    Toast.makeText(instance, (String)result.getInfo(), Toast.LENGTH_LONG).show();
+                    String toastOutput = (String)result.getInfo();
+                    if (result.isSuccess())
+                        toastOutput += " true";
+                    else
+                        toastOutput += " false";
+                    Toast.makeText(instance, toastOutput , Toast.LENGTH_LONG).show();
                 }
             }
         });
