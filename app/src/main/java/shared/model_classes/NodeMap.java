@@ -39,10 +39,17 @@ public class NodeMap
         {
             return false;
         }
-        else
+        for(RouteNode rn: list)
         {
-            return DFS(city1, city2);
+            if(!rn.isVisited())
+            {
+                if(DFS(rn, city2))
+                {
+                    return true;
+                }
+            }
         }
+        return false;
     }
 
     private void markAllNodesAsNotVisited()
@@ -57,6 +64,26 @@ public class NodeMap
         }
     }
 
+    public boolean DFS(RouteNode cur, String target)
+    {
+        if(cur.getCity1().equals(target) || cur.getCity2().equals(target))
+        {
+            return true;
+        }
+        else
+        {
+            cur.markVisited();
+            for(RouteNode rn: cur.getNeighbors())
+            {
+                if(DFS(rn,target))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
+    /*
     private boolean DFS(String cur, String target)
     {
         if(cur.equals(target))
@@ -79,6 +106,7 @@ public class NodeMap
         }
         return false;
     }
+    */
 
     public int findLargestRoute()
     {
