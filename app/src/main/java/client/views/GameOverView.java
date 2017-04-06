@@ -100,7 +100,9 @@ public class GameOverView extends AppCompatActivity implements IGameOverView{
             @Override
             public void onClick(View v) {
                 presenter.Quit();
-                startActivity(new Intent(GameOverView.this, GameListView.class));
+                Intent intent = new Intent(GameOverView.this, GameListView.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
 
