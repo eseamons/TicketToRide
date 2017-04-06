@@ -25,7 +25,6 @@ public class Game {
     private DestinationCardsList destinationCardsList;
     private List<Command> commands;
     private List<String> comments = new ArrayList<>();
-    private int currentPlayer;
 
 
     public Game(){}
@@ -38,7 +37,6 @@ public class Game {
         faceUpCards = new CardColor[5];//new CardColor[]{null, null, null, null, null};
         destinationCardsList = new DestinationCardsList();
         routes = new RoutesList();
-        currentPlayer = 0;
     }
 
     public void setFaceUpCard(int index, CardColor c)
@@ -60,10 +58,6 @@ public class Game {
     public int getCurrentPlayer() {
         return players.getCurrentPlayerID();
     }
-    public void setCurrentPlayer(int currentPlayer) {
-        this.currentPlayer = currentPlayer;
-    }
-    public void incrementCurrentPlayer() { this.currentPlayer++; }
 
     public RoutesList getRoutes(){return routes;}
     public int getGameID() {
@@ -84,9 +78,9 @@ public class Game {
         return gameIsOver;
     }
 
-    public void endTurn()
+    public void endTurn(String auth)
     {
-        players.endTurn();
+        players.endTurn(auth);
         calculateLastTurns();
     }
 

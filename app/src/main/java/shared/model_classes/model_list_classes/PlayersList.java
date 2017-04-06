@@ -148,9 +148,10 @@ public class PlayersList {
      * @post currentPlayerID += 1 or == 0 if it was at the last index of the player in the list
      * @post currentPlayer == the player in list players at index currentPlayerID
      */
-    public void endTurn()
+    public void endTurn(String auth)
     {
-        currentPlayerID++;
+
+        currentPlayerID = getPlayerIndexByAuthCode(auth) + 1;
 
         if(currentPlayerID == numOfPlayers)
         {currentPlayerID =0;}
@@ -213,15 +214,28 @@ public class PlayersList {
 
     public Player getPlayerByAuthCode(String auth)
     {
+        int i = getPlayerIndexByAuthCode(auth);
+        if(i != -1)
+        {
+            return players.get(i);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    public int getPlayerIndexByAuthCode(String auth)
+    {
         for(int i = 0; i < players.size(); i++)
         {
             Player p = players.get(i);
             if(p.getPlayerAuthCode().equals(auth))
             {
-                return p;
+                return i;
             }
         }
-        return null;
+        return -1;
     }
 
     /**

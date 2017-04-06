@@ -72,7 +72,7 @@ public interface IClient {
 
     boolean endTurn();
 
-    public void aTurnEnded(int gameID);
+    public void aTurnEnded(int gameID, String auth);
 
     public boolean ClaimRoute(Route route);
 

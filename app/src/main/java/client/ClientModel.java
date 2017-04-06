@@ -281,10 +281,10 @@ public class ClientModel extends Observable
         return gameCommandList;
     }
 
-    public void endTurn(int gameID) {
+    public void endTurn(int gameID, String auth) {
         if(currentGame.getGameID() == gameID)
         {
-            currentGame.endTurn();
+            currentGame.endTurn(auth);
             if(currentGame.getCurrentPlayer() == this_player.getPlayerID())
             {
                 calculateTurn();

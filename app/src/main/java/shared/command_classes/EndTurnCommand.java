@@ -24,8 +24,9 @@ public class EndTurnCommand extends Command{
     public void executeOnClient()
     {
         int gameID = ((EndTurnCommandData) info).getGameID();
+        String auth = ((EndTurnCommandData) info).getAuth();
         ClientFacade client = new ClientFacade();
-        client.aTurnEnded(gameID);
+        client.aTurnEnded(gameID,auth);
         //TODO: the asterisk needs to change when the players turn ends.
     }
 }
