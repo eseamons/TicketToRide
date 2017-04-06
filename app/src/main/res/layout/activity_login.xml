@@ -35,8 +35,9 @@
             android:layout_alignParentTop="true"
             android:ems="10"
             android:inputType="textPersonName"
-            android:text="IP address"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:hint="IP address"
+            android:textColorHint="@color/white" />
     </RelativeLayout>
 
     <LinearLayout
