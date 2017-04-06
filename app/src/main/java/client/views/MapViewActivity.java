@@ -472,8 +472,11 @@ public class MapViewActivity extends AppCompatActivity implements View.OnTouchLi
 
     public void setDestinationCardText(DestinationCard[] dests, boolean[] acceptance)
     {
+
         for(int i = 0; i < dests.length; i++)
         {
+            if(dests[i] == null)
+                return;
             String text = dests[i].toString();
             if(acceptance[i])
                 text += " (KEEP)";

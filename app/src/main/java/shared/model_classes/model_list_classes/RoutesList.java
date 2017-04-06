@@ -437,28 +437,28 @@ public class RoutesList {
     {
         for(int i = 0; i <availableRouteList.size(); i++)
         {
-            Route availableRoute = availableRouteList.get(i);
-            if (availableRoute.city1.equals(routeToClaim.city1))
-            {
-                if(availableRoute.city2.equals(routeToClaim.city2))
-                {
-                    if(availableRoute.color == routeToClaim.color)
-                    {
+                Route availableRoute = availableRouteList.get(i);
+//            if (availableRoute.city1.equals(routeToClaim.city1))
+//            {
+//                if(availableRoute.city2.equals(routeToClaim.city2))
+//                {
+//                    if(availableRoute.color == routeToClaim.color)
+//                    {
+                        if(availableRoute.start_x == routeToClaim.start_x && availableRoute.start_y == routeToClaim.start_y)
+                        {
+                            List<Route> routeList = playersClaimedRoutes.get(auth);
+                            if(routeList == null)
+                            {routeList = new ArrayList<>();}
+                            routeList.add(availableRoute);
+                            availableRoute.ownership = playerID+1;
+                            return true;
+                        }
                         //                    availableRouteList.remove(i);
-                        List<Route> routeList = playersClaimedRoutes.get(auth);
-                        if(routeList == null)
-                        {routeList = new ArrayList<>();}
+
+//                    }
 //
-//                    playersClaimedRoutes.remove(auth);
-                        routeList.add(availableRoute);
-//                    playersClaimedRoutes.put(auth, routeList);
-
-                        availableRoute.ownership = playerID+1;
-                        return true;
-                    }
-
-                }
-            }
+//                }
+//            }
         }
         return false;
     }

@@ -23,6 +23,11 @@ public class Player {
         trainCards = new ArrayList<>();
         trainsRemaining = 45;
         choosableDestinationCards = new DestinationCard[3];
+        for(int i = 0; i < choosableDestinationCards.length; i++)
+        {
+            choosableDestinationCards[i] = null;
+        }
+
     }
 
     public Account getAccount() {

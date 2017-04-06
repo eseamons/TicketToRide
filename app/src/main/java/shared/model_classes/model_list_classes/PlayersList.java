@@ -151,9 +151,10 @@ public class PlayersList {
     public void endTurn(String auth)
     {
 
-        //currentPlayerID = getPlayerIndexByAuthCode(auth) + 1;
+        //int temp = getPlayerIndexByAuthCode(auth) + 1;
+        //currentPlayerID = temp;
         currentPlayerID++;
-        if(currentPlayerID == numOfPlayers)
+        if(currentPlayerID >= players.size())
         {currentPlayerID =0;}
 
         currentPlayer = players.get(currentPlayerID);
