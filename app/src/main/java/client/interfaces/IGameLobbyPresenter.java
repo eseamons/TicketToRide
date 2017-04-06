@@ -1,5 +1,6 @@
 package client.interfaces;
 
+import shared.Result;
 import shared.model_classes.Player;
 
 public interface IGameLobbyPresenter {
@@ -8,7 +9,7 @@ public interface IGameLobbyPresenter {
 
     public boolean changeColor();
 
-    public boolean beginGame();
+    public Result beginGame();
 
     public Player[] getPlayers();
 

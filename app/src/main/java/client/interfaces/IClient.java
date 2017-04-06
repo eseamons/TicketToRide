@@ -8,6 +8,7 @@ import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import shared.CardColor;
 import shared.ColorNum;
+import shared.Result;
 import shared.model_classes.Account;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
@@ -59,7 +60,7 @@ public interface IClient {
 
     public void addComment(int gameID, String message);
 
-    boolean beginGame();
+    Result beginGame();
 
     public void aGameStarted(int gameID);
 

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.erics.tickettoride.R;
 
@@ -27,6 +28,7 @@ import client.ClientModel;
 import client.Poller;
 import client.interfaces.IGameLobbyView;
 import client.presenters.GameLobbyPresenter;
+import shared.Result;
 import shared.model_classes.Player;
 
 public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
@@ -82,7 +84,8 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
         startBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(GameLobbyPresenter.getInstance().beginGame())
+                Result result = GameLobbyPresenter.getInstance().beginGame();
+                if(result.isSuccess())
                 {
                     Poller.getInstance().stopLobbyListTimer();
 
@@ -90,6 +93,9 @@ public class GameLobbyView extends AppCompatActivity implements IGameLobbyView{
                     {ClientModel.getInstance().calculateTurn();}
 
                     startActivity(new Intent(GameLobbyView.this, MapViewActivity.class));
+                }
+                else{
+                    Toast.makeText(instance, (String)result.getInfo(), Toast.LENGTH_LONG).show();
                 }
             }
         });

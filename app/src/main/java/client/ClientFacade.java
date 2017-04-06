@@ -158,20 +158,20 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public boolean beginGame() {
+    public Result beginGame() {
 
         //Testing if FIRST player pressed beginGame.
         Account account = clientModel.getAccount();
         List<Player> players = getPlayers();
         if (!players.get(0).getAccount().getAuthentication().equals(account.getAuthentication()))
         {
-            return false;
+            return new Result(false, "Not first player");
         }
 
         //Testing if there are at least 2 players
         if (players.size() < 1)
         {
-            return false;
+            return new Result(false, "Must have 2 players to start the game");
         }
 
 
@@ -184,7 +184,7 @@ public class ClientFacade implements IClient{
         clientModel.setCurrent_game(game);
         //clientModel.gameSetPlayer_num();
         //TODO: is this supposed to always return null?
-        return beginGameBool;
+        return new Result(beginGameBool, "");
     }
 
     @Override

@@ -10,6 +10,7 @@ import java.util.Observer;
 import client.ClientFacade;
 import client.interfaces.IGameLobbyPresenter;
 import client.views.GameLobbyView;
+import shared.Result;
 import shared.model_classes.Player;
 
 public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
@@ -71,7 +72,7 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
         return true;
     }
 
-    public boolean beginGame()
+    public Result beginGame()
     {
         ClientFacade client = new ClientFacade();
         return client.beginGame();
