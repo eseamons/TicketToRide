@@ -8,6 +8,7 @@ import java.util.Map;
 import shared.command_classes.Command;
 import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
+import shared.model_classes.Player;
 
 /**
  * Created by erics on 2/25/2017.
@@ -18,7 +19,17 @@ public class GameList {
     private List<Game> games;
     private Map<Integer,Game> gameIdMap;
 
-    private int currentGameCommandID;
+    public Game RealgetGameByAuthCode(String auth)
+    {
+        for(int i = 0; i < games.size(); i++)
+        {
+            Game g = games.get(i);
+            if( g.getPlayerList().getPlayerByAuthCode(auth) != null)
+                return g;
+        }
+        return null;
+    }
+
 
     public GameList() {
         games = new ArrayList<>();
@@ -41,13 +52,7 @@ public class GameList {
        return gameIdMap.get(gameID);
     }
 
-    public int getCurrentGameCommandID() {
-        return currentGameCommandID;
-    }
 
-    public void incrementCurrentGameCommandID() {
-        currentGameCommandID++;
-    }
 
     public void addGameCommand(int gameID, Command cmd) {
         Game game = gameIdMap.get(gameID);

@@ -184,6 +184,7 @@ public class ServerModel implements IServer{
         if(accountList.authCodeExists(auth))
         {
 
+
             //Begin game
             GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
             Game game = gameList.beginGame(gameLobby);
@@ -195,7 +196,7 @@ public class ServerModel implements IServer{
 
 
             //remove game lobby
-            gameLobbyList.removeLobby(gameLobbyID);
+            //gameLobbyList.removeLobby(gameLobbyID);
 
 
 
@@ -252,8 +253,7 @@ public class ServerModel implements IServer{
             cmdData.setAuth(auth);
             cmdData.setMessage(message);
 
-            int currentCmdID = gameList.getCurrentGameCommandID();
-            gameList.incrementCurrentGameCommandID();
+            int currentCmdID = getCurrentGameCmdId(auth);
 
             Command cmd = new AddCommentCommand();
             cmd.setInfo(cmdData);
@@ -291,13 +291,12 @@ public class ServerModel implements IServer{
             EndTurnCommandData cmdData = new EndTurnCommandData();
             cmdData.setGameID(gameID);
 
-            int currentCmdId = gameList.getCurrentGameCommandID();
-            gameList.incrementCurrentGameCommandID();
+            int currentCmdID = getCurrentGameCmdIbWITHGAMEID(gameID);
 
             Command cmd = new EndTurnCommand();
             cmd.setInfo(cmdData);
             cmd.setAuth(auth);
-            cmd.setCmdID(currentCmdId);
+            cmd.setCmdID(currentCmdID);
             gameList.addGameCommand(gameID, cmd);
 
         }
@@ -321,8 +320,7 @@ public class ServerModel implements IServer{
                 cmdData.setRoute(route);
                 cmdData.setColorOfCardsUsed(colorOfCardsUsed);
 
-                int currentCmdId = gameList.getCurrentGameCommandID();
-                gameList.incrementCurrentGameCommandID();
+                int currentCmdId = getCurrentGameCmdId(auth);
 
                 Command cmd = new ClaimRouteCommand();
                 cmd.setInfo(cmdData);
@@ -364,8 +362,7 @@ public class ServerModel implements IServer{
                 player.setChoosableDestinationCard(cardOne, 2);
                 int playerID = player.getPlayerID();
 
-                int currentCmdID = gameList.getCurrentGameCommandID();
-                gameList.incrementCurrentGameCommandID();
+                int currentCmdID = getCurrentGameCmdIbWITHGAMEID(gameID);
                 cmd = new DrawDestinationCardCommand();
 
                 DrawDestinationCardCommandData cmdData = new DrawDestinationCardCommandData();
@@ -403,8 +400,7 @@ public class ServerModel implements IServer{
             if( player != null)
             {
                 successful = true;
-                int currentCmdID = gameList.getCurrentGameCommandID();
-                gameList.incrementCurrentGameCommandID();
+                int currentCmdID = getCurrentGameCmdIbWITHGAMEID(gameID);
                 Command cmd = new ConfirmDestinationCardCommand();
 
                 ConfirmDestinationCardCommandData cmdData = new ConfirmDestinationCardCommandData();
@@ -438,8 +434,7 @@ public class ServerModel implements IServer{
                 player.addTrainCard(cardColor);
                 int playerID = player.getPlayerID();
 
-                int currentCmdID = gameList.getCurrentGameCommandID();
-                gameList.incrementCurrentGameCommandID();
+                int currentCmdID = getCurrentGameCmdIbWITHGAMEID(gameID);
                 Command cmd = new DrawDeckCardCommand();
 
                 DrawDeckCardCommandData cmdData = new DrawDeckCardCommandData();
@@ -476,8 +471,7 @@ public class ServerModel implements IServer{
 
                 int playerID = player.getPlayerID();
 
-                int currentCmdID = gameList.getCurrentGameCommandID();
-                gameList.incrementCurrentGameCommandID();
+                int currentCmdID = getCurrentGameCmdIbWITHGAMEID(gameID);
                 Command cmd = new DrawFaceUpCardCommand();
 
                 DrawFaceUpCardCommandData cmdData = new DrawFaceUpCardCommandData();
@@ -506,8 +500,7 @@ public class ServerModel implements IServer{
         Game currentGame = gameList.getGame(gameID);
         currentGame.setFaceUpCard(cardIndex, card);
 
-        int currentCmdID = gameList.getCurrentGameCommandID();
-        gameList.incrementCurrentGameCommandID();
+        int currentCmdID = getCurrentGameCmdIbWITHGAMEID(gameID);
         Command cmd = new SetFaceUpCardCommand();
 
         SetFaceUpCardCommandData cmdData = new SetFaceUpCardCommandData();
@@ -545,13 +538,28 @@ public class ServerModel implements IServer{
             cmdData.setGameID(gameID);
 
 
-            int currentCmdID = gameList.getCurrentGameCommandID();
-            gameList.incrementCurrentGameCommandID();
+            int currentCmdID = getCurrentGameCmdIbWITHGAMEID(gameID);
             Command cmd = new ReplaceAllFaceUpCardsCommand();
             cmd.setInfo(cmdData);
             cmd.setCmdID(currentCmdID);
             gameList.addGameCommand(gameID, cmd);
         }
         return successful;
+    }
+
+
+    public int getCurrentGameCmdIbWITHGAMEID(int id)
+    {
+        Game g = gameList.getGame(id);
+        int currentCmdID = g.getCurrentGameCommandID();
+        g.incrementCurrentGameCommandID();
+        return currentCmdID;
+    }
+    public int getCurrentGameCmdId(String auth)
+    {
+        Game g= gameList.RealgetGameByAuthCode(auth);
+        int currentCmdID = g.getCurrentGameCommandID();
+        g.incrementCurrentGameCommandID();
+        return currentCmdID;
     }
 }

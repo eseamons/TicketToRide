@@ -23,9 +23,22 @@ public class Game {
     private CardColor[] faceUpCards;
     private RoutesList routes;
     private DestinationCardsList destinationCardsList;
-    private List<Command> commands;
     private List<String> comments = new ArrayList<>();
     private List<Command> gameCommands;
+
+    private int currentGameCommandID=0;
+
+    public PlayersList getPlayerList()
+    {
+        return players;
+    }
+    public int getCurrentGameCommandID() {
+        return currentGameCommandID;
+    }
+
+    public void incrementCurrentGameCommandID() {
+        currentGameCommandID++;
+    }
 
     public Game(){}
 
