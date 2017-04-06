@@ -16,7 +16,8 @@ public class GetNewGameCommandsCommand extends Command {
     {
         int commandID = ((GetNewGameCommandsCommandData) info).getCommandID();
         String auth = ((GetNewGameCommandsCommandData) info).getAuth();
-        List<Command> cmds = ServerFacade.getInstance().getNewGameCommands(commandID, auth);
+        int gameID = ((GetNewGameCommandsCommandData) info).getGameID();
+        List<Command> cmds = ServerFacade.getInstance().getNewGameCommands(gameID, commandID, auth);
 
         GetNewGameCommandsCommandData cmdData = new GetNewGameCommandsCommandData();
         Command[] cmdArray = new Command[cmds.size()];

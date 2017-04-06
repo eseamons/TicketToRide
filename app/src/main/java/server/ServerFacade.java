@@ -78,8 +78,8 @@ public class ServerFacade implements IServer{
     /*
         These are the functions used after starting the game
     */
-    public List<Command> getNewGameCommands(int commandID, String auth) {
-        return serverModel.getNewGameCommands(commandID, auth);
+    public List<Command> getNewGameCommands(int gameID, int commandID, String auth) {
+        return serverModel.getNewGameCommands(gameID, commandID, auth);
 
     }
 

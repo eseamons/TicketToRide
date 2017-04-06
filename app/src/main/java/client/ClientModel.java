@@ -450,5 +450,10 @@ public class ClientModel extends Observable
         return this_player.getAllChooseableDestinationCards();
     }
 
+    public int getGameID() {
+        return currentGame.getGameID();
+    }
+
+
 
 }

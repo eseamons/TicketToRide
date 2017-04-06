@@ -25,7 +25,7 @@ public class Game {
     private DestinationCardsList destinationCardsList;
     private List<Command> commands;
     private List<String> comments = new ArrayList<>();
-
+    private List<Command> gameCommands;
 
     public Game(){}
 
@@ -37,6 +37,7 @@ public class Game {
         faceUpCards = new CardColor[5];//new CardColor[]{null, null, null, null, null};
         destinationCardsList = new DestinationCardsList();
         routes = new RoutesList();
+        gameCommands = new ArrayList<>();
     }
 
     public void setFaceUpCard(int index, CardColor c)
@@ -204,6 +205,14 @@ public class Game {
             }
         }
         return -1;
+    }
+
+    public void addGameCommand(Command cmd) {
+        gameCommands.add(cmd);
+    }
+
+    public List<Command> getNewGameCommands(int commandID) {
+        return gameCommands.subList(commandID+1, gameCommands.size());
     }
 
 

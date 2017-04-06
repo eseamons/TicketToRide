@@ -17,7 +17,7 @@ public class GameList {
 
     private List<Game> games;
     private Map<Integer,Game> gameIdMap;
-    private List<Command> gameCommands;
+
     private int currentGameCommandID;
 
     public GameList() {
@@ -28,7 +28,6 @@ public class GameList {
         //create game
         Game newGame = new Game(gameLobby);
         games.add(newGame);
-        gameCommands = new ArrayList<>();
         return newGame;
     }
 
@@ -50,12 +49,14 @@ public class GameList {
         currentGameCommandID++;
     }
 
-    public void addGameCommand(Command cmd) {
-        gameCommands.add(cmd);
+    public void addGameCommand(int gameID, Command cmd) {
+        Game game = gameIdMap.get(gameID);
+        game.addGameCommand(cmd);
     }
 
-    public List<Command> getNewGameCommands(int commandID) {
-        return gameCommands.subList(commandID+1, gameCommands.size());
+    public List<Command> getNewGameCommands(int gameID, int commandID) {
+        Game game = gameIdMap.get(gameID);
+        return game.getNewGameCommands(commandID);
     }
 
     public Game getGameByAuthCode(String auth){

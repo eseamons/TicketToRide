@@ -11,6 +11,7 @@ public class GetNewGameCommandsCommandData {
     private int commandID;
     private String auth;
     private Command[] cmds;
+    private int gameID;
 
     public GetNewGameCommandsCommandData() {
 
@@ -40,5 +41,13 @@ public class GetNewGameCommandsCommandData {
 
     public void setCmds(Command[] cmds) {
         this.cmds = cmds;
+    }
+
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
+    }
+
+    public int getGameID() {
+        return gameID;
     }
 }

@@ -227,8 +227,9 @@ public class ClientFacade implements IClient{
         ServerProxy serverProxy = ServerProxy.getInstance();
         int lastCommand = clientModel.getLastGameCommand();
         String auth = clientModel.getAuthorization();
+        int gameID = clientModel.getGameID();
 
-        List<Command> listOfCommands = serverProxy.getNewGameCommands(lastCommand, auth);
+        List<Command> listOfCommands = serverProxy.getNewGameCommands(gameID, lastCommand, auth);
 
         //Return was not in brackets... did this fix it?
         if(listOfCommands == null)

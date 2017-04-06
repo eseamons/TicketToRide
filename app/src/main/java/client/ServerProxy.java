@@ -302,10 +302,11 @@ public class ServerProxy implements IServer{
     //@precondition - auth should be a valid authorization code
     //@return returns a list of commands to be executed on the client
     //@postcondition - a getNewGameComman is sent to the server and executed; thus returning the list of commands
-    public List<Command> getNewGameCommands(int lastCommand, String auth) {
+    public List<Command> getNewGameCommands(int gameID, int lastCommand, String auth) {
         GetNewGameCommandsCommandData cmdData = new GetNewGameCommandsCommandData();
         cmdData.setCommandID(lastCommand);
         cmdData.setAuth(auth);
+        cmdData.setGameID(gameID);
 
         Command cmd = new GetNewGameCommandsCommand();
         cmd.setInfo(cmdData);

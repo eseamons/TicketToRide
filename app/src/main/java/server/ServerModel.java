@@ -120,15 +120,11 @@ public class ServerModel implements IServer{
         return returnLobbyList;
     }
 
-    /**
-     * Adds new command to game lobby commands list
-     * @param cmd
-     * @return
-     */
-    public void addCommand(Command cmd)
-    {
-        gameList.addGameCommand(cmd);
-    }
+
+//    public void addCommand(int gameID, Command cmd)
+//    {
+//        gameList.addGameCommand(gameID, cmd);
+//    }
 
     @Override
     public List<Command> getNewCommands(int commandID, String auth) {
@@ -262,7 +258,7 @@ public class ServerModel implements IServer{
             Command cmd = new AddCommentCommand();
             cmd.setInfo(cmdData);
             cmd.setCmdID(currentCmdID);
-            gameList.addGameCommand(cmd);
+            gameList.addGameCommand(gameID, cmd);
         }
         return addCommentSuccessful;
     }
@@ -271,12 +267,12 @@ public class ServerModel implements IServer{
         These are the functions used after starting the game
     */
     //added endTurn for the end turn Command (2/28)
-    public List<Command> getNewGameCommands(int commandID, String auth) {
+    public List<Command> getNewGameCommands(int gameID, int commandID, String auth) {
         List<Command> newCommandList = new ArrayList<>();
 
         if(accountList.authCodeExists(auth))
         {
-            newCommandList = gameList.getNewGameCommands(commandID);
+            newCommandList = gameList.getNewGameCommands(gameID, commandID);
         }
 
         return newCommandList;
@@ -302,7 +298,7 @@ public class ServerModel implements IServer{
             cmd.setInfo(cmdData);
             cmd.setAuth(auth);
             cmd.setCmdID(currentCmdId);
-            gameList.addGameCommand(cmd);
+            gameList.addGameCommand(gameID, cmd);
 
         }
         return endTurnSuccessful;
@@ -331,7 +327,7 @@ public class ServerModel implements IServer{
                 Command cmd = new ClaimRouteCommand();
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdId);
-                gameList.addGameCommand(cmd);
+                gameList.addGameCommand(gameID, cmd);
 
                 for(int i = 0; i < 5; i ++)
                 {
@@ -383,7 +379,7 @@ public class ServerModel implements IServer{
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
                 cmd.setAuth(auth);
-                gameList.addGameCommand(cmd);
+                gameList.addGameCommand(gameID, cmd);
             }
         }
 
@@ -420,7 +416,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameList.addGameCommand(cmd);
+                gameList.addGameCommand(gameID, cmd);
             }
         }
         return successful;
@@ -454,7 +450,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameList.addGameCommand(cmd);
+                gameList.addGameCommand(gameID, cmd);
 
             }
         }
@@ -492,7 +488,7 @@ public class ServerModel implements IServer{
 
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
-                gameList.addGameCommand(cmd);
+                gameList.addGameCommand(gameID, cmd);
 
                 //replaces the card that you drew.. hopefully
                 setFaceUpCard(currentGame.drawCard(),faceUpCardID,gameID);
@@ -521,7 +517,7 @@ public class ServerModel implements IServer{
 
         cmd.setInfo(cmdData);
         cmd.setCmdID(currentCmdID);
-        gameList.addGameCommand(cmd);
+        gameList.addGameCommand(gameID, cmd);
     }
 
 
@@ -554,7 +550,7 @@ public class ServerModel implements IServer{
             Command cmd = new ReplaceAllFaceUpCardsCommand();
             cmd.setInfo(cmdData);
             cmd.setCmdID(currentCmdID);
-            gameList.addGameCommand(cmd);
+            gameList.addGameCommand(gameID, cmd);
         }
         return successful;
     }
