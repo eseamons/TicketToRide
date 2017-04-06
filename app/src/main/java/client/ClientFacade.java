@@ -168,6 +168,12 @@ public class ClientFacade implements IClient{
             return false;
         }
 
+        //Testing if there are at least 2 players
+        if (players.size() < 1)
+        {
+            return false;
+        }
+
 
         String auth = clientModel.getAuthorization();
         int gameLobbyID = clientModel.getCurrent_game_lobby().getID();
