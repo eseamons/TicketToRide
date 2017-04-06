@@ -254,8 +254,8 @@ public class ClientFacade implements IClient{
     }
 
     @Override
-    public void aTurnEnded(int gameID) {
-        clientModel.endTurn(gameID);
+    public void aTurnEnded(int gameID, String auth) {
+        clientModel.endTurn(gameID, auth);
     }
 
     @Override
@@ -393,14 +393,14 @@ public class ClientFacade implements IClient{
             case 22: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),3); next_cmd = "Add Destination card to player 4 "; break;
             case 23: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),4); next_cmd = "Add Destination card to player 5 "; break;
             case 24: game.stupidAddDestinationCard((new DestinationCard("Toronto", "Miami", 10)),5); next_cmd = "Turn goes to next player "; break;
-            case 25: game.endTurn(); next_cmd = "Turn goes to next player"; break;
+            /*case 25: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 26: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 27: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 28: game.endTurn(); next_cmd = "Turn goes to next player"; break;
             case 29: game.endTurn(); next_cmd = "Add new message"; break;
 //            case 30: game.stupidAddComment("DUMMY1","Hello"); next_cmd = "Add new message"; break;
 //            case 31: game.stupidAddComment("DUMMY2","Greetings"); next_cmd = "Add new message"; break;
-//            case 32: game.stupidAddComment("DUMMY3","Good Evening, old chap"); next_cmd = "DONE"; break;
+//            case 32: game.stupidAddComment("DUMMY3","Good Evening, old chap"); next_cmd = "DONE"; break;*/
         }
         time++;
         clientModel.update();

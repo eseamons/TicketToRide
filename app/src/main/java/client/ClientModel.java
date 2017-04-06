@@ -224,6 +224,12 @@ public class ClientModel extends Observable
 
     public void aGameStarted(int gameID) {
 
+        GameLobby concerned_lobby = gameLobbyList.getGameLobbyByID(gameID);
+        if(concerned_lobby != null)
+        {
+            concerned_lobby.setGameStartedToTrue();
+        }
+
         if(currentGameLobby != null && gameID == currentGameLobby.getID())
         {
 
@@ -232,14 +238,15 @@ public class ClientModel extends Observable
             setPlayerThroughAuthCode();
             //TODO: stop poller from getting game lobby commands and start get game commands
             //Poller.getInstance().stopLobbyListTimer();
+            if(gameID == currentGameLobby.getID())
+            {
+                if(this_player.getPlayerID() == 0)
+                {calculateTurn();}
+            }
+            removeGameLobbyByID(gameID);
 
         }
-        if(gameID == currentGameLobby.getID())
-        {
-            if(this_player.getPlayerID() == 0)
-            {calculateTurn();}
-        }
-        removeGameLobbyByID(gameID);
+
     }
 
     private boolean first = true;
@@ -274,10 +281,10 @@ public class ClientModel extends Observable
         return gameCommandList;
     }
 
-    public void endTurn(int gameID) {
+    public void endTurn(int gameID, String auth) {
         if(currentGame.getGameID() == gameID)
         {
-            currentGame.endTurn();
+            currentGame.endTurn(auth);
             if(currentGame.getCurrentPlayer() == this_player.getPlayerID())
             {
                 calculateTurn();

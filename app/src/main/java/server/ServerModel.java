@@ -290,7 +290,7 @@ public class ServerModel implements IServer{
         if (game != null)
         {
             endTurnSuccessful = true;
-            game.endTurn();
+            game.endTurn(auth);
 
             EndTurnCommandData cmdData = new EndTurnCommandData();
             cmdData.setGameID(gameID);

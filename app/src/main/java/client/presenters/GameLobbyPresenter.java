@@ -82,4 +82,9 @@ public class GameLobbyPresenter implements IGameLobbyPresenter,Observer{
         GameLobbyView.getInstance().clickTheStartButton();
     }
 
+
+    public void printToast(String text)
+    {
+        Toast.makeText(GameLobbyView.getInstance().getApplicationContext(), text, Toast.LENGTH_SHORT).show();
+    }
 }

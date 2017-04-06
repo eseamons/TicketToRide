@@ -39,6 +39,11 @@ public class GameListPresenter implements IGameListPresenter,Observer {
         if(game.getPlayers().size() == game.getMaxPlayers())
         {return false;}
 
+        if(!game.canJoinBecauseGameHasNotStarted())
+        {
+            return false;
+        }
+
         int id = game.getID();
         GameLobby gameLobby  = clientFacade.joinGame(id);
 

@@ -13,6 +13,7 @@ public class GameLobby {
     private int ID;
     private String name;
     private ArrayList<String> comment_list;
+    boolean gameStarted = false;
 
     public GameLobby() {
         ArrayList<Player> newPlayersList = new ArrayList<>();
@@ -92,6 +93,17 @@ public class GameLobby {
         }
         return authCodeExists;
     }
+
+    public void setGameStartedToTrue()
+    {
+        gameStarted = true;
+    }
+
+    public boolean canJoinBecauseGameHasNotStarted()
+    {
+        return !gameStarted;
+    }
+
 
 
 }
