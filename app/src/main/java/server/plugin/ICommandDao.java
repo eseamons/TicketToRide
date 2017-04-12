@@ -1,5 +1,8 @@
 package server.plugin;
 
+import java.util.Set;
+
+import shared.Result;
 import shared.command_classes.Command;
 
 /**
@@ -7,6 +10,9 @@ import shared.command_classes.Command;
  */
 
 public interface ICommandDao {
-    void insertCommand(Command command);
-    void clearData();
+    Set<CommandDTO> getAll();
+
+    Result addCommand(CommandDTO commandDTO);
+
+    Result clearData();
 }

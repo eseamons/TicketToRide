@@ -1,5 +1,8 @@
 package server.plugin;
 
+import java.util.Set;
+
+import shared.Result;
 import shared.model_classes.Game;
 
 /**
@@ -7,6 +10,15 @@ import shared.model_classes.Game;
  */
 
 public interface IGameDao {
-    void insertGame(Game game);
-    void clearData();
+
+    Set<GameDTO> getAll();
+
+    Result addGame(GameDTO gameDTO);
+
+    Result updateGame(GameDTO gameDTO);
+
+    Result deleteGame(GameDTO gameDTO);
+
+    Result clearAllGames();
+
 }
