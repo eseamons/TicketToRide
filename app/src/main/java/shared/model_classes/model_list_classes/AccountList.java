@@ -101,6 +101,11 @@ public class AccountList {
         return accountAuthMap.get(auth);
     }
 
+    public Account getAccountByUserName(String user)
+    {
+        return accountUsernameMap.get(user);
+    }
+
 
 
 }

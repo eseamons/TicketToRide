@@ -5,7 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import server.plugin.AccountDTO;
+import server.plugin.CommandDTO;
+import server.plugin.GameDTO;
+import server.plugin.IAccountDao;
 import server.plugin.ICommandDao;
+import server.plugin.IGameDao;
 import server.plugin.Plugin;
 import shared.CardColor;
 import shared.ColorNum;
@@ -62,7 +67,13 @@ public class ServerModel implements IServer{
      * @return boolean indicating if register action was successful
      */
     public boolean register(String username, String password) {
-        return accountList.registerAccount(username, password);
+        boolean registered = accountList.registerAccount(username, password);
+        if (registered)
+        {
+            Account account = accountList.getAccountByUserName(username);
+            addAccountToDatabase(account);
+        }
+        return registered;
     }
 
     /**
@@ -173,6 +184,8 @@ public class ServerModel implements IServer{
 
                 gameLobbyList.addLobbyCommand(cmd);
                 ///////////////////////////////////////////////
+
+
             }
 
         }
@@ -216,6 +229,10 @@ public class ServerModel implements IServer{
             cmd.setCmdID(currentCmdID);
             gameLobbyList.addLobbyCommand(cmd);
             beginGameSuccessful = true;
+
+            //Add to database (maybe? idk man)
+            addCommandToDatabase(cmd, game.getGameID());
+            addGameToDatabase(game);
 
             //TODO: should create multiple commands that create the game...
             //everything past here should be on gameListCommands...
@@ -303,6 +320,10 @@ public class ServerModel implements IServer{
             cmd.setCmdID(currentCmdID);
             gameList.addGameCommand(gameID, cmd);
 
+            //Add to database
+            addCommandToDatabase(cmd, gameID);
+
+
         }
         return endTurnSuccessful;
     }
@@ -330,6 +351,9 @@ public class ServerModel implements IServer{
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdId);
                 gameList.addGameCommand(gameID, cmd);
+
+                //Add to database
+                addCommandToDatabase(cmd, gameID);
 
                 for(int i = 0; i < 5; i ++)
                 {
@@ -381,6 +405,9 @@ public class ServerModel implements IServer{
                 cmd.setCmdID(currentCmdID);
                 cmd.setAuth(auth);
                 gameList.addGameCommand(gameID, cmd);
+
+                //Add to database
+                addCommandToDatabase(cmd, gameID);
             }
         }
 
@@ -417,6 +444,9 @@ public class ServerModel implements IServer{
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
                 gameList.addGameCommand(gameID, cmd);
+
+                //Add to database
+                addCommandToDatabase(cmd, gameID);
             }
         }
         return successful;
@@ -450,6 +480,9 @@ public class ServerModel implements IServer{
                 cmd.setInfo(cmdData);
                 cmd.setCmdID(currentCmdID);
                 gameList.addGameCommand(gameID, cmd);
+
+                //Add to database
+                addCommandToDatabase(cmd, gameID);
 
             }
         }
@@ -491,6 +524,9 @@ public class ServerModel implements IServer{
                 //replaces the card that you drew.. hopefully
                 setFaceUpCard(currentGame.drawCard(),faceUpCardID,gameID);
 
+                //Add to database
+                addCommandToDatabase(cmd, gameID);
+
             }
         }
 
@@ -515,6 +551,9 @@ public class ServerModel implements IServer{
         cmd.setInfo(cmdData);
         cmd.setCmdID(currentCmdID);
         gameList.addGameCommand(gameID, cmd);
+
+        //Add to database
+        addCommandToDatabase(cmd, gameID);
     }
 
 
@@ -547,6 +586,9 @@ public class ServerModel implements IServer{
             cmd.setInfo(cmdData);
             cmd.setCmdID(currentCmdID);
             gameList.addGameCommand(gameID, cmd);
+
+            //Add to database
+            addCommandToDatabase(cmd, gameID);
         }
         return successful;
     }
@@ -577,9 +619,38 @@ public class ServerModel implements IServer{
         this.checkpoint = checkpoint;
     }
 
-    public void addCommand(Command c)
+    public void addCommandToDatabase(Command c, int gameID)
     {
-        ICommandDao.dealwithit(c);
+        CommandDTO commDTO = new CommandDTO();
+        commDTO.setCommand(c);
+        commDTO.setGameID(gameID);
+
+        ICommandDao commandDao = new ICommandDao();
+        commandDao.addCommand(commDTO);
+        return;
+    }
+
+    public void addAccountToDatabase(Account acc)
+    {
+
+        AccountDTO accDTO = new AccountDTO();
+        accDTO.setAccount(acc);
+        accDTO.setAuth(acc.getAuthentication());
+
+        IAccountDao accountDao = new IAccountDao();
+        accountDao.addAccount(accDTO);
+        return;
+    }
+
+    public void addGameToDatabase(Game game)
+    {
+
+        GameDTO gameDTO = new GameDTO();
+        gameDTO.setGameID(game.getGameID());
+        gameDTO.setGame(game);
+
+        IGameDao gameDao = new IGameDao();
+        gameDao.addGame(gameDTO);
         return;
     }
 
