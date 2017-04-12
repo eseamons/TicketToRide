@@ -16,5 +16,7 @@ public interface IAccountDao {
 
     Result clearData();
 
+    AccountDTO selectByUserName(String userName);
 
+    AccountDTO secectByAuth(String auth);
 }

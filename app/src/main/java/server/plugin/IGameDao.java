@@ -21,4 +21,6 @@ public interface IGameDao {
 
     Result clearAllGames();
 
+    GameDTO selectByGameID(int gameID);
+
 }

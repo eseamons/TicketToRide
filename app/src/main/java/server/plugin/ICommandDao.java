@@ -15,4 +15,8 @@ public interface ICommandDao {
     Result addCommand(CommandDTO commandDTO);
 
     Result clearData();
+
+    Result deleteGameCommands(int gameID);
+
+    Set<CommandDTO> selectByGameID(int gameID);
 }
