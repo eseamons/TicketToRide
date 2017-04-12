@@ -47,9 +47,11 @@ public class ServerCommunicator {
 
         String portNumber = "8080";
         String provider = args[0];
+        String checkpoint = args[1];
 
         ServerModel model = ServerModel.getInstance();
         model.setPlugin(new Plugin(provider));
+        model.setCheckpoint(Integer.parseInt(checkpoint));
 
 
         new ServerCommunicator().run(portNumber);

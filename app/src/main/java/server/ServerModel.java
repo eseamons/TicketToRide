@@ -34,6 +34,7 @@ public class ServerModel implements IServer{
     private GameList gameList;
     private Map<String, Player> playerAuthMap;
     private Plugin plugin;
+    private int checkpoint;
 
     private ServerModel() {
         accountList = new AccountList();
@@ -568,6 +569,11 @@ public class ServerModel implements IServer{
 
     public void setPlugin(Plugin plugin) {
         this.plugin = plugin;
+    }
+
+    public void setCheckpoint(int checkpoint)
+    {
+        this.checkpoint = checkpoint;
     }
 
 }
