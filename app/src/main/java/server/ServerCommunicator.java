@@ -43,10 +43,15 @@ public class ServerCommunicator {
     }
 
     public static void main(String[] args) {
-        ServerModel model = ServerModel.getInstance();
-        model.setPlugin(new Plugin(""));
+
 
         String portNumber = "8080";
+        String provider = args[0];
+
+        ServerModel model = ServerModel.getInstance();
+        model.setPlugin(new Plugin(provider));
+
+
         new ServerCommunicator().run(portNumber);
     }
 }
