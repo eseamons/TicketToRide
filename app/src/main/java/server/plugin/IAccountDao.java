@@ -5,4 +5,5 @@ package server.plugin;
  */
 
 public interface IAccountDao {
+
 }
