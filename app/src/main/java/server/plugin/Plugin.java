@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import shared.command_classes.Command;
+
 /**
  * Created by eseamons on 4/11/2017.
  */

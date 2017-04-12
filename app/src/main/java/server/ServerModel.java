@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import server.plugin.ICommandDao;
 import server.plugin.Plugin;
 import shared.CardColor;
 import shared.ColorNum;
@@ -574,6 +575,12 @@ public class ServerModel implements IServer{
     public void setCheckpoint(int checkpoint)
     {
         this.checkpoint = checkpoint;
+    }
+
+    public void addCommand(Command c)
+    {
+        ICommandDao.dealwithit(c);
+        return;
     }
 
 }

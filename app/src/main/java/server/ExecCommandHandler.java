@@ -15,6 +15,8 @@ public class ExecCommandHandler extends HandlerBase {
         Result result = null;
         Command command = (Command) Serializer.deserialize(json);
         result = command.execute();
+        ServerModel.getInstance().addCommand(command);
+
         json = Serializer.serialize(result);
         return json;
     }
