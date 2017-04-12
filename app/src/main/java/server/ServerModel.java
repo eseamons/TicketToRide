@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import server.plugin.Plugin;
 import shared.CardColor;
 import shared.ColorNum;
 import shared.Result;
@@ -32,6 +33,7 @@ public class ServerModel implements IServer{
     private GameLobbyList gameLobbyList;
     private GameList gameList;
     private Map<String, Player> playerAuthMap;
+    private Plugin plugin;
 
     private ServerModel() {
         accountList = new AccountList();
@@ -562,4 +564,10 @@ public class ServerModel implements IServer{
         g.incrementCurrentGameCommandID();
         return currentCmdID;
     }
+
+
+    public void setPlugin(Plugin plugin) {
+        this.plugin = plugin;
+    }
+
 }

@@ -7,6 +7,8 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
+import server.plugin.Plugin;
+
 /**
  * Created by sirla on 2/10/2017.
  */
@@ -41,6 +43,9 @@ public class ServerCommunicator {
     }
 
     public static void main(String[] args) {
+        ServerModel model = ServerModel.getInstance();
+        model.setPlugin(new Plugin(""));
+
         String portNumber = "8080";
         new ServerCommunicator().run(portNumber);
     }
