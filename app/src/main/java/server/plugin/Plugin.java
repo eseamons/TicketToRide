@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import shared.command_classes.Command;
-
 /**
  * Created by eseamons on 4/11/2017.
  */
@@ -36,6 +34,9 @@ public class Plugin {
         factory = (IDaoFactory) Class.forName("plugin.ConcreteDaoFactory", false, uc).newInstance();
 
     }
+
+    public IDaoFactory createDaoFactory()
+    {return factory;}
 
     private void getJsonObject() {
 

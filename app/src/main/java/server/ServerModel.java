@@ -10,6 +10,7 @@ import server.plugin.CommandDTO;
 import server.plugin.GameDTO;
 import server.plugin.IAccountDao;
 import server.plugin.ICommandDao;
+import server.plugin.IDaoFactory;
 import server.plugin.IGameDao;
 import server.plugin.Plugin;
 import shared.CardColor;
@@ -612,6 +613,7 @@ public class ServerModel implements IServer{
 
     public void setPlugin(Plugin plugin) {
         this.plugin = plugin;
+
     }
 
     public void setCheckpoint(int checkpoint)
@@ -625,7 +627,9 @@ public class ServerModel implements IServer{
         commDTO.setCommand(c);
         commDTO.setGameID(gameID);
 
-        ICommandDao commandDao = new ICommandDao();
+        IDaoFactory f = plugin.createDaoFactory();
+
+        ICommandDao commandDao = f.createCommandDao();
         commandDao.addCommand(commDTO);
         return;
     }
@@ -635,9 +639,10 @@ public class ServerModel implements IServer{
 
         AccountDTO accDTO = new AccountDTO();
         accDTO.setAccount(acc);
-        accDTO.setAuth(acc.getAuthentication());
 
-        IAccountDao accountDao = new IAccountDao();
+        IDaoFactory f = plugin.createDaoFactory();
+
+        IAccountDao accountDao = f.createAccountDao();
         accountDao.addAccount(accDTO);
         return;
     }
@@ -649,7 +654,9 @@ public class ServerModel implements IServer{
         gameDTO.setGameID(game.getGameID());
         gameDTO.setGame(game);
 
-        IGameDao gameDao = new IGameDao();
+        IDaoFactory f = plugin.createDaoFactory();
+
+        IGameDao gameDao = f.createGameDao();
         gameDao.addGame(gameDTO);
         return;
     }

@@ -18,5 +18,5 @@ public interface IAccountDao {
 
     AccountDTO selectByUserName(String userName);
 
-    AccountDTO secectByAuth(String auth);
+    AccountDTO selectByAuth(String auth);
 }

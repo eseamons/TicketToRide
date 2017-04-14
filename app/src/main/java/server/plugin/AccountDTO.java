@@ -8,8 +8,7 @@ import shared.model_classes.Account;
 
 public class AccountDTO {
     Account account;
-
-    String auth;
+    int gameID;
 
     public Account getAccount() {
         return account;
@@ -19,11 +18,11 @@ public class AccountDTO {
         this.account = account;
     }
 
-    public String getAuth() {
-        return auth;
+    public int getGameID() {
+        return gameID;
     }
 
-    public void setAuth(String auth) {
-        this.auth = auth;
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
     }
 }
