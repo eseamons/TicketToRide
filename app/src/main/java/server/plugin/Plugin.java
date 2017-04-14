@@ -37,5 +37,9 @@ public class Plugin {
 
     }
 
+    private void getJsonObject() {
+
+    }
+
 
 }
