@@ -3,6 +3,7 @@ package server.plugin;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.net.URL;
 import java.net.URLClassLoader;
 
@@ -11,13 +12,13 @@ import java.net.URLClassLoader;
  */
 
 public class Plugin {
-    private IDaoFactory factory;
+    private Class<?> factoryClass;
 
-    public Plugin(String implementation_type) {
+    public Plugin(String implementationType) {
 
     }
 
-    private void loadDaoFactory() throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
+    private void loadDaoFactory(String implementationType) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
         File plugins = new File("plugins");
         File[] jars = plugins.listFiles(new FileFilter() {
             public boolean accept(File pathname) {
@@ -31,12 +32,18 @@ public class Plugin {
         }
         ClassLoader uc = new URLClassLoader(urls,this.getClass().getClassLoader());
 
-        factory = (IDaoFactory) Class.forName("plugin.ConcreteDaoFactory", false, uc).newInstance();
+        factoryClass = Class.forName("plugin.ConcreteDaoFactory", false, uc);
 
     }
 
-    public IDaoFactory createDaoFactory()
-    {return factory;}
+    public IDaoFactory createDaoFactory() {
+        try {
+            Constructor<?> con = factoryClass.getConstructors()[0];
+            return (IDaoFactory) con.newInstance();
+        } catch(Exception e) {
+            return null;
+        }
+    }
 
     private void getJsonObject() {
 
