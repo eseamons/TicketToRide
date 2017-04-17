@@ -23,7 +23,13 @@ public class Plugin {
 
     public Plugin(String implementationType) {
         String classPath = getClassPath(implementationType);
-        //loadDaoFactory(classPath);
+
+        try {
+            loadDaoFactory(classPath);
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("Plugin could not be loaded");
+        }
     }
 
     private void loadDaoFactory(String classPath) throws InstantiationException, IllegalAccessException, ClassNotFoundException, IOException {
@@ -40,7 +46,7 @@ public class Plugin {
         }
         ClassLoader uc = new URLClassLoader(urls,this.getClass().getClassLoader());
 
-        factoryClass = Class.forName("plugin.ConcreteDaoFactory", false, uc);
+        factoryClass = Class.forName(classPath, false, uc);
 
     }
 
