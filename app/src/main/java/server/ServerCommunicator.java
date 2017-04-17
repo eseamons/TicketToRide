@@ -49,8 +49,9 @@ public class ServerCommunicator {
         //String provider = args[0];
         //String checkpoint = args[1];
         boolean wipe = false;
-        if (args[2].equals("-wipe") || args[2].equals("wipe") || args[2].equals("w") || args[2].equals("-w"))
-            wipe = true;
+        if (args.length >= 3)
+            if (args[2].equals("-wipe") || args[2].equals("wipe") || args[2].equals("w") || args[2].equals("-w"))
+                wipe = true;
 
         String provider = "SQL";
         String checkpoint = "1";
