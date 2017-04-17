@@ -587,5 +587,21 @@ public class ClientFacade implements IClient{
         clientModel.addDestinationCardToPlayerIndex(playerIndex,dc);
     }
 
+    public boolean ifIsInGameSetGameInMode()
+    {
+        String auth = clientModel.getAuthorization();
+        Game current_game = ServerProxy.getInstance().getCurrentGame(auth);
+        if(current_game == null)
+        {
+            return false;
+        }
+        else
+        {
+            clientModel.setCurrent_game(current_game);
+            getNewGameCommands();
+            return true;
+        }
+    }
+
 
 }
