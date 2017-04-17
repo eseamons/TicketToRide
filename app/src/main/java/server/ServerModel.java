@@ -89,6 +89,11 @@ public class ServerModel implements IServer{
         return accountList.login(username, password);
     }
 
+    public Game getCurrentGameIfThereIsOne(String auth)
+    {
+        return gameList.getGameByAuthCode(auth);
+    }
+
     /**
      * Creates a game lobby
      * @param gameLobbyName

@@ -1,11 +1,15 @@
 package server;
 
+import android.os.Build;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.net.UnknownHostException;
 
 import server.plugin.Plugin;
 
@@ -39,6 +43,11 @@ public class ServerCommunicator {
         server.createContext("/test", new TestHandler());
 
         System.out.println("Starting server");
+        try {
+            System.out.println("Address2: " + InetAddress.getLocalHost().getHostAddress());
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
         server.start();
     }
 

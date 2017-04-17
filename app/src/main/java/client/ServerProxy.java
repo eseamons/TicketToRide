@@ -15,6 +15,7 @@ import shared.command_classes.DrawDeckCardCommand;
 import shared.command_classes.DrawDestinationCardCommand;
 import shared.command_classes.DrawFaceUpCardCommand;
 import shared.command_classes.EndTurnCommand;
+import shared.command_classes.GetCurrentGameCommand;
 import shared.command_classes.GetGamesCommand;
 import shared.command_classes.GetNewCommandsCommand;
 import shared.command_classes.GetNewGameCommandsCommand;
@@ -32,6 +33,7 @@ import shared.command_data_classes.DrawDeckCardCommandData;
 import shared.command_data_classes.DrawDestinationCardCommandData;
 import shared.command_data_classes.DrawFaceUpCardCommandData;
 import shared.command_data_classes.EndTurnCommandData;
+import shared.command_data_classes.GetCurrentGameCommandData;
 import shared.command_data_classes.GetGamesCommandData;
 import shared.command_data_classes.GetNewCommandsCommandData;
 import shared.command_data_classes.GetNewGameCommandsCommandData;
@@ -44,6 +46,7 @@ import shared.command_data_classes.SetPlayerColorCommandData;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
 import shared.model_classes.DestinationCard;
+import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Route;
 
@@ -470,5 +473,27 @@ public class ServerProxy implements IServer{
         {return false;}
         else
         {return r.isSuccess();}
+    }
+
+    public Game getCurrentGame(String auth)
+    {
+        GetCurrentGameCommandData cmdData = new GetCurrentGameCommandData();
+        cmdData.setAuth(auth);
+
+        Command cmd = new GetCurrentGameCommand();
+        cmd.setInfo(cmdData);
+        Result r = ClientCommunicator.getInstance().send(urlpath,cmd);
+        if(r == null)
+        {
+            return null;
+        }
+        else if(!r.isSuccess())
+        {
+            return null;
+        }
+        else
+        {
+            return (Game) r.getInfo();
+        }
     }
 }

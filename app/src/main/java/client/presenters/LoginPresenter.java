@@ -61,4 +61,10 @@ public class LoginPresenter implements ILoginPresenter{
 
         return account != null;
     }
+
+    public boolean isInGame()
+    {
+        return clientFacade.ifIsInGameSetGameInMode();
+    }
+
 }
