@@ -28,6 +28,10 @@ public class Game {
 
     private int currentGameCommandID=0;
 
+
+
+
+
     public PlayersList getPlayerList()
     {
         return players;

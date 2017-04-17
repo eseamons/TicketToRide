@@ -634,5 +634,23 @@ public class RoutesList {
     }
 
 
+    public void setAvailableRouteList(List<Route> availableRouteList) {
+        this.availableRouteList = availableRouteList;
+    }
 
+    public void setPlayersClaimedRoutes(Map<String, List<Route>> playersClaimedRoutes) {
+        this.playersClaimedRoutes = playersClaimedRoutes;
+    }
+
+    public void setCUR_DONE(int CUR_DONE) {
+        this.CUR_DONE = CUR_DONE;
+    }
+
+    public void setNodeMaps(ArrayList<NodeMap> nodeMaps) {
+        this.nodeMaps = nodeMaps;
+    }
+
+    public void setAWARD_FOR_LONGEST_PATH(int AWARD_FOR_LONGEST_PATH) {
+        this.AWARD_FOR_LONGEST_PATH = AWARD_FOR_LONGEST_PATH;
+    }
 }
