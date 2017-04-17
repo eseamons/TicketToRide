@@ -63,6 +63,7 @@ public class PlayersList {
         numOfPlayers = listOfPlayers.size();
         currentPlayerID = 0;
     }
+    public PlayersList(){}
 
     /**
      * Returns the id of the player whose turn it is
@@ -269,5 +270,25 @@ public class PlayersList {
             }
         }
         return null;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
+
+    public void setCurrentPlayerID(int currentPlayerID) {
+        this.currentPlayerID = currentPlayerID;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
+    }
+
+    public void setGameCommands(List<Command> gameCommands) {
+        this.gameCommands = gameCommands;
     }
 }

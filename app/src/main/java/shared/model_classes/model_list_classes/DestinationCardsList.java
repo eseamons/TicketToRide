@@ -83,4 +83,12 @@ public class DestinationCardsList {
     public void discardCard(DestinationCard destinationCard) {
         discardPile.add(destinationCard);
     }
+
+    public void setDestinationCardsList(List<DestinationCard> destinationCardsList) {
+        this.destinationCardsList = destinationCardsList;
+    }
+
+    public void setDiscardPile(List<DestinationCard> discardPile) {
+        this.discardPile = discardPile;
+    }
 }
