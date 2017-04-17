@@ -55,11 +55,11 @@ public class ServerCommunicator {
 
 
         String portNumber = "8080";
-        //String provider = args[0];
-        //String checkpoint = args[1];
+        //String provider = args[1];
+        //String checkpoint = args[2];
         boolean wipe = false;
-        if (args.length >= 3)
-            if (args[2].equals("-wipe") || args[2].equals("wipe") || args[2].equals("w") || args[2].equals("-w"))
+        if (args.length >= 1)
+            if (args[0].equals("-wipe") || args[0].equals("wipe") || args[0].equals("w") || args[0].equals("-w"))
                 wipe = true;
 
         String provider = "SQL";
@@ -67,6 +67,9 @@ public class ServerCommunicator {
 
         ServerModel model = ServerModel.getInstance();
         model.setPlugin(new Plugin(provider));
+        //Resetting Defaults might be faulty, so you can type in "-wipe" as an arg in order to bypass this.
+        if (!wipe)
+            model.resetDefaults();
         model.setCheckpoint(Integer.parseInt(checkpoint));
         model.setWipe(wipe);
 

@@ -27,6 +27,13 @@ public class AccountList {
         accountUsernameMap = new HashMap<>();
     }
 
+    public void addAccount(Account account)
+    {
+        accounts.add(account);
+        accountAuthMap.put(account.getAuthentication(), account);
+        accountUsernameMap.put(account.getUsername(), account);
+    }
+
     /**
      * Function registers a new account in the system
      * @param username

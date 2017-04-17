@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import server.plugin.AccountDTO;
 import server.plugin.CommandDTO;
@@ -50,6 +51,60 @@ public class ServerModel implements IServer{
         gameLobbyList = new GameLobbyList();
         gameList = new GameList();
         playerAuthMap = new HashMap<>();
+
+    }
+
+    public void resetDefaults()
+    {
+        IDaoFactory factory = plugin.createDaoFactory();
+
+        IGameDao gameDao = factory.createGameDao();
+        Set<GameDTO> gameDTOs = gameDao.getAll();
+        Game currentGame;
+        for (GameDTO dto : gameDTOs)
+        {
+            currentGame = dto.getGame();
+            gameList.addGame(currentGame);
+        }
+
+        ICommandDao commandDao = factory.createCommandDao();
+        Set<CommandDTO> commandDTOs = commandDao.getAll();
+        Command currentCommand;
+        for (CommandDTO dto : commandDTOs)
+        {
+            currentCommand = dto.getCommand();
+            int gameID = dto.getGameID();
+            gameList.addGameCommand(gameID, currentCommand);
+        }
+
+        IAccountDao accountDao = factory.createAccountDao();
+        Set<AccountDTO> accountDTOs = accountDao.getAll();
+        Account currentAccount;
+        for (AccountDTO dto : accountDTOs)
+        {
+            currentAccount = dto.getAccount();
+            accountList.addAccount(currentAccount);
+
+        }
+
+        //Also generate playerAuthMap??
+        for (int i = 0; i < gameList.size(); i++)
+        {
+            currentGame = gameList.getGameByIndex(i);
+            List<Player> listPlayers = currentGame.getPlayers();
+            //PlayersList playersList = currentGame.getPlayerList();
+
+            Player currentPlayer;
+            for (int j = 0; j < listPlayers.size(); j++)
+            {
+                currentPlayer = listPlayers.get(i);
+                playerAuthMap.put(currentPlayer.getPlayerAuthCode(), currentPlayer);
+            }
+
+
+        }
+
+        return;
     }
 
     /**
