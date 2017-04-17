@@ -29,6 +29,7 @@ import shared.command_data_classes.JoinGameCommandData;
 import shared.command_data_classes.ConfirmDestinationCardCommandData;
 import shared.command_data_classes.ReplaceAllFaceUpCardsCommandData;
 import shared.command_data_classes.SetFaceUpCardCommandData;
+import shared.interfaces.ICommand;
 import shared.model_classes.*;
 import shared.interfaces.IServer;
 import shared.model_classes.model_list_classes.*;
@@ -42,6 +43,7 @@ public class ServerModel implements IServer{
     private Map<String, Player> playerAuthMap;
     private Plugin plugin;
     private int checkpoint;
+    private int deltas = 0;
 
     private ServerModel() {
         accountList = new AccountList();
@@ -621,6 +623,22 @@ public class ServerModel implements IServer{
         this.checkpoint = checkpoint;
     }
 
+    public void setWipe(boolean wipe)
+    {
+        if (wipe)
+        {
+            IDaoFactory f = plugin.createDaoFactory();
+
+            IAccountDao accountDao = f.createAccountDao();
+            ICommandDao commandDao = f.createCommandDao();
+            IGameDao gameDao = f.createGameDao();
+            accountDao.clearData();
+            commandDao.clearData();
+            gameDao.clearAllGames();
+
+        }
+    }
+
     public void addCommandToDatabase(Command c, int gameID)
     {
         CommandDTO commDTO = new CommandDTO();
@@ -631,6 +649,27 @@ public class ServerModel implements IServer{
 
         ICommandDao commandDao = f.createCommandDao();
         commandDao.addCommand(commDTO);
+        deltas++;
+
+        if (deltas >= checkpoint)
+        {
+            updateGameInDatabase(gameList.getGame(gameID));
+            deltas = 0;
+        }
+
+        return;
+    }
+
+    public void updateGameInDatabase(Game game)
+    {
+        GameDTO gameDTO = new GameDTO();
+        gameDTO.setGameID(game.getGameID());
+        gameDTO.setGame(game);
+
+        IDaoFactory f = plugin.createDaoFactory();
+
+        IGameDao gameDao = f.createGameDao();
+        gameDao.updateGame(gameDTO);
         return;
     }
 
