@@ -11,6 +11,7 @@ import server.plugin.AccountDTO;
 import server.plugin.IAccountDao;
 import server.plugin.IDaoFactory;
 import server.plugin.Plugin;
+import shared.Result;
 import shared.model_classes.Account;
 
 /**
@@ -57,7 +58,7 @@ public class ServerCommunicator {
             if (args[2].equals("-wipe") || args[2].equals("wipe") || args[2].equals("w") || args[2].equals("-w"))
                 wipe = true;
 
-        String provider = "SQL";
+        String provider = "JSON";
         String checkpoint = "1";
 
         ServerModel model = ServerModel.getInstance();
@@ -72,7 +73,8 @@ public class ServerCommunicator {
         AccountDTO outAccountDTO = new AccountDTO();
         accountDTO.setAccount(account);
         accountDTO.setGameID(20);
-        accountDao.addAccount(accountDTO);
+        accountDao.clearData();
+        Result result = accountDao.addAccount(accountDTO);
 
         outAccountDTO = accountDao.selectByAuth("DTERE-3483794-UIOUP");
         Account outAccount = outAccountDTO.getAccount();
