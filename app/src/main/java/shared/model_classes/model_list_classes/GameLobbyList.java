@@ -84,8 +84,16 @@ public class GameLobbyList {
      *
      * @param gameLobbyID
      */
-    public void removeLobby(int gameLobbyID) {
-        lobbies.remove(gameLobbyID - 1);
+    public void removeLobby(int gameLobbyID)
+    {
+        for(int i = 0; i < lobbies.size(); i++)
+        {
+            if(lobbies.get(i).getID() == gameLobbyID)
+            {
+                lobbies.remove(i);
+            }
+        }
+
     }
 
     /**
@@ -141,6 +149,11 @@ public class GameLobbyList {
             return lobbyCommands.subList(commandID, lobbyCommands.size());
         }
 
+    }
+
+    public void removeGameLobby(GameLobby gl)
+    {
+        lobbies.remove(gl);
     }
 
 }

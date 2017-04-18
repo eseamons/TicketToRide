@@ -267,6 +267,7 @@ public class ServerModel implements IServer{
 
             //Begin game
             GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
+            gameLobbyList.removeGameLobby(gameLobby);
             Game game = gameList.beginGame(gameLobby);
             setFaceUpCard(game.drawCard(),0,gameLobbyID);
             setFaceUpCard(game.drawCard(),1,gameLobbyID);
@@ -385,6 +386,11 @@ public class ServerModel implements IServer{
 
             //Add to database
             addCommandToDatabase(cmd, gameID);
+
+            if(game.isGameOver())
+            {
+                gameList.removeGame(game);
+            }
 
 
         }

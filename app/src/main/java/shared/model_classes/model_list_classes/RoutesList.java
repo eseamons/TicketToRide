@@ -537,7 +537,7 @@ public class RoutesList {
     public void createNodeList()
     {
         ClientFacade client = new ClientFacade();
-        int amountOfPlayers = client.getAmountOfPlayersInCurrentGame();
+        int amountOfPlayers = client.getAmountOfPlayersInCurrentGameFromCurrentGame();
         //int amountOfPlayers = 5;
         for(int i = 0; i < amountOfPlayers; i++)
         {
@@ -559,7 +559,7 @@ public class RoutesList {
     public void calculateDestinationCardPoint()
     {
         ClientFacade client = new ClientFacade();
-        List<Player> players = client.getPlayers();
+        List<Player> players = client.getGamePlayers();
         //ArrayList<Player> players = stupidPlayers;
         for(int playerIndex = 0; playerIndex < players.size(); playerIndex++)
         {
@@ -605,7 +605,7 @@ public class RoutesList {
     public void awardLongestPath()
     {
         ClientFacade client = new ClientFacade();
-        List<Player> players = client.getPlayers();
+        List<Player> players = client.getGamePlayers();
         //ArrayList<Player> players = stupidPlayers;
         ArrayList<Integer> indexes_of_player_with_longest = new ArrayList<>();
         int longest_path = -1;

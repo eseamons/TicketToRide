@@ -182,6 +182,7 @@ public class ClientFacade implements IClient{
 
         Game game = new Game(clientModel.getInstance().getCurrent_game_lobby());
         clientModel.setCurrent_game(game);
+        clientModel.removeGameLobbyByID(gameLobbyID);
         //clientModel.gameSetPlayer_num();
         //TODO: is this supposed to always return null?
         return new Result(beginGameBool, "");
@@ -581,6 +582,11 @@ public class ClientFacade implements IClient{
     public int getAmountOfPlayersInCurrentGame()
     {
         return getPlayers().size();
+    }
+
+    public int getAmountOfPlayersInCurrentGameFromCurrentGame()
+    {
+        return clientModel.getCurrent_game().getPlayerList().getSize();
     }
 
 
