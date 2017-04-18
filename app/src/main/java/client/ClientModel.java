@@ -9,6 +9,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import client.StateClasses.ClientState;
+import client.StateClasses.DrawCardState;
 import client.StateClasses.DrawDestinationCardState;
 import client.StateClasses.MyTurnState;
 import client.StateClasses.NotMyTurnState;
@@ -16,7 +17,12 @@ import client.presenters.GameListPresenter;
 import client.presenters.GameLobbyPresenter;
 import client.presenters.LoginPresenter;
 import shared.CardColor;
+import shared.command_classes.AddCommentCommand;
 import shared.command_classes.Command;
+import shared.command_classes.DrawDeckCardCommand;
+import shared.command_classes.DrawFaceUpCardCommand;
+import shared.command_classes.ReplaceAllFaceUpCardsCommand;
+import shared.command_classes.SetFaceUpCardCommand;
 import shared.interfaces.ICommand;
 import shared.model_classes.Account;
 import shared.model_classes.DestinationCard;
@@ -249,6 +255,8 @@ public class ClientModel extends Observable
 
     }
 
+
+
     private boolean first = true;
     public void calculateTurn() {
         if(first)
@@ -353,6 +361,17 @@ public class ClientModel extends Observable
         this.this_player = this_player;
     }
 
+    public void setThis_player_withAuthCode()
+    {
+        for(Player p: getPlayers())
+        {
+            if(p.getAccount().getAuthentication().equals(getAuthorization()))
+            {
+                this_player = p;
+            }
+        }
+    }
+
     public int ThisPlayersTurn()
     {
         return currentGame.ThisPlayersTurn();
@@ -422,6 +441,11 @@ public class ClientModel extends Observable
         return this_player.getAllChooseableDestinationCards();
     }
 
+    public void setAllChoosableDestinationCardsToNull()
+    {
+        this_player.setAllChoosableDestinationCardsToNull();
+    }
+
     public boolean[] addConfirmedDestinationCardsToPlayer() {
 
         for(int i = 0; i < destinationCardsAcceptance.length; i++) {
@@ -445,6 +469,11 @@ public class ClientModel extends Observable
         currentGame.getPlayers().get(playerIndex).addDestinationCard(dc);
     }
 
+    public void clearDestinationCardsOfPlayerIndex(int playerIndex)
+    {
+        currentGame.getPlayers().get(playerIndex).setAllChoosableDestinationCardsToNull();
+    }
+
 
     public DestinationCard[] getConfirmedCards() {
         return this_player.getAllChooseableDestinationCards();
@@ -453,6 +482,58 @@ public class ClientModel extends Observable
     public int getGameID() {
         return currentGame.getGameID();
     }
+
+    public void restoreTurn()
+    {
+        if(currentGame.getCurrentPlayer() == this_player.getPlayerID())
+        {
+            if(getChooseableDestinationCards()[0] != null)
+            {
+                state = new DrawDestinationCardState();
+            }
+            else if(lastActionWasDrawCard())
+            {
+                state = new DrawCardState();
+            }
+            else
+            {
+                state = new MyTurnState();
+            }
+        }
+    }
+
+    public boolean lastActionWasDrawCard()
+    {
+        int i = gameCommandList.size()-1;
+        Command last_cmd = gameCommandList.get(i);
+        while(last_cmd instanceof AddCommentCommand)
+        {
+            i--;
+            last_cmd = gameCommandList.get(i);
+        }
+        return  last_cmd instanceof DrawDeckCardCommand || last_cmd instanceof ReplaceAllFaceUpCardsCommand || last_cmd instanceof SetFaceUpCardCommand;
+    }
+
+
+    public boolean restoreGame(Game current_game)
+    {
+        if(current_game == null)
+        {
+            return false;
+        }
+        else
+        {
+            Game cg = new Game(current_game);
+            first = false;
+            setCurrent_game(cg);
+            setPlayerThroughAuthCode();
+            ClientFacade client = new ClientFacade();
+            client.getNewGameCommands();
+            restoreTurn();
+            return true;
+        }
+    }
+
 
 
 

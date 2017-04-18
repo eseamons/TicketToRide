@@ -42,6 +42,7 @@ public class ConfirmDestinationCardCommand extends Command {
             }
 
         }
+        client.clearDestinationCardsOfPlayerIndex(playerID);
 
 
 

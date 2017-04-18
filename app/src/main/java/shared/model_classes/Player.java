@@ -30,6 +30,18 @@ public class Player {
 
     }
 
+    public void resetPlayer()
+    {
+        destinationCards = new ArrayList<>();
+        trainCards = new ArrayList<>();
+        trainsRemaining = 45;
+        choosableDestinationCards = new DestinationCard[3];
+        for(int i = 0; i < choosableDestinationCards.length; i++)
+        {
+            choosableDestinationCards[i] = null;
+        }
+    }
+
     public Account getAccount() {
         return account;
     }
@@ -112,6 +124,14 @@ public class Player {
 
     public DestinationCard[] getAllChooseableDestinationCards() {
         return choosableDestinationCards;
+    }
+
+    public void setAllChoosableDestinationCardsToNull()
+    {
+        for(int i = 0; i < 3; i++)
+        {
+            choosableDestinationCards[i] = null;
+        }
     }
 
     public void confirmDestinationCard(int cardIndex) {

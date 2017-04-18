@@ -276,6 +276,15 @@ public class PlayersList {
         this.players = players;
     }
 
+    public void resetAllPlayers()
+    {
+        for(int i = 0; i < players.size(); i++)
+        {
+            Player p = players.get(i);
+            p.resetPlayer();
+        }
+    }
+
     public void setNumOfPlayers(int numOfPlayers) {
         this.numOfPlayers = numOfPlayers;
     }

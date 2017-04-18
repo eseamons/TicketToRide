@@ -169,7 +169,7 @@ public class ClientFacade implements IClient{
         }
 
         //Testing if there are at least 2 players
-        if (players.size() < 1)
+        if (players.size() < 0)
         {
             return new Result(false, "Must have 2 players to start the game");
         }
@@ -235,6 +235,7 @@ public class ClientFacade implements IClient{
         if(listOfCommands == null)
         {return;}
 
+        System.out.println(lastCommand);
         for(int i = 0; i < listOfCommands.size(); i++)
         {
             Command cmd = (Command) listOfCommands.get(i);
@@ -559,6 +560,7 @@ public class ClientFacade implements IClient{
         String auth = clientModel.getAuthorization();
         ServerProxy proxy = ServerProxy.getInstance();
         proxy.removeDestinationCard(gameID, playerID, acceptedCards, acceptedCardsBools, auth);
+        clientModel.setAllChoosableDestinationCardsToNull();
     }
 
     public boolean canConfirmDestinationCards()
@@ -587,20 +589,16 @@ public class ClientFacade implements IClient{
         clientModel.addDestinationCardToPlayerIndex(playerIndex,dc);
     }
 
+    public void clearDestinationCardsOfPlayerIndex(int playerIndex)
+    {
+        clientModel.clearDestinationCardsOfPlayerIndex(playerIndex);
+    }
+
     public boolean ifIsInGameSetGameInMode()
     {
         String auth = clientModel.getAuthorization();
         Game current_game = ServerProxy.getInstance().getCurrentGame(auth);
-        if(current_game == null)
-        {
-            return false;
-        }
-        else
-        {
-            clientModel.setCurrent_game(current_game);
-            getNewGameCommands();
-            return true;
-        }
+        return clientModel.restoreGame(current_game);
     }
 
 
