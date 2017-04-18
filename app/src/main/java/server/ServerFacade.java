@@ -9,6 +9,7 @@ import shared.command_classes.Command;
 import shared.interfaces.IServer;
 import shared.model_classes.Account;
 import shared.model_classes.DestinationCard;
+import shared.model_classes.Game;
 import shared.model_classes.GameLobby;
 import shared.model_classes.Route;
 
@@ -121,6 +122,11 @@ public class ServerFacade implements IServer{
 
     public boolean replaceAllFaceUpCards(int gameID) {
         return serverModel.replaceAllFaceUpCards(gameID);
+    }
+
+    public Game getCurrentGame(String auth)
+    {
+        return serverModel.getCurrentGameIfThereIsOne(auth);
     }
 
 }

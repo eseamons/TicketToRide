@@ -83,4 +83,16 @@ public class TrainCardDeck {
 
     public int getDiscardPileSize()
     {return discardDeck.size();}
+
+    public static void setInstance(TrainCardDeck instance) {
+        TrainCardDeck.instance = instance;
+    }
+
+    public void setCardsInDeck(List<CardColor> cardsInDeck) {
+        this.cardsInDeck = cardsInDeck;
+    }
+
+    public void setDiscardDeck(List<CardColor> discardDeck) {
+        this.discardDeck = discardDeck;
+    }
 }

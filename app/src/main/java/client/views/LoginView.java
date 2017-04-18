@@ -67,8 +67,17 @@ public class LoginView extends AppCompatActivity implements ILoginView {
                 LoginPresenter loginPresenter = LoginPresenter.getInstance();
                 boolean successful = loginPresenter.Login();
 
-                if(successful) {
-                    startActivity(new Intent(LoginView.this, GameListView.class));
+                if(successful)
+                {
+                    if(loginPresenter.isInGame())
+                    {
+                        startActivity(new Intent(LoginView.this, MapViewActivity.class));
+                    }
+                    else
+                    {
+                        startActivity(new Intent(LoginView.this, GameListView.class));
+                    }
+
                 }
                 else {
                     Toast.makeText(getBaseContext(), "Login Unsuccessful",Toast.LENGTH_SHORT).show();

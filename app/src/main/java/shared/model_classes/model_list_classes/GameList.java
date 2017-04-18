@@ -75,4 +75,20 @@ public class GameList {
         return returnGame;
     }
 
+    public void addGame(Game game)
+    {
+        games.add(game);
+        gameIdMap.put(game.getGameID(), game);
+    }
+
+    public int size()
+    {
+        return games.size();
+    }
+
+    public Game getGameByIndex(int index)
+    {
+        return games.get(index);
+    }
+
 }
