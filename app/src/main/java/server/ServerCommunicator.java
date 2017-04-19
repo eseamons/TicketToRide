@@ -89,11 +89,14 @@ public class ServerCommunicator {
 //        System.out.println("Done");
 
 
-
         model.setPlugin(plugin);
-        model.resetDefaults();
+        if(!wipe)
+        {
+            model.resetDefaults();
+        }
         model.setCheckpoint(Integer.parseInt(checkpoint));
         model.setWipe(wipe);
+
 
 
         new ServerCommunicator().run(portNumber);

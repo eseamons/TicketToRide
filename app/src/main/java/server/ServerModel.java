@@ -709,7 +709,7 @@ public class ServerModel implements IServer{
             accountDao.clearData();
             commandDao.clearData();
             gameDao.clearAllGames();
-
+            System.out.println("wiped");
         }
     }
 
