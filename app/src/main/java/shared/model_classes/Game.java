@@ -68,6 +68,20 @@ public class Game {
         destinationCardsList = new DestinationCardsList();
         routes = new RoutesList();
         gameCommands = new ArrayList<>();
+
+        int comp_number = 1;
+        for(int i = players.getSize(); i < gameLobby.getMaxPlayers(); i++)
+        {
+            ComputerPlayer cp = new ComputerPlayer(gameID,routes);
+            Account cp_ant = new Account();
+            cp_ant.setAuthentication(Integer.toString(i) + "C" + Integer.toString(gameID));
+            cp_ant.setPassword("");
+            cp_ant.setUsername("Computer " + comp_number);
+            comp_number++;
+            cp.setAccount(cp_ant);
+            cp.setPlayerID(i);
+            players.addPlayer(cp);
+        }
     }
 
     public void setFaceUpCard(int index, CardColor c)
@@ -130,6 +144,11 @@ public class Game {
                 gameIsOver = true;
             }
         }
+    }
+
+    public boolean isComputersTurn()
+    {
+        return getCurrentPlayersPlayerInstance() instanceof ComputerPlayer;
     }
 
 
@@ -274,6 +293,11 @@ public class Game {
     public void stupidAddDestinationCard(DestinationCard card, int player_num)
     {
         getPlayerbyIndex(player_num-1).addDestinationCard(card);
+    }
+
+    public void takeComputerTurn()
+    {
+        ((ComputerPlayer) getCurrentPlayersPlayerInstance()).takeTurn();
     }
 
 }
