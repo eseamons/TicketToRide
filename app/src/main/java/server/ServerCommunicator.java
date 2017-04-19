@@ -1,7 +1,5 @@
 package server;
 
-import android.os.Build;
-
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -11,7 +9,12 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.UnknownHostException;
 
+import server.plugin.AccountDTO;
+import server.plugin.IAccountDao;
+import server.plugin.IDaoFactory;
 import server.plugin.Plugin;
+import shared.Result;
+import shared.model_classes.Account;
 
 /**
  * Created by sirla on 2/10/2017.
@@ -44,7 +47,7 @@ public class ServerCommunicator {
 
         System.out.println("Starting server");
         try {
-            System.out.println("Address2: " + InetAddress.getLocalHost().getHostAddress());
+            System.out.println("Address:" + InetAddress.getLocalHost().getHostAddress());
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -55,23 +58,42 @@ public class ServerCommunicator {
 
 
         String portNumber = "8080";
-        //String provider = args[1];
-        //String checkpoint = args[2];
+        //String provider = args[0];
+        //String checkpoint = args[1];
         boolean wipe = false;
-        if (args.length >= 1)
-            if (args[0].equals("-wipe") || args[0].equals("wipe") || args[0].equals("w") || args[0].equals("-w"))
+        if (args.length >= 3)
+            if (args[2].equals("-wipe") || args[2].equals("wipe") || args[2].equals("w") || args[2].equals("-w"))
                 wipe = true;
 
-        String provider = "SQL";
+        String provider = "JSON";
         String checkpoint = "1";
 
         ServerModel model = ServerModel.getInstance();
-        model.setPlugin(new Plugin(provider));
-        //Resetting Defaults might be faulty, so you can type in "-wipe" as an arg in order to bypass this.
-        if (!wipe)
-            model.resetDefaults();
-        model.setCheckpoint(Integer.parseInt(checkpoint));
-        model.setWipe(wipe);
+        Plugin plugin = new Plugin(provider);
+        IDaoFactory daoFactory = plugin.createDaoFactory();
+        IAccountDao accountDao = daoFactory.createAccountDao();
+        Account account = new Account();
+        account.setAuthentication("DTERE-3483794-UIOUP");
+        account.setUsername("myuser");
+        account.setPassword("mypass");
+        AccountDTO accountDTO = new AccountDTO();
+        AccountDTO outAccountDTO = new AccountDTO();
+        accountDTO.setAccount(account);
+        accountDTO.setGameID(20);
+        accountDao.clearData();
+        Result result = accountDao.addAccount(accountDTO);
+
+        outAccountDTO = accountDao.selectByAuth("DTERE-3483794-UIOUP");
+        Account outAccount = outAccountDTO.getAccount();
+        int outGameID = outAccountDTO.getGameID();
+        System.out.println("Done");
+
+
+
+
+//        model.setPlugin(plugin);
+//        model.setCheckpoint(Integer.parseInt(checkpoint));
+//        model.setWipe(wipe);
 
 
         new ServerCommunicator().run(portNumber);

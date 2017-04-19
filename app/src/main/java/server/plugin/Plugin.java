@@ -69,10 +69,10 @@ public class Plugin {
             String classPath = null;
 
             for(int i = 0; i < jsonArray.size(); i++) {
-                JsonObject tempObject = jsonArray.get(0).getAsJsonObject();
-                classPath = tempObject.get(implementationType).getAsString();
+                JsonObject tempObject = jsonArray.get(i).getAsJsonObject();
 
-                if(classPath != null) {
+                if(tempObject.has(implementationType)) {
+                    classPath = tempObject.get(implementationType).getAsString();
                     break;
                 }
             }

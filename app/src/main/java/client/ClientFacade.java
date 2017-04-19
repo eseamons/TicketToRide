@@ -169,7 +169,7 @@ public class ClientFacade implements IClient{
         }
 
         //Testing if there are at least 2 players
-        if (players.size() < 1)
+        if (players.size() < 0)
         {
             return new Result(false, "Must have 2 players to start the game");
         }
@@ -182,6 +182,7 @@ public class ClientFacade implements IClient{
 
         Game game = new Game(clientModel.getInstance().getCurrent_game_lobby());
         clientModel.setCurrent_game(game);
+        clientModel.removeGameLobbyByID(gameLobbyID);
         //clientModel.gameSetPlayer_num();
         //TODO: is this supposed to always return null?
         return new Result(beginGameBool, "");
@@ -235,6 +236,7 @@ public class ClientFacade implements IClient{
         if(listOfCommands == null)
         {return;}
 
+        System.out.println(lastCommand);
         for(int i = 0; i < listOfCommands.size(); i++)
         {
             Command cmd = (Command) listOfCommands.get(i);
@@ -559,6 +561,7 @@ public class ClientFacade implements IClient{
         String auth = clientModel.getAuthorization();
         ServerProxy proxy = ServerProxy.getInstance();
         proxy.removeDestinationCard(gameID, playerID, acceptedCards, acceptedCardsBools, auth);
+        clientModel.setAllChoosableDestinationCardsToNull();
     }
 
     public boolean canConfirmDestinationCards()
@@ -581,26 +584,27 @@ public class ClientFacade implements IClient{
         return getPlayers().size();
     }
 
+    public int getAmountOfPlayersInCurrentGameFromCurrentGame()
+    {
+        return clientModel.getCurrent_game().getPlayerList().getSize();
+    }
+
 
     public void addDestinationCardToPlayerIndex(int playerIndex, DestinationCard dc)
     {
         clientModel.addDestinationCardToPlayerIndex(playerIndex,dc);
     }
 
+    public void clearDestinationCardsOfPlayerIndex(int playerIndex)
+    {
+        clientModel.clearDestinationCardsOfPlayerIndex(playerIndex);
+    }
+
     public boolean ifIsInGameSetGameInMode()
     {
         String auth = clientModel.getAuthorization();
         Game current_game = ServerProxy.getInstance().getCurrentGame(auth);
-        if(current_game == null)
-        {
-            return false;
-        }
-        else
-        {
-            clientModel.setCurrent_game(current_game);
-            getNewGameCommands();
-            return true;
-        }
+        return clientModel.restoreGame(current_game);
     }
 
 
