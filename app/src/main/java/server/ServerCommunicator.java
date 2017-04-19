@@ -70,23 +70,23 @@ public class ServerCommunicator {
 
         ServerModel model = ServerModel.getInstance();
         Plugin plugin = new Plugin(provider);
-        IDaoFactory daoFactory = plugin.createDaoFactory();
-        IAccountDao accountDao = daoFactory.createAccountDao();
-        Account account = new Account();
-        account.setAuthentication("DTERE-3483794-UIOUP");
-        account.setUsername("myuser");
-        account.setPassword("mypass");
-        AccountDTO accountDTO = new AccountDTO();
-        AccountDTO outAccountDTO = new AccountDTO();
-        accountDTO.setAccount(account);
-        accountDTO.setGameID(20);
-        accountDao.clearData();
-        Result result = accountDao.addAccount(accountDTO);
-
-        outAccountDTO = accountDao.selectByAuth("DTERE-3483794-UIOUP");
-        Account outAccount = outAccountDTO.getAccount();
-        int outGameID = outAccountDTO.getGameID();
-        System.out.println("Done");
+//        IDaoFactory daoFactory = plugin.createDaoFactory();
+//        IAccountDao accountDao = daoFactory.createAccountDao();
+//        Account account = new Account();
+//        account.setAuthentication("DTERE-3483794-UIOUP");
+//        account.setUsername("myuser");
+//        account.setPassword("mypass");
+//        AccountDTO accountDTO = new AccountDTO();
+//        AccountDTO outAccountDTO = new AccountDTO();
+//        accountDTO.setAccount(account);
+//        accountDTO.setGameID(20);
+//        accountDao.clearData();
+//        Result result = accountDao.addAccount(accountDTO);
+//
+//        outAccountDTO = accountDao.selectByAuth("DTERE-3483794-UIOUP");
+//        Account outAccount = outAccountDTO.getAccount();
+//        int outGameID = outAccountDTO.getGameID();
+//        System.out.println("Done");
 
         model.setPlugin(plugin);
         if(!wipe)
