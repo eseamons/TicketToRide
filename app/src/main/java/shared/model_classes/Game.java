@@ -46,6 +46,19 @@ public class Game {
 
     public Game(){}
 
+    public Game(Game game)
+    {
+        gameID = game.getGameID();
+        players = game.getPlayerList();
+        players.resetAllPlayers();
+        LastTurnsLeft = players.getSize() + 1;
+        trainCardDeck = TrainCardDeck.getInstance();
+        faceUpCards = new CardColor[5];
+        destinationCardsList = new DestinationCardsList();
+        routes = new RoutesList();
+        gameCommands = new ArrayList<>();
+    }
+
     public Game(GameLobby gameLobby) {
         gameID = gameLobby.getID();
         players = new PlayersList(gameLobby.getPlayers());
@@ -75,6 +88,11 @@ public class Game {
 
     public int getCurrentPlayer() {
         return players.getCurrentPlayerID();
+    }
+
+    public Player getCurrentPlayersPlayerInstance()
+    {
+        return players.getCurrentPlayer();
     }
 
     public RoutesList getRoutes(){return routes;}
@@ -257,4 +275,5 @@ public class Game {
     {
         getPlayerbyIndex(player_num-1).addDestinationCard(card);
     }
+
 }

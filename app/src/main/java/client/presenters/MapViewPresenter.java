@@ -28,6 +28,7 @@ public class MapViewPresenter implements Observer, IMapPresenter
     MapViewActivity view;
     ClientFacade client;
 
+    public static boolean not_restoring_game = true;
     public MapViewPresenter(MapViewActivity act)
     {
         view = act;

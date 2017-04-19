@@ -91,4 +91,9 @@ public class GameList {
         return games.get(index);
     }
 
+    public void removeGame(Game le_game)
+    {
+        games.remove(le_game);
+    }
+
 }
