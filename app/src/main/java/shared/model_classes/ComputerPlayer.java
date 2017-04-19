@@ -46,7 +46,11 @@ public class ComputerPlayer extends Player
         }
         else
         {
-            claimRoute();
+            if(!claimRoute())
+            {
+                drawCards();
+            }
+
         }
         ServerFacade.getInstance().endTurn(gameID,account.getAuthentication());
     }
