@@ -66,7 +66,7 @@ public class ServerCommunicator {
                 wipe = true;
 
         String provider = "JSON";
-        String checkpoint = "1";
+        String checkpoint = "5";
 
         ServerModel model = ServerModel.getInstance();
         Plugin plugin = new Plugin(provider);
@@ -91,6 +91,7 @@ public class ServerCommunicator {
 
 
         model.setPlugin(plugin);
+        model.resetDefaults();
         model.setCheckpoint(Integer.parseInt(checkpoint));
         model.setWipe(wipe);
 

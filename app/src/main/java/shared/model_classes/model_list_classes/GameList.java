@@ -55,6 +55,7 @@ public class GameList {
 
 
     public void addGameCommand(int gameID, Command cmd) {
+        getGame(0);
         Game game = gameIdMap.get(gameID);
         game.addGameCommand(cmd);
     }

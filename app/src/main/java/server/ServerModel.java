@@ -724,7 +724,7 @@ public class ServerModel implements IServer{
             {
                 updateGameInDatabase(games.get(i));
             }
-
+            commandDao.clearData();
             //updateGameInDatabase(gameList.getGame(gameID));
 
             deltas = 0;
