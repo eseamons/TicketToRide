@@ -719,7 +719,14 @@ public class ServerModel implements IServer{
 
         if (deltas >= checkpoint)
         {
-            updateGameInDatabase(gameList.getGame(gameID));
+            List<Game> games = gameList.getGames();
+            for (int i = 0; i < games.size(); i++)
+            {
+                updateGameInDatabase(games.get(i));
+            }
+
+            //updateGameInDatabase(gameList.getGame(gameID));
+
             deltas = 0;
         }
 
