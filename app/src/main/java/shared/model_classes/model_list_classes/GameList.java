@@ -91,4 +91,9 @@ public class GameList {
         return games.get(index);
     }
 
+    public List<Game> getGames()
+    {
+        return games;
+    }
+
 }
