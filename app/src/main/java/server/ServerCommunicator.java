@@ -58,15 +58,15 @@ public class ServerCommunicator {
 
 
         String portNumber = "8080";
-        String provider = args[0];
-        String checkpoint = args[1];
+        //String provider = args[0];
+        //String checkpoint = args[1];
         boolean wipe = false;
         if (args.length >= 3)
             if (args[2].equals("-wipe") || args[2].equals("wipe") || args[2].equals("w") || args[2].equals("-w"))
                 wipe = true;
 
-        provider = "JSON";
-        checkpoint = "5";
+        String provider = "JSON";
+        String checkpoint = "5";
 
         ServerModel model = ServerModel.getInstance();
         Plugin plugin = new Plugin(provider);
