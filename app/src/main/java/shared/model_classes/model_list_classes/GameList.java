@@ -96,4 +96,9 @@ public class GameList {
         games.remove(le_game);
     }
 
+    public List<Game> getGames()
+    {
+        return games;
+    }
+
 }
