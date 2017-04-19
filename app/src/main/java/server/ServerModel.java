@@ -76,6 +76,7 @@ public class ServerModel implements IServer{
             int gameID = dto.getGameID();
             gameList.addGameCommand(gameID, currentCommand);
         }
+        commandDao.clearData();
 
         IAccountDao accountDao = factory.createAccountDao();
         Set<AccountDTO> accountDTOs = accountDao.getAll();

@@ -36,8 +36,13 @@ public class Game {
     {
         return players;
     }
-    public int getCurrentGameCommandID() {
-        return currentGameCommandID;
+    public int getCurrentGameCommandID()
+    {
+        if(gameCommands.size() == 0)
+        {
+            return 0;
+        }
+        return gameCommands.get(gameCommands.size()-1).getCmdID()+1;
     }
 
     public void incrementCurrentGameCommandID() {
