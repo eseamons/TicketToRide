@@ -89,7 +89,6 @@ public class ServerCommunicator {
 //        System.out.println("Done");
 
 
-
         model.setPlugin(plugin);
         model.resetDefaults();
         model.setCheckpoint(Integer.parseInt(checkpoint));

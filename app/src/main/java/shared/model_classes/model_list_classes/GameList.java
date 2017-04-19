@@ -78,6 +78,7 @@ public class GameList {
 
     public void addGame(Game game)
     {
+        getGame(0);
         games.add(game);
         gameIdMap.put(game.getGameID(), game);
     }
