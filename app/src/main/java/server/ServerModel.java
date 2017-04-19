@@ -269,6 +269,11 @@ public class ServerModel implements IServer{
             GameLobby gameLobby = gameLobbyList.getGameLobbyByID(gameLobbyID);
             gameLobbyList.removeGameLobby(gameLobby);
             Game game = gameList.beginGame(gameLobby);
+            for(int i = 0; i < game.getPlayers().size(); i++)
+            {
+                Player currentPlayer = game.getPlayers().get(i);
+                playerAuthMap.put(currentPlayer.getPlayerAuthCode(), currentPlayer);
+            }
             setFaceUpCard(game.drawCard(),0,gameLobbyID);
             setFaceUpCard(game.drawCard(),1,gameLobbyID);
             setFaceUpCard(game.drawCard(),2,gameLobbyID);
@@ -391,7 +396,10 @@ public class ServerModel implements IServer{
             {
                 gameList.removeGame(game);
             }
-
+            else if(game.isComputersTurn())
+            {
+                game.takeComputerTurn();
+            }
 
         }
         return endTurnSuccessful;

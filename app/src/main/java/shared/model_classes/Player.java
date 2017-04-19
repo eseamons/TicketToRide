@@ -8,14 +8,14 @@ import shared.ColorNum;
 
 public class Player {
 
-    private Account account;
+    protected Account account;
     private ColorNum color;
     private int points;
     private List<CardColor> trainCards;
     private List<DestinationCard> destinationCards;
     private int trainsRemaining;
-    private int playerID;  // 1-5
-    private DestinationCard[] choosableDestinationCards;
+    protected int playerID;  // 1-5
+    protected DestinationCard[] choosableDestinationCards;
 
 
     public Player() {
